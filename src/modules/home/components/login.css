@@ -1,0 +1,136 @@
+.get-started {
+  position: relative;
+  background-color: var(--color-white);
+  width: 100%;
+  height: 100vh;
+  text-align: left;
+  font-size: 45px;
+  color: var(--color-gray);
+  font-family: var(--font-inter);
+}
+
+.getlista-wrapper {
+  position: absolute;
+  top: 12%;
+  left: 9%;
+  display: flex;
+  font-size: 50px;
+  color: #464646;
+}
+
+.get-started-divider {
+  position: absolute;
+  left: 26%;
+  border-right: 1px solid #000;
+  box-sizing: border-box;
+  width: 1px;
+  height: 19%;
+  opacity: 0.9;
+}
+
+.finds-anyone-from,
+.is-gateway-to {
+  position: absolute;
+  letter-spacing: -0.02em;
+}
+.is-gateway-to {
+  top: 11%;
+  left: 27%;
+
+}
+.finds-anyone-from {
+  top: 20%;
+  left: 27%;
+  color: #2b81e7;
+}
+
+.sign-up-with {
+  position: relative;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+.get-started-parent,
+.linkedin-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-25px);
+}
+.linkedin-btn {
+  border: 1px solid white;
+  border-radius: 9px;
+  background-color: #0083c8;
+  flex-direction: row;
+  padding: 12px 20px;
+  justify-content: center;
+  text-align: left;
+  font-size: 22px;
+  color: var(--color-white);
+  cursor: pointer;
+}
+.get-started-parent {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  border-radius: 10px;
+  background-color: var(--color-white);
+  border: 1px solid #c9c4c4;
+  box-sizing: border-box;
+  width: 32vw;
+  flex-direction: column;
+  padding: 32px 40px;
+  justify-content: flex-start;
+}
+
+.login-page-ul {
+  margin: 0;
+  padding-left: 27px;
+}
+.login-ul-container {
+  position: absolute;
+  top: 44%;
+  left: 0;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  line-height: 35px;
+  font-weight: 500;
+  font-family: var(--font-inherit);
+  text-align: left;
+}
+.right-grid {
+  position: relative;
+  top: 65%;
+  width: 524px;
+  height: 442px;
+  text-align: center;
+  font-size: 30px;
+}
+.getlist {
+  font-weight: 800;
+}
+.a {
+  font-weight: 500;
+  color: #1be885;
+}
+
+.left-grid {
+  position: absolute;
+  top: 65%;
+  left: 24%;
+  width: 36vw;
+  height: 36vh;
+  object-fit: cover;
+}
+
+
+.getlista-2023- {
+  position: absolute;
+  top: 99%;
+  padding-top: 20px;
+  left: calc(50% - 140px);
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: #999;
+  text-align: center;
+}
