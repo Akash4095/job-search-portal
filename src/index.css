@@ -1,13 +1,101 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800&display=swap");
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: normal;
+}
+:root {
+  /* fonts */
+  --font-inter: Inter;
+  --font-inherit: inherit;
+
+  /* font sizes */
+  --font-size-29xl-4: 48.4px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-gray: #1a1a1a;
+
+  /* Gaps */
+  --gap-24: 24px;
+
+   /* fonts */
+   --font-inter: Inter;
+
+   /* font sizes */
+   --font-size-xs-7: 11.7px;
+   --font-size-16xl-5: 35.5px;
+   --font-size-lg: 18px;
+   --font-size-base: 16px;
+   --font-size-sm: 14px;
+ 
+   /* Colors */
+   --color-gray-100: #878787;
+   --color-gray-200: #828282;
+   --color-white: #fff;
+   --color-darkgray: #a9a9a9;
+   --color-dimgray-100: #666;
+   --color-dimgray-200: #535353;
+   --color-black: #000;
+   --color-dodgerblue: #2b81e7;
+   --color-lightgray-100: #ccc;
+ 
+   /* Gaps */
+   --gap-base: 16px;
+   --gap-20px: 20px;
+   --gap-xs: 12px;
+   --gap-25px: 24px;
+ 
+   /* Paddings */
+   --padding-mini-2: 14.2px;
+   --padding-5xl: 24px;
+   --padding-8px: 8px;
+   --padding-2px: 2px;
+   --padding36px: 36px;
+ 
+   /* border radiuses */
+   --br-6xs: 7px;
+   --br-81xl: 100px;
+   --br-7xs: 6px;
+
+     /* font sizes */
+  --font-size-5xl: 24px;
+  --font-size-mini: 15px;
+  --font-size-mid: 17px;
+  --font-size-sm: 14px;
+  --font-size-lg: 18px;
+  --font-size-base: 16px;
+
+  /* Colors */
+  --color-gray-100: #878787;
+  --color-gray-200: #1a1a1a;
+  --color-darkgray-100: #a9a9a9;
+  --color-darkgray-200: #999;
+  --color-dimgray: #666;
+  --color-white: #fff;
+  --color-darkslategray-100: #333;
+  --color-dodgerblue: #2b81e7;
+  --color-lightgray-100: #ccc;
+
+  /* Gaps */
+  --gap-base: 16px;
+  --gap-24: 24px;
+  --gap-8px: 8px;
+  --gap-3xs: 10px;
+  --gap-20: 20px;
+  --gap-xs: 12px;
+
+  /* Paddings */
+  --padding-5xl: 24px;
+  --padding-13xl: 32px;
+  --padding-xl: 20px;
+  --padding-base: 16px;
+  --padding-5xs: 8px;
+  --padding-2px: 2px;
+  --padding-36: 36px;
+
+  /* border radiuses */
+  --br-81xl: 100px;
+  --br-6px: 6px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}

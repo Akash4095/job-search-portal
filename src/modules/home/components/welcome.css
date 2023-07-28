@@ -1,0 +1,204 @@
+.right-panel {
+  width: 80vw !important;
+  background-color: #fafafa !important;
+  position: relative !important;
+}
+
+.header {
+  display: flex !important;
+  position: absolute;
+  top: 20px !important;
+  height: 40px !important;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  width: 77vw !important;
+  left: 2% !important;
+  gap: 36px !important;
+  font-size: var(--font-size-lg);
+}
+
+.top-tab {
+  display: flex;
+  flex: 1 !important;
+  align-items: flex-start;
+  /* margin-right: 40% !important; */
+  width: 60% !important;
+  gap: 20px !important;
+  color: var(--color-dodgerblue);
+  margin-top: 10px;
+}
+
+.div {
+  position: relative;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--color-dodgerblue);
+}
+.balance {
+  border-radius: 6px !important;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: row;
+  padding: 5px !important;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px !important;
+  font-size: var(--font-size-sm);
+  width: 22% !important;
+}
+.notification {
+  position: relative;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  display: none;
+}
+
+.top-actions {
+  display: flex;
+  gap: 10px !important;
+  font-size: var(--font-size-base);
+  width: 18% !important;
+  margin-top: 10px;
+}
+
+.list-wrapper,
+.list-wrapper {
+  padding: var(--padding8px) var(--padding-11xs);
+  align-items: center;
+  color: var(--color-dimgray-100);
+}
+
+.profile {
+  margin-left: 10px !important;
+}
+.user-parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.user-name-parent {
+  display: flex;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 30px;
+  color: var(--color-black);
+}
+
+.bio {
+  position: absolute;
+  font-size: var(--font-size-base);
+  letter-spacing: -0.02em;
+  line-height: 168%;
+  color: #050505;
+  display: inline-block;
+  opacity: 0.78;
+  margin-top: 25px !important;
+}
+
+.user-name {
+  position: absolute;
+  top: 0;
+  letter-spacing: -0.02em;
+}
+
+.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  border: 1px solid #a9a9a9;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 90px !important;
+  width: 150px !important;
+}
+
+.parent-div {
+  font-size: 12px !important;
+}
+.span {
+  color: var(--color-dimgray-100);
+}
+.keywords {
+  text-decoration: underline;
+  font-weight: 500;
+  color: #333;
+}
+
+.user-container {
+  position: relative;
+  top: 22vh !important;
+  left: 10vw !important;
+  display: flex !important;
+  margin-right: 20% !important;
+}
+
+.user-container-img {
+  margin-right: 4% !important;
+  border-radius: 50% !important;
+}
+
+.searchbar-container {
+  position: relative !important;
+  margin-top: 80px !important;
+  top: 15vh !important;
+  left: 10vw !important;
+}
+
+.searchbar-p {
+  margin-left: 17% !important;
+  font-size: 23px !important;
+  margin-bottom: 15px !important;
+  color: #666 !important;
+}
+/*--------------------------search bar ----------------------*/
+
+.input-wrapper {
+  width: 70%;
+  height: 60px !important;
+  border: none;
+  border-radius: 30px;
+  padding: 0 15px !important;
+  box-shadow: 0px 0px 8px #ddd;
+  background-color: rgba(222, 222, 222, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 16px !important;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  font-size: 1.25rem;
+  width: 100%;
+  margin-left: 5px;
+  font-size: 18px !important;
+}
+
+input:focus {
+  outline: none;
+}
+
+/*-----------------------------------------------*/
+.summary-grid {
+  margin-left: 5% !important;
+  margin-right: 2% !important;
+  margin-top: 28vh !important;
+}
+
+.summary-grid-column {
+  padding-left: 10px !important;
+  height: 80px !important;
+  color: #535353;
+}
+
+.div1 {
+  font-size: 25px;
+  margin-bottom: 3px !important;
+}
