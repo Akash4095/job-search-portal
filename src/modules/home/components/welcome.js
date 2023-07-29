@@ -3,6 +3,7 @@ import "./welcome.css";
 import { Grid, Icon } from "semantic-ui-react";
 import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
+import { NavLink } from "react-router-dom";
 
 
 const Welcome = () => {
@@ -13,12 +14,12 @@ const Welcome = () => {
       <div className="right-panel">
         <header className="header">
           <div className="top-tab">
-            <div className="search-wrapper">
+            <NavLink to="/welcome" className="search-wrapper" activeClassName="nav_active">
               <div className="search">Search</div>
-            </div>
-            <div className="list-wrapper">
+            </NavLink>
+            <NavLink to="/welcome" className="list-wrapper" activeClassName="nav_active">
               <div className="search">List</div>
-            </div>
+            </NavLink>
           </div>
           <div className="balance">
             <div className="getlista">Available Credits</div>
@@ -56,6 +57,7 @@ const Welcome = () => {
           <SearchComponent />
         </div>
         <Grid className="summary-grid">
+        <p style={{color:"#1c34b0"}}>Your Summary</p>
           <Grid.Row>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">

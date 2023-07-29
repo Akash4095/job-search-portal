@@ -16,6 +16,10 @@ const SideBar = () => {
                     <div className="default-list1">Default List</div>
                     <Icon name="lock" />
                 </div>
+                <div className="sidebar-add-list">
+                    <Icon name="add" className='sidebar-icons' />
+                    <div className="default-list1">Add List</div>
+                </div>
             </div>
             <div className="footer-actions">
                 <div className="sidebar-f-list">

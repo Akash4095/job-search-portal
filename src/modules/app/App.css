@@ -35,7 +35,6 @@ body {
 }
 
 .sidebar-middle {
-  display: flex;
   border-bottom: 1px solid var(--color-lightgray-100);
   box-sizing: border-box;
   height: 55vh !important;
@@ -57,6 +56,13 @@ body {
   display: flex;
   padding-left: 25px;
   padding-top: 25px;
+}
+
+.sidebar-add-list {
+  display: flex;
+  padding-left: 25px;
+  padding-top: 25px;
+  color: #2185d0 !important;
 }
 
 .sidebar-f-list {
@@ -83,6 +89,7 @@ body {
 
 .footer-actions {
   padding-bottom: 20px !important;
+  border-bottom: 1px solid var(--color-lightgray-100);
 }
 
 .widget-last {
@@ -97,4 +104,25 @@ body {
 
 i.icon{
   font-size: 18px !important;
+}
+
+.marginLeft {
+  margin-left: 5% !important;
+}
+.marginRight {
+  margin-right: 5% !important;
+}
+
+.marginLeft10 {
+  margin-left: 10% !important;
+}
+
+.marginLeft20 {
+  margin-left: 10% !important;
+}
+.marginLeft30 {
+  margin-left: 10% !important;
+}
+.marginLeft40 {
+  margin-left: 10% !important;
 }

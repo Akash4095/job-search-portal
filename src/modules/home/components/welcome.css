@@ -189,16 +189,24 @@ input:focus {
 .summary-grid {
   margin-left: 5% !important;
   margin-right: 2% !important;
-  margin-top: 28vh !important;
+  margin-top: 22vh !important;
 }
 
 .summary-grid-column {
   padding-left: 10px !important;
   height: 80px !important;
   color: #535353;
+  width: 40% !important;
+  margin-top: -2% !important;
 }
 
 .div1 {
   font-size: 25px;
   margin-bottom: 3px !important;
+}
+
+
+.nav_active {
+  color: #2185d0 !important;
+  background: #fff;
 }
