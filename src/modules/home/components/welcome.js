@@ -14,7 +14,7 @@ const Welcome = () => {
       <div className="right-panel">
         <header className="header">
           <div className="top-tab">
-            <NavLink to="/welcome" className="search-wrapper" activeClassName="nav_active">
+            <NavLink to="/search" className="search-wrapper" activeClassName="nav_active">
               <div className="search">Search</div>
             </NavLink>
             <NavLink to="/welcome" className="list-wrapper" activeClassName="nav_active">
