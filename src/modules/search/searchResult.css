@@ -1,17 +1,16 @@
 .search-result-container {
   position: relative !important;
-  width: 76vw !important;
+  /* width: 76vw !important; */
   margin-left: 1vw !important;
   left: 1.4% !important;
   height: 16% !important;
-  margin-bottom: 5% !important;
   font-size: 12px !important;
 }
 
 .search-result-grid {
-  padding: 10px !important;
+  padding: 5px !important;
   height: 12% !important;
-  width: 98% !important;
+  width: 100% !important;
 }
 
 .search-result-grid-row {
@@ -62,4 +61,25 @@
   color: #999;
   font-weight: 500;
   margin: 0vw 6vw !important;
+}
+
+/* Styles to hide the scrollbar */
+.scrollable-container::-webkit-scrollbar {
+  width: 1px; /* Adjust the width of the scrollbar if needed */
+  color: #fff;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.usercart-container {
+  width: 22vw !important;
+  padding: 10px !important;
+  margin: 5px !important;
+  height: 70vh !important;
+  background: #fff;
+  border: 1px solid #eee;
 }

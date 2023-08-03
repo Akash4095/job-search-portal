@@ -12,7 +12,7 @@ const Welcome = () => {
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <header className="header">
+        <header className="header-class">
           <div className="top-tab">
             <NavLink to="/search" className="search-wrapper" activeClassName="nav_active">
               <div className="search">Search</div>

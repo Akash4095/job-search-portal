@@ -4,12 +4,12 @@ import { Icon } from 'semantic-ui-react'
 
 const HeaderComponent = () => {
     return (
-        <header className="header">
+        <header className="header-class">
             <div className="top-tab">
                 <NavLink to="/search" className="search-wrapper" activeClassName="nav_active">
                     <div className="search">Search</div>
                 </NavLink>
-                <NavLink to="/welcome" className="list-wrapper" activeClassName="nav_active">
+                <NavLink to="/list" className="list-wrapper" activeClassName="nav_active">
                     <div className="search">List</div>
                 </NavLink>
             </div>

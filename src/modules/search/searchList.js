@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SideBar from '../common/sideBar'
 import SearchResults from './searchResults'
 import CommonHeaderComponent from '../common/commonHeader'
 import CommonSearchComponent from '../common/commonSearchComponent'
 import { Button, Icon } from 'semantic-ui-react'
+import UserCart from './userCart'
 
 
 const Search = () => {
+
+    const [rowClicked, setRowClicked] = useState(false)
+    console.log('rowClicked', rowClicked)
+
+    const userRowClicked = () => {
+       
+    }
     return (
         <div className='d_flex'>
             <SideBar />
@@ -27,11 +35,16 @@ const Search = () => {
                         Add to list
                     </Button>
                 </p> */}
-                <div style={{ height: "72vh", overflowY: "scroll" }}>
-                    <SearchResults />
-                    <SearchResults />
-                    <SearchResults />
-                    <SearchResults />
+                <div className='d_flex'>
+                <div className='scrollable-container' style={{height: "70vh", overflowY: "scroll", width: "78vw" }}>
+                    <SearchResults rowClicked={rowClicked} setRowClicked={setRowClicked} />
+                    <SearchResults rowClicked={rowClicked} />
+                    <SearchResults rowClicked={rowClicked} />
+                    <SearchResults rowClicked={rowClicked} setRowClicked={setRowClicked} />
+                </div>
+                {
+                    rowClicked ? <UserCart setRowClicked={setRowClicked}/> : null
+                }
                 </div>
             </div>
         </div>
