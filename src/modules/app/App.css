@@ -4,6 +4,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: var(--font-inter) !important;
 }
 
 .d_flex {
@@ -309,11 +310,12 @@ input:focus {
 .listActions-checkbox {
   margin-right: 10px !important;
   padding-top: 4px !important;
+  cursor: pointer !important;
 }
 .listActions-btns {
-  width: 45% !important;
   color: #2185d0;
   margin-bottom: 1% !important;
+  cursor:  pointer !important;
 }
 .marginRight7 {
   margin-right: 7% !important;
@@ -363,3 +365,56 @@ input:focus {
   color: #fff;
   border-radius: 5px;
 }
+
+
+
+.list-usercart-container {
+  width: 18vw !important;
+  padding: 10px !important;
+  margin: 5px !important;
+  margin-right: 1% !important;
+  height: 70vh !important;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+.list-user-cart-close-icon {
+  position: absolute !important;
+  right: 18px !important;
+  cursor: pointer !important;
+}
+.list-user-cart-name {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.list-company-details {
+  margin-top: 5px !important;
+  color: #666 !important;
+  border-bottom: 1px solid #ccc;
+}
+
+.list-contact-details {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0px !important;
+  padding-bottom: 10px !important;
+}
+.list-user-cart-work {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+}
+
+.list-user-cart-description {
+  margin: 10px 3px;
+  font-size: 11px !important;
+  word-wrap: break-word !important;
+}
+
+.list-user-cart-btn {
+  padding: 6px 25px !important;
+  margin-left: 15% !important;
+  border-radius: 6px !important;
+}
+
+/*------------------------end list page ----------------------*/
