@@ -294,3 +294,59 @@ input:focus {
   padding: 1px 10px;
   color: #888 !important;
 }
+
+.commonSearchCommponent {
+  position: relative !important;
+  left: 10% !important;
+}
+
+.listActions {
+  display: flex;
+  width: 95% !important;
+  margin-left: 2% !important;
+}
+
+.listActions-checkbox {
+  margin-right: 10px !important;
+  padding-top: 4px !important;
+}
+.listActions-btns {
+  width: 45% !important;
+  color: #2185d0;
+}
+.marginRight7 {
+  margin-right: 7% !important;
+}
+.marginRight6 {
+  margin-right: 6% !important;
+}
+
+.list-table {
+  width: 95% !important;
+  margin-left: 2% !important;
+  background: #fff !important;
+  padding-top: 5px !important;
+}
+
+.list-person-name {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.list-person-work {
+  color: #666 !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+.list-header-row {
+  margin-top: 5px !important;
+  color: #ccc;
+  font-size: 13px !important;
+}
+.error {
+  color: red !important;
+}
+
+.success {
+  color: green !important;
+}

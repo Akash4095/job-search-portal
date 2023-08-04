@@ -14,29 +14,29 @@ const ListPage = () => {
                 <br />
                 <br />
                 <br />
-                <div style={{ left: "10%", position: "relative" }}>
+                <div className='commonSearchCommponent'>
                     <CommonSearchComponent />
                 </div>
-                <div className='d_flex' style={{ width: "95%", marginLeft: "2%", }}>
+                <div className='listActions'>
                     <div style={{ width: "20%" }}>
-                        <Checkbox style={{ marginRight: "10px", paddingTop: "4px" }} />
+                        <Checkbox className='listActions-checkbox' />
                         <span>Select All</span>
                     </div>
                     <div style={{ width: "35%" }}>
 
                     </div>
-                    <div style={{ width: "45%", color: "#2185d0 " }}>
-                        <span style={{ marginRight: "7%" }}> <Icon name="tag" /> <span>Tag</span></span>
-                        <span style={{ marginRight: "7%" }}> <Icon name="tags" /> <span>Untag</span></span>
-                        <span style={{ marginRight: "7%" }}> <Icon name="list" /> <span>Add to list</span></span>
-                        <span style={{ marginRight: "6%" }}> <Icon name="download" /> <span>Export</span></span>
-                        <span style={{ color: "red" }}> <Icon color='red' name="trash alternate" /> <span>Delete</span></span>
+                    <div className='listActions-btns'>
+                        <span className='marginRight7'> <Icon name="tag" /> <span>Tag</span></span>
+                        <span className='marginRight7'> <Icon name="tags" /> <span>Untag</span></span>
+                        <span className='marginRight7'> <Icon name="list" /> <span>Add to list</span></span>
+                        <span className='marginRight6'> <Icon name="download" /> <span>Export</span></span>
+                        <span className='error'> <Icon color='red' name="trash alternate" /> <span>Delete</span></span>
                     </div>
                 </div>
                 <>
-                    <Table basic='very' style={{ width: "95%", marginLeft: "2%", background: "#fff", paddingTop: "5px" }}>
+                    <Table basic='very' className='list-table'>
                         <Table.Header>
-                            <Table.Row style={{ marginTop: "5px", color: "#ccc", fontSize: "13px" }}>
+                            <Table.Row className='list-header-row'>
                                 <Table.HeaderCell style={{ width: "3%" }}></Table.HeaderCell>
                                 <Table.HeaderCell style={{ width: "24%" }}>Person</Table.HeaderCell>
                                 <Table.HeaderCell style={{ width: "18%" }}>Company</Table.HeaderCell>
@@ -55,8 +55,8 @@ const ListPage = () => {
                                     <div className='d_flex'>
                                         <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
                                         <div>
-                                            <div style={{ fontSize: "14px", fontWeight: "600" }}>Akash Athnure</div>
-                                            <div style={{ color: "#666", fontSize: "13px", fontWeight: "500" }}>UX Design Lead </div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
                                         </div>
                                     </div>
                                 </Table.Cell>
