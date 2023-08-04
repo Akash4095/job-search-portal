@@ -210,7 +210,7 @@ i.icon {
 }
 
 .right-panel {
-  width: 80vw !important;
+  width: 82vw !important;
   background-color: #fafafa !important;
   position: relative !important;
 }
@@ -261,7 +261,7 @@ input:focus {
 
 .common-input-wrapper {
   width: 80%;
-  margin-bottom: 20px !important;
+  margin-bottom: 2% !important;
   height: 52px !important;
   border: none;
   border-radius: 30px;
@@ -313,6 +313,7 @@ input:focus {
 .listActions-btns {
   width: 45% !important;
   color: #2185d0;
+  margin-bottom: 1% !important;
 }
 .marginRight7 {
   margin-right: 7% !important;
@@ -349,4 +350,16 @@ input:focus {
 
 .success {
   color: green !important;
+}
+
+/* Styles to hide the scrollbar */
+.scrollable-container::-webkit-scrollbar {
+  width: 1px; /* Adjust the width of the scrollbar if needed */
+  color: #fff;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  color: #fff;
+  border-radius: 5px;
 }

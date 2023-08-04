@@ -34,6 +34,7 @@ const ListPage = () => {
                     </div>
                 </div>
                 <>
+                <div className='scrollable-container' style={{ height: '70vh', overflowY: 'auto' }}>
                     <Table basic='very' className='list-table'>
                         <Table.Header>
                             <Table.Row className='list-header-row'>
@@ -86,8 +87,323 @@ const ListPage = () => {
                                     <Icon color='grey' name='ellipsis vertical' />
                                 </Table.Cell>
                             </Table.Row>
+                            <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
+                             <Table.Row>
+                                <Table.Cell style={{ width: "3%", }}>
+                                    <Checkbox style={{ marginLeft: "8px" }} />
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div className='d_flex'>
+                                        <img src="" alt="" width="28" height="28" style={{ borderRadius: "10px", marginTop: "5px", marginRight: "10px" }} />
+                                        <div>
+                                            <div className='list-person-name'>Akash Athnure</div>
+                                            <div className='list-person-work'>UX Design Lead </div>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "18%" }}>
+                                    <Icon name="google" /><span>Google</span>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%" }}>
+                                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                                        <div className='tag-item'>Lead Designer</div>
+                                        <div className='tag-item'>Designer</div>
+                                        <div className='tag-item'>UX/UI hhhhh</div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell style={{ width: "24%", fontSize: "12px", color: "#666" }}>
+                                    <div>
+                                        <div>
+                                            <Icon color='grey' name='mail outline' />
+                                            <span> akashathnure40@gmail.com</span>
+                                        </div>
+                                        <div>
+                                            <Icon color='grey' name='phone' flipped="horizontally" />
+                                            <span>8095595412</span>
+                                        </div>
+                                    </div>
+                                </Table.Cell>
+                                <Table.Cell textAlign='center' style={{ width: "2%" }}>
+                                    <Icon color='grey' name='ellipsis vertical' />
+                                </Table.Cell>
+                            </Table.Row>
                         </Table.Body>
                     </Table>
+                    </div>
                 </>
 
             </div>

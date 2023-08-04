@@ -63,23 +63,51 @@
   margin: 0vw 6vw !important;
 }
 
-/* Styles to hide the scrollbar */
-.scrollable-container::-webkit-scrollbar {
-  width: 1px; /* Adjust the width of the scrollbar if needed */
-  color: #fff;
-}
-
-.scrollable-container::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  color: #fff;
-  border-radius: 5px;
-}
-
 .usercart-container {
-  width: 22vw !important;
+  width: 23vw !important;
   padding: 10px !important;
   margin: 5px !important;
+  margin-right: 1% !important;
   height: 70vh !important;
   background: #fff;
   border: 1px solid #eee;
+}
+
+.user-cart-close-icon {
+  position: absolute !important;
+  right: 18px !important;
+  cursor: pointer !important;
+}
+.user-cart-name {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+.company-details {
+  margin-top: 5px !important;
+  color: #666 !important;
+  border-bottom: 1px solid #ccc;
+}
+
+.previouscompany {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0px !important;
+  padding-bottom: 10px !important;
+}
+.user-cart-work {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #666 !important;
+}
+
+.user-cart-description {
+  margin: 10px 3px;
+  font-size: 11px !important;
+  word-wrap: break-word !important;
+}
+
+.user-cart-btn {
+  padding: 8px 55px !important;
+  margin-left: 10px !important;
+  border-radius: 6px !important;
 }
