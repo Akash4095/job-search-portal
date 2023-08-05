@@ -34,12 +34,12 @@
   letter-spacing: -0.02em;
 }
 .is-gateway-to {
-  top: 11%;
+  top: 10%;
   left: 27%;
 
 }
 .finds-anyone-from {
-  top: 20%;
+  top: 18%;
   left: 27%;
   color: #2b81e7;
 }
@@ -90,6 +90,7 @@
   position: absolute;
   top: 44%;
   left: 0;
+  padding-top: 15px !important;
   font-size: 19px;
   letter-spacing: -0.02em;
   line-height: 35px;
@@ -99,9 +100,9 @@
 }
 .right-grid {
   position: relative;
-  top: 65%;
-  width: 524px;
-  height: 442px;
+  top: 42vh !important;
+  width: 35vw !important;
+  height: 65vh !important;
   text-align: center;
   font-size: 30px;
 }
@@ -115,8 +116,8 @@
 
 .left-grid {
   position: absolute;
-  top: 65%;
-  left: 24%;
+  top: 42vh !important;
+  left: 12vw !important;
   width: 36vw;
   height: 36vh;
   object-fit: cover;
@@ -125,7 +126,7 @@
 
 .getlista-2023- {
   position: absolute;
-  top: 99%;
+  top: 90vh !important;
   padding-top: 20px;
   left: calc(50% - 140px);
   font-size: 16px;

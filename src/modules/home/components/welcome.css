@@ -21,7 +21,7 @@
   color: #050505;
   display: inline-block;
   opacity: 0.78;
-  margin-top: 25px !important;
+  margin-top: 4% !important;
 }
 
 .user-name {
@@ -59,7 +59,7 @@
 
 .user-container {
   position: relative;
-  top: 22vh !important;
+  top: 20vh !important;
   left: 10vw !important;
   display: flex !important;
   margin-right: 20% !important;
@@ -87,7 +87,7 @@
 .summary-grid {
   margin-left: 5% !important;
   margin-right: 2% !important;
-  margin-top: 22vh !important;
+  margin-top: 25vh !important;
 }
 
 .summary-grid-column {

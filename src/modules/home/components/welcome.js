@@ -4,6 +4,7 @@ import { Grid, Icon } from "semantic-ui-react";
 import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
 import { NavLink } from "react-router-dom";
+import CommonHeaderComponent from "../../common/commonHeader";
 
 
 const Welcome = () => {
@@ -12,34 +13,7 @@ const Welcome = () => {
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <header className="header-class">
-          <div className="top-tab">
-            <NavLink to="/search" className="search-wrapper" activeClassName="nav_active">
-              <div className="search">Search</div>
-            </NavLink>
-            <NavLink to="/welcome" className="list-wrapper" activeClassName="nav_active">
-              <div className="search">List</div>
-            </NavLink>
-          </div>
-          <div className="balance">
-            <div className="getlista">Available Credits</div>
-            <div className="div">
-              <span>15</span>
-              <span className="span"> / 20</span>
-            </div>
-          </div>
-          <div className="top-actions">
-            <Icon name="bell outline" color="grey" />
-            <Icon name="setting" color="grey"/>
-            <img width='25px' height='20px' />
-            <div className="profile">
-              <div className="user-parent">
-                <div className="search">Dinesh</div>
-                <Icon name="caret down" />
-              </div>
-            </div>
-          </div>
-        </header>
+        <CommonHeaderComponent />
         <div className="user-container">
           <img src="" alt="" className="user-container-img" width="100" height="100" />
           <div className="user-name-parent">
@@ -57,7 +31,7 @@ const Welcome = () => {
           <SearchComponent />
         </div>
         <Grid className="summary-grid">
-        <p style={{color:"#1c34b0"}}>Your Summary</p>
+          <p style={{ color: "#1c34b0" }}>Your Summary</p>
           <Grid.Row>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">

@@ -315,7 +315,7 @@ input:focus {
 .listActions-btns {
   color: #2185d0;
   margin-bottom: 1% !important;
-  cursor:  pointer !important;
+  cursor: pointer !important;
 }
 .marginRight7 {
   margin-right: 7% !important;
@@ -366,16 +366,15 @@ input:focus {
   border-radius: 5px;
 }
 
-
-
 .list-usercart-container {
-  width: 18vw !important;
-  padding: 10px !important;
+  width: 20vw !important;
   margin: 5px !important;
-  margin-right: 1% !important;
+  margin-top: 2.5% !important;
+  margin-right: 0% !important;
   height: 70vh !important;
   background: #fff;
-  border: 1px solid #eee;
+  border: 1px solid #fff;
+  overflow-y: scroll !important;
 }
 
 .list-user-cart-close-icon {
@@ -412,9 +411,38 @@ input:focus {
 }
 
 .list-user-cart-btn {
-  padding: 6px 25px !important;
-  margin-left: 15% !important;
-  border-radius: 6px !important;
+  padding: 6px 40px !important;
+  margin-left: 6% !important;
+  border-radius: 5px !important;
 }
 
+.contact-details-header {
+  font-size: 12px !important;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px !important;
+}
+
+.list-user-tags {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0px !important;
+  padding-bottom: 10px !important;
+}
+
+.padding10 {
+  padding: 10px !important;
+}
+
+.user-cart-delete-btn{
+  font-size: 12px !important;
+  color: red !important;
+  margin-left: 32% !important;
+}
+
+.prev-comp-accord{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px !important;
+}
 /*------------------------end list page ----------------------*/
