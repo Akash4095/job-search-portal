@@ -141,7 +141,7 @@ const ListTable = ({
                     <div>
                       <div>
                         <Icon color="grey" name="mail outline" />
-                        <span style={{ fontSize: "11px" }}>
+                        <span style={{ fontSize: "12px" }}>
                           akashathnure40@gmail.com
                         </span>
                       </div>

@@ -166,6 +166,17 @@ i.icon {
   margin-top: 10px;
 }
 
+/* .search-wrapper {
+  border-bottom: 2px solid var(--color-dodgerblue);
+  padding: var(--padding-5xs) var(--padding-11xs);
+  align-items: center;
+}
+
+.list-wrapper {
+  border-bottom: 2px solid var(--color-dodgerblue);
+  padding: var(--padding-5xs) var(--padding-11xs);
+  align-items: center;
+} */
 .div {
   position: relative;
   letter-spacing: -0.02em;
@@ -432,6 +443,14 @@ input:focus {
 
 .padding10 {
   padding: 10px !important;
+}
+
+.padding5 {
+  padding: 5px 10px !important;
+}
+
+.paddingTop5 {
+  padding-top: 5px !important;
 }
 
 .user-cart-delete-btn{

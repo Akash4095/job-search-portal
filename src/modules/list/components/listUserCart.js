@@ -23,15 +23,13 @@ const ListUserCart = ({ setRowClicked }) => {
                         <div style={{ fontSize: "11px" }}> Company Details</div>
                         <div><Icon name='apple' ></Icon> Apple</div>
                         <div className='list-user-cart-description'>
-                            Worked with over 70+ startups and
-                            dozens of leading Silicon Valley VC
-                            firms as a Senior UX Designer... More
+                            Worked with over 70+ startups and dozens of leading Silicon Valley VC firms as a Senior UX Designer... More
                         </div>
                     </div>
                 </div>
             </div>
             <div className='list-contact-details' >
-                <div className='padding10'>
+                <div className='padding5'>
                     <div className='contact-details-header' >Contact Details <Icon size='mini' name='download' /> </div>
                     <div>
                         <div>
@@ -59,13 +57,20 @@ const ListUserCart = ({ setRowClicked }) => {
                 </div>
             </div>
             <div className='list-user-tags'>
-                <div className='padding10'>
+                <div className='padding5'>
                     <div style={{ fontSize: "11px" }}>Tags</div>
                 </div>
-                <div className='padding10'>
-                    <span style={{ fontSize: "11px", color: "#2185d0" }}>
-                        <Icon color="blue" name="add" /> <span>Add Tag</span>
-                    </span>
+                <div className='padding5'>
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                        <div className="tag-item">Lead Designer</div>
+                        <div className="tag-item">Designer</div>
+                        <div className="tag-item">UX/UI hhhhh</div>
+                    </div>
+                    <div className='paddingTop5'>
+                        <span style={{ fontSize: "11px", color: "#2185d0" }}>
+                            <Icon color="blue" name="add" /> <span>Add Tag</span>
+                        </span>
+                    </div>
                 </div>
             </div>
             <div className='list-user-tags'>

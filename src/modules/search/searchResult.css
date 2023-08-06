@@ -65,14 +65,16 @@
 
 .usercart-container {
   width: 23vw !important;
-  padding: 10px !important;
   margin: 5px !important;
   margin-right: 1% !important;
   height: 70vh !important;
   background: #fff;
   border: 1px solid #eee;
+  overflow-y: scroll !important;
 }
-
+.add-user-to-list{
+  padding-bottom: 15px !important;
+}
 .user-cart-close-icon {
   position: absolute !important;
   right: 18px !important;
