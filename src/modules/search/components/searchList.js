@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import SideBar from "../common/sideBar";
+import SideBar from "../../common/sideBar";
 import SearchResults from "./searchResults";
-import CommonHeaderComponent from "../common/commonHeader";
-import CommonSearchComponent from "../common/commonSearchComponent";
+import CommonHeaderComponent from "../../common/commonHeader";
+import CommonSearchComponent from "../../common/commonSearchComponent";
 import { Button, Icon } from "semantic-ui-react";
 import UserCart from "./userCart";
 
