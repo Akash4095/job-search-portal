@@ -4,26 +4,33 @@ import imgage from "../../../images/loginpageImg.png"
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import "./login.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchLinkedinKeys, sendLinkedInCode } from '../data/actions';
+import { getIsLikedinKeysResponse } from '../data/selectors';
 
-const Login = () => {
+const Login = (props) => {
 
     const [isModalOpen, setModalOpen] = useState({ open: false, msg: "" })
+    // const linkedinKeys = useSelector(state => getIsLikedinKeysResponse(state, props))
 
     const clientId = '86cilhpcnozw4l';
     const redirectUri = 'http://localhost:3000';
     const scope = 'r_emailaddress,r_liteprofile';
 
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    // console.log('linkedinKeys', linkedinKeys)
 
     useEffect(() => {
         const getUrl = window.location.href
         let code = getUrl ? getUrl.split("?")[1] ? getUrl.split("?")[1] : "" : ""
-
         if (code && code !== "" && code !== undefined && code !== null) {
             console.log('code', code)
-            navigate("/welcome")
+            // dispatch(sendLinkedInCode())
+            // navigate("/welcome")
         }
-
+        dispatch(fetchLinkedinKeys())
     }, []);
 
     const signUpWithLinkedFunction = () => {
