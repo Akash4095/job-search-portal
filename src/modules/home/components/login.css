@@ -12,7 +12,7 @@
 .getlista-wrapper {
   position: absolute;
   top: 12%;
-  left: 9%;
+  left: 7%;
   display: flex;
   font-size: 50px;
   color: #464646;
@@ -35,12 +35,12 @@
 }
 .is-gateway-to {
   top: 10%;
-  left: 27%;
+  left: 28%;
 
 }
 .finds-anyone-from {
   top: 18%;
-  left: 27%;
+  left: 28%;
   color: #2b81e7;
 }
 
@@ -91,7 +91,7 @@
   top: 44%;
   left: 0;
   padding-top: 15px !important;
-  font-size: 19px;
+  font-size: 17px;
   letter-spacing: -0.02em;
   line-height: 35px;
   font-weight: 500;
@@ -126,7 +126,7 @@
 
 .getlista-2023- {
   position: absolute;
-  top: 90vh !important;
+  top: 92vh !important;
   padding-top: 20px;
   left: calc(50% - 140px);
   font-size: 16px;

@@ -42,10 +42,10 @@ const ListTable = ({
             />
             <span>Select All</span>
           </div>
-          <div style={{ width: rowClicked ? "20%" : "35%" }}></div>
+          <div style={{ width: rowClicked ? "15%" : "25%" }}></div>
           <div
             className="listActions-btns"
-            style={{ width: rowClicked ? "60%" : "45%" }}
+            style={{ width: rowClicked ? "65%" : "45%" }}
           >
             <span className="marginRight7">
               <Icon name="tag" /> <span>Tag</span>
@@ -67,7 +67,7 @@ const ListTable = ({
         <>
           <div
             className="scrollable-container"
-            style={{ height: "70vh", overflowY: "auto" }}
+            style={{ height: "70vh",  overflowY: "auto",  width: rowClicked ? "67vw" : "81vw" }}
           >
             <Table basic="very" className="list-table">
               <Table.Header>
@@ -141,7 +141,7 @@ const ListTable = ({
                     <div>
                       <div>
                         <Icon color="grey" name="mail outline" />
-                        <span style={{ fontSize: "12px" }}>
+                        <span style={{ fontSize: "11px" }}>
                           akashathnure40@gmail.com
                         </span>
                       </div>
