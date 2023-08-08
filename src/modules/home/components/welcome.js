@@ -7,17 +7,18 @@ import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
 
 
-const Welcome = () => {
-
+const Welcome = ({ userDetails }) => {
+  // console.log('userDetails', userDetails)
+  let fname = (userDetails && userDetails !== null && userDetails !== undefined) ? userDetails.fname : ""
   return (
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <CommonHeaderComponent />
+        <CommonHeaderComponent fname={fname} />
         <div className="user-container">
           <img src="" alt="" className="user-container-img" width="100" height="100" />
           <div className="user-name-parent">
-            <b className="user-name">Hello Dinesh!</b>
+            <b className="user-name">{fname}</b>
             <div className="bio">
               <p>We're here to help you find the perfect candidates for your needs. Easily search, filter, and connect with talented individuals.</p>
               <p style={{ marginTop: "-15px" }}>

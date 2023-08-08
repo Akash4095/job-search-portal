@@ -12,22 +12,7 @@ const monitorReducerEnhancer = createStore => (
     const diff = round(end - start)
 
     console.log('reducer process time:', diff)
-    if(action){
-      if(action.payload){
-        if(action.payload.location){
-          if(action.payload.location.pathname){
-            if(action.payload.location.pathname === "/"){
-              if(document.getElementsByClassName("markedMenuOpt") && document.getElementsByClassName("markedMenuOpt").length){
-                if(document.getElementsByClassName("markedMenuOpt")[0].classList){
-                  console.log(document.getElementsByClassName("markedMenuOpt")[0].classList)
-                  document.getElementsByClassName("markedMenuOpt")[0].classList.remove("markedMenuOpt")
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+  
     return newState
   }
 

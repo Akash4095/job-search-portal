@@ -3,7 +3,7 @@ import { merge } from "lodash";
 
 
 function fetchedLinkedinKeysReducer(state = {}, action) {
-    if (action.type === 'FETCHED_LINKEDIN_KEYS ') {
+    if (action.type === 'FETCHED_LINKEDIN_KEYS') {
         return action.payload
     } else {
         return state
@@ -12,7 +12,7 @@ function fetchedLinkedinKeysReducer(state = {}, action) {
 
 
 function getLinkedinCodeResponse(state = {}, action) {
-    if (action.type === 'GET_RESPONSE_OF_CODE ') {
+    if (action.type === 'GET_RESPONSE_OF_CODE') {
         return action.payload
     } else {
         return state
@@ -21,10 +21,10 @@ function getLinkedinCodeResponse(state = {}, action) {
 
 
 
-const homepage = combineReducers({
+const homepageReducer = combineReducers({
     fetchedLinkedinKeysReducer,
     getLinkedinCodeResponse,
 
 })
 
-export default homepage
+export default homepageReducer;

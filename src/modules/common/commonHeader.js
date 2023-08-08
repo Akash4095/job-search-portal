@@ -4,7 +4,7 @@ import { Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const CommonHeaderComponent = () => {
+const CommonHeaderComponent = ({fname}) => {
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);
@@ -70,7 +70,7 @@ const CommonHeaderComponent = () => {
                 <img width="25px" height="20px" />
                 <div className="profile">
                     <div className="user-parent">
-                        <div className="search">Dinesh</div>
+                        <div className="search">{fname}</div>
                         <Icon name="caret down" />
                     </div>
                 </div>
