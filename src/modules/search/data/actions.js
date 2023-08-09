@@ -1,4 +1,4 @@
-
+import * as type from './types'
 
 export function fetchSearchByQuery(props) {
     return {

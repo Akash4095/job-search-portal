@@ -66,10 +66,15 @@
 }
 
 .user-container-img {
-  margin-right: 4% !important;
+  
   border-radius: 50% !important;
 }
 
+.image-container{
+  border: 5px solid forestgreen;
+  border-radius: 50% !important;
+  margin-right: 1.4% !important;
+}
 .searchbar-container {
   position: relative !important;
   margin-top: 80px !important;

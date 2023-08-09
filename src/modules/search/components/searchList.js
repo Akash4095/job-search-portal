@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../../common/sideBar";
 import SearchResults from "./searchResults";
 import CommonHeaderComponent from "../../common/commonHeader";
@@ -7,6 +7,9 @@ import { Button, Icon } from "semantic-ui-react";
 import UserCart from "./userCart";
 import { getIsSearchedText } from "../../home/data/selectors";
 import { getIsFetchedSearchByQuery } from "../data/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { fetchSearchByQuery } from "../data/actions";
 
 const Search = () => {
 
@@ -15,13 +18,21 @@ const Search = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const searchedText = useSelector((state) => getIsSearchedText(state));
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
+  const inputText = useSelector((state) => getIsSearchedText(state));
 
   useEffect(() => {
 
     if (searchedText && searchedText !== undefined && searchedText !== null) {
-
+      let obj = {}
+      obj.query = searchedText
+      obj.start = "1"
+      obj.userid = "1"
+      dispatch(fetchSearchByQuery())
     }
 
   }, [searchedText])
@@ -36,7 +47,7 @@ const Search = () => {
   }, [searchResult])
 
 
-
+console.log('inputText', inputText)
   const userRowClicked = () => { };
   return (
     <div className="d_flex">
@@ -48,7 +59,7 @@ const Search = () => {
         <br />
         <br />
         <div style={{ left: "10%", position: "relative" }}>
-          <CommonSearchComponent />
+          <CommonSearchComponent text={inputText}  />
         </div>
         <p className="search-result-count">
           304 Search Result Product Designer

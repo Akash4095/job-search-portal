@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./welcome.css";
 import { Grid, Icon } from "semantic-ui-react";
+import userImage from "../../../images/user.png";
 import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
 import { NavLink } from "react-router-dom";
@@ -10,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse } from "../data/selectors";
 
 const Welcome = () => {
-  
+
   const [userName, setUserName] = useState("");
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
@@ -28,13 +29,20 @@ const Welcome = () => {
         if (
           getLoginAuthRes.data &&
           getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null
+          getLoginAuthRes.data !== null &&
+          getLoginAuthRes.data !== {}
         ) {
-          setUserName(getLoginAuthRes.data.fname);
+          if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
+            setUserName(getLoginAuthRes.data.fname);
+          }
+
         }
       }
     }
   }, [getLoginAuthRes]);
+
+  console.log('userName', userName)
+  console.log('getLoginAuthRes', getLoginAuthRes)
 
   return (
     <div className="d_flex">
@@ -42,13 +50,15 @@ const Welcome = () => {
       <div className="right-panel">
         <CommonHeaderComponent fname={userName} />
         <div className="user-container">
-          <img
-            src=""
-            alt=""
-            className="user-container-img"
-            width="100"
-            height="100"
-          />
+          <div className="image-container">
+            <img
+              src={userImage}
+              alt=""
+              className="user-container-img"
+              width="100"
+              height="100"
+            />
+          </div>
           <div className="user-name-parent">
             <b className="user-name">{"Hello " + userName}</b>
             <div className="bio">

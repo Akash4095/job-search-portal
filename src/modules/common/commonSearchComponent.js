@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSearchedComponentText } from '../home/data/actions';
 import { getIsSearchedText } from '../home/data/selectors';
 
-const CommonSearchComponent = () => {
+const CommonSearchComponent = ({text}) => {
 
-  // const [input, setInput] = useState(""); 
-  const input = useSelector((state) => getIsSearchedText(state));
+  const [input, setInput] = useState(""); 
+  const inputText = useSelector((state) => getIsSearchedText(state));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -20,21 +20,22 @@ const CommonSearchComponent = () => {
 
   const saveSearchedText = () => {
     dispatch(getSearchedComponentText(input))
-    navigate("/search")
+    // navigate("/search")
   }
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
+      console.log('enter clicked',)
       saveSearchedText();
     }
   };
 
   return (
     <div className="common-input-wrapper">
-      <Icon name="search" onClick={() => saveSearchedText} />
+      <Icon name="search" onClick={() => saveSearchedText()} />
       <input
         placeholder="Search..."
-        value={input}
+        value={text}
         onChange={(e) => handleChange(e.target.value)}
         onKeyDown={handleKeyPress}
       />
