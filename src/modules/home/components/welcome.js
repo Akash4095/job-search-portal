@@ -5,20 +5,24 @@ import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
 import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
+import { useSelector } from "react-redux";
+import { getIsCodeSendResponse } from "../data/selectors";
 
 
-const Welcome = ({ userDetails }) => {
-  // console.log('userDetails', userDetails)
-  let fname = (userDetails && userDetails !== null && userDetails !== undefined) ? userDetails.fname : ""
+const Welcome = () => {
+
+  const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
+  let fname = (getLoginAuthRes && getLoginAuthRes !== null && getLoginAuthRes !== undefined) ? getLoginAuthRes : ""
+  console.log('fname', fname)
   return (
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <CommonHeaderComponent fname={fname} />
+        <CommonHeaderComponent fname={"fname"} />
         <div className="user-container">
           <img src="" alt="" className="user-container-img" width="100" height="100" />
           <div className="user-name-parent">
-            <b className="user-name">{fname}</b>
+            <b className="user-name">{"fname"}</b>
             <div className="bio">
               <p>We're here to help you find the perfect candidates for your needs. Easily search, filter, and connect with talented individuals.</p>
               <p style={{ marginTop: "-15px" }}>

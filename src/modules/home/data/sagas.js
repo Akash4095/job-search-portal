@@ -1,10 +1,7 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
 import { fetchedLinkedinKeys, getResponseOfCode } from "./actions";
-import userACL from "../../../store/access";
-import { merge } from "lodash";
-import axios from "axios";
-
+import axios from "axios"
 
 
 
@@ -17,9 +14,8 @@ function* fetchLinkedinKeys() {
 function* getLinkedinKeysFunc(action) {
 
     const { response, error } = yield call(fetchLinkedInKeysAPI)
-    console.log('response', response)
     if (response) {
-        // yield put(fetchedLinkedinKeys(response.data))
+        yield put(fetchedLinkedinKeys(response.data))
     }
     else {
         sagaErrorMessage(error, action)
@@ -28,7 +24,7 @@ function* getLinkedinKeysFunc(action) {
 
 async function fetchLinkedInKeysAPI() {
     try {
-        const response = await axios.get(BASE_URL + '/user/getlinkedinkeys', {headers: { Authorization: getToken()}, Accept: '*/*',});
+        const response = await axios.get(BASE_URL + '/user/getlinkedinkeys', {headers: { Authorization: getToken()},});
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -56,7 +52,7 @@ function* sendCode(action) {
 
 async function sendCodeAPI(data) {
     try {
-        const response = await axios.post(BASE_URL + '/sendcode', data, { crossDomain: true });
+        const response = await axios.post(BASE_URL + '/user/linkedinauth', data,{headers: { Authorization: getToken()}});
         return ({ response });
     } catch (error) {
         return ({ error });

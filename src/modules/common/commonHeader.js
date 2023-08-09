@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getIsCodeSendResponse } from "../home/data/selectors";
 
 const CommonHeaderComponent = ({fname}) => {
+
+    const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);

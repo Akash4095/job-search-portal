@@ -10,5 +10,5 @@ export const getHeader = () => {
 }
 
 export const getToken = () => {
-    return 'Bearer ' + 'Basic cm9taWwuc2FybmFAZ21haWwuY29tOnJvbWlsMTIz';
+    return 'Basic cm9taWwuc2FybmFAZ21haWwuY29tOnJvbWlsMTIz';
   }

@@ -7,13 +7,14 @@ import rootSaga from './sagas'
 import rootReducer from './reducers'
 
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
+const reducers = rootReducer();
 
 const preloadedState = loadState();
 
 const store = configureStore(
     {
-        reducer: rootReducer,
+        reducer: reducers,
         middleware: () => [sagaMiddleware, txnMiddleware, loggerMiddleware],
         preloadedState
     }
