@@ -11,11 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchSearchByQuery } from "../data/actions";
 
-const Search = () => {
+const Search = ({setSearchedText, searchedText}) => {
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
-  const [searchedText, setSearchedText] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
 
@@ -49,7 +48,7 @@ const Search = () => {
           <CommonSearchComponent text={inputText} setSearchedText={setSearchedText} />
         </div>
         <p className="search-result-count">
-          {(items.length > 0) ? items.length + " " + searchedText : ""}
+          {(items.length > 0) ? items.length + " " + searchedText  : ""}
         </p>
         {
           selectedRows.length > 0 ?

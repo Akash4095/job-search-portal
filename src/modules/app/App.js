@@ -10,12 +10,14 @@ import { fetchLinkedinKeys, fetchLoginAuth } from './apiCall';
 
 function App() {
 
+  const [searchedText, setSearchedText] = useState("");
+
   return (
     <div>
       <Routes>
         <Route path='/' element={<Login />} />
-        <Route path='/welcome' element={<Welcome />} />
-        <Route path='/search' element={<SearchList />} />
+        <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} />} />
+        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} />} />
         <Route path='/list' element={<ListPage />} />
       </Routes>
     </div>

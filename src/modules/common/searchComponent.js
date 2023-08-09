@@ -6,7 +6,7 @@ import { getIsCodeSendResponse, getIsSearchedText } from '../home/data/selectors
 import { getSearchedComponentText } from '../home/data/actions';
 import { fetchSearchByQuery } from '../search/data/actions';
 
-const SearchComponent = () => {
+const SearchComponent = ({setSearchedText}) => {
 
   const [input, setInput] = useState("");
   const [userId, setUserId] = useState("");
@@ -46,6 +46,7 @@ const SearchComponent = () => {
 
   const saveSearchedText = () => {
     dispatch(getSearchedComponentText(input))
+    setSearchedText(input)
     let obj = {}
     obj.query = input
     obj.start = "1"
