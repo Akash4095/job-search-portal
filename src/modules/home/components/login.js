@@ -1,53 +1,61 @@
-import React, { useState, useEffect } from 'react'
-import { Grid, Icon, Modal, Button } from 'semantic-ui-react'
-import imgage from "../../../images/loginpageImg.png"
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLinkedinKeys, sendLinkedInCode } from '../data/actions';
-import { getIsCodeSendResponse, getIsLikedinKeysResponse } from '../data/selectors';
-import "./login.css"
-
-
+import React, { useState, useEffect } from "react";
+import { Grid, Icon, Modal, Button } from "semantic-ui-react";
+import imgage from "../../../images/loginpageImg.png";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLinkedinKeys, sendLinkedInCode } from "../data/actions";
+import {
+    getIsCodeSendResponse,
+    getIsLikedinKeysResponse,
+} from "../data/selectors";
+import "./login.css";
 
 const Login = ({ }) => {
+    const [clientId, setClientId] = useState("86cilhpcnozw4l");
+    const [redirectUri, setRedirectUri] = useState("http://localhost:3000");
+    const [scope, setScope] = useState("r_emailaddress,r_liteprofile");
 
-    const getLinkedInKeys = useSelector((state) => getIsLikedinKeysResponse(state))
-    const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
-
-    const clientId = '86cilhpcnozw4l';
-    const redirectUri = 'http://localhost:3000';
-    const scope = 'r_emailaddress,r_liteprofile';
+    const getLinkedInKeys = useSelector((state) =>
+        getIsLikedinKeysResponse(state)
+    );
+    const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
 
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const getUrl = window.location.href
-        let code = getUrl ? getUrl.split("code=")[1] ? getUrl.split("code=")[1] : "" : ""
+        const getUrl = window.location.href;
+        let code = getUrl
+            ? getUrl.split("code=")[1]
+                ? getUrl.split("code=")[1]
+                : ""
+            : "";
         if (code && code !== "" && code !== undefined && code !== null) {
-            let obj = {}
-            obj.code = code
-            dispatch(sendLinkedInCode())
+            let obj = {};
+            obj.code = code;
+            dispatch(sendLinkedInCode(obj));
         }
-        dispatch(fetchLinkedinKeys())
+        dispatch(fetchLinkedinKeys());
     }, []);
 
-
-    //   useEffect(() => {
-    //     if (getLoginAuthRes && getLoginAuthRes !== null && getLoginAuthRes !== undefined) {
-    //       if (getLoginAuthRes.status === "success") {
-    //         navigate("/welcome")
-    //       }
-    //     }
-    //   }, [getLoginAuthRes])
-
-    console.log('getLoginAuthRes', getLoginAuthRes)
-    console.log('getLinkedInKeys', getLinkedInKeys)
+    useEffect(() => {
+        if (
+            getLoginAuthRes &&
+            getLoginAuthRes !== null &&
+            getLoginAuthRes !== undefined
+        ) {
+            if (getLoginAuthRes.status === "success") {
+                navigate("/welcome");
+            }
+        }
+    }, [getLoginAuthRes]);
 
     const signUpWithLinkedFunction = () => {
-        window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(scope)}`;
-    }
+        window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
+            scope
+        )}`;
+    };
 
     return (
         <div>
@@ -69,20 +77,18 @@ const Login = ({ }) => {
                                 <div className="get-started-parent">
                                     <div className="sign-up-with">Get Started</div>
 
-                                    <button className="linkedin-btn" onClick={() => signUpWithLinkedFunction()}>
-                                        <Icon name='linkedin' size='large' />
+                                    <button
+                                        className="linkedin-btn"
+                                        onClick={() => signUpWithLinkedFunction()}
+                                    >
+                                        <Icon name="linkedin" size="large" />
                                         <div className="sign-up-with">Sign up with Linkedin</div>
                                     </button>
-
                                 </div>
                                 <div className="login-ul-container">
                                     <ul className="login-page-ul">
-                                        <li>
-                                            Touch base with 500 Million people across globe
-                                        </li>
-                                        <li>
-                                            Find the perfect person for your company
-                                        </li>
+                                        <li>Touch base with 500 Million people across globe</li>
+                                        <li>Find the perfect person for your company</li>
                                         <li>Pay as go</li>
                                         <li>Find their contact details</li>
                                         <li>{`Engage with them on the fly `}</li>
@@ -91,14 +97,12 @@ const Login = ({ }) => {
                             </div>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row>
-
-                    </Grid.Row>
+                    <Grid.Row></Grid.Row>
                 </Grid>
             </div>
-            <footer className="getlista-2023-">{`© getlist{a} 2023 - All rights reserved.`}</footer> */}
+            <footer className="getlista-2023-">{`© getlist{a} 2023 - All rights reserved.`}</footer>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

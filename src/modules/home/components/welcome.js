@@ -1,30 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./welcome.css";
 import { Grid, Icon } from "semantic-ui-react";
 import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
 import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse } from "../data/selectors";
 
-
 const Welcome = () => {
+  
+  const [userName, setUserName] = useState("");
 
-  const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
-  let fname = (getLoginAuthRes && getLoginAuthRes !== null && getLoginAuthRes !== undefined) ? getLoginAuthRes : ""
-  console.log('fname', fname)
+  const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (
+      getLoginAuthRes &&
+      getLoginAuthRes !== null &&
+      getLoginAuthRes !== undefined
+    ) {
+      if (getLoginAuthRes.status === "success") {
+        if (
+          getLoginAuthRes.data &&
+          getLoginAuthRes.data !== undefined &&
+          getLoginAuthRes.data !== null
+        ) {
+          setUserName(getLoginAuthRes.data.fname);
+        }
+      }
+    }
+  }, [getLoginAuthRes]);
+
   return (
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <CommonHeaderComponent fname={"fname"} />
+        <CommonHeaderComponent fname={userName} />
         <div className="user-container">
-          <img src="" alt="" className="user-container-img" width="100" height="100" />
+          <img
+            src=""
+            alt=""
+            className="user-container-img"
+            width="100"
+            height="100"
+          />
           <div className="user-name-parent">
-            <b className="user-name">{"fname"}</b>
+            <b className="user-name">{"Hello " + userName}</b>
             <div className="bio">
-              <p>We're here to help you find the perfect candidates for your needs. Easily search, filter, and connect with talented individuals.</p>
+              <p>
+                We're here to help you find the perfect candidates for your
+                needs. Easily search, filter, and connect with talented
+                individuals.
+              </p>
               <p style={{ marginTop: "-15px" }}>
                 Start exploring now and unlock your company's potential!
               </p>
@@ -32,7 +64,9 @@ const Welcome = () => {
           </div>
         </div>
         <div className="searchbar-container">
-          <p className="searchbar-p">Find the right person using <b className="keywords">keywords</b></p>
+          <p className="searchbar-p">
+            Find the right person using <b className="keywords">keywords</b>
+          </p>
           <SearchComponent />
         </div>
         <Grid className="summary-grid">
@@ -45,7 +79,7 @@ const Welcome = () => {
               </div>
             </Grid.Column>
             <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent" >
+              <div className="parent">
                 <div className="div1">29</div>
                 <div className="parent-div">Tags created</div>
               </div>

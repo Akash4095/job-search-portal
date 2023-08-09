@@ -43,7 +43,7 @@ function* sendCode(action) {
 
     const { response, error } = yield call(sendCodeAPI, action.payload)
     if (response) {
-        yield put(getResponseOfCode(action.payload, response.data))
+        yield put(getResponseOfCode(response.data))
     }
     else {
         sagaErrorMessage(error, action)
