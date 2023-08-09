@@ -6,37 +6,57 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchLinkedinKeys, sendLinkedInCode } from "../data/actions";
 import {
+    getIsAuthFetched,
     getIsCodeSendResponse,
+    getIsKeysFetched,
     getIsLikedinKeysResponse,
 } from "../data/selectors";
 import "./login.css";
 
 const Login = ({ }) => {
-    const [clientId, setClientId] = useState("86cilhpcnozw4l");
-    const [redirectUri, setRedirectUri] = useState("http://localhost:3000");
+    const [clientId, setClientId] = useState("");
+    const [clientSecret, setClientSecret] = useState("");
+    const [redirectUri, setRedirectUri] = useState("");
+    const [authCallOnce, setAuthCallOnce] = useState(false);
     const [scope, setScope] = useState("r_emailaddress,r_liteprofile");
 
     const getLinkedInKeys = useSelector((state) =>
         getIsLikedinKeysResponse(state)
     );
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+    const getAuthResFetched = useSelector((state) => getIsAuthFetched(state));
+    const getKeysFetched = useSelector((state) => getIsKeysFetched(state));
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const getUrl = window.location.href;
+        if (!getKeysFetched) {
+            dispatch(fetchLinkedinKeys());
+        }
+    }, [])
+
+    const getUrl = window.location.href;
+
+
+    useEffect(() => {
+
         let code = getUrl
             ? getUrl.split("code=")[1]
                 ? getUrl.split("code=")[1]
                 : ""
             : "";
-        if (code && code !== "" && code !== undefined && code !== null) {
-            let obj = {};
-            obj.code = code;
-            dispatch(sendLinkedInCode(obj));
+        if (getUrl && getUrl.includes("code=")) {
+            if (code && code !== "" && code !== undefined && code !== null) {
+                let obj = {};
+                obj.code = code;
+                if (!authCallOnce) {
+                    dispatch(sendLinkedInCode(obj));
+                    setAuthCallOnce(true)
+                }
+            }
         }
-        dispatch(fetchLinkedinKeys());
+
     }, []);
 
     useEffect(() => {
@@ -50,6 +70,19 @@ const Login = ({ }) => {
             }
         }
     }, [getLoginAuthRes]);
+
+    useEffect(() => {
+        if (getLinkedInKeys && getLinkedInKeys !== undefined && getLinkedInKeys !== null) {
+            if (getLinkedInKeys.status === "success") {
+                if (getLinkedInKeys.data && getLinkedInKeys.data !== undefined) {
+                    setClientId(getLinkedInKeys.data.client_id)
+                    setClientSecret(getLinkedInKeys.data.client_secret)
+                    setRedirectUri(getLinkedInKeys.data.redirecturi)
+                }
+            }
+        }
+
+    }, [getLinkedInKeys])
 
     const signUpWithLinkedFunction = () => {
         window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(

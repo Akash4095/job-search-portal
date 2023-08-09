@@ -34,7 +34,9 @@ body {
   font-size: 34px;
   color: #464646;
 }
-
+.sidebar-header .top {
+  cursor: pointer !important;
+}
 .sidebar-middle {
   border-bottom: 1px solid var(--color-lightgray-100);
   box-sizing: border-box;
@@ -257,6 +259,10 @@ i.icon {
   gap: 16px !important;
 }
 
+.input-wrapper,
+.common-input-wrapper .searchIcon {
+  cursor: pointer !important;
+}
 input {
   background-color: transparent;
   border: none;
@@ -453,13 +459,13 @@ input:focus {
   padding-top: 5px !important;
 }
 
-.user-cart-delete-btn{
+.user-cart-delete-btn {
   font-size: 12px !important;
   color: red !important;
   margin-left: 32% !important;
 }
 
-.prev-comp-accord{
+.prev-comp-accord {
   display: flex;
   justify-content: space-between;
   font-size: 12px !important;

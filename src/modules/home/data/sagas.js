@@ -1,7 +1,8 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { fetchedLinkedinKeys, getResponseOfCode } from "./actions";
+import { fetchedDashboardDetails, fetchedLinkedinKeys, getLoginAuthRes } from "./actions";
 import axios from "axios"
+import { getIsAuthFetched, getIsKeysFetched } from './selectors';
 
 
 
@@ -12,19 +13,22 @@ function* fetchLinkedinKeys() {
 }
 
 function* getLinkedinKeysFunc(action) {
+    const isKeysFetched = yield select(getIsKeysFetched);
+    if (!isKeysFetched) {
+        const { response, error } = yield call(fetchLinkedInKeysAPI)
+        if (response) {
+            yield put(fetchedLinkedinKeys(response.data))
+        }
+        else {
+            sagaErrorMessage(error, action)
+        }
+    }
 
-    const { response, error } = yield call(fetchLinkedInKeysAPI)
-    if (response) {
-        yield put(fetchedLinkedinKeys(response.data))
-    }
-    else {
-        sagaErrorMessage(error, action)
-    }
 }
 
 async function fetchLinkedInKeysAPI() {
     try {
-        const response = await axios.get(BASE_URL + '/user/getlinkedinkeys', {headers: { Authorization: getToken()},});
+        const response = await axios.get(BASE_URL + '/user/getlinkedinkeys', { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -41,18 +45,52 @@ function* sendLinkedInCode() {
 
 function* sendCode(action) {
 
-    const { response, error } = yield call(sendCodeAPI, action.payload)
+    const isAuthFetched = yield select(getIsAuthFetched);
+    if (!isAuthFetched) {
+        const { response, error } = yield call(sendCodeAPI, action.payload)
+        if (response) {
+            yield put(getLoginAuthRes(response.data))
+        }
+        else {
+            sagaErrorMessage(error, action)
+        }
+    }
+
+}
+
+async function sendCodeAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/user/linkedinauth', data, { headers: { Authorization: getToken() } });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for send code
+
+function* fetchDashboardDetail() {
+    yield takeEvery('FETCH_DASHBOARD_DETAILS', callDashboardDetails);
+}
+
+function* callDashboardDetails(action) {
+
+    const { response, error } = yield call(callDashboardDetailsAPI, action.payload)
     if (response) {
-        yield put(getResponseOfCode(response.data))
+        yield put(fetchedDashboardDetails(response.data))
     }
     else {
         sagaErrorMessage(error, action)
     }
 }
 
-async function sendCodeAPI(data) {
+async function callDashboardDetailsAPI(data) {
+    let userId = data
+    console.log('userId', userId)
     try {
-        const response = await axios.post(BASE_URL + '/user/linkedinauth', data,{headers: { Authorization: getToken()}});
+        const response = await axios.get(BASE_URL + `/get/dashboarddetails/${userId}`, { headers: { Authorization: getToken() } });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -72,5 +110,6 @@ export default function* homesagas() {
     yield all([
         fetchLinkedinKeys(),
         sendLinkedInCode(),
+        fetchDashboardDetail(),
     ])
 }

@@ -5,6 +5,7 @@ import UserCart from "./userCart";
 
 const SearchResults = ({
   row,
+  key,
   rowClicked,
   setRowClicked,
   selectAll,
@@ -14,12 +15,12 @@ const SearchResults = ({
 }) => {
   let data = [];
 
-  const handleRowClick = (rowId) => {
+  const handleRowClick = (title) => {
     setSelectedRows((prevSelectedRows) => {
-      if (prevSelectedRows.includes(rowId)) {
-        return prevSelectedRows.filter((id) => id !== rowId);
+      if (prevSelectedRows.includes(title)) {
+        return prevSelectedRows.filter((title) => title !== title);
       } else {
-        return [...prevSelectedRows, rowId];
+        return [...prevSelectedRows, title];
       }
     });
   };
@@ -33,28 +34,49 @@ const SearchResults = ({
     setSelectAll((prevSelectAll) => !prevSelectAll);
   };
 
+  function createMarkup(msg) {
+    return { __html: msg };
+  }
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: rowClicked ? "60vw" : "75vw" }}>
-        <div
-          className="search-result-container"
-        >
+        <div className="search-result-container">
           <Grid className="search-result-grid" style={{ margin: "0px" }}>
             <Grid.Row className="search-result-grid-row">
               <Grid.Column width={2}>
                 <Checkbox
                   className="search-result-checkbox"
-                  checked={selectedRows.includes(row.id)}
-                  onChange={() => handleRowClick(row.id)}
+                  checked={selectedRows.includes(row.title)}
+                  onChange={() => handleRowClick(row.title)}
                 />
-                <img src={(row && row.profilepic && row.profilepic !== undefined) ? row.profilepic : ""} height="40" width="40" className="border-radius" />
+                <img
+                  src={
+                    row && row.profilepic && row.profilepic !== undefined
+                      ? row.profilepic
+                      : ""
+                  }
+                  height="40"
+                  width="40"
+                  className="border-radius"
+                />
               </Grid.Column>
               <Grid.Column width={12} style={{ marginLeft: "-3%" }}>
                 <p className="wordBreak" onClick={() => setRowClicked(true)}>
-                  {(row && row.title) ? (row.title) : ""}
+                  {row && row.title ? (
+                    <span dangerouslySetInnerHTML={createMarkup(row.title)} />
+                  ) : (
+                    ""
+                  )}
                 </p>
                 <p className="wordBreak">
-                  {(row && row.description && row.description !== undefined) ? (row.description) : ""}
+                  {row && row.description && row.description !== undefined ? (
+                    <span
+                      dangerouslySetInnerHTML={createMarkup(row.description)}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </p>
               </Grid.Column>
               <Grid.Column width={2} className="action-column">

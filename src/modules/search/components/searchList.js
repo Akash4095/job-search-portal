@@ -15,27 +15,15 @@ const Search = () => {
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
+  const [searchedText, setSearchedText] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const searchedText = useSelector((state) => getIsSearchedText(state));
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
   const inputText = useSelector((state) => getIsSearchedText(state));
-
-  useEffect(() => {
-
-    if (searchedText && searchedText !== undefined && searchedText !== null) {
-      let obj = {}
-      obj.query = searchedText
-      obj.start = "1"
-      obj.userid = "1"
-      dispatch(fetchSearchByQuery())
-    }
-
-  }, [searchedText])
 
   useEffect(() => {
     if (searchResult && searchResult !== null && searchResult !== undefined) {
@@ -47,7 +35,6 @@ const Search = () => {
   }, [searchResult])
 
 
-console.log('inputText', inputText)
   const userRowClicked = () => { };
   return (
     <div className="d_flex">
@@ -59,16 +46,16 @@ console.log('inputText', inputText)
         <br />
         <br />
         <div style={{ left: "10%", position: "relative" }}>
-          <CommonSearchComponent text={inputText}  />
+          <CommonSearchComponent text={inputText} setSearchedText={setSearchedText} />
         </div>
         <p className="search-result-count">
-          304 Search Result Product Designer
+          {(items.length > 0) ? items.length + " " + searchedText : ""}
         </p>
         {
           selectedRows.length > 0 ?
             <p className='selected'>
-              <span> {selectedRows + " Selected"} </span>
-              <Button icon labelPosition='left' color='blue' size='mini' style={{ padding: "5px 0px", marginLeft: "20px", borderRadius: "6px" }}>
+              <span> {selectedRows.length + " Selected"} </span>
+              <Button icon labelPosition='left' color='blue' size='mini' style={{ padding: "6px 0px", marginLeft: "20px", borderRadius: "6px" }}>
                 <Icon name='list ul' color='white' size='mini' />
                 Add to list
               </Button>
@@ -84,9 +71,10 @@ console.log('inputText', inputText)
           >
             {
               (items && items.length > 0) ?
-                items.map((item) => {
+                items.map((item, index) => {
                   return (
                     <SearchResults
+                      key={index}
                       row={item}
                       rowClicked={rowClicked}
                       setRowClicked={setRowClicked}

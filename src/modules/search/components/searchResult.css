@@ -57,10 +57,12 @@
 .selected {
   position: relative !important;
   display: flex;
-  width: 76vw !important;
+  width: 75vw !important;
   color: #999;
   font-weight: 500;
-  margin: 0vw 6vw !important;
+  margin-left: 4vw !important;
+  margin-bottom: 6px !important;
+  font-size: 14px;
 }
 
 .usercart-container {
@@ -72,7 +74,7 @@
   border: 1px solid #eee;
   overflow-y: scroll !important;
 }
-.add-user-to-list{
+.add-user-to-list {
   padding-bottom: 15px !important;
 }
 .user-cart-close-icon {

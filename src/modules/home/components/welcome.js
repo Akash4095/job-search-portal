@@ -8,16 +8,40 @@ import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse } from "../data/selectors";
+import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors";
+import { fetchDashboardDetails } from "../data/actions";
 
 const Welcome = () => {
 
   const [userName, setUserName] = useState("");
+  const [leads, setLeads] = useState("");
+  const [search, setSearch] = useState("");
+  const [list, setList] = useState("");
+  const [team, setTeam] = useState("");
+  const [tags, setTags] = useState("");
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+  const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch(fetchDashboardDetails("2"))
+  }, [])
+
+  useEffect(() => {
+    if (dashboardRes && dashboardRes.status === "success") {
+      if (dashboardRes.data && dashboardRes.data !== null && dashboardRes.data !== undefined) {
+        setLeads(dashboardRes.data.leads)
+        setSearch(dashboardRes.data.search)
+        setList(dashboardRes.data.list)
+        setTeam(dashboardRes.data.team)
+        setTags(dashboardRes.data.tags)
+      }
+    }
+
+  }, [dashboardRes])
 
   useEffect(() => {
     if (
@@ -35,14 +59,16 @@ const Welcome = () => {
           if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
             setUserName(getLoginAuthRes.data.fname);
           }
+          if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
+            dispatch(fetchDashboardDetails(getLoginAuthRes.data.id))
+          }
 
         }
+
       }
     }
   }, [getLoginAuthRes]);
 
-  console.log('userName', userName)
-  console.log('getLoginAuthRes', getLoginAuthRes)
 
   return (
     <div className="d_flex">
@@ -84,31 +110,31 @@ const Welcome = () => {
           <Grid.Row>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">
-                <div className="div1">9</div>
+                <div className="div1">{search}</div>
                 <div className="parent-div">Search conducted</div>
               </div>
             </Grid.Column>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">
-                <div className="div1">29</div>
+                <div className="div1">{tags}</div>
                 <div className="parent-div">Tags created</div>
               </div>
             </Grid.Column>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">
-                <div className="div1">4</div>
+                <div className="div1">{list}</div>
                 <div className="parent-div">Lists created</div>
               </div>
             </Grid.Column>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">
-                <div className="div1">10</div>
+                <div className="div1">{team}</div>
                 <div className="parent-div">Team members</div>
               </div>
             </Grid.Column>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">
-                <div className="div1">34</div>
+                <div className="div1">{leads}</div>
                 <div className="parent-div">Leads left</div>
               </div>
             </Grid.Column>

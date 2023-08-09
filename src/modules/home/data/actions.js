@@ -21,9 +21,9 @@ export function sendLinkedInCode(props) {
     };
 }
 
-export function getResponseOfCode(props, res) {
+export function getLoginAuthRes(props, res) {
     return {
-        type: type.GET_RESPONSE_OF_CODE,
+        type: type.GET_LOGIN_AUTH_RESPONSE,
         payload: props,
     }
 }
@@ -41,4 +41,18 @@ export function getSearchedComponentText(props) {
         type: type.GET_SEARCHED_COMPONENT_TEXT,
         payload: props,
     };
+}
+
+export function fetchDashboardDetails(props) {
+    return {
+        type: type.FETCH_DASHBOARD_DETAILS,
+        payload: props,
+    };
+}
+
+export function fetchedDashboardDetails(props, res) {
+    return {
+        type: type.FETCHED_DASHBOARD_DETAILS,
+        payload: props,
+    }
 }

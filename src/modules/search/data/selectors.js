@@ -1,3 +1,3 @@
 
 
-export const getIsFetchedSearchByQuery = (state, prop) => state.homepage.fetchedSearchedByQuery
+export const getIsFetchedSearchByQuery = (state, prop) => state.searchReducer.fetchedSearchedByQuery

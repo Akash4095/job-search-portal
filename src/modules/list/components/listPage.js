@@ -7,8 +7,10 @@ import ListTable from "./listTable";
 import ListUserCart from "./listUserCart";
 
 const ListPage = () => {
+
   const [rowClicked, setRowClicked] = useState(true);
   const [selectAll, setSelectAll] = useState(false);
+  const [searchedText, setSearchedText] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
 
   return (
@@ -21,7 +23,7 @@ const ListPage = () => {
         <br />
         <br />
         <div className="commonSearchCommponent">
-          <CommonSearchComponent />
+          <CommonSearchComponent setSearchedText={setSearchedText} />
         </div>
         <div className="d_flex">
           <ListTable

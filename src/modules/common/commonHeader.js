@@ -4,8 +4,9 @@ import { Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse } from "../home/data/selectors";
+import userImage from "../../images/user.png";
 
-const CommonHeaderComponent = ({fname}) => {
+const CommonHeaderComponent = ({ fname }) => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
 
@@ -70,7 +71,7 @@ const CommonHeaderComponent = ({fname}) => {
                 <Icon name="bell outline" color="grey" />
                 <span className="notification-count">5</span>
                 <Icon name="setting" color="grey" />
-                <img width="25px" height="20px" />
+                <img src={userImage} width="25px" height="20px" />
                 <div className="profile">
                     <div className="user-parent">
                         <div className="search">{fname}</div>

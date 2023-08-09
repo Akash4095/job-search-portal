@@ -1,11 +1,20 @@
 import React from 'react'
 import { Icon } from 'semantic-ui-react'
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const gotoWelcomePage = () => {
+        navigate("/welcome")
+    }
     return (
         <section className="sidebar-container">
             <div className="sidebar-header">
-                <div className="top">
+                <div className="top" onClick={() => gotoWelcomePage()}>
                     <span className="getlist">getlist</span>
                     <span className="a">{`{a}`}</span>
                 </div>
