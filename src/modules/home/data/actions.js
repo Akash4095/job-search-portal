@@ -27,3 +27,18 @@ export function getResponseOfCode(props, res) {
         payload: props,
     }
 }
+
+
+export function saveSearchedComponentText(props) {
+    return {
+        type: type.SAVE_SEARCHED_COMPONENT_TEXT,
+        payload: props,
+    };
+}
+
+export function getSearchedComponentText(props) {
+    return {
+        type: type.GET_SEARCHED_COMPONENT_TEXT,
+        payload: props,
+    };
+}

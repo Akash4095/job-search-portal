@@ -4,6 +4,7 @@ import "./searchResult.css";
 import UserCart from "./userCart";
 
 const SearchResults = ({
+  row,
   rowClicked,
   setRowClicked,
   selectAll,
@@ -44,8 +45,8 @@ const SearchResults = ({
               <Grid.Column width={2}>
                 <Checkbox
                   className="search-result-checkbox"
-                //   checked={selectedRows.includes(row.id)}
-                //   onChange={() => handleRowClick(row.id)}
+                  checked={selectedRows.includes(row.id)}
+                  onChange={() => handleRowClick(row.id)}
                 />
                 <img height="40" width="40" className="border-radius" />
               </Grid.Column>

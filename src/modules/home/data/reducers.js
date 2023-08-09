@@ -19,11 +19,19 @@ function getLinkedinCodeResponse(state = {}, action) {
     }
 }
 
+function getSearchedText(state = "", action) {
+    if (action.type === 'GET_SEARCHED_COMPONENT_TEXT') {
+        return action.payload
+    } else {
+        return state
+    }
+}
 
 
 const homepageReducer = combineReducers({
     fetchedLinkedinKeysReducer,
     getLinkedinCodeResponse,
+    getSearchedText,
 
 })
 
