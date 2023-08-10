@@ -2,9 +2,11 @@ import React from 'react'
 import { Icon } from 'semantic-ui-react'
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getIsUserList } from '../search/data/selectors';
 
 const SideBar = () => {
 
+    const userListRes = useSelector((state) => getIsUserList(state));
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

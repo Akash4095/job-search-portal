@@ -33,6 +33,63 @@ async function getQuerySearchFuncAPI(data) {
 
 // End region
 
+// region for add user
+
+function* addUserList() {
+    yield takeEvery('ADD_USER_LIST', addUserListFunc);
+}
+
+function* addUserListFunc(action) {
+
+    const { response, error } = yield call(addUserListAPI, action.payload)
+    if (response) {
+        yield put(fetchedSearchByQuery(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function addUserListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/add/list', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+
+// region for add user
+
+function* getUserList() {
+    yield takeEvery('GET_USER_LIST', getUserListFunc);
+}
+
+function* getUserListFunc(action) {
+
+    const { response, error } = yield call(getUserListAPI, action.payload)
+    if (response) {
+        yield put(fetchedSearchByQuery(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function getUserListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/get/userlist/1', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
 
 
 const sagaErrorMessage = (error, action) => {
@@ -44,5 +101,7 @@ const sagaErrorMessage = (error, action) => {
 export default function* searchsagas() {
     yield all([
         fetchSearchByQuery(),
+        addUserList(),
+        getUserList(),
     ])
 }

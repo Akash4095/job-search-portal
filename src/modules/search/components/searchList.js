@@ -6,12 +6,12 @@ import CommonSearchComponent from "../../common/commonSearchComponent";
 import { Button, Icon } from "semantic-ui-react";
 import UserCart from "./userCart";
 import { getIsSearchedText } from "../../home/data/selectors";
-import { getIsFetchedSearchByQuery } from "../data/selectors";
+import { getIsAddUserList, getIsFetchedSearchByQuery, getIsUserList } from "../data/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchSearchByQuery } from "../data/actions";
 
-const Search = ({setSearchedText, searchedText}) => {
+const Search = ({ setSearchedText, searchedText }) => {
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
@@ -23,6 +23,8 @@ const Search = ({setSearchedText, searchedText}) => {
 
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
   const inputText = useSelector((state) => getIsSearchedText(state));
+  const userListRes = useSelector((state) => getIsUserList(state));
+  const addListRes = useSelector((state) => getIsAddUserList(state));
 
   useEffect(() => {
     if (searchResult && searchResult !== null && searchResult !== undefined) {
@@ -48,7 +50,7 @@ const Search = ({setSearchedText, searchedText}) => {
           <CommonSearchComponent text={inputText} setSearchedText={setSearchedText} />
         </div>
         <p className="search-result-count">
-          {(items.length > 0) ? items.length + " " + searchedText  : ""}
+          {(items.length > 0) ? items.length + " " + searchedText : ""}
         </p>
         {
           selectedRows.length > 0 ?

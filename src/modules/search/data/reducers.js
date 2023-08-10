@@ -11,8 +11,26 @@ function fetchedSearchedByQuery(state = {}, action) {
 }
 
 
+function addUserListRes(state = {}, action) {
+    if (action.type === 'ADD_USER_LIST_RES') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
+function getUserListRes(state = {}, action) {
+    if (action.type === 'GET_USER_LIST_RES') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
 const searchReducer = combineReducers({
     fetchedSearchedByQuery,
+    addUserListRes,
+    getUserListRes,
 
 })
 

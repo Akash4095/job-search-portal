@@ -13,3 +13,31 @@ export function fetchedSearchByQuery(props) {
         payload: props,
     };
 }
+
+export function addUserList(props) {
+    return {
+        type: type.ADD_USER_LIST,
+        payload: props,
+    };
+}
+
+export function addUserListRes(props) {
+    return {
+        type: type.ADD_USER_LIST_RES,
+        payload: props,
+    };
+}
+
+export function getUserList(props) {
+    return {
+        type: type.GET_USER_LIST,
+        payload: props,
+    };
+}
+
+export function getUserListRes(props) {
+    return {
+        type: type.GET_USER_LIST_RES,
+        payload: props,
+    };
+}
