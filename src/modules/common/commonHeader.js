@@ -46,14 +46,14 @@ const CommonHeaderComponent = ({ fname }) => {
         <header className="common-header">
             <div className="top-tab">
                 <div
-                    style={{ color: searchClicked ? "#2185d0" : "#666" }}
+                    style={{ color: searchClicked ? "#2185d0" : "#666", borderBottom: searchClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToSearch()}
                 >
                     Search
                 </div>
 
                 <div
-                    style={{ color: listClicked ? "#2185d0" : "#666" }}
+                    style={{ color: listClicked ? "#2185d0" : "#666", borderBottom: listClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToList()}
                 >
                     List
@@ -68,10 +68,12 @@ const CommonHeaderComponent = ({ fname }) => {
             </div>
 
             <div className="top-actions">
-                <Icon name="bell outline" color="grey" />
+                <div>
+                    <Icon name="bell outline" color="grey" />
+                </div>
                 <span className="notification-count">5</span>
                 <Icon name="setting" color="grey" />
-                <img src={userImage} width="25px" height="20px" />
+                <img src={userImage} width="25px" height="25px" />
                 <div className="profile">
                     <div className="user-parent">
                         <div className="search">{fname}</div>

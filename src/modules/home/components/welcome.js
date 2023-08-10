@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors";
 import { fetchDashboardDetails } from "../data/actions";
 
-const Welcome = ({setSearchedText, searchedText}) => {
+const Welcome = ({ setSearchedText, searchedText }) => {
 
   const [userName, setUserName] = useState("");
   const [leads, setLeads] = useState("");
@@ -103,10 +103,10 @@ const Welcome = ({setSearchedText, searchedText}) => {
           <p className="searchbar-p">
             Find the right person using <b className="keywords">keywords</b>
           </p>
-          <SearchComponent setSearchedText={setSearchedText}/>
+          <SearchComponent setSearchedText={setSearchedText} />
         </div>
         <Grid className="summary-grid">
-          <p style={{ color: "#1c34b0" }}>Your Summary</p>
+          <p style={{ color: "#1c34b0", marginBottom: "20px" }}>Your Summary</p>
           <Grid.Row>
             <Grid.Column width={3} className="summary-grid-column">
               <div className="parent">

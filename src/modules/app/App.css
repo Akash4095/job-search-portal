@@ -155,6 +155,7 @@ i.icon {
   left: 2% !important;
   gap: 36px !important;
   font-size: var(--font-size-lg);
+  cursor: pointer !important;
 }
 
 .top-tab {
@@ -196,6 +197,8 @@ i.icon {
   gap: 8px !important;
   font-size: var(--font-size-sm);
   width: 22% !important;
+  margin-top: 8px !important;
+  height: 80% !important;
 }
 .notification {
   position: relative;
@@ -237,7 +240,7 @@ i.icon {
   position: absolute;
   margin-left: 8px;
   text-align: center;
-  top: 0px;
+  top: 4px;
   width: 18px;
   font-size: 11px;
 }
@@ -270,7 +273,7 @@ input {
   font-size: 1.25rem;
   width: 100%;
   margin-left: 5px;
-  font-size: 18px !important;
+  font-size: 17px !important;
 }
 
 input:focus {

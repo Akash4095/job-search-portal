@@ -4,7 +4,8 @@
   margin-left: 1vw !important;
   left: 1.4% !important;
   height: 16% !important;
-  font-size: 12px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
 }
 
 .search-result-grid {
@@ -15,7 +16,14 @@
 
 .search-result-grid-row {
   background: #fff !important;
-  border: 1px solid #ccc !important;
+  border: 1px solid #eee !important;
+  border-radius: 3px;
+}
+
+.search-result-grid-row:hover {
+  background: #fff !important;
+  border: 1px solid #aaa !important;
+  border-radius: 3px;
 }
 
 .search-result-checkbox {
@@ -42,7 +50,7 @@
   margin-left: 11% !important;
   margin-top: 3px !important;
   text-decoration: underline;
-  color: blue;
+  color: #2185d0;
   cursor: pointer !important;
 }
 
@@ -114,4 +122,14 @@
   padding: 8px 55px !important;
   margin-left: 10px !important;
   border-radius: 6px !important;
+}
+.userName {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.userDescription {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  margin-top: -7px !important;
 }

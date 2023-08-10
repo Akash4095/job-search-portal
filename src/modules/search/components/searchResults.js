@@ -2,6 +2,7 @@ import React from "react";
 import { Checkbox, Grid, Icon } from "semantic-ui-react";
 import "./searchResult.css";
 import UserCart from "./userCart";
+import { Link } from "react-router-dom";
 
 const SearchResults = ({
   row,
@@ -56,20 +57,20 @@ const SearchResults = ({
                       ? row.profilepic
                       : ""
                   }
-                  height="40"
-                  width="40"
+                  height={rowClicked ? "40" : "55"}
+                  width={rowClicked ? "40" : "55"}
                   className="border-radius"
                 />
               </Grid.Column>
               <Grid.Column width={12} style={{ marginLeft: "-3%" }}>
-                <p className="wordBreak" onClick={() => setRowClicked(true)}>
+                <p className="userName" onClick={() => setRowClicked(true)}>
                   {row && row.title ? (
                     <span dangerouslySetInnerHTML={createMarkup(row.title)} />
                   ) : (
                     ""
                   )}
                 </p>
-                <p className="wordBreak">
+                <p className="userDescription">
                   {row && row.description && row.description !== undefined ? (
                     <span
                       dangerouslySetInnerHTML={createMarkup(row.description)}
@@ -80,7 +81,11 @@ const SearchResults = ({
                 </p>
               </Grid.Column>
               <Grid.Column width={2} className="action-column">
-                <Icon name="linkedin" />
+                <Link to={row.linkedinlink} target="_blank">
+                  <div title="Linkedin Profile">
+                    <Icon color="grey" name="linkedin" />
+                  </div>
+                </Link>
                 <Icon name="twitter" />
                 <Icon name="dribbble" />
               </Grid.Column>

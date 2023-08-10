@@ -57,7 +57,7 @@ const Login = ({ }) => {
             }
         }
 
-    }, []);
+    }, [authCallOnce]);
 
     useEffect(() => {
         if (
