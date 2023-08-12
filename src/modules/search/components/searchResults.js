@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox, Grid, Icon } from "semantic-ui-react";
 import "./searchResult.css";
 import UserCart from "./userCart";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addProfileToList, fetchProfileDetails } from "../data/actions";
 
 const SearchResults = ({
   row,
@@ -13,15 +15,18 @@ const SearchResults = ({
   setSelectAll,
   selectedRows,
   setSelectedRows,
+  sessionUserId
 }) => {
   let data = [];
 
-  const handleRowClick = (title) => {
+  const dispatch = useDispatch();
+
+  const handleRowClick = (id) => {
     setSelectedRows((prevSelectedRows) => {
-      if (prevSelectedRows.includes(title)) {
-        return prevSelectedRows.filter((title) => title !== title);
+      if (prevSelectedRows.includes(id)) {
+        return prevSelectedRows.filter((id) => id !== id);
       } else {
-        return [...prevSelectedRows, title];
+        return [...prevSelectedRows, id];
       }
     });
   };
@@ -39,6 +44,23 @@ const SearchResults = ({
     return { __html: msg };
   }
 
+  const getUserProfileDetails = (row) => {
+    let obj = {}
+    obj.profileid = row.id
+    obj.userid = sessionUserId
+    dispatch(fetchProfileDetails(obj))
+    setRowClicked(true)
+  }
+
+  const addProfileToListFunc = (row) => {
+    let obj = {}
+    obj.userid = sessionUserId
+    obj.listid = ""
+    obj.profileid = row.id
+    dispatch(addProfileToList(obj))
+
+  }
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ width: rowClicked ? "60vw" : "75vw" }}>
@@ -48,8 +70,8 @@ const SearchResults = ({
               <Grid.Column width={2}>
                 <Checkbox
                   className="search-result-checkbox"
-                  checked={selectedRows.includes(row.title)}
-                  onChange={() => handleRowClick(row.title)}
+                  checked={selectedRows.includes(row.id)}
+                  onChange={() => handleRowClick(row.id)}
                 />
                 <img
                   src={
@@ -63,7 +85,7 @@ const SearchResults = ({
                 />
               </Grid.Column>
               <Grid.Column width={12} style={{ marginLeft: "-3%" }}>
-                <p className="userName" onClick={() => setRowClicked(true)}>
+                <p className="userName" onClick={() => getUserProfileDetails(row)}>
                   {row && row.title ? (
                     <span dangerouslySetInnerHTML={createMarkup(row.title)} />
                   ) : (
@@ -89,7 +111,7 @@ const SearchResults = ({
                 <Icon name="twitter" />
                 <Icon name="dribbble" />
               </Grid.Column>
-              <p className="add-list-btn">Add List</p>
+              <p className="add-list-btn" onClick={() => addProfileToListFunc(row)}>Add List</p>
             </Grid.Row>
           </Grid>
         </div>

@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { addUserListRes, fetchedSearchByQuery, getUserListRes } from "./actions";
+import { addProfileToListRes, addUserListRes, deleteProfileFromListRes, fetchedProfileDetails, fetchedSearchByQuery, getUserListRes } from "./actions";
 import axios from "axios"
 
 
@@ -91,6 +91,89 @@ async function getUserListAPI(data) {
 
 // End region
 
+// region for fetch profile details
+
+function* fetchProfileDetails() {
+    yield takeEvery('FETCH_PROFILE_DETAILS', requestProfileDetails);
+}
+
+function* requestProfileDetails(action) {
+
+    const { response, error } = yield call(profileDetailsAPI, action.payload)
+    if (response) {
+        yield put(fetchedProfileDetails(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function profileDetailsAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/fetchprofiledetail', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for add user  to list
+
+function* addUserToList() {
+    yield takeEvery('ADD_PROFILE_TO_LIST', requestAddUserToList);
+}
+
+function* requestAddUserToList(action) {
+
+    const { response, error } = yield call(addUserToListAPI, action.payload)
+    if (response) {
+        yield put(addProfileToListRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function addUserToListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/add/profiletolist', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for delete user from list
+
+function* deleteUserFromList() {
+    yield takeEvery('ADD_PROFILE_TO_LIST', requestdeleteUserFromList);
+}
+
+function* requestdeleteUserFromList(action) {
+
+    const { response, error } = yield call(deleteUserFromListAPI, action.payload)
+    if (response) {
+        yield put(deleteProfileFromListRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function deleteUserFromListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/delete/profilefrmlist', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
 
 
 const sagaErrorMessage = (error, action) => {
@@ -104,5 +187,8 @@ export default function* searchsagas() {
         fetchSearchByQuery(),
         addUserList(),
         getUserList(),
+        fetchProfileDetails(),
+        addUserToList(),
+        deleteUserFromList(),
     ])
 }

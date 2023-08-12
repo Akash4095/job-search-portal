@@ -118,6 +118,7 @@ const Search = ({ setSearchedText, searchedText }) => {
                       setSelectAll={setSelectAll}
                       selectedRows={selectedRows}
                       setSelectedRows={setSelectedRows}
+                      sessionUserId={sessionUserId}
                     />
                   )
                 }) : null

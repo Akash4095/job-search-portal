@@ -27,10 +27,37 @@ function getUserListRes(state = {}, action) {
     }
 }
 
+function fetchedProfileDetailsRes(state = {}, action) {
+    if (action.type === 'FETCHED_PROFILE_DETAILS_RES') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
+function addProfileToListRes(state = {}, action) {
+    if (action.type === 'ADD_PROFILE_TO_LIST_RES') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
+function deleteProfileFromListRes(state = {}, action) {
+    if (action.type === 'DELETE_PROFILE_FROM_LIST_RES') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
 const searchReducer = combineReducers({
     fetchedSearchedByQuery,
     addUserListRes,
     getUserListRes,
+    fetchedProfileDetailsRes,
+    addProfileToListRes,
+    deleteProfileFromListRes,
 
 })
 
