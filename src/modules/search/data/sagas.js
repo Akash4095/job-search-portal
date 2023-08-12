@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { fetchedSearchByQuery } from "./actions";
+import { addUserListRes, fetchedSearchByQuery, getUserListRes } from "./actions";
 import axios from "axios"
 
 
@@ -43,7 +43,7 @@ function* addUserListFunc(action) {
 
     const { response, error } = yield call(addUserListAPI, action.payload)
     if (response) {
-        yield put(fetchedSearchByQuery(response.data))
+        yield put(addUserListRes(response.data))
     }
     else {
         sagaErrorMessage(error, action)
@@ -72,7 +72,7 @@ function* getUserListFunc(action) {
 
     const { response, error } = yield call(getUserListAPI, action.payload)
     if (response) {
-        yield put(fetchedSearchByQuery(response.data))
+        yield put(getUserListRes(response.data))
     }
     else {
         sagaErrorMessage(error, action)
@@ -80,8 +80,9 @@ function* getUserListFunc(action) {
 }
 
 async function getUserListAPI(data) {
+    let userId = data.userid
     try {
-        const response = await axios.post(BASE_URL + '/get/userlist/1', data, { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + `/get/userlist/${userId}`, data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });

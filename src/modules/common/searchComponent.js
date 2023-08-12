@@ -9,7 +9,7 @@ import { fetchSearchByQuery } from '../search/data/actions';
 const SearchComponent = ({setSearchedText}) => {
 
   const [input, setInput] = useState("");
-  const [userId, setUserId] = useState("");
+  const [sessionUserId, setSessionUserId] = useState("");
 
   const inputText = useSelector((state) => getIsSearchedText(state));
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
@@ -31,7 +31,7 @@ const SearchComponent = ({setSearchedText}) => {
           getLoginAuthRes.data !== {}
         ) {
           if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
-            setUserId(getLoginAuthRes.data.id);
+            setSessionUserId(getLoginAuthRes.data.id);
           }
 
         }
@@ -50,7 +50,7 @@ const SearchComponent = ({setSearchedText}) => {
     let obj = {}
     obj.query = input
     obj.start = "1"
-    obj.userid = { userId }
+    obj.userid = { sessionUserId }
     dispatch(fetchSearchByQuery(obj))
     setTimeout(() => {
       navigate("/search")

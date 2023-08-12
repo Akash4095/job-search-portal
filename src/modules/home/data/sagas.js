@@ -87,10 +87,10 @@ function* callDashboardDetails(action) {
 }
 
 async function callDashboardDetailsAPI(data) {
-    let userId = data
-    console.log('userId', userId)
+    let sessionUserId = data
+    console.log('sessionUserId', sessionUserId)
     try {
-        const response = await axios.get(BASE_URL + `/get/dashboarddetails/${userId}`, { headers: { Authorization: getToken() } });
+        const response = await axios.get(BASE_URL + `/get/dashboarddetails/${sessionUserId}`, { headers: { Authorization: getToken() } });
         return ({ response });
     } catch (error) {
         return ({ error });

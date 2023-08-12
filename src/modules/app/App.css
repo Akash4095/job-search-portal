@@ -27,7 +27,7 @@ body {
   height: 15vh !important;
   display: flex;
   flex-direction: row;
-  padding: 0 var(--padding-36);
+  padding: 0 7% !important;
   align-items: center;
   justify-content: flex-start;
   margin-left: -10px !important;
@@ -45,6 +45,7 @@ body {
 
 .getlist {
   font-weight: 800;
+  padding-left: 15% !important;
 }
 .a {
   font-weight: 500;
@@ -57,20 +58,21 @@ body {
 
 .sidebar-list {
   display: flex;
-  padding-left: 25px;
+  padding-left: 12% !important;
   padding-top: 25px;
 }
 
 .sidebar-add-list {
   display: flex;
-  padding-left: 25px;
+  padding-left: 12% !important;
   padding-top: 25px;
   color: #2185d0 !important;
+  cursor: pointer !important;
 }
 
 .sidebar-f-list {
   display: flex;
-  padding-left: 25px;
+  padding-left: 12% !important;
   padding-top: 15px;
   gap: var(--gap-base);
 }
@@ -80,7 +82,7 @@ body {
 }
 
 .default-list {
-  padding-right: 70px !important;
+  padding-right: 15% !important;
   font-weight: 500;
 }
 
@@ -93,13 +95,14 @@ body {
 .footer-actions {
   padding-bottom: 20px !important;
   border-bottom: 1px solid var(--color-lightgray-100);
+  cursor: pointer;
 }
 
 .widget-last {
   height: 8vh !important;
   border-radius: var(--br-7xs);
-  width: 280px;
-  padding: 16px var(--padding-5xl);
+  width: 18vw !important;
+  padding: 8% 12% !important;
   justify-content: center;
   gap: 10px;
   color: var(--color-gray-100);
@@ -474,3 +477,11 @@ input:focus {
   font-size: 12px !important;
 }
 /*------------------------end list page ----------------------*/
+
+.field> label{
+  font-size: 14px !important;
+}
+.listName >input {
+  font-size: 13px !important;
+  height: 35px !important;
+}

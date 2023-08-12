@@ -1,18 +1,66 @@
-import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import React, { useState, useEffect } from "react";
+import { Button, Icon, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsUserList } from '../search/data/selectors';
+import { getIsAddUserList, getIsUserList } from "../search/data/selectors";
+import AddListForm from "./addListForm";
+import CommanResponseModal from "./commonModal";
+import { getUserList } from "../search/data/actions";
 
-const SideBar = () => {
+const SideBar = ({ sessionUserId }) => {
 
+    const addListRes = useSelector((state) => getIsAddUserList(state));
     const userListRes = useSelector((state) => getIsUserList(state));
+    const [addListModal, setAddListModal] = useState({ open: false, msg: "" });
+    const [sidebarUserList, setSidebarUserList] = useState([]);
+    const [openCommonModal, setOpenCommonModal] = useState({
+        open: false,
+        size: "",
+        headerContent: "",
+        headerIcon: "",
+        modalContent: "",
+        buttonColor: "",
+    });
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const gotoWelcomePage = () => {
-        navigate("/welcome")
-    }
+        navigate("/welcome");
+    };
+    const openAddListModal = () => {
+        setAddListModal({ open: true, msg: "" });
+    };
+
+    useEffect(() => {
+
+    }, [])
+
+    useEffect(() => {
+        if (addListRes && addListRes !== null && addListRes !== undefined) {
+            if (addListRes.status === "success") {
+                setOpenCommonModal({ open: true, size: "tiny", headerContent: "Add List Response", headerIcon: "check circle", modalContent: "Success", buttonColor: "green" })
+                let obj = {}
+                obj.userid = sessionUserId
+                dispatch(getUserList(obj))
+            }
+        }
+
+    }, [addListRes])
+
+    useEffect(() => {
+        if (userListRes && userListRes !== null && userListRes !== undefined) {
+            if (userListRes.status === "success") {
+                setSidebarUserList(userListRes.list)
+            }
+        }
+
+    }, [userListRes])
+
+    //   console.log("addListRes", addListRes);
+    //   console.log("userListRes", userListRes);
+    //   console.log('sidebarUserList', sidebarUserList)
+
     return (
         <section className="sidebar-container">
             <div className="sidebar-header">
@@ -23,26 +71,41 @@ const SideBar = () => {
             </div>
             <div className="sidebar-middle">
                 <div className="sidebar-list">
-                    <Icon name="bars" className='sidebar-icons' />
+                    <Icon name="bars" className="sidebar-icons" />
                     <div className="default-list1">Default List</div>
                     <Icon name="lock" />
                 </div>
-                <div className="sidebar-add-list">
-                    <Icon name="add" className='sidebar-icons' />
+                {
+                    (sidebarUserList && sidebarUserList.length > 0) ?
+                        sidebarUserList.map((item) => {
+                            return (
+                                <div className="sidebar-add-list" onClick={() => openAddListModal()}>
+                                    <Icon name="bars" className="sidebar-icons" />
+                                    <div className="default-list1">{item.listname}</div>
+                                </div>
+                            )
+                        })
+
+                        : null
+
+                }
+
+                <div className="sidebar-add-list" onClick={() => openAddListModal()}>
+                    <Icon name="add" className="sidebar-icons" />
                     <div className="default-list1">Add List</div>
                 </div>
             </div>
             <div className="footer-actions">
                 <div className="sidebar-f-list">
-                    <Icon name="user" className='sidebar-icons' />
+                    <Icon name="user" className="sidebar-icons" />
                     <div className="default-list">My Team</div>
                 </div>
                 <div className="sidebar-f-list">
-                    <Icon name="help circle" className='sidebar-icons' />
+                    <Icon name="help circle" className="sidebar-icons" />
                     <div className="default-list">Help</div>
                 </div>
                 <div className="sidebar-f-list">
-                    <Icon name="clipboard outline" className='sidebar-icons' />
+                    <Icon name="clipboard outline" className="sidebar-icons" />
                     <div className="default-list">Integration</div>
                 </div>
             </div>
@@ -50,9 +113,21 @@ const SideBar = () => {
                 <div className="getlista">Subscription Expiry Date</div>
                 <div>25 July 2023</div>
             </div>
+            <Modal
+                size="mini"
+                open={addListModal.open}
+                onClose={() => setAddListModal({ open: false, msg: "" })}
+            >
+                <Modal.Content>
+                    <AddListForm setAddListModal={setAddListModal} />
+                </Modal.Content>
+            </Modal>
+            <CommanResponseModal
+                openCommonModal={openCommonModal}
+                setOpenCommonModal={setOpenCommonModal}
+            />
         </section>
+    );
+};
 
-    )
-}
-
-export default SideBar
+export default SideBar;

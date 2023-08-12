@@ -5,7 +5,7 @@ import CommonHeaderComponent from "../../common/commonHeader";
 import CommonSearchComponent from "../../common/commonSearchComponent";
 import { Button, Icon } from "semantic-ui-react";
 import UserCart from "./userCart";
-import { getIsSearchedText } from "../../home/data/selectors";
+import { getIsCodeSendResponse, getIsSearchedText } from "../../home/data/selectors";
 import { getIsAddUserList, getIsFetchedSearchByQuery, getIsUserList } from "../data/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,18 +13,22 @@ import { fetchSearchByQuery } from "../data/actions";
 
 const Search = ({ setSearchedText, searchedText }) => {
 
+  const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
+  const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+  const inputText = useSelector((state) => getIsSearchedText(state));
+  const userListRes = useSelector((state) => getIsUserList(state));
+  const addListRes = useSelector((state) => getIsAddUserList(state));
+
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
+  const [sessionUserId, setSessionUserId] = useState("1");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
-  const inputText = useSelector((state) => getIsSearchedText(state));
-  const userListRes = useSelector((state) => getIsUserList(state));
-  const addListRes = useSelector((state) => getIsAddUserList(state));
+ 
 
   useEffect(() => {
     if (searchResult && searchResult !== null && searchResult !== undefined) {
@@ -35,11 +39,42 @@ const Search = ({ setSearchedText, searchedText }) => {
 
   }, [searchResult])
 
+  useEffect(() => {
+    if (addListRes && addListRes !== null && addListRes !== undefined) {
+      if (addListRes.status && addListRes.status === "success") {
+        
+      }
+    }
+
+  }, [addListRes])
+
+  useEffect(() => {
+    if (
+        getLoginAuthRes &&
+        getLoginAuthRes !== null &&
+        getLoginAuthRes !== undefined
+    ) {
+        if (getLoginAuthRes.status === "success") {
+            if (
+                getLoginAuthRes.data &&
+                getLoginAuthRes.data !== undefined &&
+                getLoginAuthRes.data !== null &&
+                getLoginAuthRes.data !== {}
+            ) {
+                if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
+                    setSessionUserId(getLoginAuthRes.data.id);
+                }
+
+            }
+        }
+    }
+}, [getLoginAuthRes]);
+
 
   const userRowClicked = () => { };
   return (
     <div className="d_flex">
-      <SideBar />
+      <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
         <br />
