@@ -73,10 +73,10 @@ const UserCart = ({ setRowClicked }) => {
               </div>
             </div>
             <div style={{ marginLeft: "10%", fontSize: "12px" }}>
-              From
+               
               {profileDetails.experience
                 ? profileDetails.experience.length > 0
-                  ? displayDate(profileDetails.experience[0].startdate)
+                  ? ("From" + " " + displayDate(profileDetails.experience[0].startdate))
                   : ""
                 : ""}
             </div>

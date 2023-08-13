@@ -62,7 +62,7 @@
   font-weight: 500;
 }
 
-.selected {
+.list-selected {
   position: relative !important;
   display: flex;
   width: 75vw !important;
@@ -141,4 +141,23 @@
   font-size: 13px !important;
   font-weight: 500 !important;
   margin-top: -7px !important;
+}
+
+.list-selected {
+  position: relative !important;
+  display: flex;
+  width: 75vw !important;
+  color: #999;
+  font-weight: 500;
+  margin-left: 4% !important;
+  margin-bottom: 6px !important;
+  font-size: 14px;
+}
+
+.dropdown .icon {
+  padding: 8px !important;
+}
+
+.dropdown .icon .clear {
+  padding: 8px !important;
 }

@@ -15,7 +15,8 @@ const SearchResults = ({
   setSelectAll,
   selectedRows,
   setSelectedRows,
-  sessionUserId
+  sessionUserId,
+  setAddListModal
 }) => {
   let data = [];
 
@@ -24,12 +25,13 @@ const SearchResults = ({
   const handleRowClick = (id) => {
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(id)) {
-        return prevSelectedRows.filter((id) => id !== id);
+        return prevSelectedRows.filter((rowId) => rowId !== id);
       } else {
         return [...prevSelectedRows, id];
       }
     });
   };
+  
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -53,16 +55,12 @@ const SearchResults = ({
   }
 
   const addProfileToListFunc = (row) => {
-    let obj = {}
-    obj.userid = sessionUserId
-    obj.listid = ""
-    obj.profileid = row.id
-    dispatch(addProfileToList(obj))
+    setAddListModal({ open: true, msg: "", obj: row })
 
   }
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex" }} key={key}>
       <div style={{ width: rowClicked ? "60vw" : "75vw" }}>
         <div className="search-result-container">
           <Grid className="search-result-grid" style={{ margin: "0px" }}>

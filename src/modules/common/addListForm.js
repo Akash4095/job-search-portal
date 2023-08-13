@@ -36,7 +36,7 @@ const AddListForm = (props) => {
         }
     }, [getLoginAuthRes]);
 
-    const saveFinanceBank = (values) => {
+    const saveAddListForm = (values) => {
         let obj = {}
         obj.listname = values.listname
         obj.userid = sessionUserId
@@ -56,7 +56,7 @@ const AddListForm = (props) => {
                 initialValues={{ listname: "" }}
                 validationSchema={null}
                 onSubmit={(values, { resetForm }) => {
-                    saveFinanceBank(values, resetForm)
+                    saveAddListForm(values, resetForm)
                 }}
                 render={({ values, handleSubmit, onChange, handleChange, setFieldValue, errors, handleBlur }) => (
 
@@ -64,8 +64,8 @@ const AddListForm = (props) => {
 
                         <Field name='listname' isLabel='false' component={FormikInputComponent} className="listName" placeholder="Enter List Name" />
                         <br />
-                        <Button type="submit" size="small" color='blue' className="CustomeBTN">Add</Button>
                         <Button type="button" size="small" color='red' className="CustomeBTN" onClick={() => closeModal()}>Close</Button>
+                        <Button type="submit" size="small" color='blue' className="CustomeBTN">Add</Button>
                     </Form>
                 )}
             />

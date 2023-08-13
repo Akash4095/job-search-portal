@@ -403,7 +403,7 @@ export const FormikCheckBoxComponent = ({
 );
 
 export const FormikSelectComponent = ({
-  userProps, isLabel, label, isTxn, isSelection, focus, width, compute, setFieldValueM, clearable, isMandatory, setvalue, setChange,
+  userProps, isLabel, label, isTxn, isSelection, placeholder, focus, width, compute, setFieldValueM, clearable, isMandatory, setvalue, setChange,
   index,
   field, // { name, value, onChange, onBlur }
   form: { touched, errors, values, handleChange, setFieldValue, submitCount }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
@@ -450,7 +450,7 @@ export const FormikSelectComponent = ({
         selection={isSelection ? true : false}
         id={field.id ? field.id : ''}
         name={field.name ? field.name : ''}
-        placeholder={userProps.placeholder}
+        placeholder={placeholder}
         options={userProps.options}
         value={userProps ? userProps.isLowerCaseEnable ? toLower(field.value) : field.value : field.value}
         onChange={(e, { value }) => onChange(value)}
@@ -580,7 +580,7 @@ export const FormikAsyncSelectComponent = ({
 
 
 export const FormikTextAreaComponent = ({
-  userProps, isTxn, isLabel, label, className, background, readOnly, isMandatory, setvalue, setChange,setFieldValueM,
+  userProps, isTxn, isLabel, label, className, background, readOnly, isMandatory, setvalue, setChange, setFieldValueM,
   field, // { name, value, onChange, onBlur }
   form: { touched, errors, values, handleChange, handleBlur, setFieldValue, HeaderClick }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
