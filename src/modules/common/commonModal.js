@@ -24,7 +24,7 @@ const CommanResponseModal = (props) => {
             }}
         >
             <Modal.Header>
-                <Icon name={openCommonModal.headerIcon} color={openCommonModal.buttonColor} style={iconStyle} />
+                <Icon size="large" name={openCommonModal.headerIcon} color={openCommonModal.buttonColor} style={iconStyle} />
                 <span
                     style={{
                         marginLeft: "3px",

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { getIsAddUserList, getIsUserList } from "../search/data/selectors";
 import AddListForm from "./addListForm";
 import CommanResponseModal from "./commonModal";
-import { getUserList } from "../search/data/actions";
+import { clearUserListRes, getUserList } from "../search/data/actions";
 
 const SideBar = ({ sessionUserId }) => {
 
@@ -39,9 +39,11 @@ const SideBar = ({ sessionUserId }) => {
     useEffect(() => {
         if (addListRes && addListRes !== null && addListRes !== undefined) {
             if (addListRes.status === "success") {
-                setOpenCommonModal({ open: true, size: "tiny", headerContent: "Add List Response", headerIcon: "check circle", modalContent: "Success", buttonColor: "green" })
+                setOpenCommonModal({ open: true, size: "mini", headerContent: "Add List Response", headerIcon: "check circle", modalContent: "Success", buttonColor: "green" })
+                dispatch(clearUserListRes())
                 let obj = {}
                 obj.userid = sessionUserId
+                // obj.userid = "1"
                 dispatch(getUserList(obj))
             }
         }
@@ -69,17 +71,17 @@ const SideBar = ({ sessionUserId }) => {
                     <span className="a">{`{a}`}</span>
                 </div>
             </div>
-            <div className="sidebar-middle">
+            <div className="sidebar-middle scrollable-container">
                 <div className="sidebar-list">
                     <Icon name="bars" className="sidebar-icons" />
-                    <div className="default-list1">Default List</div>
+                    <div className="default-list-lock">Default List</div>
                     <Icon name="lock" />
                 </div>
                 {
                     (sidebarUserList && sidebarUserList.length > 0) ?
                         sidebarUserList.map((item) => {
                             return (
-                                <div className="sidebar-add-list" onClick={() => openAddListModal()}>
+                                <div className="sidebar-list">
                                     <Icon name="bars" className="sidebar-icons" />
                                     <div className="default-list1">{item.listname}</div>
                                 </div>

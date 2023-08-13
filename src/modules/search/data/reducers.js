@@ -14,6 +14,9 @@ function fetchedSearchedByQuery(state = {}, action) {
 function addUserListRes(state = {}, action) {
     if (action.type === 'ADD_USER_LIST_RES') {
         return action.payload
+    }
+    if (action.type === 'CLEAR_USER_LIST_RES') {
+        return {}
     } else {
         return state
     }

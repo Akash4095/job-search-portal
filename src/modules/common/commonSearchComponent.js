@@ -53,8 +53,8 @@ const CommonSearchComponent = ({ setSearchedText }) => {
     let obj = {}
     obj.query = input
     obj.start = "1"
-    // obj.userid = { sessionUserId }
-    obj.userid = "1"
+    obj.userid = sessionUserId
+    // obj.userid = "1"
     dispatch(fetchSearchByQuery(obj))
     // navigate("/search")
   }

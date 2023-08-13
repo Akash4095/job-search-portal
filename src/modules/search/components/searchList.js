@@ -9,7 +9,7 @@ import { getIsCodeSendResponse, getIsSearchedText } from "../../home/data/select
 import { getIsAddUserList, getIsFetchedSearchByQuery, getIsUserList } from "../data/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchSearchByQuery } from "../data/actions";
+import { fetchSearchByQuery, getUserList } from "../data/actions";
 
 const Search = ({ setSearchedText, searchedText }) => {
 
@@ -23,12 +23,19 @@ const Search = ({ setSearchedText, searchedText }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("1");
+  const [sessionUserId, setSessionUserId] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
  
+  useEffect(() => {
+    let obj = {}
+    obj.userid = sessionUserId
+    // obj.userid = "1"
+    dispatch(getUserList(obj))
+
+  }, [sessionUserId])
 
   useEffect(() => {
     if (searchResult && searchResult !== null && searchResult !== undefined) {
@@ -42,7 +49,7 @@ const Search = ({ setSearchedText, searchedText }) => {
   useEffect(() => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status && addListRes.status === "success") {
-        
+
       }
     }
 
@@ -50,25 +57,25 @@ const Search = ({ setSearchedText, searchedText }) => {
 
   useEffect(() => {
     if (
-        getLoginAuthRes &&
-        getLoginAuthRes !== null &&
-        getLoginAuthRes !== undefined
+      getLoginAuthRes &&
+      getLoginAuthRes !== null &&
+      getLoginAuthRes !== undefined
     ) {
-        if (getLoginAuthRes.status === "success") {
-            if (
-                getLoginAuthRes.data &&
-                getLoginAuthRes.data !== undefined &&
-                getLoginAuthRes.data !== null &&
-                getLoginAuthRes.data !== {}
-            ) {
-                if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
-                    setSessionUserId(getLoginAuthRes.data.id);
-                }
+      if (getLoginAuthRes.status === "success") {
+        if (
+          getLoginAuthRes.data &&
+          getLoginAuthRes.data !== undefined &&
+          getLoginAuthRes.data !== null &&
+          getLoginAuthRes.data !== {}
+        ) {
+          if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
+            setSessionUserId(getLoginAuthRes.data.id);
+          }
 
-            }
         }
+      }
     }
-}, [getLoginAuthRes]);
+  }, [getLoginAuthRes]);
 
 
   const userRowClicked = () => { };

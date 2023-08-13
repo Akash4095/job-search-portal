@@ -41,6 +41,7 @@ body {
   border-bottom: 1px solid var(--color-lightgray-100);
   box-sizing: border-box;
   height: 55vh !important;
+  overflow-y: scroll !important;
 }
 
 .getlist {
@@ -59,7 +60,8 @@ body {
 .sidebar-list {
   display: flex;
   padding-left: 12% !important;
-  padding-top: 25px;
+  padding-top: 8% !important;
+  color: #666;
 }
 
 .sidebar-add-list {
@@ -86,8 +88,14 @@ body {
   font-weight: 500;
 }
 
+.default-list-lock {
+  padding-right: 20% !important;
+  padding-left: 10px !important;
+  font-weight: 500;
+}
+
 .default-list1 {
-  padding-right: 55px !important;
+  padding-right: 2% !important;
   padding-left: 10px !important;
   font-weight: 500;
 }
@@ -457,18 +465,24 @@ input:focus {
   padding: 4% !important;
 }
 
+.paddingBtn {
+  padding: 8% 4% !important;
+}
+.wordBreak {
+  word-break: break-all !important;
+}
 .padding5 {
   padding: 2% 4% !important;
 }
-.previousCompanyPadding{
+.previousCompanyPadding {
   padding: 1px 4% !important;
 }
 .paddingImg {
-  padding: 4% 4% 2% 4%  !important;
+  padding: 4% 4% 2% 4% !important;
 }
 
 .paddingUsrDetails {
-  padding: 2% 4% 4% 4%  !important;
+  padding: 2% 4% 4% 4% !important;
 }
 .paddingTop5 {
   padding-top: 2% !important;
@@ -485,12 +499,50 @@ input:focus {
   justify-content: space-between;
   font-size: 12px !important;
 }
+
+.ellipsis-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+.ellipsis-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /*------------------------end list page ----------------------*/
 
-.field> label{
+.field > label {
   font-size: 14px !important;
 }
-.listName >input {
+.listName > input {
   font-size: 13px !important;
   height: 35px !important;
+}
+
+.accord-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px !important;
+  margin: -4% !important;
+  padding: 1% 4% !important;
+  color: #666;
+  font-weight: 600;
+}
+
+.accord-container {
+  border-bottom: 1px solid #ccc;
+  color: #666 !important;
+  padding-bottom: 3% !important;
+  font-size: 11px !important;
 }

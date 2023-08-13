@@ -27,6 +27,12 @@ export function addUserListRes(props) {
         payload: props,
     };
 }
+export function clearUserListRes(props) {
+    return {
+        type: type.CLEAR_USER_LIST_RES,
+        payload: props,
+    };
+}
 
 export function getUserList(props) {
     return {

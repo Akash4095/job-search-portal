@@ -82,7 +82,7 @@ function* getUserListFunc(action) {
 async function getUserListAPI(data) {
     let userId = data.userid
     try {
-        const response = await axios.post(BASE_URL + `/get/userlist/${userId}`, data, { headers: { Authorization: getToken() }, });
+        const response = await axios.get(BASE_URL + `/get/userlist/${userId}`,  { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
