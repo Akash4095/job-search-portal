@@ -33,7 +33,7 @@ const Search = ({ setSearchedText, searchedText }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("1");
+  const [sessionUserId, setSessionUserId] = useState("");
 
   const [addListModal, setAddListModal] = useState({
     open: false,
