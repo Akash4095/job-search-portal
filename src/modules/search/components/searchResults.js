@@ -46,7 +46,7 @@ const SearchResults = ({
 
   const getUserProfileDetails = (row) => {
     let obj = {}
-    obj.profileid = row.id
+    obj.profileid = (row.id).toString()
     obj.userid = sessionUserId
     dispatch(fetchProfileDetails(obj))
     setRowClicked(true)
