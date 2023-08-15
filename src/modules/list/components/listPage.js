@@ -25,7 +25,7 @@ const ListPage = () => {
 
   useEffect(() => {
     let obj = {}
-    obj.userid = sessionUserId
+    obj.userid = sessionUserId.toString()
     // obj.userid = "1"
     dispatch(getUserList(obj))
 

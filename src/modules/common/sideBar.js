@@ -42,7 +42,7 @@ const SideBar = ({ sessionUserId }) => {
                 setOpenCommonModal({ open: true, size: "mini", headerContent: "Add List Response", headerIcon: "check circle", modalContent: "Success", buttonColor: "green" })
                 dispatch(clearUserListRes())
                 let obj = {}
-                obj.userid = sessionUserId
+                obj.userid = sessionUserId.toString()
                 // obj.userid = "1"
                 dispatch(getUserList(obj))
             }

@@ -50,7 +50,7 @@ const SearchComponent = ({setSearchedText}) => {
     let obj = {}
     obj.query = input
     obj.start = "1"
-    obj.userid = sessionUserId 
+    obj.userid = sessionUserId.toString() 
     // obj.userid ="1"
     dispatch(fetchSearchByQuery(obj))
     setTimeout(() => {
