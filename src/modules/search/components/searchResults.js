@@ -16,7 +16,9 @@ const SearchResults = ({
   selectedRows,
   setSelectedRows,
   sessionUserId,
-  setAddListModal
+  setAddListModal,
+  loader,
+  setUserCartLoader
 }) => {
   let data = [];
 
@@ -31,7 +33,7 @@ const SearchResults = ({
       }
     });
   };
-  
+
 
   const handleSelectAll = () => {
     if (selectAll) {
@@ -49,8 +51,10 @@ const SearchResults = ({
   const getUserProfileDetails = (row) => {
     let obj = {}
     obj.profileid = (row.id).toString()
-    obj.userid = sessionUserId
+    obj.userid = sessionUserId.toString()
+    // obj.userid = "1"
     dispatch(fetchProfileDetails(obj))
+    setUserCartLoader({ open: true, msg: "Loading Profile" })
     setRowClicked(true)
   }
 

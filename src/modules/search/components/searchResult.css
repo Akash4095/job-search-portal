@@ -81,6 +81,7 @@
   background: #fff;
   border: 1px solid #eee;
   overflow-y: scroll !important;
+  position: relative;
 }
 .add-user-to-list {
   padding-bottom: 15px !important;
@@ -91,7 +92,7 @@
   cursor: pointer !important;
 }
 .user-cart-name {
-  font-size: 17px !important;
+  font-size: 16px !important;
   font-weight: 500 !important;
 }
 
@@ -109,7 +110,7 @@
 }
 
 .user-cart-work {
-  font-size: 16px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
   color: #666 !important;
 }

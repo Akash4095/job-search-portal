@@ -3,7 +3,7 @@ import SideBar from "../../common/sideBar";
 import SearchResults from "./searchResults";
 import CommonHeaderComponent from "../../common/commonHeader";
 import CommonSearchComponent from "../../common/commonSearchComponent";
-import { Button, Icon, Modal } from "semantic-ui-react";
+import { Button, Dimmer, Icon, Loader, Modal } from "semantic-ui-react";
 import UserCart from "./userCart";
 import {
   getIsCodeSendResponse,
@@ -34,6 +34,9 @@ const Search = ({ setSearchedText, searchedText }) => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
   const [sessionUserId, setSessionUserId] = useState("");
+  const [start, setStart] = useState(1);
+  const [userCartLoader, setUserCartLoader] = useState({ open: false, msg: "" });
+  const [listLoader, setListLoader] = useState({ open: false, msg: "" });
 
   const [addListModal, setAddListModal] = useState({
     open: false,
@@ -48,12 +51,13 @@ const Search = ({ setSearchedText, searchedText }) => {
     modalContent: "",
     buttonColor: "",
   });
+  const [showViewMoreButton, setShowViewMoreButton] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
     let obj = {};
-    obj.userid = sessionUserId
+    obj.userid = sessionUserId.toString()
     // obj.userid = "1";
     dispatch(getUserList(obj));
   }, [sessionUserId]);
@@ -63,6 +67,7 @@ const Search = ({ setSearchedText, searchedText }) => {
       if (searchResult.status && searchResult.status === "success") {
         setItems(searchResult.data);
       }
+      setListLoader({ open: false, msg: "" })
     }
   }, [searchResult]);
 
@@ -102,7 +107,10 @@ const Search = ({ setSearchedText, searchedText }) => {
     setAddListModal({ open: true, msg: "", obj: row });
   };
 
-  const userRowClicked = () => { };
+  const handleViewMoreClick = () => {
+    setStart(start + 1);
+  };
+
   return (
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
@@ -114,8 +122,10 @@ const Search = ({ setSearchedText, searchedText }) => {
         <br />
         <div style={{ left: "10%", position: "relative" }}>
           <CommonSearchComponent
-            text={inputText}
+            start={start}
+            text={searchedText}
             setSearchedText={setSearchedText}
+            setLoader={setListLoader}
           />
         </div>
         <p className="search-result-count">
@@ -161,12 +171,24 @@ const Search = ({ setSearchedText, searchedText }) => {
                     setSelectedRows={setSelectedRows}
                     sessionUserId={sessionUserId}
                     setAddListModal={setAddListModal}
+                    userCartLoader={userCartLoader}
+                    setUserCartLoader={setUserCartLoader}
                   />
                 );
               })
               : null}
+            <div className="view-more-button-container">
+              {(showViewMoreButton && items && items.length > 0) ? <button className="view-more-button" onClick={handleViewMoreClick}>View More</button> : null}
+            </div>
           </div>
-          {rowClicked ? <UserCart setRowClicked={setRowClicked} /> : null}
+          {rowClicked ? <UserCart setRowClicked={setRowClicked} userCartLoader={userCartLoader} setUserCartLoader={setUserCartLoader} /> : null}
+        </div>
+        <div className="dimmer-loader-container">
+          {(listLoader.open) &&
+            <Dimmer inverted active>
+              <Loader active>{listLoader.msg}</Loader>
+            </Dimmer>
+          }
         </div>
       </div>
       <Modal

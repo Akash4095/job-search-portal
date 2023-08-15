@@ -39,7 +39,8 @@ const AddListForm = (props) => {
     const saveAddListForm = (values) => {
         let obj = {}
         obj.listname = values.listname
-        obj.userid = sessionUserId
+        obj.userid = sessionUserId.toString()
+        // obj.userid = "1"
         dispatch(addUserList(obj))
         props.setAddListModal({ open: false, msg: "" })
     }

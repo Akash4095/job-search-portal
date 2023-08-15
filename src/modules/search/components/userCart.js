@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Button, Feed, Icon } from "semantic-ui-react";
+import { Accordion, Button, Dimmer, Feed, Icon, Loader } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIsProfileDetails } from "../data/selectors";
 import { Link } from "react-router-dom";
 import { displayDate } from "../../../utilities/listUtils";
 
-const UserCart = ({ setRowClicked }) => {
+const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
   const [profileData, setProfileData] = useState([]);
   const [skillsAccordion, setSkillsAcordion] = useState(false);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
@@ -21,6 +21,10 @@ const UserCart = ({ setRowClicked }) => {
     ) {
       if (profileDetails.status === "success") {
         setProfileData(profileDetails);
+        setUserCartLoader({ open: false, msg: "" })
+      }
+      if (profileDetails.status === "failed" || profileDetails.status === "error") {
+        setUserCartLoader({ open: false, msg: "" })
       }
     }
   }, [profileDetails]);
@@ -57,7 +61,7 @@ const UserCart = ({ setRowClicked }) => {
         <div className="company-details">
           <div className="padding10">
             <div style={{ fontSize: "12px", paddingBottom: "5px" }}>
-              
+
               Company Details
             </div>
             <div style={{ fontSize: "12px", width: "100%" }} className="d_flex">
@@ -73,7 +77,7 @@ const UserCart = ({ setRowClicked }) => {
               </div>
             </div>
             <div style={{ marginLeft: "10%", fontSize: "12px" }}>
-               
+
               {profileDetails.experience
                 ? profileDetails.experience.length > 0
                   ? ("From" + " " + displayDate(profileDetails.experience[0].startdate))
@@ -117,42 +121,34 @@ const UserCart = ({ setRowClicked }) => {
             </Accordion.Title>
             <Accordion.Content active={prevCompanyAccordion}>
               {profileDetails.experience && profileDetails.experience.length > 0
-                ? profileDetails.experience.map((item) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <div className="wordBreak">{item.company}</div>
-                        <div>
-                          {displayDate(item.startdate).split("-")[2]}-
-                          {displayDate(item.enddate).split("-")[2]}
-                        </div>
+                ? profileDetails.experience.map((item, index) => {
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <li className="wordBreak">{item.company}</li>
+                      <div style={{ padding: "0 8%" }}>
+                        {
+                          (index == 0 && item.enddate === "") ?
+                            <>
+                              {displayDate(item.startdate).split("-")[2]} {item.startdate !== "" ? "- Present" : ""}
+
+                            </>
+                            :
+                            <>
+                              {displayDate(item.startdate).split("-")[2]} {item.startdate !== "" ? "-" : ""}
+                              {displayDate(item.enddate).split("-")[2]}
+                            </>
+                        }
+
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>
         </div>
       </div>
-      {/* <div className="previouscompany">
-        <div style={{ fontSize: "12px", paddingBottom: "5px", paddingLeft: "4%" }}> Previous Company</div>
-        {
-          (profileDetails.experience && profileDetails.experience.length > 0) ?
 
-            profileDetails.experience.map((item) => {
-              return (
-                <div className="previousCompanyPadding">
-                  <div style={{ fontSize: "11px" }}>
-                    <div>{item.company}</div>
-                    <div>{displayDate(item.startdate).split("-")[2]}-{displayDate(item.enddate).split("-")[2]}</div>
-                  </div>
-                </div>
-              )
-            })
-
-            : null
-
-        }
-      </div> */}
 
       <div className="accord-container">
         <div className="padding5">
@@ -170,7 +166,7 @@ const UserCart = ({ setRowClicked }) => {
               </div>
             </Accordion.Title>
             <Accordion.Content active={skillsAccordion}>
-             <div className="wordBreak"> {profileDetails.skills ? profileDetails.skills : "N/A"} </div>
+              <div className="wordBreak"> {profileDetails.skills ? profileDetails.skills : "N/A"} </div>
             </Accordion.Content>
           </Accordion>
         </div>
@@ -193,16 +189,16 @@ const UserCart = ({ setRowClicked }) => {
             <Accordion.Content active={educationAccordion}>
               {profileDetails.education && profileDetails.education.length > 0
                 ? profileDetails.education.map((item) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <div className="wordBreak">{item.degree_name ? item.degree_name : ""}</div>
-                        <div>
-                          {displayDate(item.startdate).split("-")[2]}-
-                          {displayDate(item.enddate).split("-")[2]}
-                        </div>
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <li className="wordBreak">{item.degree_name ? item.degree_name : ""}</li>
+                      <div style={{ padding: "0 8%" }}>
+                        {displayDate(item.startdate).split("-")[2]}  {item.startdate !== "" ? "-" : ""}
+                        {displayDate(item.enddate).split("-")[2]}
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>
@@ -215,6 +211,13 @@ const UserCart = ({ setRowClicked }) => {
             Add to list
           </Button>
         </div>
+      </div>
+      <div className="dimmer-loader-container">
+        {(userCartLoader.open) &&
+          <Dimmer inverted active>
+            <Loader size="tiny" active>{userCartLoader.msg}</Loader>
+          </Dimmer>
+        }
       </div>
     </div>
   );

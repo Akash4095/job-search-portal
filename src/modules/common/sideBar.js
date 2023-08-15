@@ -71,7 +71,7 @@ const SideBar = ({ sessionUserId }) => {
                     <span className="a">{`{a}`}</span>
                 </div>
             </div>
-            <div className="sidebar-middle scrollable-container">
+            <div className="sidebar-middle scrollable-container-sidebar">
                 <div className="sidebar-list">
                     <Icon name="bars" className="sidebar-icons" />
                     <div className="default-list-lock">Default List</div>

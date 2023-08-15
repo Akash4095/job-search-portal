@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors";
 import { fetchDashboardDetails } from "../data/actions";
+import { getUserList } from "../../search/data/actions";
 
 const Welcome = ({ setSearchedText, searchedText }) => {
 
   const [userName, setUserName] = useState("");
+  const [sessionUserId, setSessionUserId] = useState("");
   const [leads, setLeads] = useState("");
   const [search, setSearch] = useState("");
   const [list, setList] = useState("");
@@ -29,6 +31,12 @@ const Welcome = ({ setSearchedText, searchedText }) => {
   useEffect(() => {
     // dispatch(fetchDashboardDetails("2"))
   }, [])
+  useEffect(() => {
+    let obj = {};
+    obj.userid = sessionUserId.toString()
+    // obj.userid = "1";
+    dispatch(getUserList(obj));
+  }, [sessionUserId]);
 
   useEffect(() => {
     if (dashboardRes && dashboardRes.status === "success") {
@@ -58,6 +66,7 @@ const Welcome = ({ setSearchedText, searchedText }) => {
         ) {
           if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
             setUserName(getLoginAuthRes.data.fname);
+            setSessionUserId(getLoginAuthRes.data.id);
           }
           if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
             dispatch(fetchDashboardDetails(getLoginAuthRes.data.id))
