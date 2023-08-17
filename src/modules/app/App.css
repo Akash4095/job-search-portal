@@ -345,7 +345,7 @@ input:focus {
   cursor: pointer !important;
 }
 .listActions-btns {
-  color: #2185d0;
+  color: #2185d0 !important;
   margin-bottom: 1% !important;
   cursor: pointer !important;
 }
@@ -377,6 +377,16 @@ input:focus {
   margin-top: 5px !important;
   color: #ccc;
   font-size: 13px !important;
+}
+.listActionBtns {
+  color: #2185d0 !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+.listActionBtns > i {
+  font-size: 12px !important;
 }
 .error {
   color: red !important;
@@ -423,7 +433,7 @@ input:focus {
 
 .list-user-cart-close-icon {
   position: absolute !important;
-  right: 18px !important;
+  right: 10px !important;
   cursor: pointer !important;
 }
 .list-user-cart-name {
@@ -449,17 +459,43 @@ input:focus {
 }
 
 .list-user-cart-description {
+  display: block;
+  display: -webkit-box;
   margin: 10px 3px;
   font-size: 11px !important;
   word-wrap: break-word !important;
+  word-break: break-all !important;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.list-company-details {
+  margin-top: 5px !important;
+  color: #666 !important;
+  border-bottom: 1px solid #ccc;
+}
 .list-user-cart-btn {
   padding: 6px 40px !important;
-  margin-left: 6% !important;
+  margin-top: 6% !important;
   border-radius: 5px !important;
+  font-size: 12px !important;
 }
 
+.fontSize12 {
+  font-size: 12px !important;
+}
+.list-contacts > i {
+  font-size: 12px !important;
+  margin-right: 5px !important;
+}
+
+.alignCenter {
+  display: flex;
+  align-items: center !important;
+  justify-content: center !important;
+}
 .contact-details-header {
   font-size: 12px !important;
   color: #666;

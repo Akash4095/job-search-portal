@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Icon, Image, Table } from "semantic-ui-react";
+import { Checkbox, Grid, Icon, Image, Table } from "semantic-ui-react";
 
 const ListTable = ({
   rowClicked,
@@ -33,41 +33,45 @@ const ListTable = ({
   return (
     <div>
       <div style={{ width: rowClicked ? "65vw" : "81vw" }}>
-        <div className="listActions">
-          <div style={{ width: "20%", paddingLeft: "10px" }}>
-            <Checkbox
-              className="listActions-checkbox"
-              checked={selectAll}
-              onChange={handleSelectAll}
-            />
-            <span>Select All</span>
-          </div>
-          <div style={{ width: rowClicked ? "15%" : "25%" }}></div>
-          <div
-            className="listActions-btns"
-            style={{ width: rowClicked ? "65%" : "45%" }}
-          >
-            <span className="marginRight7">
-              <Icon name="tag" /> <span>Tag</span>
-            </span>
-            <span className="marginRight7">
-              <Icon name="tags" /> <span>Untag</span>
-            </span>
-            <span className="marginRight7">
-              <Icon name="list" /> <span>Add to list</span>
-            </span>
-            <span className="marginRight6">
-              <Icon name="download" /> <span>Export</span>
-            </span>
-            <span className="error">
-              <Icon color="red" name="trash alternate" /> <span>Delete</span>
-            </span>
-          </div>
-        </div>
+        <Grid style={{ marginLeft: "1%", marginRight: "1%", marginBottom: "-6px" }}>
+          <Grid.Row>
+            <Grid.Column width={3}>
+              <Checkbox
+                className="listActions-checkbox"
+                checked={selectAll}
+                onChange={handleSelectAll}
+              />
+              <span>Select All</span>
+            </Grid.Column>
+            <Grid.Column width={3}></Grid.Column>
+            <Grid.Column width={2} className="listActionBtns">
+              <div><Icon size="tiny" name="tag" /> Tag</div>
+            </Grid.Column>
+            <Grid.Column width={2} className="listActionBtns">
+              <div> <Icon name="tags" /> Untag</div>
+            </Grid.Column>
+            <Grid.Column width={2} className="listActionBtns">
+              <div><Icon name="list" />Add to list</div>
+            </Grid.Column>
+            <Grid.Column width={2} className="listActionBtns">
+              <div>  <Icon name="download" /> Export</div>
+            </Grid.Column>
+            <Grid.Column width={2} >
+              <span className="error">
+                <Icon color="red" name="trash alternate" /> <span>Delete</span>
+              </span>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      
         <>
           <div
             className="scrollable-container"
-            style={{ height: "70vh",  overflowY: "auto",  width: rowClicked ? "67vw" : "81vw" }}
+            style={{
+              height: "70vh",
+              overflowY: "auto",
+              width: rowClicked ? "67vw" : "81vw",
+            }}
           >
             <Table basic="very" className="list-table">
               <Table.Header>
@@ -101,8 +105,8 @@ const ListTable = ({
                   <Table.Cell style={{ width: "3%" }}>
                     <Checkbox
                       style={{ marginLeft: "8px" }}
-                      //   checked={selectedRows.includes(row.id)}
-                      //   onChange={() => handleRowClick(row.id)}
+                    //   checked={selectedRows.includes(row.id)}
+                    //   onChange={() => handleRowClick(row.id)}
                     />
                   </Table.Cell>
                   <Table.Cell style={{ width: "24%" }}>

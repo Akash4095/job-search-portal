@@ -10,15 +10,16 @@ import ListUserCart from "./listUserCart";
 import { getUserList } from "../../search/data/actions";
 import { getIsCodeSendResponse } from "../../home/data/selectors";
 
-const ListPage = () => {
+const ListPage = ({ setSearchedText, searchedText }) => {
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
 
   const [rowClicked, setRowClicked] = useState(true);
   const [selectAll, setSelectAll] = useState(false);
-  const [searchedText, setSearchedText] = useState("");
+  const [start, setStart] = useState(1);
   const [selectedRows, setSelectedRows] = useState([]);
   const [sessionUserId, setSessionUserId] = useState("");
+  const [listLoader, setListLoader] = useState({ open: false, msg: "" });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ const ListPage = () => {
         <br />
         <br />
         <div className="commonSearchCommponent">
-          <CommonSearchComponent setSearchedText={setSearchedText} />
+          <CommonSearchComponent setSearchedText={setSearchedText} text={searchedText} start={start} />
         </div>
         <div className="d_flex">
           <ListTable

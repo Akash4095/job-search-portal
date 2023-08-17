@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} />} />
         <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} />} />
-        <Route path='/list' element={<ListPage />} />
+        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} />} />
       </Routes>
     </div>
   );

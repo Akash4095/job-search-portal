@@ -73,8 +73,9 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
     obj.userid = sessionUserId.toString();
     // obj.userid = "1"
     dispatch(fetchSearchByQuery(obj));
-    setLoader({ open: true, msg: "Loading" });
-   
+    if (setLoader) {
+      setLoader({ open: true, msg: "Loading" });
+    }
   };
 
   useEffect(() => {
@@ -86,10 +87,12 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
     obj.userid = sessionUserId.toString();
     // obj.userid = "1"
     dispatch(fetchSearchByQuery(obj));
-    setLoader({ open: true, msg: "Loading" });
+    if (setLoader) {
+      setLoader({ open: true, msg: "Loading" });
+    }
   }, [start]);
 
- 
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       saveSearchedText();
