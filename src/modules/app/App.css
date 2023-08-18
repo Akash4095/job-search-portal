@@ -433,12 +433,16 @@ input:focus {
 
 .list-user-cart-close-icon {
   position: absolute !important;
-  right: 10px !important;
+  right: 20px !important;
   cursor: pointer !important;
 }
 .list-user-cart-name {
   font-size: 13px !important;
   font-weight: 600 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 .list-company-details {

@@ -30,6 +30,10 @@ const ListTable = ({
     setSelectAll((prevSelectAll) => !prevSelectAll);
   };
 
+  const fetchlistCartDetails = () => {
+    setRowClicked(true)
+  }
+
   const tagListFunction = () => {
 
   }
@@ -81,7 +85,7 @@ const ListTable = ({
               <div onClick={() => listExportFunction()}>  <Icon name="download" /> Export</div>
             </Grid.Column>
             <Grid.Column width={2} >
-              <span className="error" onClick={() => deleteSelectedList()}>
+              <span className="error cursor-pointer" onClick={() => deleteSelectedList()}>
                 <Icon color="red" name="trash alternate" /> <span>Delete</span>
               </span>
             </Grid.Column>
@@ -125,7 +129,7 @@ const ListTable = ({
                     </Table.Row>
                 })
               } */}
-                <Table.Row onClick={() => setRowClicked(true)}>
+                <Table.Row>
                   <Table.Cell style={{ width: "3%" }}>
                     <Checkbox
                       style={{ marginLeft: "8px" }}
@@ -133,7 +137,7 @@ const ListTable = ({
                     //   onChange={() => handleRowClick(row.id)}
                     />
                   </Table.Cell>
-                  <Table.Cell style={{ width: "24%" }}>
+                  <Table.Cell style={{ width: "24%", cursor: "pointer" }} onClick={() => fetchlistCartDetails()}>
                     <div className="d_flex">
                       <img
                         src=""
@@ -141,7 +145,7 @@ const ListTable = ({
                         height={rowClicked ? "40" : "55"}
                         width={rowClicked ? "40" : "55"}
                         style={{
-                          borderRadius: "10px",
+                          borderRadius: "50%",
                           marginTop: "5px",
                           marginRight: "10px",
                         }}

@@ -223,7 +223,7 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
         </div>
       </div>
       <div className="add-user-to-list">
-        <div className="paddingBtn">
+        <div className="paddingBtn alignCenter">
           <Button basic color="blue" size="large" className="user-cart-btn">
             <Icon name="list ul" color="white" size="mini" />
             Add to list
