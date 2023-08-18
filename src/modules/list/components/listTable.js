@@ -30,6 +30,26 @@ const ListTable = ({
     setSelectAll((prevSelectAll) => !prevSelectAll);
   };
 
+  const tagListFunction = () => {
+
+  }
+
+  const unTagListFunction = () => {
+
+  }
+
+  const addToListFunction = () => {
+
+  }
+
+  const listExportFunction = () => {
+
+  }
+
+  const deleteSelectedList = () => {
+
+  }
+
   return (
     <div>
       <div style={{ width: rowClicked ? "65vw" : "81vw" }}>
@@ -41,29 +61,33 @@ const ListTable = ({
                 checked={selectAll}
                 onChange={handleSelectAll}
               />
-              <span>Select All</span>
+              {selectedRows.length > 0 ? (
+                <span className="list-selected">
+                  <span> {selectedRows.length + " Selected"} </span>
+                </span>
+              ) : <span>Select All</span>}
             </Grid.Column>
             <Grid.Column width={3}></Grid.Column>
             <Grid.Column width={2} className="listActionBtns">
-              <div><Icon size="tiny" name="tag" /> Tag</div>
+              <div onClick={() => tagListFunction()}><Icon size="tiny" name="tag" /> Tag</div>
             </Grid.Column>
             <Grid.Column width={2} className="listActionBtns">
-              <div> <Icon name="tags" /> Untag</div>
+              <div onClick={() => unTagListFunction()}> <Icon name="tags" /> Untag</div>
             </Grid.Column>
             <Grid.Column width={2} className="listActionBtns">
-              <div><Icon name="list" />Add to list</div>
+              <div onClick={() => addToListFunction()}><Icon name="list" />Add to list</div>
             </Grid.Column>
             <Grid.Column width={2} className="listActionBtns">
-              <div>  <Icon name="download" /> Export</div>
+              <div onClick={() => listExportFunction()}>  <Icon name="download" /> Export</div>
             </Grid.Column>
             <Grid.Column width={2} >
-              <span className="error">
+              <span className="error" onClick={() => deleteSelectedList()}>
                 <Icon color="red" name="trash alternate" /> <span>Delete</span>
               </span>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      
+
         <>
           <div
             className="scrollable-container"
@@ -114,8 +138,8 @@ const ListTable = ({
                       <img
                         src=""
                         alt=""
-                        width="28"
-                        height="28"
+                        height={rowClicked ? "40" : "55"}
+                        width={rowClicked ? "40" : "55"}
                         style={{
                           borderRadius: "10px",
                           marginTop: "5px",
