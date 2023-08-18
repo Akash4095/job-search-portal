@@ -5,6 +5,14 @@ import { merge } from "lodash";
 function fetchedList(state = {}, action) {
     if (action.type === 'FETCHED_LIST') {
         return action.payload
+    } else {
+        return state
+    }
+}
+
+function fetchedListResSave(state = {}, action) {
+    if (action.type === 'FETCHED_LIST_RES_SAVE') {
+        return action.payload
     }
     if (action.type === 'CLEAR_FETCHED_LIST') {
         return {}
@@ -12,7 +20,6 @@ function fetchedList(state = {}, action) {
         return state
     }
 }
-
 
 function fetchedListProfileDetails(state = {}, action) {
     if (action.type === 'FETCHED_LIST_PROFILE_DETAILS') {
@@ -50,6 +57,7 @@ function deleteListProfileRes(state = {}, action) {
 
 const listReducer = combineReducers({
     fetchedList,
+    fetchedListResSave,
     fetchedListProfileDetails,
     fetchedListContactDetails,
     addTagsRes,

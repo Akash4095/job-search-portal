@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { addProfileToListRes, fetchedList, fetchedListProfileDetails, fetchedListContactDetails, addTagsRes, deleteListProfileRes } from "./actions";
+import { addProfileToListRes, fetchedList, fetchedListProfileDetails, fetchedListContactDetails, addTagsRes, deleteListProfileRes, fetchedListResSave } from "./actions";
 import axios from "axios"
 
 
@@ -16,6 +16,7 @@ function* requestList(action) {
     const { response, error } = yield call(requestListAPI, action.payload)
     if (response) {
         yield put(fetchedList(response.data))
+        yield put(fetchedListResSave(response.data))
     }
     else {
         sagaErrorMessage(error, action)
@@ -24,7 +25,7 @@ function* requestList(action) {
 
 async function requestListAPI(data) {
     try {
-        const response = await axios.post(BASE_URL + '/', data, { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + '/get/profilevialistid', data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -52,7 +53,7 @@ function* requestListProfileDetails(action) {
 
 async function requestListProfileDetailsAPI(data) {
     try {
-        const response = await axios.post(BASE_URL + '/list', data, { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + '/fetchprofiledetailvialist', data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -110,7 +111,7 @@ function* requestAddTags(action) {
 
 async function requestAddTagsAPI(data) {
     try {
-        const response = await axios.post(BASE_URL + '/tags', data, { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + '/add/tags', data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });

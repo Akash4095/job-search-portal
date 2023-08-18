@@ -1,25 +1,43 @@
-import React, { useState } from "react";
-import { Accordion, Button, Feed, Icon } from "semantic-ui-react";
+import React, { useEffect, useState } from "react";
+import { Accordion, Button, Feed, Icon, Modal } from "semantic-ui-react";
 import { displayDate } from "../../../utilities/listUtils";
 import { Link } from "react-router-dom";
+import { getIsListProfileDetails } from "../data/selectors";
+import { useSelector } from "react-redux";
+import AddTagNameForm from "./addTagName";
 
-const ListUserCart = ({ setRowClicked }) => {
-    
+const ListUserCart = ({
+  setRowClicked,
+  sessionUserId,
+  addTagModal,
+  setAddTagModal,
+}) => {
   const [accordion, setAcordion] = useState(false);
   const [contactAccordion, setContactAcordion] = useState(false);
   const [tagsAccordion, setTagsAcordion] = useState(false);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
+  const [profileDetails, setProfileDetails] = useState("");
 
-  let profileDetails = {
-    description:
-      " Worked with over 70+ startups and dozens of leading Silicon Valley VC firms as a Senior UX Designer... More",
-    experience: [
-      {
-        company: "Apple",
-        startdate: "2012-09-23",
-        enddate: "2022-05-21",
-      },
-    ],
+  const profileDetailsRes = useSelector((state) =>
+    getIsListProfileDetails(state)
+  );
+
+  useEffect(() => {
+    if (
+      profileDetailsRes &&
+      profileDetailsRes !== undefined &&
+      profileDetailsRes !== null &&
+      profileDetailsRes !== {}
+    ) {
+      if (profileDetailsRes.status === "success") {
+        setProfileDetails(profileDetailsRes);
+      }
+    }
+  }, [profileDetailsRes]);
+
+  const openTagModal = (row) => {
+    console.log("row", row);
+    setAddTagModal({ open: true, obj: {} })
   };
 
   return (
@@ -28,7 +46,13 @@ const ListUserCart = ({ setRowClicked }) => {
         <div className="paddingImg">
           <div className="d_flex">
             <img
-              // src={profileDetails.profilepic ? profileDetails.profilepic : ""}
+              src={
+                profileDetails !== ""
+                  ? profileDetails.profilepic
+                    ? profileDetails.profilepic
+                    : ""
+                  : ""
+              }
               width="50"
               height="50"
               className="borderRadius"
@@ -43,8 +67,20 @@ const ListUserCart = ({ setRowClicked }) => {
           </div>
         </div>
         <div className="paddingUsrDetails">
-          <div className="user-cart-name">Akash Athnure</div>
-          <div className="user-cart-work">UX Design Lead</div>
+          <div className="user-cart-name">
+            {profileDetails !== ""
+              ? profileDetails.full_name
+                ? profileDetails.full_name
+                : ""
+              : ""}
+          </div>
+          <div className="user-cart-work">
+            {profileDetails !== ""
+              ? profileDetails.designation
+                ? profileDetails.designation
+                : ""
+              : ""}
+          </div>
         </div>
         <div className="list-company-details">
           <div className="padding10">
@@ -102,47 +138,30 @@ const ListUserCart = ({ setRowClicked }) => {
               </div>
             </Accordion.Title>
             <Accordion.Content active={contactAccordion}>
-              {profileDetails.experience && profileDetails.experience.length > 0
-                ? profileDetails.experience.map((item, index) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <div className="wordBreak list-contacts">
-                          <Icon size="mini" color="grey" name="mail outline" />
-                          <span style={{ fontSize: "11px", color: "#2185d0" }}>
-                            akashathnure40@gmail.com
-                          </span>
-                        </div>
-                        <div className="wordBreak list-contacts">
-                          <Icon size="mini" color="grey" name="mail outline" />
-                          <span style={{ fontSize: "11px", color: "#2185d0" }}>
-                            akashathnure40@gmail.com
-                          </span>
-                        </div>
-                        <div className="list-contacts">
-                          <Icon
-                            size="mini"
-                            color="grey"
-                            name="phone"
-                            flipped="horizontally"
-                          />
-                          <span style={{ fontSize: "10px", color: "#2185d0" }}>
-                            8095595412
-                          </span>
-                        </div>
-                        <div className="list-contacts">
-                          <Icon
-                            size="mini"
-                            color="grey"
-                            name="phone"
-                            flipped="horizontally"
-                          />
-                          <span style={{ fontSize: "10px", color: "#2185d0" }}>
-                            8095595412
-                          </span>
-                        </div>
+              {profileDetails.contacts && profileDetails.contacts.length > 0
+                ? profileDetails.contacts.map((item, index) => {
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <div className="wordBreak list-contacts">
+                        <Icon size="mini" color="grey" name="mail outline" />
+                        <span style={{ fontSize: "11px", color: "#2185d0" }}>
+                          akashathnure40@gmail.com
+                        </span>
                       </div>
-                    );
-                  })
+                      <div className="list-contacts">
+                        <Icon
+                          size="mini"
+                          color="grey"
+                          name="phone"
+                          flipped="horizontally"
+                        />
+                        <span style={{ fontSize: "10px", color: "#2185d0" }}>
+                          8095595412
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })
                 : "N/A"}
               <div style={{ paddingTop: "10px" }}>
                 <Icon name="linkedin" />
@@ -171,12 +190,21 @@ const ListUserCart = ({ setRowClicked }) => {
             </Accordion.Title>
             <Accordion.Content active={tagsAccordion}>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                <div className="tag-item">Lead Designer</div>
-                <div className="tag-item">Designer</div>
-                <div className="tag-item">UX/UI hhhhh</div>
+                <div className="tag-item">
+                  <div className="tag-color1"></div> Lead Designer
+                </div>
+                <div className="tag-item">
+                  <div className="tag-color2"></div>Designer
+                </div>
+                <div className="tag-item">
+                  <div className="tag-color3"></div> UX/UI hhhhh
+                </div>
               </div>
               <div className="paddingTop5">
-                <span style={{ fontSize: "11px", color: "#2185d0" }}>
+                <span
+                  style={{ fontSize: "11px", color: "#2185d0", cursor: "pointer" }}
+                  onClick={() => openTagModal()}
+                >
                   <Icon color="blue" name="add" /> <span>Add Tag</span>
                 </span>
               </div>
@@ -221,26 +249,26 @@ const ListUserCart = ({ setRowClicked }) => {
             <Accordion.Content active={prevCompanyAccordion}>
               {profileDetails.experience && profileDetails.experience.length > 0
                 ? profileDetails.experience.map((item, index) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <li className="wordBreak">{item.company}</li>
-                        <div style={{ padding: "0 8%" }}>
-                          {index == 0 && item.enddate === "" ? (
-                            <>
-                              {displayDate(item.startdate).split("-")[2]}{" "}
-                              {item.startdate !== "" ? "- Present" : ""}
-                            </>
-                          ) : (
-                            <>
-                              {displayDate(item.startdate).split("-")[2]}{" "}
-                              {item.startdate !== "" ? "-" : ""}
-                              {displayDate(item.enddate).split("-")[2]}
-                            </>
-                          )}
-                        </div>
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <li className="wordBreak">{item.company}</li>
+                      <div style={{ padding: "0 8%" }}>
+                        {index == 0 && item.enddate === "" ? (
+                          <>
+                            {displayDate(item.startdate).split("-")[2]}{" "}
+                            {item.startdate !== "" ? "- Present" : ""}
+                          </>
+                        ) : (
+                          <>
+                            {displayDate(item.startdate).split("-")[2]}{" "}
+                            {item.startdate !== "" ? "-" : ""}
+                            {displayDate(item.enddate).split("-")[2]}
+                          </>
+                        )}
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>
@@ -264,6 +292,18 @@ const ListUserCart = ({ setRowClicked }) => {
           </span>
         </div>
       </div>
+      <Modal
+        size="mini"
+        open={addTagModal.open}
+        onClose={() => setAddTagModal({ open: false, obj: {} })}
+      >
+        <Modal.Content>
+          <AddTagNameForm
+            setAddTagModal={setAddTagModal}
+            sessionUserId={sessionUserId}
+          />
+        </Modal.Content>
+      </Modal>
     </div>
   );
 };

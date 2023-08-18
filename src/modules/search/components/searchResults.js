@@ -35,14 +35,7 @@ const SearchResults = ({
   };
 
 
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows(data.map((row) => row.id));
-    }
-    setSelectAll((prevSelectAll) => !prevSelectAll);
-  };
+
 
   function createMarkup(msg) {
     return { __html: msg };

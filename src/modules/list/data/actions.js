@@ -14,6 +14,13 @@ export function fetchedList(props) {
     };
 }
 
+export function fetchedListResSave(props) {
+    return {
+        type: type.FETCHED_LIST_RES_SAVE,
+        payload: props,
+    };
+}
+
 export function clearFetchedList(props) {
     return {
         type: type.CLEAR_FETCHED_LIST,

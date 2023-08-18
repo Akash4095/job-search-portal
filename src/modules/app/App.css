@@ -320,15 +320,58 @@ input:focus {
 }
 
 .tag-item {
+  display: flex;
+  align-items: center;
   border: 1px solid #ccc;
-  border-radius: 10px !important;
+  border-radius: 30px !important;
   margin-right: 5px !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 6px !important;
   font-size: 12px !important;
   padding: 1px 10px;
   color: #888 !important;
 }
 
+.icons > i {
+  font-size: 11px !important;
+}
+
+.tag-color1 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #e2a93a;
+}
+
+.tag-color2 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #cf1876;
+}
+.tag-color3 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #5551ff;
+}
+
+.tag-color4 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #0fa958;
+}
+.tag-color5 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #2b81e7;
+}
 .commonSearchCommponent {
   position: relative !important;
   left: 10% !important;
@@ -367,12 +410,14 @@ input:focus {
 .list-person-name {
   font-size: 14px !important;
   font-weight: 600 !important;
+  word-break: break-all !important;
 }
 
 .list-person-work {
   color: #666 !important;
   font-size: 13px !important;
   font-weight: 500 !important;
+  word-break: break-all !important;
 }
 .list-header-row {
   margin-top: 5px !important;
@@ -424,7 +469,7 @@ input:focus {
 .list-usercart-container {
   width: 20vw !important;
   margin: 5px !important;
-  margin-top: 2.5% !important;
+  margin-top: 2.7% !important;
   margin-right: 0% !important;
   height: 70vh !important;
   background: #fff;

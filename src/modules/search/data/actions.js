@@ -76,6 +76,13 @@ export function addProfileToListRes(props) {
     };
 }
 
+export function clearProfileToListRes(props) {
+    return {
+        type: type.CLEAR_PROFILE_TO_LIST_RES,
+        payload: props,
+    };
+}
+
 export function deleteProfileFromList(props) {
     return {
         type: type.DELETE_PROFILE_FROM_LIST,

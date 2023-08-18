@@ -11,26 +11,25 @@ import { getUserList } from "../../search/data/actions";
 import { getIsCodeSendResponse } from "../../home/data/selectors";
 
 const ListPage = ({ setSearchedText, searchedText }) => {
-
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
 
-  const [rowClicked, setRowClicked] = useState(true);
+  const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [start, setStart] = useState(1);
   const [selectedRows, setSelectedRows] = useState([]);
   const [sessionUserId, setSessionUserId] = useState("");
   const [listLoader, setListLoader] = useState({ open: false, msg: "" });
+  const [addTagModal, setAddTagModal] = useState({ open: false, obj: {} });
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let obj = {}
-    obj.userid = sessionUserId.toString()
+    let obj = {};
+    obj.userid = sessionUserId.toString();
     // obj.userid = "1"
-    dispatch(getUserList(obj))
-
-  }, [sessionUserId])
+    dispatch(getUserList(obj));
+  }, [sessionUserId]);
 
   useEffect(() => {
     if (
@@ -45,10 +44,13 @@ const ListPage = ({ setSearchedText, searchedText }) => {
           getLoginAuthRes.data !== null &&
           getLoginAuthRes.data !== {}
         ) {
-          if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
+          if (
+            getLoginAuthRes.data.id &&
+            getLoginAuthRes.data.id !== undefined &&
+            getLoginAuthRes.data.id !== null
+          ) {
             setSessionUserId(getLoginAuthRes.data.id);
           }
-
         }
       }
     }
@@ -64,7 +66,11 @@ const ListPage = ({ setSearchedText, searchedText }) => {
         <br />
         <br />
         <div className="commonSearchCommponent">
-          <CommonSearchComponent setSearchedText={setSearchedText} text={searchedText} start={start} />
+          <CommonSearchComponent
+            setSearchedText={setSearchedText}
+            text={searchedText}
+            start={start}
+          />
         </div>
         <div className="d_flex">
           <ListTable
@@ -74,12 +80,19 @@ const ListPage = ({ setSearchedText, searchedText }) => {
             setSelectAll={setSelectAll}
             selectedRows={selectedRows}
             setSelectedRows={setSelectedRows}
+            sessionUserId={sessionUserId}
+            setListLoader={setListLoader}
+            addTagModal={addTagModal}
+            setAddTagModal={setAddTagModal}
           />
 
           {rowClicked ? (
             <ListUserCart
               rowClicked={rowClicked}
               setRowClicked={setRowClicked}
+              sessionUserId={sessionUserId}
+              addTagModal={addTagModal}
+              setAddTagModal={setAddTagModal}
             />
           ) : null}
         </div>

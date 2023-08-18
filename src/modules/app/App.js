@@ -7,6 +7,8 @@ import Welcome from '../home/components/welcome';
 import SearchList from '../search/components/searchList';
 import ListPage from '../list/components/listPage';
 import { fetchLinkedinKeys, fetchLoginAuth } from './apiCall';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
 
@@ -20,6 +22,13 @@ function App() {
         <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} />} />
         <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        closeOnClick
+        pauseOnHover
+        hideProgressBar={false}
+      />
     </div>
   );
 }

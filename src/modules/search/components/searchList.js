@@ -17,9 +17,10 @@ import {
 } from "../data/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchSearchByQuery, getUserList } from "../data/actions";
+import { clearProfileToListRes, clearUserListRes, fetchSearchByQuery, getUserList } from "../data/actions";
 import CommanResponseModal from "../../common/commonModal";
 import AddUserProfileToListForm from "./addUserProfile";
+import { toast } from "react-toastify";
 
 const Search = ({ setSearchedText, searchedText }) => {
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
@@ -33,7 +34,7 @@ const Search = ({ setSearchedText, searchedText }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("");
+  const [sessionUserId, setSessionUserId] = useState("1");
   const [start, setStart] = useState(1);
   const [userCartLoader, setUserCartLoader] = useState({ open: false, msg: "" });
   const [listLoader, setListLoader] = useState({ open: false, msg: "" });
@@ -74,9 +75,21 @@ const Search = ({ setSearchedText, searchedText }) => {
   useEffect(() => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status && addListRes.status === "success") {
+        toast.success("List Added Successfully");
+        dispatch(clearUserListRes())
       }
     }
   }, [addListRes]);
+
+  useEffect(() => {
+    if (addProfileToListRes && addProfileToListRes !== null && addProfileToListRes !== undefined) {
+      if (addProfileToListRes.status && addProfileToListRes.status === "success") {
+        setSelectedRows([])
+        toast.success(addProfileToListRes.msg ? addProfileToListRes.msg : "");
+        dispatch(clearProfileToListRes())
+      }
+    }
+  }, [addProfileToListRes]);
 
   useEffect(() => {
     if (
@@ -108,8 +121,11 @@ const Search = ({ setSearchedText, searchedText }) => {
   };
 
   const handleViewMoreClick = () => {
-    setStart(start + 1);
+    setStart(start + 10);
   };
+
+  console.log('addProfileToListRes', addProfileToListRes)
+  console.log('addListRes', addListRes)
 
   return (
     <div className="d_flex">
