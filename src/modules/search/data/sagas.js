@@ -150,7 +150,7 @@ async function addUserToListAPI(data) {
 // region for delete user from list
 
 function* deleteUserFromList() {
-    yield takeEvery('ADD_PROFILE_TO_LIST', requestdeleteUserFromList);
+    yield takeEvery('DELETE_PROFILE_FROM_LIST', requestdeleteUserFromList);
 }
 
 function* requestdeleteUserFromList(action) {
