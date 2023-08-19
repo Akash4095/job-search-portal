@@ -6,7 +6,7 @@ import { getIsAddUserList, getIsUserList } from "../search/data/selectors";
 import AddListForm from "./addListForm";
 import CommanResponseModal from "./commonModal";
 import { clearUserListRes, getUserList } from "../search/data/actions";
-import { clearFetchedList, fetchList } from "../list/data/actions";
+import { clearFetchedList, fetchList, saveSideListPayload } from "../list/data/actions";
 import { getIsFetchedListResSave } from "../list/data/selectors";
 
 const SideBar = ({ sessionUserId }) => {
@@ -79,14 +79,13 @@ const SideBar = ({ sessionUserId }) => {
     }
   }, [listResponse]);
 
-  //   console.log("userListRes", userListRes);
-  //   console.log('sidebarUserList', sidebarUserList)
 
   const callListFunction = (row) => {
     let obj = {};
     obj.userid = row.userid.toString();
     obj.listid = row.id.toString();
     dispatch(fetchList(obj));
+    dispatch(saveSideListPayload(obj))
   };
 
   return (

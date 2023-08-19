@@ -4,20 +4,38 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { FormikInputComponent } from "../../../utilities/formUtils";
 import { addTags } from '../data/actions';
+import { getIsListProfileDetailsPayload } from '../data/selectors';
 
-const AddTagNameForm = ({ setAddTagModal, sessionUserId }) => {
+const AddTagNameForm = ({ setAddTagModal, sessionUserId, selectedRows }) => {
+
+
+    const profileDetailsPayload = useSelector((state) => getIsListProfileDetailsPayload(state));
 
     const dispatch = useDispatch();
 
+
     const saveAddTagForm = (values) => {
-        let obj = {}
-        obj.tagname = values.tagname
-        obj.listid = values.listid
-        obj.profileid = values.profileid
-        obj.userid = sessionUserId.toString()
-        // obj.userid = "1"
-        dispatch(addTags(obj))
+
+        if (selectedRows && selectedRows.length && selectedRows.length > 0) {
+            selectedRows.map((item) => {
+                let obj = {}
+                obj.tagname = values.tagname
+                obj.listid = (item.id).toString()
+                obj.profileid = (item.profileid).toString()
+                obj.userid = sessionUserId ? (sessionUserId).toString() : ""
+                dispatch(addTags(obj))
+            })
+        } else {
+            let obj = {}
+            obj.tagname = values.tagname
+            obj.listid = (profileDetailsPayload.listid ? profileDetailsPayload.listid : "").toString()
+            obj.profileid = (profileDetailsPayload.profileid ? profileDetailsPayload.profileid : "").toString()
+            obj.userid = (profileDetailsPayload.userid ? profileDetailsPayload.userid : "").toString()
+            dispatch(addTags(obj))
+
+        }
         setAddTagModal({ open: false, obj: "" })
+
     }
 
     return (

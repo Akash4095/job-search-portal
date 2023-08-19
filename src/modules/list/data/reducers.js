@@ -30,8 +30,16 @@ function fetchedListProfileDetails(state = {}, action) {
     }
 }
 
-function fetchedListContactDetails(state = {}, action) {
-    if (action.type === 'FETCHED_LIST_CONTACT_DETAILS') {
+function saveListProfileDetailsPayload(state = {}, action) {
+    if (action.type === 'SAVE_LIST_PROFILE_DETAILS_PAYLOAD') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
+function fetchedProfileContactDetails(state = {}, action) {
+    if (action.type === 'FETCHED_PROFILE_CCONTACTS_DETAILS') {
         return action.payload
     } else {
         return state
@@ -41,6 +49,17 @@ function fetchedListContactDetails(state = {}, action) {
 
 function addTagsRes(state = {}, action) {
     if (action.type === 'ADD_TAGS_RES') {
+        return action.payload
+    } if (action.type === 'CLEAR_TAGS_RES') {
+        return {}
+    }
+    else {
+        return state
+    }
+}
+
+function saveSidebarListPayload(state = {}, action) {
+    if (action.type === 'SAVE_SIDEBAR_LIST_PAYLOAD') {
         return action.payload
     } else {
         return state
@@ -59,8 +78,10 @@ const listReducer = combineReducers({
     fetchedList,
     fetchedListResSave,
     fetchedListProfileDetails,
-    fetchedListContactDetails,
+    saveListProfileDetailsPayload,
+    fetchedProfileContactDetails,
     addTagsRes,
+    saveSidebarListPayload,
     deleteListProfileRes
 
 })

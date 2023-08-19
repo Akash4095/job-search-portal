@@ -1,22 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { Accordion, Button, Feed, Icon, Modal } from "semantic-ui-react";
+import {
+  Accordion,
+  Button,
+  Dimmer,
+  Feed,
+  Icon,
+  Loader,
+  Modal,
+} from "semantic-ui-react";
 import { displayDate } from "../../../utilities/listUtils";
 import { Link } from "react-router-dom";
-import { getIsListProfileDetails } from "../data/selectors";
-import { useSelector } from "react-redux";
+import {
+  getIsListProfileDetails,
+  getIsListProfileDetailsPayload,
+  getIsProfileContactDetails,
+} from "../data/selectors";
+import { useDispatch, useSelector } from "react-redux";
 import AddTagNameForm from "./addTagName";
+import {
+  fetchListProfileDetails,
+  fetchProfileContactDetails,
+} from "../data/actions";
 
 const ListUserCart = ({
+  selectedRows,
   setRowClicked,
   sessionUserId,
   addTagModal,
   setAddTagModal,
+  loader,
+  setLoader,
 }) => {
   const [accordion, setAcordion] = useState(false);
   const [contactAccordion, setContactAcordion] = useState(false);
   const [tagsAccordion, setTagsAcordion] = useState(false);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
   const [profileDetails, setProfileDetails] = useState("");
+  const [emails, setEmails] = useState([]);
+  const [phones, setPhones] = useState([]);
+
+  const dispatch = useDispatch();
+
+  const profileDetailsPayload = useSelector((state) =>
+    getIsListProfileDetailsPayload(state)
+  );
+
+  const contactDetails = useSelector((state) =>
+    getIsProfileContactDetails(state)
+  );
 
   const profileDetailsRes = useSelector((state) =>
     getIsListProfileDetails(state)
@@ -31,13 +62,32 @@ const ListUserCart = ({
     ) {
       if (profileDetailsRes.status === "success") {
         setProfileDetails(profileDetailsRes);
+        setLoader({ open: false, msg: "" });
       }
     }
   }, [profileDetailsRes]);
 
+  useEffect(() => {
+    if (
+      contactDetails &&
+      contactDetails !== undefined &&
+      contactDetails !== null &&
+      contactDetails !== {}
+    ) {
+      if (contactDetails.status === "success") {
+        dispatch(fetchListProfileDetails(profileDetailsPayload));
+        setEmails(contactDetails.email);
+        setPhones(contactDetails.phones);
+      }
+    }
+  }, [contactDetails]);
+
   const openTagModal = (row) => {
-    console.log("row", row);
-    setAddTagModal({ open: true, obj: {} })
+    setAddTagModal({ open: true, obj: {} });
+  };
+
+  const callProfileContacts = () => {
+    dispatch(fetchProfileContactDetails(profileDetailsPayload));
   };
 
   return (
@@ -138,31 +188,55 @@ const ListUserCart = ({
               </div>
             </Accordion.Title>
             <Accordion.Content active={contactAccordion}>
-              {profileDetails.contacts && profileDetails.contacts.length > 0
-                ? profileDetails.contacts.map((item, index) => {
-                  return (
-                    <div style={{ fontSize: "11px" }}>
-                      <div className="wordBreak list-contacts">
-                        <Icon size="mini" color="grey" name="mail outline" />
-                        <span style={{ fontSize: "11px", color: "#2185d0" }}>
-                          akashathnure40@gmail.com
-                        </span>
-                      </div>
-                      <div className="list-contacts">
-                        <Icon
-                          size="mini"
-                          color="grey"
-                          name="phone"
-                          flipped="horizontally"
-                        />
-                        <span style={{ fontSize: "10px", color: "#2185d0" }}>
-                          8095595412
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })
-                : "N/A"}
+              <div
+                style={{ paddingLeft: "86%", cursor: "pointer" }}
+                onClick={() => callProfileContacts()}
+              >
+                <Icon color="blue" name="download" />
+              </div>
+
+              <div style={{ fontSize: "11px" }}>
+                {profileDetails.email && profileDetails.email.length > 0
+                  ? profileDetails.email.map((item, index) => {
+                      return (
+                        <div className="wordBreak list-contacts">
+                          <Icon size="mini" color="grey" name="mail outline" />
+                          <span
+                            style={{
+                              fontSize: "11px",
+                              color: "#2185d0",
+                            }}
+                          >
+                            {item}
+                          </span>
+                        </div>
+                      );
+                    })
+                  : ""}
+                {profileDetails.phone && profileDetails.phone.length > 0
+                  ? profileDetails.phone.map((item, index) => {
+                      return (
+                        <div className="list-contacts">
+                          <Icon
+                            size="mini"
+                            color="grey"
+                            name="phone"
+                            flipped="horizontally"
+                          />
+                          <span
+                            style={{
+                              fontSize: "10px",
+                              color: "#2185d0",
+                            }}
+                          >
+                            {item}
+                          </span>
+                        </div>
+                      );
+                    })
+                  : ""}
+              </div>
+
               <div style={{ paddingTop: "10px" }}>
                 <Icon name="linkedin" />
                 <Icon name="twitter" />
@@ -190,20 +264,24 @@ const ListUserCart = ({
             </Accordion.Title>
             <Accordion.Content active={tagsAccordion}>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                <div className="tag-item">
-                  <div className="tag-color1"></div> Lead Designer
-                </div>
-                <div className="tag-item">
-                  <div className="tag-color2"></div>Designer
-                </div>
-                <div className="tag-item">
-                  <div className="tag-color3"></div> UX/UI hhhhh
-                </div>
+                {profileDetails.tags && profileDetails.tags.length > 0
+                  ? profileDetails.tags.map((item, index) => {
+                      return (
+                        <div className="tag-item">
+                          <div className={`tag-color${index + 1}`}></div> {item}
+                        </div>
+                      );
+                    })
+                  : "N/A"}
               </div>
               <div className="paddingTop5">
                 <span
-                  style={{ fontSize: "11px", color: "#2185d0", cursor: "pointer" }}
-                  onClick={() => openTagModal()}
+                  style={{
+                    fontSize: "11px",
+                    color: "#2185d0",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => openTagModal(profileDetails)}
                 >
                   <Icon color="blue" name="add" /> <span>Add Tag</span>
                 </span>
@@ -212,23 +290,7 @@ const ListUserCart = ({
           </Accordion>
         </div>
       </div>
-      {/* <div className="list-user-tags">
-                <div className="padding5">
-                    <div style={{ fontSize: "11px" }}>Tags</div>
-                </div>
-                <div className="padding5">
-                    <div style={{ display: "flex", flexWrap: "wrap" }}>
-                        <div className="tag-item">Lead Designer</div>
-                        <div className="tag-item">Designer</div>
-                        <div className="tag-item">UX/UI hhhhh</div>
-                    </div>
-                    <div className="paddingTop5">
-                        <span style={{ fontSize: "11px", color: "#2185d0" }}>
-                            <Icon color="blue" name="add" /> <span>Add Tag</span>
-                        </span>
-                    </div>
-                </div>
-            </div> */}
+
       <div className="accord-container">
         <div className="padding5">
           <Accordion>
@@ -249,26 +311,26 @@ const ListUserCart = ({
             <Accordion.Content active={prevCompanyAccordion}>
               {profileDetails.experience && profileDetails.experience.length > 0
                 ? profileDetails.experience.map((item, index) => {
-                  return (
-                    <div style={{ fontSize: "11px" }}>
-                      <li className="wordBreak">{item.company}</li>
-                      <div style={{ padding: "0 8%" }}>
-                        {index == 0 && item.enddate === "" ? (
-                          <>
-                            {displayDate(item.startdate).split("-")[2]}{" "}
-                            {item.startdate !== "" ? "- Present" : ""}
-                          </>
-                        ) : (
-                          <>
-                            {displayDate(item.startdate).split("-")[2]}{" "}
-                            {item.startdate !== "" ? "-" : ""}
-                            {displayDate(item.enddate).split("-")[2]}
-                          </>
-                        )}
+                    return (
+                      <div style={{ fontSize: "11px" }}>
+                        <li className="wordBreak">{item.company}</li>
+                        <div style={{ padding: "0 8%" }}>
+                          {index == 0 && item.enddate === "" ? (
+                            <>
+                              {displayDate(item.startdate).split("-")[2]}{" "}
+                              {item.startdate !== "" ? "- Present" : ""}
+                            </>
+                          ) : (
+                            <>
+                              {displayDate(item.startdate).split("-")[2]}{" "}
+                              {item.startdate !== "" ? "-" : ""}
+                              {displayDate(item.enddate).split("-")[2]}
+                            </>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })
+                    );
+                  })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>
@@ -301,9 +363,19 @@ const ListUserCart = ({
           <AddTagNameForm
             setAddTagModal={setAddTagModal}
             sessionUserId={sessionUserId}
+            selectedRows={selectedRows}
           />
         </Modal.Content>
       </Modal>
+      <div className="dimmer-loader-container">
+        {loader.open && (
+          <Dimmer inverted active>
+            <Loader size="tiny" active>
+              {loader.msg}
+            </Loader>
+          </Dimmer>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { addProfileToListRes, fetchedList, fetchedListProfileDetails, fetchedListContactDetails, addTagsRes, deleteListProfileRes, fetchedListResSave } from "./actions";
+import { addProfileToListRes, fetchedList, fetchedListProfileDetails, fetchedProfileContactDetails, addTagsRes, deleteListProfileRes, fetchedListResSave } from "./actions";
 import axios from "axios"
 
 
@@ -66,14 +66,14 @@ async function requestListProfileDetailsAPI(data) {
 // region for add user
 
 function* fetchListContactDetails() {
-    yield takeEvery('FETCHED_LIST_CONTACT_DETAILS', fetchListContactDetailsFunc);
+    yield takeEvery('FETCH_PROFILE_CCONTACTS_DETAILS', fetchListContactDetailsFunc);
 }
 
 function* fetchListContactDetailsFunc(action) {
 
     const { response, error } = yield call(fetchListContactDetailsAPI, action.payload)
     if (response) {
-        yield put(fetchedListContactDetails(response.data))
+        yield put(fetchedProfileContactDetails(response.data))
     }
     else {
         sagaErrorMessage(error, action)
@@ -83,7 +83,7 @@ function* fetchListContactDetailsFunc(action) {
 async function fetchListContactDetailsAPI(data) {
     let userId = data.userid
     try {
-        const response = await axios.post(BASE_URL + `/get/userlist/${userId}`, data, { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + `/fetchprofilecontactdetailsvialist`, data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });

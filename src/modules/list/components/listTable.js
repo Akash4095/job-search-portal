@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Checkbox, Grid, Icon, Image, Modal, Table } from "semantic-ui-react";
 import { getIsFetchedList } from "../data/selectors";
 import AddTagNameForm from "./addTagName";
-import { fetchListProfileDetails } from "../data/actions";
+import { fetchListProfileDetails, saveListProfileDetailsPayload } from "../data/actions";
 
 const ListTable = ({
   rowClicked,
@@ -13,7 +13,7 @@ const ListTable = ({
   selectedRows,
   setSelectedRows,
   sessionUserId,
-  setListLoader,
+  setLoader,
   addTagModal,
   setAddTagModal
 }) => {
@@ -40,12 +40,13 @@ const ListTable = ({
   }, [listResponse]);
 
 
-  const handleRowClick = (rowId) => {
+  const handleRowClick = (row) => {
+   
     setSelectedRows((prevSelectedRows) => {
-      if (prevSelectedRows.includes(rowId)) {
-        return prevSelectedRows.filter((id) => id !== rowId);
+      if (prevSelectedRows.includes(row)) {
+        return prevSelectedRows.filter((item) => item !== row);
       } else {
-        return [...prevSelectedRows, rowId];
+        return [...prevSelectedRows, row];
       }
     });
   };
@@ -54,10 +55,15 @@ const ListTable = ({
     if (selectAll) {
       setSelectedRows([]);
     } else {
-      setSelectedRows(listArray.map((row) => row.id));
+      setSelectedRows(listArray.map((row) => row));
     }
     setSelectAll((prevSelectAll) => !prevSelectAll);
   };
+
+  const unselectAll = () => {
+    setSelectedRows([])
+    setSelectAll(false)
+  }
 
   const fetchlistCartDetails = (row) => {
     let obj = {}
@@ -65,7 +71,8 @@ const ListTable = ({
     obj.profileid = row.profileid
     obj.listid = row.id
     dispatch(fetchListProfileDetails(obj))
-    setListLoader({ open: true, msg: "Loading" })
+    dispatch(saveListProfileDetailsPayload(obj))
+    setLoader({ open: true, msg: "Loading" })
     setRowClicked(true);
 
   };
@@ -89,10 +96,10 @@ const ListTable = ({
           style={{ marginLeft: "1%", marginRight: "1%", marginBottom: "-6px" }}
         >
           <Grid.Row>
-            <Grid.Column width={3}>
+            <Grid.Column width={3} style={{cursor:"pointer"}}>
               {
                 selectedRows.length > 0 ?
-                  <Icon name="minus square" color="blue" />
+                  <Icon name="minus square" color="blue" onClick={() => unselectAll()}  />
                   :
                   <Checkbox
                     className="listActions-checkbox"
@@ -179,13 +186,14 @@ const ListTable = ({
                         <Table.Cell style={{ width: "3%" }}>
                           <Checkbox
                             style={{ marginLeft: "8px" }}
-                            checked={selectedRows.includes(item.id)}
-                            onChange={() => handleRowClick(item.id)}
+                            checked={selectedRows.includes(item)}
+                            onChange={() => handleRowClick(item)}
                           />
                         </Table.Cell>
                         <Table.Cell
                           style={{ width: "24%", cursor: "pointer" }}
                           onClick={() => fetchlistCartDetails(item)}
+                          verticalAlign="top"
                         >
                           <div className="d_flex">
                             <img
@@ -209,7 +217,7 @@ const ListTable = ({
                             </div>
                           </div>
                         </Table.Cell>
-                        <Table.Cell style={{ width: "18%" }}>
+                        <Table.Cell style={{ width: "18%" }} verticalAlign="top">
                           {/* {item && item.company_logo && item.company_logo !== "" ? (
                           <img
                             src={item.company_logo}
@@ -220,24 +228,24 @@ const ListTable = ({
                         ) : (
                           <Icon color="blue" name="building outline" />
                         )} */}
-                          <div style={{ position: "relative", top: "-12px" }}>
+                          <div >
                             <Icon color="blue" name="building outline" />
                             <span style={{ wordBreak: "break-all", fontSize: "12px", fontFamily: "Inter" }}>
                               {item.company ? item.company : ""}
                             </span>
                           </div>
                         </Table.Cell>
-                        <Table.Cell style={{ width: "28%" }}>
+                        <Table.Cell style={{ width: "28%", fontSize: "12px" }} verticalAlign="top">
                           <div style={{ display: "flex", flexWrap: "wrap" }}>
-                            <div className="tag-item">
-                              <div className="tag-color1"></div> Lead Designer
-                            </div>
-                            <div className="tag-item">
-                              <div className="tag-color2"></div>Designer
-                            </div>
-                            <div className="tag-item">
-                              <div className="tag-color3"></div> UX/UI hhhhh
-                            </div>
+                            {item.tags && item.tags.length > 0
+                              ? item.tags.map((tagname, index) => {
+                                return (
+                                  <div className="tag-item">
+                                    <div className={`tag-color${index + 1}`}></div> {tagname}
+                                  </div>
+                                );
+                              })
+                              : "N/A"}
                           </div>
                         </Table.Cell>
                         <Table.Cell
@@ -246,6 +254,7 @@ const ListTable = ({
                             color: "#666",
                             wordBreak: "break-all",
                           }}
+                          verticalAlign="top"
                         >
                           <div>
                             <div className="icons">
@@ -266,7 +275,7 @@ const ListTable = ({
                             </div>
                           </div>
                         </Table.Cell>
-                        <Table.Cell textAlign="center" style={{ width: "2%" }}>
+                        <Table.Cell textAlign="center" style={{ width: "2%" }} verticalAlign="top">
                           <Icon
                             color="grey"
                             name="ellipsis vertical"
@@ -284,7 +293,7 @@ const ListTable = ({
               onClose={() => setAddTagModal({ open: false, obj: {} })}
             >
               <Modal.Content>
-                <AddTagNameForm setAddTagModal={setAddTagModal} sessionUserId={sessionUserId} />
+                <AddTagNameForm setAddTagModal={setAddTagModal} sessionUserId={sessionUserId} selectedRows={selectedRows} />
               </Modal.Content>
             </Modal>
           </div>

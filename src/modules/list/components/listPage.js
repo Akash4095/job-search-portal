@@ -9,16 +9,35 @@ import ListTable from "./listTable";
 import ListUserCart from "./listUserCart";
 import { getUserList } from "../../search/data/actions";
 import { getIsCodeSendResponse } from "../../home/data/selectors";
+import {
+  getIsListProfileDetailsPayload,
+  getIsSidebarListPayload,
+  getIsTagsRes,
+} from "../data/selectors";
+import { toast } from "react-toastify";
+import {
+  clearTagsRes,
+  fetchList,
+  fetchListProfileDetails,
+} from "../data/actions";
 
 const ListPage = ({ setSearchedText, searchedText }) => {
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+  const tagsAddedRes = useSelector((state) => getIsTagsRes(state));
+  const sidebarPayload = useSelector((state) => getIsSidebarListPayload(state));
+  const profileDetailsPayload = useSelector((state) =>
+    getIsListProfileDetailsPayload(state)
+  );
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [start, setStart] = useState(1);
   const [selectedRows, setSelectedRows] = useState([]);
   const [sessionUserId, setSessionUserId] = useState("");
-  const [listLoader, setListLoader] = useState({ open: false, msg: "" });
+  const [listCartLoader, setListCartLoader] = useState({
+    open: false,
+    msg: "",
+  });
   const [addTagModal, setAddTagModal] = useState({ open: false, obj: {} });
 
   const navigate = useNavigate();
@@ -55,6 +74,21 @@ const ListPage = ({ setSearchedText, searchedText }) => {
     }
   }, [getLoginAuthRes]);
 
+  useEffect(() => {
+    if (tagsAddedRes && tagsAddedRes !== null && tagsAddedRes !== undefined) {
+      if (tagsAddedRes.status && tagsAddedRes.status === "success") {
+        toast.success(tagsAddedRes.msg ? tagsAddedRes.msg : "");
+        if (selectedRows && selectedRows.length > 0) {
+          dispatch(fetchList(sidebarPayload));
+        } else {
+          dispatch(fetchListProfileDetails(profileDetailsPayload));
+        }
+        dispatch(clearTagsRes());
+        setSelectedRows([]);
+      }
+    }
+  }, [tagsAddedRes]);
+
   return (
     <div className="d_flex">
       <SideBar />
@@ -80,18 +114,21 @@ const ListPage = ({ setSearchedText, searchedText }) => {
             selectedRows={selectedRows}
             setSelectedRows={setSelectedRows}
             sessionUserId={sessionUserId}
-            setListLoader={setListLoader}
+            setLoader={setListCartLoader}
             addTagModal={addTagModal}
             setAddTagModal={setAddTagModal}
           />
 
           {rowClicked ? (
             <ListUserCart
+              selectedRows={selectedRows}
               rowClicked={rowClicked}
               setRowClicked={setRowClicked}
               sessionUserId={sessionUserId}
               addTagModal={addTagModal}
               setAddTagModal={setAddTagModal}
+              loader={listCartLoader}
+              setLoader={setListCartLoader}
             />
           ) : null}
         </div>

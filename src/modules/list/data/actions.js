@@ -43,16 +43,23 @@ export function fetchedListProfileDetails(props) {
     };
 }
 
-export function fetchListContactDetails(props) {
+export function saveListProfileDetailsPayload(props) {
     return {
-        type: type.FETCHED_LIST_CONTACT_DETAILS,
+        type: type.SAVE_LIST_PROFILE_DETAILS_PAYLOAD,
         payload: props,
     };
 }
 
-export function fetchedListContactDetails(props) {
+export function fetchProfileContactDetails(props) {
     return {
-        type: type.FETCHED_LIST_CONTACT_DETAILS,
+        type: type.FETCH_PROFILE_CCONTACTS_DETAILS,
+        payload: props,
+    };
+}
+
+export function fetchedProfileContactDetails(props) {
+    return {
+        type: type.FETCHED_PROFILE_CCONTACTS_DETAILS,
         payload: props,
     };
 }
@@ -68,6 +75,20 @@ export function addTags(props) {
 export function addTagsRes(props) {
     return {
         type: type.ADD_TAGS_RES,
+        payload: props,
+    };
+}
+
+export function clearTagsRes(props) {
+    return {
+        type: type.CLEAR_TAGS_RES,
+        payload: props,
+    };
+}
+
+export function saveSideListPayload(props) {
+    return {
+        type: type.SAVE_SIDEBAR_LIST_PAYLOAD,
         payload: props,
     };
 }

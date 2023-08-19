@@ -372,6 +372,44 @@ input:focus {
   border-radius: 50%;
   background: #2b81e7;
 }
+
+.tag-color6 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #e2a93a;
+}
+
+.tag-color7 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #cf1876;
+}
+.tag-color8 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #5551ff;
+}
+
+.tag-color9 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #0fa958;
+}
+.tag-color10 {
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: #2b81e7;
+}
 .commonSearchCommponent {
   position: relative !important;
   left: 10% !important;
@@ -408,14 +446,14 @@ input:focus {
 }
 
 .list-person-name {
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
   word-break: break-all !important;
 }
 
 .list-person-work {
   color: #666 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 500 !important;
   word-break: break-all !important;
 }
@@ -475,6 +513,7 @@ input:focus {
   background: #fff;
   border: 1px solid #fff;
   overflow-y: scroll !important;
+  position: relative;
 }
 
 .list-user-cart-close-icon {
