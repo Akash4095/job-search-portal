@@ -7,9 +7,9 @@ import {
   getIsCodeSendResponse,
   getIsSearchedText,
 } from "../home/data/selectors";
-import { fetchSearchByQuery } from "../search/data/actions";
+import { fetchSearchByQuery, fetchViewMoreQuery } from "../search/data/actions";
 
-const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
+const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, setItems, setStart }) => {
   const [input, setInput] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [sessionUserId, setSessionUserId] = useState("");
@@ -69,7 +69,7 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
     setSearchedText(input);
     let obj = {};
     obj.query = input;
-    obj.start = "1";
+    obj.start = start.toString();
     obj.userid = sessionUserId.toString();
     dispatch(fetchSearchByQuery(obj));
     if (setLoader) {
@@ -85,7 +85,7 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
       obj.query = input;
       obj.start = start.toString();
       obj.userid = sessionUserId.toString();
-      dispatch(fetchSearchByQuery(obj));
+      dispatch(fetchViewMoreQuery(obj));
       if (setLoader) {
         setLoader({ open: true, msg: "Loading" });
       }

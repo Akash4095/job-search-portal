@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { addProfileToListRes, addUserListRes, deleteProfileFromListRes, fetchedProfileDetails, fetchedSearchByQuery, getUserListRes } from "./actions";
+import { addProfileToListRes, addUserListRes, deleteProfileFromListRes, fetchedProfileDetails, fetchedSearchByQuery, getUserListRes, viewMoreSearchRes } from "./actions";
 import axios from "axios"
 
 
@@ -23,6 +23,34 @@ function* getQuerySearchFunc(action) {
 }
 
 async function getQuerySearchFuncAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/searchbyquery', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for send code
+
+function* fetchViewMoreQuery() {
+    yield takeEvery('FETCH_VIEW_MORE_QUERY', requestViewMore);
+}
+
+function* requestViewMore(action) {
+
+    const { response, error } = yield call(requestViewMoreAPI, action.payload)
+    if (response) {
+        yield put(viewMoreSearchRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function requestViewMoreAPI(data) {
     try {
         const response = await axios.post(BASE_URL + '/searchbyquery', data, { headers: { Authorization: getToken() }, });
         return ({ response });
@@ -82,7 +110,7 @@ function* getUserListFunc(action) {
 async function getUserListAPI(data) {
     let userId = data.userid
     try {
-        const response = await axios.get(BASE_URL + `/get/userlist/${userId}`,  { headers: { Authorization: getToken() }, });
+        const response = await axios.get(BASE_URL + `/get/userlist/${userId}`, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -185,6 +213,7 @@ const sagaErrorMessage = (error, action) => {
 export default function* searchsagas() {
     yield all([
         fetchSearchByQuery(),
+        fetchViewMoreQuery(),
         addUserList(),
         getUserList(),
         fetchProfileDetails(),

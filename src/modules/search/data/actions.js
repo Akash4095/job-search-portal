@@ -14,6 +14,28 @@ export function fetchedSearchByQuery(props) {
     };
 }
 
+
+export function fetchViewMoreQuery(props) {
+    return {
+        type: type.FETCH_VIEW_MORE_QUERY,
+        payload: props,
+    };
+}
+
+export function viewMoreSearchRes(props) {
+    return {
+        type: type.VIEW_MORE_SEARCH_RES,
+        payload: props,
+    };
+}
+
+export function clearSearchByQuery(props) {
+    return {
+        type: type.CLEAR_SEARCH_BY_QUERY,
+        payload: props,
+    };
+}
+
 export function addUserList(props) {
     return {
         type: type.ADD_USER_LIST,

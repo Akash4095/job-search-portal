@@ -4,6 +4,9 @@ import { merge } from "lodash";
 
 function fetchedSearchedByQuery(state = { status: "", data: [] }, action) {
     if (action.type === 'FETCHED_SEARCH_BY_QUERY') {
+        return action.payload
+
+    } if (action.type === 'VIEW_MORE_SEARCH_RES') {
         if (action.payload.data && action.payload.data !== undefined && action.payload.data.length) {
             return {
                 ...state,
@@ -16,8 +19,8 @@ function fetchedSearchedByQuery(state = { status: "", data: [] }, action) {
                 status: action.payload.status,
             }
         }
-
-    } else {
+    }
+    else {
         return state
     }
 }
