@@ -56,6 +56,7 @@ const UserListSelect = (
       userProps={{ options, getValue }}
       focus={focus}
       placeholder={placeholder}
+      className="selectInput"
     >
     </Field>
   );

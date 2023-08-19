@@ -71,7 +71,6 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
     obj.query = input;
     obj.start = "1";
     obj.userid = sessionUserId.toString();
-    // obj.userid = "1"
     dispatch(fetchSearchByQuery(obj));
     if (setLoader) {
       setLoader({ open: true, msg: "Loading" });
@@ -79,16 +78,17 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader }) => {
   };
 
   useEffect(() => {
-    dispatch(getSearchedComponentText(input));
-    setSearchedText(input);
-    let obj = {};
-    obj.query = input;
-    obj.start = start.toString();
-    obj.userid = sessionUserId.toString();
-    // obj.userid = "1"
-    dispatch(fetchSearchByQuery(obj));
-    if (setLoader) {
-      setLoader({ open: true, msg: "Loading" });
+    if (start > 1) {
+      dispatch(getSearchedComponentText(input));
+      setSearchedText(input);
+      let obj = {};
+      obj.query = input;
+      obj.start = start.toString();
+      obj.userid = sessionUserId.toString();
+      dispatch(fetchSearchByQuery(obj));
+      if (setLoader) {
+        setLoader({ open: true, msg: "Loading" });
+      }
     }
   }, [start]);
 

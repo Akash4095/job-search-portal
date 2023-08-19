@@ -10,7 +10,7 @@ import { addUserList } from '../search/data/actions';
 const AddListForm = (props) => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
-    const [sessionUserId, setSessionUserId] = useState("");
+    const [sessionUserId, setSessionUserId] = useState("1");
 
     const dispatch = useDispatch();
 
@@ -40,7 +40,6 @@ const AddListForm = (props) => {
         let obj = {}
         obj.listname = values.listname
         obj.userid = sessionUserId.toString()
-        // obj.userid = "1"
         dispatch(addUserList(obj))
         props.setAddListModal({ open: false, msg: "" })
     }

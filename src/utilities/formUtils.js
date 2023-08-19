@@ -403,7 +403,7 @@ export const FormikCheckBoxComponent = ({
 );
 
 export const FormikSelectComponent = ({
-  userProps, isLabel, label, isTxn, isSelection, placeholder, focus, width, compute, setFieldValueM, clearable, isMandatory, setvalue, setChange,
+  userProps, isLabel, label, isTxn, isSelection, placeholder, className, focus, width, compute, setFieldValueM, clearable, isMandatory, setvalue, setChange,
   index,
   field, // { name, value, onChange, onBlur }
   form: { touched, errors, values, handleChange, setFieldValue, submitCount }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
@@ -461,6 +461,7 @@ export const FormikSelectComponent = ({
           if (compute) { compute(values, index, setFieldValue) }
         }}
         clearable
+        className={className ? className : ""}
         disabled={userProps ? userProps.isDisable ? userProps.isDisable : null : null}
       />
       {isTxn ? <ErrorMessage name={field.name} render={msg => <Label size="mini" color='red' basic pointing prompt>{msg}</Label>} /> : null}

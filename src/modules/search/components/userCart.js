@@ -11,8 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIsProfileDetails } from "../data/selectors";
 import { Link } from "react-router-dom";
 import { displayDate } from "../../../utilities/listUtils";
+import { extractMonthNames } from "../../common/getMonthName";
 
-const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
+const UserCart = ({
+  setRowClicked,
+  userCartLoader,
+  setUserCartLoader,
+  setAddListModal,
+}) => {
   const [profileData, setProfileData] = useState([]);
   const [skillsAccordion, setSkillsAcordion] = useState(false);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
@@ -39,6 +45,10 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
     }
   }, [profileDetails]);
 
+  const addProfileToListFunc = (row) => {
+    setAddListModal({ open: true, msg: "", obj: row });
+  };
+
   return (
     <div className="usercart-container scrollable-container">
       <div className="">
@@ -61,10 +71,10 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
         </div>
         <div className="paddingUsrDetails">
           <div className="user-cart-name">
-            {profileDetails.full_name ? profileDetails.full_name : ""}
+            {profileDetails.full_name ? profileDetails.full_name : "N/A"}
           </div>
           <div className="user-cart-work">
-            {profileDetails.designation ? profileDetails.designation : ""}
+            {profileDetails.designation ? profileDetails.designation : "N/A"}
           </div>
         </div>
 
@@ -81,8 +91,8 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
                 {profileDetails.experience
                   ? profileDetails.experience.length > 0
                     ? profileDetails.experience[0].company
-                    : ""
-                  : ""}
+                    : "N/A"
+                  : "N/A"}
               </div>
             </div>
             <div style={{ marginLeft: "10%", fontSize: "12px" }}>
@@ -90,12 +100,22 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
                 ? profileDetails.experience.length > 0
                   ? "From" +
                     " " +
-                    displayDate(profileDetails.experience[0].startdate)
+                    extractMonthNames(
+                      displayDate(profileDetails.experience[0].startdate)
+                    ) +
+                    " " +
+                    (profileDetails.experience[0].startdate &&
+                    profileDetails.experience[0].startdate !== "" &&
+                    profileDetails.experience[0].startdate !== undefined
+                      ? displayDate(
+                          profileDetails.experience[0].startdate
+                        ).split("-")[2]
+                      : "")
                   : ""
                 : ""}
             </div>
             <div className="user-cart-description">
-              {profileDetails.description ? profileDetails.description : ""}
+              {profileDetails.description ? profileDetails.description : "N/A"}
             </div>
             <div style={{ marginBottom: "10px" }} className="d_flex">
               <Link
@@ -136,18 +156,24 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
                 ? profileDetails.experience.map((item, index) => {
                     return (
                       <div style={{ fontSize: "11px" }}>
-                        <li className="wordBreak">{item.company}</li>
+                        <li className="wordBreak">
+                          {item.company && item.company !== ""
+                            ? item.company
+                            : "N/A"}
+                        </li>
                         <div style={{ padding: "0 8%" }}>
                           {index == 0 && item.enddate === "" ? (
                             <>
-                              {displayDate(item.startdate).split("-")[2]}{" "}
+                              {displayDate(item.startdate).split("-")[2]}
                               {item.startdate !== "" ? "- Present" : ""}
                             </>
                           ) : (
                             <>
-                              {displayDate(item.startdate).split("-")[2]}{" "}
+                              {displayDate(item.startdate).split("-")[2]}
                               {item.startdate !== "" ? "-" : ""}
-                              {displayDate(item.enddate).split("-")[2]}
+                              {item.startdate !== ""
+                                ? displayDate(item.enddate).split("-")[2]
+                                : ""}
                             </>
                           )}
                         </div>
@@ -177,8 +203,7 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
             </Accordion.Title>
             <Accordion.Content active={skillsAccordion}>
               <div className="wordBreak">
-                {" "}
-                {profileDetails.skills ? profileDetails.skills : "N/A"}{" "}
+                {profileDetails.skills ? profileDetails.skills : "N/A"}
               </div>
             </Accordion.Content>
           </Accordion>
@@ -207,12 +232,16 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
                     return (
                       <div style={{ fontSize: "11px" }}>
                         <li className="wordBreak">
-                          {item.degree_name ? item.degree_name : ""}
+                          {item.degree_name && item.degree_name !== ""
+                            ? item.degree_name
+                            : "N/A"}
                         </li>
                         <div style={{ padding: "0 8%" }}>
-                          {displayDate(item.startdate).split("-")[2]}{" "}
+                          {displayDate(item.startdate).split("-")[2]}
                           {item.startdate !== "" ? "-" : ""}
-                          {displayDate(item.enddate).split("-")[2]}
+                          {item.startdate !== ""
+                            ? displayDate(item.enddate).split("-")[2]
+                            : ""}
                         </div>
                       </div>
                     );
@@ -224,7 +253,13 @@ const UserCart = ({ setRowClicked, userCartLoader, setUserCartLoader }) => {
       </div>
       <div className="add-user-to-list">
         <div className="paddingBtn alignCenter">
-          <Button basic color="blue" size="large" className="user-cart-btn">
+          <Button
+            basic
+            color="blue"
+            size="large"
+            className="user-cart-btn"
+            onClick={() => addProfileToListFunc(profileDetails)}
+          >
             <Icon name="list ul" color="white" size="mini" />
             Add to list
           </Button>

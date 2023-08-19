@@ -17,7 +17,11 @@ import {
 } from "../data/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearProfileToListRes, clearUserListRes, fetchSearchByQuery, getUserList } from "../data/actions";
+import {
+  clearProfileToListRes,
+  clearUserListRes,
+  getUserList,
+} from "../data/actions";
 import CommanResponseModal from "../../common/commonModal";
 import AddUserProfileToListForm from "./addUserProfile";
 import { toast } from "react-toastify";
@@ -28,15 +32,20 @@ const Search = ({ setSearchedText, searchedText }) => {
   const inputText = useSelector((state) => getIsSearchedText(state));
   const userListRes = useSelector((state) => getIsUserList(state));
   const addListRes = useSelector((state) => getIsAddUserList(state));
-  const addProfileToListRes = useSelector((state) => getIsAddProfileToListRes(state));
+  const addProfileToListRes = useSelector((state) =>
+    getIsAddProfileToListRes(state)
+  );
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("1");
+  const [sessionUserId, setSessionUserId] = useState("");
   const [start, setStart] = useState(1);
-  const [userCartLoader, setUserCartLoader] = useState({ open: false, msg: "" });
+  const [userCartLoader, setUserCartLoader] = useState({
+    open: false,
+    msg: "",
+  });
   const [listLoader, setListLoader] = useState({ open: false, msg: "" });
 
   const [addListModal, setAddListModal] = useState({
@@ -58,8 +67,7 @@ const Search = ({ setSearchedText, searchedText }) => {
 
   useEffect(() => {
     let obj = {};
-    obj.userid = sessionUserId.toString()
-    // obj.userid = "1";
+    obj.userid = sessionUserId.toString();
     dispatch(getUserList(obj));
   }, [sessionUserId]);
 
@@ -68,7 +76,7 @@ const Search = ({ setSearchedText, searchedText }) => {
       if (searchResult.status && searchResult.status === "success") {
         setItems(searchResult.data);
       }
-      setListLoader({ open: false, msg: "" })
+      setListLoader({ open: false, msg: "" });
     }
   }, [searchResult]);
 
@@ -76,17 +84,24 @@ const Search = ({ setSearchedText, searchedText }) => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status && addListRes.status === "success") {
         toast.success("List Added Successfully");
-        dispatch(clearUserListRes())
+        dispatch(clearUserListRes());
       }
     }
   }, [addListRes]);
 
   useEffect(() => {
-    if (addProfileToListRes && addProfileToListRes !== null && addProfileToListRes !== undefined) {
-      if (addProfileToListRes.status && addProfileToListRes.status === "success") {
-        setSelectedRows([])
+    if (
+      addProfileToListRes &&
+      addProfileToListRes !== null &&
+      addProfileToListRes !== undefined
+    ) {
+      if (
+        addProfileToListRes.status &&
+        addProfileToListRes.status === "success"
+      ) {
+        setSelectedRows([]);
         toast.success(addProfileToListRes.msg ? addProfileToListRes.msg : "");
-        dispatch(clearProfileToListRes())
+        dispatch(clearProfileToListRes());
       }
     }
   }, [addProfileToListRes]);
@@ -123,9 +138,6 @@ const Search = ({ setSearchedText, searchedText }) => {
   const handleViewMoreClick = () => {
     setStart(start + 10);
   };
-
-  console.log('addProfileToListRes', addProfileToListRes)
-  console.log('addListRes', addListRes)
 
   return (
     <div className="d_flex">
@@ -175,36 +187,50 @@ const Search = ({ setSearchedText, searchedText }) => {
           >
             {items && items.length > 0
               ? items.map((item, index) => {
-                return (
-                  <SearchResults
-                    key={index}
-                    row={item}
-                    rowClicked={rowClicked}
-                    setRowClicked={setRowClicked}
-                    selectAll={selectAll}
-                    setSelectAll={setSelectAll}
-                    selectedRows={selectedRows}
-                    setSelectedRows={setSelectedRows}
-                    sessionUserId={sessionUserId}
-                    setAddListModal={setAddListModal}
-                    userCartLoader={userCartLoader}
-                    setUserCartLoader={setUserCartLoader}
-                  />
-                );
-              })
+                  return (
+                    <SearchResults
+                      key={index}
+                      row={item}
+                      rowClicked={rowClicked}
+                      setRowClicked={setRowClicked}
+                      selectAll={selectAll}
+                      setSelectAll={setSelectAll}
+                      selectedRows={selectedRows}
+                      setSelectedRows={setSelectedRows}
+                      sessionUserId={sessionUserId}
+                      setAddListModal={setAddListModal}
+                      userCartLoader={userCartLoader}
+                      setUserCartLoader={setUserCartLoader}
+                    />
+                  );
+                })
               : null}
             <div className="view-more-button-container">
-              {(showViewMoreButton && items && items.length > 0) ? <button className="view-more-button" onClick={handleViewMoreClick}>View More</button> : null}
+              {showViewMoreButton && items && items.length > 0 ? (
+                <button
+                  className="view-more-button"
+                  onClick={handleViewMoreClick}
+                >
+                  View More
+                </button>
+              ) : null}
             </div>
           </div>
-          {rowClicked ? <UserCart setRowClicked={setRowClicked} userCartLoader={userCartLoader} setUserCartLoader={setUserCartLoader} /> : null}
+          {rowClicked ? (
+            <UserCart
+              setRowClicked={setRowClicked}
+              userCartLoader={userCartLoader}
+              setUserCartLoader={setUserCartLoader}
+              setAddListModal={setAddListModal}
+            />
+          ) : null}
         </div>
         <div className="dimmer-loader-container">
-          {(listLoader.open) &&
+          {listLoader.open && (
             <Dimmer inverted active>
               <Loader active>{listLoader.msg}</Loader>
             </Dimmer>
-          }
+          )}
         </div>
       </div>
       <Modal

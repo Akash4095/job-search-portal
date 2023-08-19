@@ -34,7 +34,6 @@ const Welcome = ({ setSearchedText, searchedText }) => {
   useEffect(() => {
     let obj = {};
     obj.userid = sessionUserId.toString()
-    // obj.userid = "1";
     dispatch(getUserList(obj));
   }, [sessionUserId]);
 

@@ -2,10 +2,21 @@ import { combineReducers } from "redux";
 import { merge } from "lodash";
 
 
-function fetchedSearchedByQuery(state = {}, action) {
+function fetchedSearchedByQuery(state = { status: "", data: [] }, action) {
     if (action.type === 'FETCHED_SEARCH_BY_QUERY') {
-        // return merge({}, state, action.payload)
-        return action.payload
+        if (action.payload.data && action.payload.data !== undefined && action.payload.data.length) {
+            return {
+                ...state,
+                status: action.payload.status,
+                data: [...state.data, ...action.payload.data]
+            };
+        } else {
+            return {
+                ...state,
+                status: action.payload.status,
+            }
+        }
+
     } else {
         return state
     }
@@ -39,6 +50,14 @@ function fetchedProfileDetailsRes(state = {}, action) {
     }
 }
 
+function saveProfileDetailsPayload(state = {}, action) {
+    if (action.type === 'SAVE_PROFILE_DETAILS_PAYLOAD') {
+        return action.payload
+    } else {
+        return state
+    }
+}
+
 function addProfileToListRes(state = {}, action) {
     if (action.type === 'ADD_PROFILE_TO_LIST_RES') {
         return action.payload
@@ -63,6 +82,7 @@ const searchReducer = combineReducers({
     addUserListRes,
     getUserListRes,
     fetchedProfileDetailsRes,
+    saveProfileDetailsPayload,
     addProfileToListRes,
     deleteProfileFromListRes,
 

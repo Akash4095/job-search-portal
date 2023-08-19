@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { addProfileToList } from '../data/actions';
 import UserListSelect from './userListSelect';
+import { getIsProfileDetailsPayload } from '../data/selectors';
 
 
 const AddUserProfileToListForm = (props) => {
 
+    const profileDetailsPayload = useSelector((state) => getIsProfileDetailsPayload(state));
 
     const dispatch = useDispatch();
 
@@ -24,8 +26,8 @@ const AddUserProfileToListForm = (props) => {
         } else {
             let obj = {}
             obj.listid = (values.listid).toString()
-            obj.profileid = (props.addListModal.obj.id).toString()
-            obj.userid = props.sessionUserId ? (props.sessionUserId).toString() : ""
+            obj.profileid = (profileDetailsPayload.profileid ? profileDetailsPayload.profileid : "").toString()
+            obj.userid = (profileDetailsPayload.userid ? profileDetailsPayload.userid : "").toString()
             dispatch(addProfileToList(obj))
 
         }

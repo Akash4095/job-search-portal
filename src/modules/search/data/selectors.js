@@ -5,7 +5,8 @@ export const getIsFetchedSearchByQuery = (state, prop) => state.searchReducer.fe
 
 export const getIsAddUserList = (state, prop) => state.searchReducer.addUserListRes
 export const getIsUserList = (state, prop) => state.searchReducer.getUserListRes
-export const getIsProfileDetails = (state, prop) => state.searchReducer.fetchedProfileDetailsRes
+export const getIsProfileDetails = (state, prop) => state.searchReducer.fetchedProfileDetailsRes 
+export const getIsProfileDetailsPayload = (state, prop) => state.searchReducer.saveProfileDetailsPayload 
 
 export const getIsAddProfileToListRes = (state, prop) => state.searchReducer.addProfileToListRes
 export const getIsDeleteProfileFromListRes = (state, prop) => state.searchReducer.deleteProfileFromListRes

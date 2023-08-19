@@ -4,7 +4,11 @@ import "./searchResult.css";
 import UserCart from "./userCart";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProfileToList, fetchProfileDetails } from "../data/actions";
+import {
+  addProfileToList,
+  fetchProfileDetails,
+  saveProfileDetailsPayload,
+} from "../data/actions";
 
 const SearchResults = ({
   row,
@@ -18,7 +22,7 @@ const SearchResults = ({
   sessionUserId,
   setAddListModal,
   loader,
-  setUserCartLoader
+  setUserCartLoader,
 }) => {
   let data = [];
 
@@ -34,27 +38,23 @@ const SearchResults = ({
     });
   };
 
-
-
-
   function createMarkup(msg) {
     return { __html: msg };
   }
 
   const getUserProfileDetails = (row) => {
-    let obj = {}
-    obj.profileid = (row.id).toString()
-    obj.userid = sessionUserId.toString()
-    // obj.userid = "1"
-    dispatch(fetchProfileDetails(obj))
-    setUserCartLoader({ open: true, msg: "Loading Profile" })
-    setRowClicked(true)
-  }
+    let obj = {};
+    obj.profileid = row.id.toString();
+    obj.userid = sessionUserId.toString();
+    dispatch(fetchProfileDetails(obj));
+    dispatch(saveProfileDetailsPayload(obj));
+    setUserCartLoader({ open: true, msg: "Loading Profile" });
+    setRowClicked(true);
+  };
 
   const addProfileToListFunc = (row) => {
-    setAddListModal({ open: true, msg: "", obj: row })
-
-  }
+    setAddListModal({ open: true, msg: "", obj: row });
+  };
 
   return (
     <div style={{ display: "flex" }} key={key}>
@@ -80,7 +80,10 @@ const SearchResults = ({
                 />
               </Grid.Column>
               <Grid.Column width={12} style={{ marginLeft: "-3%" }}>
-                <p className="userName" onClick={() => getUserProfileDetails(row)}>
+                <p
+                  className="userName"
+                  onClick={() => getUserProfileDetails(row)}
+                >
                   {row && row.title ? (
                     <span dangerouslySetInnerHTML={createMarkup(row.title)} />
                   ) : (
@@ -106,7 +109,12 @@ const SearchResults = ({
                 <Icon name="twitter" />
                 <Icon name="dribbble" />
               </Grid.Column>
-              <p className="add-list-btn" onClick={() => addProfileToListFunc(row)}>Add List</p>
+              <p
+                className="add-list-btn"
+                onClick={() => addProfileToListFunc(row)}
+              >
+                Add List
+              </p>
             </Grid.Row>
           </Grid>
         </div>

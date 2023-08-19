@@ -55,6 +55,12 @@ export function fetchProfileDetails(props) {
     };
 }
 
+export function saveProfileDetailsPayload(props) {
+    return {
+        type: type.SAVE_PROFILE_DETAILS_PAYLOAD,
+        payload: props,
+    };
+}
 export function fetchedProfileDetails(props) {
     return {
         type: type.FETCHED_PROFILE_DETAILS_RES,

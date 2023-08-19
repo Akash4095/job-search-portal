@@ -51,7 +51,6 @@ const SearchComponent = ({setSearchedText}) => {
     obj.query = input
     obj.start = "1"
     obj.userid = sessionUserId.toString() 
-    // obj.userid ="1"
     dispatch(fetchSearchByQuery(obj))
     setTimeout(() => {
       navigate("/search")
