@@ -41,7 +41,7 @@ const ListTable = ({
 
 
   const handleRowClick = (row) => {
-   
+
     setSelectedRows((prevSelectedRows) => {
       if (prevSelectedRows.includes(row)) {
         return prevSelectedRows.filter((item) => item !== row);
@@ -66,14 +66,16 @@ const ListTable = ({
   }
 
   const fetchlistCartDetails = (row) => {
-    let obj = {}
-    obj.userid = sessionUserId.toString()
-    obj.profileid = row.profileid
-    obj.listid = row.listid
-    dispatch(fetchListProfileDetails(obj))
-    dispatch(saveListProfileDetailsPayload(obj))
-    setLoader({ open: true, msg: "Loading" })
-    setRowClicked(true);
+    if (sessionUserId && sessionUserId !== undefined) {
+      let obj = {}
+      obj.userid = sessionUserId.toString()
+      obj.profileid = row.profileid
+      obj.listid = row.listid
+      dispatch(fetchListProfileDetails(obj))
+      dispatch(saveListProfileDetailsPayload(obj))
+      setLoader({ open: true, msg: "Loading" })
+      setRowClicked(true);
+    }
 
   };
 
@@ -96,10 +98,10 @@ const ListTable = ({
           style={{ marginLeft: "1%", marginRight: "1%", marginBottom: "-6px" }}
         >
           <Grid.Row>
-            <Grid.Column width={3} style={{cursor:"pointer"}}>
+            <Grid.Column width={3} style={{ cursor: "pointer" }}>
               {
                 selectedRows.length > 0 ?
-                  <Icon name="minus square" color="blue" onClick={() => unselectAll()}  />
+                  <Icon name="minus square" color="blue" onClick={() => unselectAll()} />
                   :
                   <Checkbox
                     className="listActions-checkbox"

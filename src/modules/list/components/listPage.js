@@ -43,9 +43,11 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    let obj = {};
-    obj.userid = sessionUserId.toString();
-    dispatch(getUserList(obj));
+    if (sessionUserId && sessionUserId !== undefined) {
+      let obj = {};
+      obj.userid = sessionUserId.toString();
+      dispatch(getUserList(obj));
+    }
   }, [sessionUserId]);
 
 

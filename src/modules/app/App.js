@@ -18,16 +18,13 @@ function App() {
 
   useEffect(() => {
     let getObj = localStorage.getItem("user")
-    console.log('getObj-app', getObj)
-    // if(getObj && getObj !== null && getObj !== undefined){
-    //   let auth = JSON.parse(getObj);
-    //   console.log('auth', auth)
-    //   if (auth && auth !== undefined && auth !== null && auth !== "") {
-    //     setSessionUserId(auth.id)
-    //   } else {
-    //     setSessionUserId("")
-    //   }
-    // }
+    if(getObj && getObj !== null && getObj !== undefined){
+      if (getObj && getObj !== undefined && getObj !== null && getObj !== "") {
+        setSessionUserId(getObj.id)
+      } else {
+        setSessionUserId("")
+      }
+    }
   }, [])
 
   return (

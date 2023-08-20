@@ -43,13 +43,15 @@ const SearchResults = ({
   }
 
   const getUserProfileDetails = (row) => {
-    let obj = {};
-    obj.profileid = row.id.toString();
-    obj.userid = sessionUserId.toString();
-    dispatch(fetchProfileDetails(obj));
-    dispatch(saveProfileDetailsPayload(obj));
-    setUserCartLoader({ open: true, msg: "Loading Profile" });
-    setRowClicked(true);
+    if (sessionUserId && sessionUserId !== undefined) {
+      let obj = {};
+      obj.profileid = row.id.toString();
+      obj.userid = sessionUserId.toString();
+      dispatch(fetchProfileDetails(obj));
+      dispatch(saveProfileDetailsPayload(obj));
+      setUserCartLoader({ open: true, msg: "Loading Profile" });
+      setRowClicked(true);
+    }
   };
 
   const addProfileToListFunc = (row) => {

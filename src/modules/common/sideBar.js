@@ -27,15 +27,17 @@ const SideBar = ({ sessionUserId }) => {
     setAddListModal({ open: true, msg: "" });
   };
 
-  useEffect(() => {}, []);
+
 
   useEffect(() => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status === "success") {
         dispatch(clearUserListRes());
-        let obj = {};
-        obj.userid = sessionUserId.toString();
-        dispatch(getUserList(obj));
+        if (sessionUserId && sessionUserId !== undefined) {
+          let obj = {};
+          obj.userid = sessionUserId.toString();
+          dispatch(getUserList(obj));
+        }
       }
     }
   }, [addListRes]);
@@ -88,16 +90,16 @@ const SideBar = ({ sessionUserId }) => {
         </div>
         {sidebarUserList && sidebarUserList.length > 0
           ? sidebarUserList.map((item) => {
-              return (
-                <div
-                  className="sidebar-list"
-                  onClick={() => callListFunction(item)}
-                >
-                  <Icon name="bars" className="sidebar-icons" />
-                  <div className="default-list1">{item.listname}</div>
-                </div>
-              );
-            })
+            return (
+              <div
+                className="sidebar-list"
+                onClick={() => callListFunction(item)}
+              >
+                <Icon name="bars" className="sidebar-icons" />
+                <div className="default-list1">{item.listname}</div>
+              </div>
+            );
+          })
           : null}
 
         <div className="sidebar-add-list" onClick={() => openAddListModal()}>

@@ -27,21 +27,24 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const getObj = localStorage.getItem("user");
-  //   if(getObj && getObj !== null && getObj !== undefined){
-  //     let auth = JSON.parse(getObj);
-  //     if (auth && auth !== undefined && auth !== null && auth !== "") {
-  //       setUserName(auth.fname);
-  //       dispatch(fetchDashboardDetails(auth.id))
-  //     } else {
-  //       setUserName("");
-  //     }
-  //   }
-  // }, [])
+  useEffect(() => {
+    const getObj = localStorage.getItem("user");
+    if (getObj && getObj !== null && getObj !== undefined) {
+      if (getObj && getObj !== undefined && getObj !== null && getObj !== "") {
+        if (getObj.fname && getObj.fname !== undefined) {
+          setUserName(getObj.fname);
+        }
+        if (getObj.id && getObj.id !== undefined) {
+          dispatch(fetchDashboardDetails(getObj.id))
+        }
+      } else {
+        setUserName("");
+      }
+    }
+  }, [])
 
   useEffect(() => {
-    if (sessionUserId && sessionUserId !== "") {
+    if (sessionUserId && sessionUserId !== undefined) {
       let obj = {};
       obj.userid = sessionUserId.toString()
       dispatch(getUserList(obj));
@@ -107,7 +110,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
             />
           </div>
           <div className="user-name-parent">
-            <b className="user-name">{"Hello " + userName}</b>
+            <b className="user-name">{"Hello " + (userName && userName !== undefined && userName !== null) ? userName : ""}</b>
             <div className="bio">
               <p>
                 We're here to help you find the perfect candidates for your

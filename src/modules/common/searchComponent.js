@@ -6,7 +6,7 @@ import { getIsCodeSendResponse, getIsSearchedText } from '../home/data/selectors
 import { getSearchedComponentText } from '../home/data/actions';
 import { fetchSearchByQuery } from '../search/data/actions';
 
-const SearchComponent = ({setSearchedText , sessionUserId}) => {
+const SearchComponent = ({ setSearchedText, sessionUserId }) => {
 
   const [input, setInput] = useState("");
 
@@ -24,17 +24,18 @@ const SearchComponent = ({setSearchedText , sessionUserId}) => {
   };
 
   const saveSearchedText = () => {
-    dispatch(getSearchedComponentText(input))
-    setSearchedText(input)
-    let obj = {}
-    obj.query = input
-    obj.start = "1"
-    obj.userid = sessionUserId.toString() 
-    dispatch(fetchSearchByQuery(obj))
-    setTimeout(() => {
-      navigate("/search")
-    }, 700)
-
+    if (sessionUserId && sessionUserId !== undefined) {
+      dispatch(getSearchedComponentText(input))
+      setSearchedText(input)
+      let obj = {}
+      obj.query = input
+      obj.start = "1"
+      obj.userid = sessionUserId.toString()
+      dispatch(fetchSearchByQuery(obj))
+      setTimeout(() => {
+        navigate("/search")
+      }, 700)
+    }
   }
 
   const handleKeyPress = (event) => {

@@ -10,18 +10,20 @@ import { addUserList } from '../search/data/actions';
 const AddListForm = (props) => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
-   
+
 
     const dispatch = useDispatch();
 
 
 
     const saveAddListForm = (values) => {
-        let obj = {}
-        obj.listname = values.listname
-        obj.userid = props.sessionUserId.toString()
-        dispatch(addUserList(obj))
-        props.setAddListModal({ open: false, msg: "" })
+        if (props.sessionUserId && props.sessionUserId !== undefined) {
+            let obj = {}
+            obj.listname = values.listname
+            obj.userid = props.sessionUserId.toString()
+            dispatch(addUserList(obj))
+            props.setAddListModal({ open: false, msg: "" })
+        }
     }
 
     const closeModal = () => {
