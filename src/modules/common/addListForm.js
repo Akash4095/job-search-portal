@@ -10,36 +10,16 @@ import { addUserList } from '../search/data/actions';
 const AddListForm = (props) => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
-    const [sessionUserId, setSessionUserId] = useState("1");
+   
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (
-            getLoginAuthRes &&
-            getLoginAuthRes !== null &&
-            getLoginAuthRes !== undefined
-        ) {
-            if (getLoginAuthRes.status === "success") {
-                if (
-                    getLoginAuthRes.data &&
-                    getLoginAuthRes.data !== undefined &&
-                    getLoginAuthRes.data !== null &&
-                    getLoginAuthRes.data !== {}
-                ) {
-                    if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
-                        setSessionUserId(getLoginAuthRes.data.id);
-                    }
 
-                }
-            }
-        }
-    }, [getLoginAuthRes]);
 
     const saveAddListForm = (values) => {
         let obj = {}
         obj.listname = values.listname
-        obj.userid = sessionUserId.toString()
+        obj.userid = props.sessionUserId.toString()
         dispatch(addUserList(obj))
         props.setAddListModal({ open: false, msg: "" })
     }

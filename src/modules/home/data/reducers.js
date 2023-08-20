@@ -27,7 +27,6 @@ function getLoginAuthResponse(state = {}, action) {
 
 function getSearchedText(state = "", action) {
     if (action.type === 'GET_SEARCHED_COMPONENT_TEXT') {
-        console.log('action.payload', action.payload)
         return action.payload
     } else {
         return state

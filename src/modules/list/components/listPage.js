@@ -21,7 +21,7 @@ import {
   fetchListProfileDetails,
 } from "../data/actions";
 
-const ListPage = ({ setSearchedText, searchedText }) => {
+const ListPage = ({ setSearchedText, searchedText, sessionUserId }) => {
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const tagsAddedRes = useSelector((state) => getIsTagsRes(state));
   const sidebarPayload = useSelector((state) => getIsSidebarListPayload(state));
@@ -33,7 +33,6 @@ const ListPage = ({ setSearchedText, searchedText }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [start, setStart] = useState(1);
   const [selectedRows, setSelectedRows] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("");
   const [listCartLoader, setListCartLoader] = useState({
     open: false,
     msg: "",
@@ -49,30 +48,6 @@ const ListPage = ({ setSearchedText, searchedText }) => {
     dispatch(getUserList(obj));
   }, [sessionUserId]);
 
-  useEffect(() => {
-    if (
-      getLoginAuthRes &&
-      getLoginAuthRes !== null &&
-      getLoginAuthRes !== undefined
-    ) {
-      if (getLoginAuthRes.status === "success") {
-        if (
-          getLoginAuthRes.data &&
-          getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null &&
-          getLoginAuthRes.data !== {}
-        ) {
-          if (
-            getLoginAuthRes.data.id &&
-            getLoginAuthRes.data.id !== undefined &&
-            getLoginAuthRes.data.id !== null
-          ) {
-            setSessionUserId(getLoginAuthRes.data.id);
-          }
-        }
-      }
-    }
-  }, [getLoginAuthRes]);
 
   useEffect(() => {
     if (tagsAddedRes && tagsAddedRes !== null && tagsAddedRes !== undefined) {
@@ -91,7 +66,7 @@ const ListPage = ({ setSearchedText, searchedText }) => {
 
   return (
     <div className="d_flex">
-      <SideBar />
+      <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
         <br />
@@ -103,6 +78,7 @@ const ListPage = ({ setSearchedText, searchedText }) => {
             setSearchedText={setSearchedText}
             text={searchedText}
             start={start}
+            sessionUserId={sessionUserId}
           />
         </div>
         <div className="d_flex">

@@ -20,7 +20,7 @@ const AddTagNameForm = ({ setAddTagModal, sessionUserId, selectedRows }) => {
             selectedRows.map((item) => {
                 let obj = {}
                 obj.tagname = values.tagname
-                obj.listid = (item.id).toString()
+                obj.listid = (item.listid).toString()
                 obj.profileid = (item.profileid).toString()
                 obj.userid = sessionUserId ? (sessionUserId).toString() : ""
                 dispatch(addTags(obj))

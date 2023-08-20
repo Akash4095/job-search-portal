@@ -6,10 +6,9 @@ import { getIsCodeSendResponse, getIsSearchedText } from '../home/data/selectors
 import { getSearchedComponentText } from '../home/data/actions';
 import { fetchSearchByQuery } from '../search/data/actions';
 
-const SearchComponent = ({setSearchedText}) => {
+const SearchComponent = ({setSearchedText , sessionUserId}) => {
 
   const [input, setInput] = useState("");
-  const [sessionUserId, setSessionUserId] = useState("");
 
   const inputText = useSelector((state) => getIsSearchedText(state));
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
@@ -17,27 +16,7 @@ const SearchComponent = ({setSearchedText}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (
-      getLoginAuthRes &&
-      getLoginAuthRes !== null &&
-      getLoginAuthRes !== undefined
-    ) {
-      if (getLoginAuthRes.status === "success") {
-        if (
-          getLoginAuthRes.data &&
-          getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null &&
-          getLoginAuthRes.data !== {}
-        ) {
-          if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
-            setSessionUserId(getLoginAuthRes.data.id);
-          }
 
-        }
-      }
-    }
-  }, [getLoginAuthRes]);
 
   const handleChange = (value) => {
     setInput(value);

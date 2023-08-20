@@ -9,10 +9,10 @@ import {
 } from "../home/data/selectors";
 import { fetchSearchByQuery, fetchViewMoreQuery } from "../search/data/actions";
 
-const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, setItems, setStart }) => {
+const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessionUserId }) => {
   const [input, setInput] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
-  const [sessionUserId, setSessionUserId] = useState("");
+
 
   const inputText = useSelector((state) => getIsSearchedText(state));
 
@@ -35,30 +35,6 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, setIte
     }
   }, [input]);
 
-  useEffect(() => {
-    if (
-      getLoginAuthRes &&
-      getLoginAuthRes !== null &&
-      getLoginAuthRes !== undefined
-    ) {
-      if (getLoginAuthRes.status === "success") {
-        if (
-          getLoginAuthRes.data &&
-          getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null &&
-          getLoginAuthRes.data !== {}
-        ) {
-          if (
-            getLoginAuthRes.data.id &&
-            getLoginAuthRes.data.id !== undefined &&
-            getLoginAuthRes.data.id !== null
-          ) {
-            setSessionUserId(getLoginAuthRes.data.id);
-          }
-        }
-      }
-    }
-  }, [getLoginAuthRes]);
 
   const handleChange = (value) => {
     setInput(value);
@@ -79,10 +55,10 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, setIte
 
   useEffect(() => {
     if (start > 1) {
-      dispatch(getSearchedComponentText(input));
-      setSearchedText(input);
+      dispatch(getSearchedComponentText(text));
+      setSearchedText(text);
       let obj = {};
-      obj.query = input;
+      obj.query = text;
       obj.start = start.toString();
       obj.userid = sessionUserId.toString();
       dispatch(fetchViewMoreQuery(obj));

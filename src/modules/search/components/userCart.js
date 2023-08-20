@@ -99,18 +99,19 @@ const UserCart = ({
               {profileDetails.experience
                 ? profileDetails.experience.length > 0
                   ? "From" +
-                    " " +
+                  " " +
+                  ((profileDetails.experience[0].startdate && profileDetails.experience[0].startdate !== "") ?
                     extractMonthNames(
                       displayDate(profileDetails.experience[0].startdate)
-                    ) +
-                    " " +
-                    (profileDetails.experience[0].startdate &&
+                    ) : "") +
+                  " " +
+                  (profileDetails.experience[0].startdate &&
                     profileDetails.experience[0].startdate !== "" &&
                     profileDetails.experience[0].startdate !== undefined
-                      ? displayDate(
-                          profileDetails.experience[0].startdate
-                        ).split("-")[2]
-                      : "")
+                    ? displayDate(
+                      profileDetails.experience[0].startdate
+                    ).split("-")[2]
+                    : "")
                   : ""
                 : ""}
             </div>
@@ -154,32 +155,32 @@ const UserCart = ({
             <Accordion.Content active={prevCompanyAccordion}>
               {profileDetails.experience && profileDetails.experience.length > 0
                 ? profileDetails.experience.map((item, index) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <li className="wordBreak">
-                          {item.company && item.company !== ""
-                            ? item.company
-                            : "N/A"}
-                        </li>
-                        <div style={{ padding: "0 8%" }}>
-                          {index == 0 && item.enddate === "" ? (
-                            <>
-                              {displayDate(item.startdate).split("-")[2]}
-                              {item.startdate !== "" ? "- Present" : ""}
-                            </>
-                          ) : (
-                            <>
-                              {displayDate(item.startdate).split("-")[2]}
-                              {item.startdate !== "" ? "-" : ""}
-                              {item.startdate !== ""
-                                ? displayDate(item.enddate).split("-")[2]
-                                : ""}
-                            </>
-                          )}
-                        </div>
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <li className="wordBreak">
+                        {item.company && item.company !== ""
+                          ? item.company
+                          : "N/A"}
+                      </li>
+                      <div style={{ padding: "0 8%" }}>
+                        {index == 0 && item.enddate === "" ? (
+                          <>
+                            {displayDate(item.startdate).split("-")[2]}
+                            {item.startdate !== "" ? "- Present" : ""}
+                          </>
+                        ) : (
+                          <>
+                            {displayDate(item.startdate).split("-")[2]}
+                            {item.startdate !== "" ? "-" : ""}
+                            {item.startdate !== ""
+                              ? displayDate(item.enddate).split("-")[2]
+                              : ""}
+                          </>
+                        )}
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>
@@ -229,23 +230,23 @@ const UserCart = ({
             <Accordion.Content active={educationAccordion}>
               {profileDetails.education && profileDetails.education.length > 0
                 ? profileDetails.education.map((item) => {
-                    return (
-                      <div style={{ fontSize: "11px" }}>
-                        <li className="wordBreak">
-                          {item.degree_name && item.degree_name !== ""
-                            ? item.degree_name
-                            : "N/A"}
-                        </li>
-                        <div style={{ padding: "0 8%" }}>
-                          {displayDate(item.startdate).split("-")[2]}
-                          {item.startdate !== "" ? "-" : ""}
-                          {item.startdate !== ""
-                            ? displayDate(item.enddate).split("-")[2]
-                            : ""}
-                        </div>
+                  return (
+                    <div style={{ fontSize: "11px" }}>
+                      <li className="wordBreak">
+                        {item.degree_name && item.degree_name !== ""
+                          ? item.degree_name
+                          : "N/A"}
+                      </li>
+                      <div style={{ padding: "0 8%" }}>
+                        {displayDate(item.startdate).split("-")[2]}
+                        {item.startdate !== "" ? "-" : ""}
+                        {item.startdate !== ""
+                          ? displayDate(item.enddate).split("-")[2]
+                          : ""}
                       </div>
-                    );
-                  })
+                    </div>
+                  );
+                })
                 : "N/A"}
             </Accordion.Content>
           </Accordion>

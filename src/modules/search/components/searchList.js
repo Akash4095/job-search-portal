@@ -26,7 +26,7 @@ import CommanResponseModal from "../../common/commonModal";
 import AddUserProfileToListForm from "./addUserProfile";
 import { toast } from "react-toastify";
 
-const Search = ({ setSearchedText, searchedText }) => {
+const Search = ({ setSearchedText, searchedText, sessionUserId }) => {
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const inputText = useSelector((state) => getIsSearchedText(state));
@@ -40,7 +40,6 @@ const Search = ({ setSearchedText, searchedText }) => {
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
   const [items, setItems] = useState([]);
-  const [sessionUserId, setSessionUserId] = useState("");
   const [start, setStart] = useState(1);
   const [userCartLoader, setUserCartLoader] = useState({
     open: false,
@@ -88,7 +87,7 @@ const Search = ({ setSearchedText, searchedText }) => {
       }
     }
   }, [addListRes]);
-
+ 
   useEffect(() => {
     if (
       addProfileToListRes &&
@@ -106,30 +105,7 @@ const Search = ({ setSearchedText, searchedText }) => {
     }
   }, [addProfileToListRes]);
 
-  useEffect(() => {
-    if (
-      getLoginAuthRes &&
-      getLoginAuthRes !== null &&
-      getLoginAuthRes !== undefined
-    ) {
-      if (getLoginAuthRes.status === "success") {
-        if (
-          getLoginAuthRes.data &&
-          getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null &&
-          getLoginAuthRes.data !== {}
-        ) {
-          if (
-            getLoginAuthRes.data.id &&
-            getLoginAuthRes.data.id !== undefined &&
-            getLoginAuthRes.data.id !== null
-          ) {
-            setSessionUserId(getLoginAuthRes.data.id);
-          }
-        }
-      }
-    }
-  }, [getLoginAuthRes]);
+
 
   const addProfilesToListFunc = (row) => {
     setAddListModal({ open: true, msg: "", obj: row });
@@ -154,6 +130,7 @@ const Search = ({ setSearchedText, searchedText }) => {
             text={searchedText}
             setSearchedText={setSearchedText}
             setLoader={setListLoader}
+            sessionUserId={sessionUserId}
           />
         </div>
         <p className="search-result-count">
@@ -187,23 +164,23 @@ const Search = ({ setSearchedText, searchedText }) => {
           >
             {items && items.length > 0
               ? items.map((item, index) => {
-                  return (
-                    <SearchResults
-                      key={index}
-                      row={item}
-                      rowClicked={rowClicked}
-                      setRowClicked={setRowClicked}
-                      selectAll={selectAll}
-                      setSelectAll={setSelectAll}
-                      selectedRows={selectedRows}
-                      setSelectedRows={setSelectedRows}
-                      sessionUserId={sessionUserId}
-                      setAddListModal={setAddListModal}
-                      userCartLoader={userCartLoader}
-                      setUserCartLoader={setUserCartLoader}
-                    />
-                  );
-                })
+                return (
+                  <SearchResults
+                    key={index}
+                    row={item}
+                    rowClicked={rowClicked}
+                    setRowClicked={setRowClicked}
+                    selectAll={selectAll}
+                    setSelectAll={setSelectAll}
+                    selectedRows={selectedRows}
+                    setSelectedRows={setSelectedRows}
+                    sessionUserId={sessionUserId}
+                    setAddListModal={setAddListModal}
+                    userCartLoader={userCartLoader}
+                    setUserCartLoader={setUserCartLoader}
+                  />
+                );
+              })
               : null}
             <div className="view-more-button-container">
               {showViewMoreButton && items && items.length > 0 ? (

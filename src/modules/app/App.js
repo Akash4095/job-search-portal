@@ -13,14 +13,30 @@ import { ToastContainer } from 'react-toastify';
 function App() {
 
   const [searchedText, setSearchedText] = useState("");
+  const [sessionUserId, setSessionUserId] = useState("");
+
+
+  useEffect(() => {
+    let getObj = localStorage.getItem("user")
+    console.log('getObj-app', getObj)
+    // if(getObj && getObj !== null && getObj !== undefined){
+    //   let auth = JSON.parse(getObj);
+    //   console.log('auth', auth)
+    //   if (auth && auth !== undefined && auth !== null && auth !== "") {
+    //     setSessionUserId(auth.id)
+    //   } else {
+    //     setSessionUserId("")
+    //   }
+    // }
+  }, [])
 
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} />} />
-        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} />} />
-        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} />} />
+        <Route path='/' element={<Login setSessionUserId={setSessionUserId}/>} />
+        <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} />} />
+        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} />} />
       </Routes>
       <ToastContainer
         position="top-right"

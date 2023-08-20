@@ -69,7 +69,7 @@ const ListTable = ({
     let obj = {}
     obj.userid = sessionUserId.toString()
     obj.profileid = row.profileid
-    obj.listid = row.id
+    obj.listid = row.listid
     dispatch(fetchListProfileDetails(obj))
     dispatch(saveListProfileDetailsPayload(obj))
     setLoader({ open: true, msg: "Loading" })

@@ -3,15 +3,19 @@ import { NavLink } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse } from "../home/data/selectors";
+import { getIsCodeSendResponse, getIsDashboardDetails } from "../home/data/selectors";
 import userImage from "../../images/user.png";
 
-const CommonHeaderComponent = ({ fname }) => {
+const CommonHeaderComponent = () => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
+    const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);
+    const [usedCredit, setUsedCredit] = useState("");
+    const [totalCredit, setTotalCredit] = useState("");
+    const [userName, setUserName] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -42,6 +46,50 @@ const CommonHeaderComponent = ({ fname }) => {
 
     }, [searchClicked, listClicked])
 
+    useEffect(() => {
+        if (dashboardRes && dashboardRes.status === "success") {
+            if (dashboardRes.data && dashboardRes.data !== null && dashboardRes.data !== undefined) {
+                setUsedCredit(dashboardRes.data.creditused)
+                setTotalCredit(dashboardRes.data.credittotal)
+            }
+        }
+
+    }, [dashboardRes])
+
+    useEffect(() => {
+        if (
+          getLoginAuthRes &&
+          getLoginAuthRes !== null &&
+          getLoginAuthRes !== undefined
+        ) {
+          if (getLoginAuthRes.status === "success") {
+            if (
+              getLoginAuthRes.data &&
+              getLoginAuthRes.data !== undefined &&
+              getLoginAuthRes.data !== null &&
+              getLoginAuthRes.data !== {}
+            ) {
+              if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
+                setUserName(getLoginAuthRes.data.fname);
+    
+              }
+
+            }
+    
+          }
+        }
+      }, [getLoginAuthRes]);
+
+    // useEffect(() => {
+    //     const getObj = localStorage.getItem("user");
+    //     let auth = JSON.parse(getObj);
+    //     if (auth && auth !== undefined && auth !== null && auth !== "") {
+    //         setUserName(auth.fname);
+    //     }else{
+    //         setUserName("");
+    //     }
+    // }, [])
+
     return (
         <header className="common-header">
             <div className="top-tab">
@@ -62,8 +110,8 @@ const CommonHeaderComponent = ({ fname }) => {
             <div className="balance">
                 <div className="getlista">Available Credits</div>
                 <div className="div">
-                    <span>15</span>
-                    <span className="span"> / 20</span>
+                    <span>{usedCredit}</span>
+                    <span className="span"> / {totalCredit}</span>
                 </div>
             </div>
 
@@ -76,7 +124,7 @@ const CommonHeaderComponent = ({ fname }) => {
                 <img src={userImage} width="25px" height="25px" />
                 <div className="profile">
                     <div className="user-parent">
-                        <div className="search">{fname}</div>
+                        <div className="search">{userName}</div>
                         <Icon name="caret down" />
                     </div>
                 </div>

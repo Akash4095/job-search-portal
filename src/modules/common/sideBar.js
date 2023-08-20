@@ -15,14 +15,7 @@ const SideBar = ({ sessionUserId }) => {
   const [addListModal, setAddListModal] = useState({ open: false, msg: "" });
   const listResponse = useSelector((state) => getIsFetchedListResSave(state));
   const [sidebarUserList, setSidebarUserList] = useState([]);
-  const [openCommonModal, setOpenCommonModal] = useState({
-    open: false,
-    size: "",
-    headerContent: "",
-    headerIcon: "",
-    modalContent: "",
-    buttonColor: "",
-  });
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,18 +32,9 @@ const SideBar = ({ sessionUserId }) => {
   useEffect(() => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status === "success") {
-        setOpenCommonModal({
-          open: true,
-          size: "mini",
-          headerContent: "Add List Response",
-          headerIcon: "check circle",
-          modalContent: "Success",
-          buttonColor: "green",
-        });
         dispatch(clearUserListRes());
         let obj = {};
         obj.userid = sessionUserId.toString();
-        // obj.userid = "1"
         dispatch(getUserList(obj));
       }
     }
@@ -145,13 +129,10 @@ const SideBar = ({ sessionUserId }) => {
         onClose={() => setAddListModal({ open: false, msg: "" })}
       >
         <Modal.Content>
-          <AddListForm setAddListModal={setAddListModal} />
+          <AddListForm setAddListModal={setAddListModal} sessionUserId={sessionUserId} />
         </Modal.Content>
       </Modal>
-      <CommanResponseModal
-        openCommonModal={openCommonModal}
-        setOpenCommonModal={setOpenCommonModal}
-      />
+
     </section>
   );
 };

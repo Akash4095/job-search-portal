@@ -12,10 +12,9 @@ import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors"
 import { fetchDashboardDetails } from "../data/actions";
 import { getUserList } from "../../search/data/actions";
 
-const Welcome = ({ setSearchedText, searchedText }) => {
+const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
 
   const [userName, setUserName] = useState("");
-  const [sessionUserId, setSessionUserId] = useState("");
   const [leads, setLeads] = useState("");
   const [search, setSearch] = useState("");
   const [list, setList] = useState("");
@@ -28,13 +27,26 @@ const Welcome = ({ setSearchedText, searchedText }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   const getObj = localStorage.getItem("user");
+  //   if(getObj && getObj !== null && getObj !== undefined){
+  //     let auth = JSON.parse(getObj);
+  //     if (auth && auth !== undefined && auth !== null && auth !== "") {
+  //       setUserName(auth.fname);
+  //       dispatch(fetchDashboardDetails(auth.id))
+  //     } else {
+  //       setUserName("");
+  //     }
+  //   }
+  // }, [])
+
   useEffect(() => {
-    // dispatch(fetchDashboardDetails("2"))
-  }, [])
-  useEffect(() => {
-    let obj = {};
-    obj.userid = sessionUserId.toString()
-    dispatch(getUserList(obj));
+    if (sessionUserId && sessionUserId !== "") {
+      let obj = {};
+      obj.userid = sessionUserId.toString()
+      dispatch(getUserList(obj));
+    }
+
   }, [sessionUserId]);
 
   useEffect(() => {
@@ -65,7 +77,8 @@ const Welcome = ({ setSearchedText, searchedText }) => {
         ) {
           if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
             setUserName(getLoginAuthRes.data.fname);
-            setSessionUserId(getLoginAuthRes.data.id);
+            setSessionUserId(getLoginAuthRes.data.id)
+
           }
           if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
             dispatch(fetchDashboardDetails(getLoginAuthRes.data.id))
@@ -82,7 +95,7 @@ const Welcome = ({ setSearchedText, searchedText }) => {
     <div className="d_flex">
       <SideBar />
       <div className="right-panel">
-        <CommonHeaderComponent fname={userName} />
+        <CommonHeaderComponent />
         <div className="user-container">
           <div className="image-container">
             <img
@@ -111,7 +124,7 @@ const Welcome = ({ setSearchedText, searchedText }) => {
           <p className="searchbar-p">
             Find the right person using <b className="keywords">keywords</b>
           </p>
-          <SearchComponent setSearchedText={setSearchedText} />
+          <SearchComponent setSearchedText={setSearchedText} sessionUserId={sessionUserId} />
         </div>
         <Grid className="summary-grid">
           <p style={{ color: "#1c34b0", marginBottom: "20px" }}>Your Summary</p>
