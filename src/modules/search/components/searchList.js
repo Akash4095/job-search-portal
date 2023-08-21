@@ -224,7 +224,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
       <Modal
         size="tiny"
         open={addListModal.open}
-        onClose={() => setAddListModal({ open: false, msg: "", obj: {} })}
+        // onClose={() => setAddListModal({ open: false, msg: "", obj: {} })}
       >
         <Modal.Content>
           <AddUserProfileToListForm

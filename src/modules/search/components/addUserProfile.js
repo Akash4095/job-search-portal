@@ -5,11 +5,13 @@ import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { addProfileToList } from '../data/actions';
 import UserListSelect from './userListSelect';
 import { getIsProfileDetailsPayload } from '../data/selectors';
+import AddListForm from '../../common/addListForm';
 
 
 const AddUserProfileToListForm = (props) => {
 
     const profileDetailsPayload = useSelector((state) => getIsProfileDetailsPayload(state));
+    const [listModal, setListModal] = useState({ open: false, msg: "" });
 
     const dispatch = useDispatch();
 
@@ -42,7 +44,12 @@ const AddUserProfileToListForm = (props) => {
 
     return (
         <Container>
-            <Header as='h3' style={{ marginBottom: "15px" }}>Add Profile To List</Header>
+            <Header as='h3' style={{ marginBottom: "15px" }}>Add Profile To List
+            <Button size='tiny' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{marginTop:"-5px"}}>Add List</Button>
+            </Header>
+           
+            <br />
+            <p>Note: U can Add New List from above Add List button</p>
             <br />
             <Formik id="finbank" size="large" width={5}
                 initialValues={{ listid: "" }}
@@ -63,6 +70,14 @@ const AddUserProfileToListForm = (props) => {
                     </Form>
                 )}
             />
+            <Modal
+                size="mini"
+                open={listModal.open}
+            >
+                <Modal.Content>
+                    <AddListForm setAddListModal={setListModal} sessionUserId={props.sessionUserId} />
+                </Modal.Content>
+            </Modal>
         </Container>
     )
 }

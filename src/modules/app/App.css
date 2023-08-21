@@ -69,6 +69,7 @@ body {
   display: flex;
   padding-left: 12% !important;
   padding-top: 25px;
+  padding-bottom: 25px;
   color: #2185d0 !important;
   cursor: pointer !important;
 }
