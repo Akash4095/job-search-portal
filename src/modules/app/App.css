@@ -235,7 +235,8 @@ i.icon {
 }
 
 .profile {
-  margin-left: 10px !important;
+  margin-left: -24px !important;
+  margin-top: -5px !important;
 }
 
 .right-panel {

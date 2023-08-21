@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Icon } from "semantic-ui-react";
+import { Dropdown, Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse, getIsDashboardDetails } from "../home/data/selectors";
@@ -80,7 +80,7 @@ const CommonHeaderComponent = () => {
         }
     }, [getLoginAuthRes]);
 
- 
+
     useEffect(() => {
         const usrName = localStorage.getItem("username");
         console.log('usrName-header', usrName)
@@ -90,6 +90,15 @@ const CommonHeaderComponent = () => {
             setUserName("");
         }
     }, [])
+
+    const navigateToWelcomePage = () => {
+        navigate("/welcome");
+    }
+
+    const logoutSession = () => {
+        navigate("/");
+        localStorage.clear()
+    }
 
     return (
         <header className="common-header">
@@ -126,7 +135,12 @@ const CommonHeaderComponent = () => {
                 <div className="profile">
                     <div className="user-parent">
                         <div className="search">{userName}</div>
-                        <Icon name="caret down" />
+                        <Dropdown text='' style={{ marginTop: "10px", }} pointing="top">
+                            <Dropdown.Menu direction="left" style={{ height: "17vh", padding: "5px 5px" }}>
+                                <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
+                                <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 </div>
             </div>

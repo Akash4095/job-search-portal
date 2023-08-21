@@ -37,7 +37,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
     }
     const usrId = localStorage.getItem("userid");
     if (usrId && usrId !== null && usrId !== undefined) {
-      dispatch(fetchDashboardDetails(usrId))
+      dispatch(fetchDashboardDetails(usrId.toString()))
     }
 
   }, [])
@@ -109,7 +109,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
             />
           </div>
           <div className="user-name-parent">
-            <b className="user-name">{"Hello " + (userName && userName !== undefined && userName !== null) ? userName : ""}</b>
+            <b className="user-name">{"Hello " + ((userName && userName !== undefined && userName !== null) ? userName : "")}</b>
             <div className="bio">
               <p>
                 We're here to help you find the perfect candidates for your
