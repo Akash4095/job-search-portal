@@ -16,23 +16,14 @@ function App() {
   const [sessionUserId, setSessionUserId] = useState("");
 
 
-  useEffect(() => {
-    const usrId = localStorage.getItem("userid");
-    console.log('usrId', usrId)
-    if (usrId && usrId !== null && usrId !== undefined) {
-      setSessionUserId(usrId)
-    } else {
-      setSessionUserId("")
-    }
-  }, [])
 
   return (
     <div>
       <Routes>
         <Route path='/' element={<Login setSessionUserId={setSessionUserId} />} />
         <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} />} />
-        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} />} />
+        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
       </Routes>
       <ToastContainer
         position="top-right"

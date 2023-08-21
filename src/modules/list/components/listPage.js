@@ -21,7 +21,7 @@ import {
   fetchListProfileDetails,
 } from "../data/actions";
 
-const ListPage = ({ setSearchedText, searchedText, sessionUserId }) => {
+const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const tagsAddedRes = useSelector((state) => getIsTagsRes(state));
   const sidebarPayload = useSelector((state) => getIsSidebarListPayload(state));
@@ -41,6 +41,14 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const usrId = localStorage.getItem("userid");
+  console.log('usrId', usrId)
+  useEffect(() => {
+    if (usrId && usrId !== null && usrId !== undefined) {
+      setSessionUserId(usrId)
+    }
+  }, [usrId])
 
   useEffect(() => {
     let obj = {};

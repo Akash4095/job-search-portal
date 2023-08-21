@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProfileToList,
+  clearProfileDetails,
   fetchProfileDetails,
   saveProfileDetailsPayload,
 } from "../data/actions";
@@ -50,7 +51,7 @@ const SearchResults = ({
     dispatch(saveProfileDetailsPayload(obj));
     setUserCartLoader({ open: true, msg: "Loading Profile" });
     setRowClicked(true);
-
+    dispatch(clearProfileDetails())
   };
 
   const addProfileToListFunc = (row) => {

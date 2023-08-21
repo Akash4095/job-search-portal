@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Checkbox, Grid, Icon, Image, Modal, Table } from "semantic-ui-react";
 import { getIsFetchedList } from "../data/selectors";
 import AddTagNameForm from "./addTagName";
-import { fetchListProfileDetails, saveListProfileDetailsPayload } from "../data/actions";
+import { clearListProfileDetails, fetchListProfileDetails, saveListProfileDetailsPayload } from "../data/actions";
 
 const ListTable = ({
   rowClicked,
@@ -74,6 +74,7 @@ const ListTable = ({
     dispatch(saveListProfileDetailsPayload(obj))
     setLoader({ open: true, msg: "Loading" })
     setRowClicked(true);
+    dispatch(clearListProfileDetails())
 
   };
 

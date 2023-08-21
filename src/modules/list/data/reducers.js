@@ -25,6 +25,9 @@ function fetchedListProfileDetails(state = {}, action) {
     if (action.type === 'FETCHED_LIST_PROFILE_DETAILS') {
         return action.payload
     }
+    if (action.type === 'CLEAR_LIST_PROFILE_DETAILS') {
+        return {}
+    }
     else {
         return state
     }

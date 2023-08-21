@@ -50,6 +50,13 @@ export function saveListProfileDetailsPayload(props) {
     };
 }
 
+export function clearListProfileDetails(props) {
+    return {
+        type: type.CLEAR_LIST_PROFILE_DETAILS,
+        payload: props,
+    };
+}
+
 export function fetchProfileContactDetails(props) {
     return {
         type: type.FETCH_PROFILE_CCONTACTS_DETAILS,

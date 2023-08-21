@@ -20,6 +20,10 @@ function fetchedSearchedByQuery(state = { status: "", data: [] }, action) {
             }
         }
     }
+    if (action.type === 'CLEAR_SEARCH_BY_QUERY') {
+        return { status: "", data: [] }
+
+    }
     else {
         return state
     }
@@ -48,6 +52,9 @@ function getUserListRes(state = {}, action) {
 function fetchedProfileDetailsRes(state = {}, action) {
     if (action.type === 'FETCHED_PROFILE_DETAILS_RES') {
         return action.payload
+    }
+    if (action.type === 'CLEAR_PROFILE_DETAILS_RES') {
+        return {}
     } else {
         return state
     }

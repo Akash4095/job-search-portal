@@ -90,6 +90,13 @@ export function fetchedProfileDetails(props) {
     };
 }
 
+export function clearProfileDetails(props) {
+    return {
+        type: type.CLEAR_PROFILE_DETAILS_RES,
+        payload: props,
+    };
+}
+
 export function addProfileToList(props) {
     return {
         type: type.ADD_PROFILE_TO_LIST,

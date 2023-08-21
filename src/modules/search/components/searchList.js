@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   clearProfileToListRes,
+  clearSearchByQuery,
   clearUserListRes,
   getUserList,
 } from "../data/actions";
@@ -26,7 +27,7 @@ import CommanResponseModal from "../../common/commonModal";
 import AddUserProfileToListForm from "./addUserProfile";
 import { toast } from "react-toastify";
 
-const Search = ({ setSearchedText, searchedText, sessionUserId }) => {
+const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const inputText = useSelector((state) => getIsSearchedText(state));
@@ -52,17 +53,18 @@ const Search = ({ setSearchedText, searchedText, sessionUserId }) => {
     msg: "",
     obj: {},
   });
-  const [openCommonModal, setOpenCommonModal] = useState({
-    open: false,
-    size: "",
-    headerContent: "",
-    headerIcon: "",
-    modalContent: "",
-    buttonColor: "",
-  });
+  const [isModalOpen, setModalOpen] = useState({ open: false, msg: "" })
   const [showViewMoreButton, setShowViewMoreButton] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const usrId = localStorage.getItem("userid");
+  console.log('usrId', usrId)
+  useEffect(() => {
+    if (usrId && usrId !== null && usrId !== undefined) {
+      setSessionUserId(usrId)
+    }
+  }, [usrId])
 
   useEffect(() => {
     let obj = {};
@@ -76,9 +78,17 @@ const Search = ({ setSearchedText, searchedText, sessionUserId }) => {
       if (searchResult.status && searchResult.status === "success") {
         setItems(searchResult.data);
       }
+      if (searchResult.status && searchResult.status === "failed") {
+        setModalOpen({ open: true, msg: searchResult.msg ? searchResult.msg : "" })
+      }
       setListLoader({ open: false, msg: "" });
     }
   }, [searchResult]);
+
+  const closeModal = () => {
+    dispatch(clearSearchByQuery())
+    setModalOpen({ open: false, msg: "" })
+  }
 
   useEffect(() => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
@@ -225,10 +235,15 @@ const Search = ({ setSearchedText, searchedText, sessionUserId }) => {
           />
         </Modal.Content>
       </Modal>
-      <CommanResponseModal
-        openCommonModal={openCommonModal}
-        setOpenCommonModal={setOpenCommonModal}
-      />
+      <Modal open={isModalOpen.open} size="mini">
+        <Modal.Header>Error</Modal.Header>
+        <Modal.Content>
+          <h4 className="error">{isModalOpen.msg}</h4>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button type="button" inverted color="red" onClick={() => closeModal()}>Close</Button>
+        </Modal.Actions>
+      </Modal>
     </div>
   );
 };
