@@ -176,7 +176,7 @@ i.icon {
   flex: 1 !important;
   align-items: flex-start;
   /* margin-right: 40% !important; */
-  width: 60% !important;
+  width: 50% !important;
   gap: 20px !important;
   color: var(--color-dodgerblue);
   margin-top: 10px;
@@ -209,7 +209,7 @@ i.icon {
   justify-content: flex-start;
   gap: 8px !important;
   font-size: var(--font-size-sm);
-  width: 22% !important;
+  width: 25% !important;
   margin-top: 8px !important;
   height: 80% !important;
 }
@@ -224,7 +224,7 @@ i.icon {
   display: flex;
   gap: 10px !important;
   font-size: var(--font-size-base);
-  width: 18% !important;
+  width: 25% !important;
   margin-top: 10px;
 }
 
@@ -236,8 +236,12 @@ i.icon {
 }
 
 .profile {
-  margin-left: -24px !important;
-  margin-top: -5px !important;
+  margin-left: -4px !important;
+  margin-top: 5px !important;
+}
+
+.user-parent {
+  display: flex;
 }
 
 .right-panel {

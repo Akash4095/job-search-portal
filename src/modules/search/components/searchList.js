@@ -59,7 +59,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
   const dispatch = useDispatch();
 
   const usrId = localStorage.getItem("userid");
-  console.log('usrId', usrId)
+  // console.log('usrId', usrId)
   useEffect(() => {
     if (usrId && usrId !== null && usrId !== undefined) {
       setSessionUserId(usrId)

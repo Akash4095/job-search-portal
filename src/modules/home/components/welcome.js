@@ -28,7 +28,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const dispatch = useDispatch();
 
   const usrId = localStorage.getItem("userid");
-  console.log('usrId', usrId)
+  // console.log('usrId', usrId)
   useEffect(() => {
     if (usrId && usrId !== null && usrId !== undefined) {
       setSessionUserId(usrId)
@@ -37,7 +37,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
 
   useEffect(() => {
     const usrName = localStorage.getItem("username");
-    console.log('usrName', usrName)
+    // console.log('usrName', usrName)
     if (usrName && usrName !== null && usrName !== undefined) {
       setUserName(usrName);
     } else {
