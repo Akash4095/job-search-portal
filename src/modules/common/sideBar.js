@@ -33,12 +33,12 @@ const SideBar = ({ sessionUserId }) => {
     if (addListRes && addListRes !== null && addListRes !== undefined) {
       if (addListRes.status === "success") {
         dispatch(clearUserListRes());
-        if (sessionUserId && sessionUserId !== undefined) {
-          let obj = {};
-          obj.userid = sessionUserId.toString();
-          dispatch(getUserList(obj));
-        }
+
+        let obj = {};
+        obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+        dispatch(getUserList(obj));
       }
+
     }
   }, [addListRes]);
 

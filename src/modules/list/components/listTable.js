@@ -66,16 +66,14 @@ const ListTable = ({
   }
 
   const fetchlistCartDetails = (row) => {
-    if (sessionUserId && sessionUserId !== undefined) {
-      let obj = {}
-      obj.userid = sessionUserId.toString()
-      obj.profileid = row.profileid
-      obj.listid = row.listid
-      dispatch(fetchListProfileDetails(obj))
-      dispatch(saveListProfileDetailsPayload(obj))
-      setLoader({ open: true, msg: "Loading" })
-      setRowClicked(true);
-    }
+    let obj = {}
+    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    obj.profileid = row.profileid
+    obj.listid = row.listid
+    dispatch(fetchListProfileDetails(obj))
+    dispatch(saveListProfileDetailsPayload(obj))
+    setLoader({ open: true, msg: "Loading" })
+    setRowClicked(true);
 
   };
 

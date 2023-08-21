@@ -136,7 +136,7 @@ const CommonHeaderComponent = () => {
                     <div className="user-parent">
                         <div className="search">{userName}</div>
                         <Dropdown text='' style={{ marginTop: "10px", }} pointing="top">
-                            <Dropdown.Menu direction="left" style={{ height: "17vh", padding: "5px 5px" }}>
+                            <Dropdown.Menu direction="left" style={{ height: "16vh", width:"12vw" }}>
                                 <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
                                 <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
                             </Dropdown.Menu>

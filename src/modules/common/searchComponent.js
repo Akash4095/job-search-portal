@@ -24,18 +24,18 @@ const SearchComponent = ({ setSearchedText, sessionUserId }) => {
   };
 
   const saveSearchedText = () => {
-    if (sessionUserId && sessionUserId !== undefined) {
-      dispatch(getSearchedComponentText(input))
-      setSearchedText(input)
-      let obj = {}
-      obj.query = input
-      obj.start = "1"
-      obj.userid = sessionUserId.toString()
-      dispatch(fetchSearchByQuery(obj))
-      setTimeout(() => {
-        navigate("/search")
-      }, 700)
-    }
+
+    dispatch(getSearchedComponentText(input))
+    setSearchedText(input)
+    let obj = {}
+    obj.query = input
+    obj.start = "1"
+    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    dispatch(fetchSearchByQuery(obj))
+    setTimeout(() => {
+      navigate("/search")
+    }, 700)
+
   }
 
   const handleKeyPress = (event) => {

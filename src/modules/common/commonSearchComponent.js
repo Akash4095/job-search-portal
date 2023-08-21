@@ -41,34 +41,33 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessio
   };
 
   const saveSearchedText = () => {
-    if (sessionUserId && sessionUserId !== undefined) {
-      dispatch(getSearchedComponentText(input));
-      setSearchedText(input);
-      let obj = {};
-      obj.query = input;
-      obj.start = start.toString();
-      obj.userid = sessionUserId.toString();
-      dispatch(fetchSearchByQuery(obj));
-      if (setLoader) {
-        setLoader({ open: true, msg: "Loading" });
-      }
+    dispatch(getSearchedComponentText(input));
+    setSearchedText(input);
+    let obj = {};
+    obj.query = input;
+    obj.start = start.toString();
+    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    dispatch(fetchSearchByQuery(obj));
+    if (setLoader) {
+      setLoader({ open: true, msg: "Loading" });
+
     }
   };
 
   useEffect(() => {
     if (start > 1) {
-      if (sessionUserId && sessionUserId !== undefined) {
-        dispatch(getSearchedComponentText(text));
-        setSearchedText(text);
-        let obj = {};
-        obj.query = text;
-        obj.start = start.toString();
-        obj.userid = sessionUserId.toString();
-        dispatch(fetchViewMoreQuery(obj));
-        if (setLoader) {
-          setLoader({ open: true, msg: "Loading" });
-        }
+
+      dispatch(getSearchedComponentText(text));
+      setSearchedText(text);
+      let obj = {};
+      obj.query = text;
+      obj.start = start.toString();
+      obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+      dispatch(fetchViewMoreQuery(obj));
+      if (setLoader) {
+        setLoader({ open: true, msg: "Loading" });
       }
+
     }
   }, [start]);
 
