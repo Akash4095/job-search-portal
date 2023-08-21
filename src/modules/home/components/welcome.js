@@ -28,19 +28,18 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const getObj = localStorage.getItem("user");
-    if (getObj && getObj !== null && getObj !== undefined) {
-      if (getObj && getObj !== undefined && getObj !== null && getObj !== "") {
-        if (getObj.fname && getObj.fname !== undefined) {
-          setUserName(getObj.fname);
-        }
-        if (getObj.id && getObj.id !== undefined) {
-          dispatch(fetchDashboardDetails(getObj.id))
-        }
-      } else {
-        setUserName("");
-      }
+    const usrName = localStorage.getItem("username");
+    console.log('usrName', usrName)
+    if (usrName && usrName !== null && usrName !== undefined) {
+      setUserName(usrName);
+    } else {
+      setUserName("");
     }
+    const usrId = localStorage.getItem("userid");
+    if (usrId && usrId !== null && usrId !== undefined) {
+      dispatch(fetchDashboardDetails(usrId))
+    }
+
   }, [])
 
   useEffect(() => {

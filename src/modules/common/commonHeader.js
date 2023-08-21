@@ -58,37 +58,38 @@ const CommonHeaderComponent = () => {
 
     useEffect(() => {
         if (
-          getLoginAuthRes &&
-          getLoginAuthRes !== null &&
-          getLoginAuthRes !== undefined
+            getLoginAuthRes &&
+            getLoginAuthRes !== null &&
+            getLoginAuthRes !== undefined
         ) {
-          if (getLoginAuthRes.status === "success") {
-            if (
-              getLoginAuthRes.data &&
-              getLoginAuthRes.data !== undefined &&
-              getLoginAuthRes.data !== null &&
-              getLoginAuthRes.data !== {}
-            ) {
-              if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
-                setUserName(getLoginAuthRes.data.fname);
-    
-              }
+            if (getLoginAuthRes.status === "success") {
+                if (
+                    getLoginAuthRes.data &&
+                    getLoginAuthRes.data !== undefined &&
+                    getLoginAuthRes.data !== null &&
+                    getLoginAuthRes.data !== {}
+                ) {
+                    if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
+                        setUserName(getLoginAuthRes.data.fname);
+
+                    }
+
+                }
 
             }
-    
-          }
         }
-      }, [getLoginAuthRes]);
+    }, [getLoginAuthRes]);
 
-    // useEffect(() => {
-    //     const getObj = localStorage.getItem("user");
-    //     let auth = JSON.parse(getObj);
-    //     if (auth && auth !== undefined && auth !== null && auth !== "") {
-    //         setUserName(auth.fname);
-    //     }else{
-    //         setUserName("");
-    //     }
-    // }, [])
+ 
+    useEffect(() => {
+        const usrName = localStorage.getItem("username");
+        console.log('usrName-header', usrName)
+        if (usrName && usrName !== null && usrName !== undefined) {
+            setUserName(usrName);
+        } else {
+            setUserName("");
+        }
+    }, [])
 
     return (
         <header className="common-header">

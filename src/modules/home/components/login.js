@@ -13,7 +13,7 @@ import {
 } from "../data/selectors";
 import "./login.css";
 
-const Login = ({ setSessionUserId}) => {
+const Login = ({ setSessionUserId }) => {
     const [clientId, setClientId] = useState("");
     const [clientSecret, setClientSecret] = useState("");
     const [redirectUri, setRedirectUri] = useState("");
@@ -67,10 +67,14 @@ const Login = ({ setSessionUserId}) => {
         ) {
             if (getLoginAuthRes.status === "success") {
                 setSessionUserId(getLoginAuthRes.data.id)
-                if(getLoginAuthRes.data && getLoginAuthRes.data !== null && getLoginAuthRes.data !== undefined){
-                    const userObjectString = JSON.stringify(getLoginAuthRes.data);
-                    console.log('userObjectString', userObjectString)
-                    localStorage.setItem("user",userObjectString)
+                if (getLoginAuthRes.data && getLoginAuthRes.data !== null && getLoginAuthRes.data !== undefined) {
+                    if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined) {
+                        localStorage.setItem("userid", getLoginAuthRes.data.id)
+                    }
+                    if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined) {
+                        localStorage.setItem("username", getLoginAuthRes.data.fname)
+                    }
+
                 }
                 navigate("/welcome");
             }
