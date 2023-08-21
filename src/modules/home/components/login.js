@@ -66,9 +66,9 @@ const Login = ({ setSessionUserId }) => {
             getLoginAuthRes !== undefined
         ) {
             if (getLoginAuthRes.status === "success") {
-                setSessionUserId(getLoginAuthRes.data.id)
                 if (getLoginAuthRes.data && getLoginAuthRes.data !== null && getLoginAuthRes.data !== undefined) {
                     if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined) {
+                        setSessionUserId(getLoginAuthRes.data.id)
                         localStorage.setItem("userid", getLoginAuthRes.data.id)
                     }
                     if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined) {
