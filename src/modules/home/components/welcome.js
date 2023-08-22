@@ -129,7 +129,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
         </div>
         <div className="searchbar-container">
           <p className="searchbar-p">
-            Find the right person using <b className="keywords">keywords</b>
+          Who can I look up for you today?
           </p>
           <SearchComponent setSearchedText={setSearchedText} sessionUserId={sessionUserId} />
         </div>

@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse, getIsDashboardDetails } from "../home/data/selectors";
 import userImage from "../../images/user.png";
+import BellSvg from "../svg/bellSvg";
+
 
 const CommonHeaderComponent = () => {
 
@@ -126,16 +128,16 @@ const CommonHeaderComponent = () => {
             </div>
 
             <div className="top-actions">
-                <div>
-                    <Icon name="bell outline" color="grey" />
+                <div style={{position:"relative"}}>
+                    <BellSvg />
+                    <span className="notification-count">5</span>
                 </div>
-                <span className="notification-count">5</span>
-                <Icon name="setting" color="grey" />
                 <img src={userImage} width="25px" height="25px" />
-                <div className="profile">
-                    <div className="user-parent">
-                        <div className="search" style={{ wordWrap: "break-word", width: "12vw" }}>{userName}
-                            <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px" }} pointing="top">
+                <div className="profile-wrapper">
+                    <div className="profile">
+                        <div className="user-parent">
+                            <div className="search">{userName}</div>
+                            <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", }} pointing="top">
                                 <Dropdown.Menu direction="left" style={{ height: "16vh", width: "12vw" }}>
                                     <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
                                     <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
