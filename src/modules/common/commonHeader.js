@@ -140,7 +140,7 @@ const CommonHeaderComponent = () => {
                     <div className="profile-wrapper">
                         <div className="profile">
                             <div className="user-parent">
-                                <div className="search">{"akash Athnure"}</div>
+                                <div className="search">{userName}</div>
                                 <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", }} pointing="top">
                                     <Dropdown.Menu direction="left" style={{ height: "16vh", width: "12vw" }}>
                                         <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>

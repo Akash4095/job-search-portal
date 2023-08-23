@@ -8,6 +8,12 @@ import CommanResponseModal from "./commonModal";
 import { clearUserListRes, getUserList } from "../search/data/actions";
 import { clearFetchedList, fetchList, saveSideListPayload } from "../list/data/actions";
 import { getIsFetchedListResSave } from "../list/data/selectors";
+import LockSvg from "../svg/lockSvg"
+import ListSvg from "../svg/listSvg";
+import AddListSvg from "../svg/addListSvg";
+import MyTeamSvg from "../svg/myTeamSvg";
+import HelpSvg from "../svg/helpSvg";
+import IntegrationSvg from "../svg/integrationSvg";
 
 const SideBar = ({ sessionUserId }) => {
   const addListRes = useSelector((state) => getIsAddUserList(state));
@@ -84,9 +90,15 @@ const SideBar = ({ sessionUserId }) => {
       </div>
       <div className="sidebar-middle scrollable-container-sidebar">
         <div className="sidebar-list">
-          <Icon name="bars" className="sidebar-icons" />
+          {/* <Icon name="bars" className="sidebar-icons" /> */}
+          <div className="listSvg">
+            <ListSvg />
+          </div>
           <div className="default-list-lock">Default List</div>
-          <Icon name="lock" />
+          {/* <Icon name="lock" /> */}
+          <div className="lockSvg">
+            <LockSvg />
+          </div>
         </div>
         {sidebarUserList && sidebarUserList.length > 0
           ? sidebarUserList.map((item) => {
@@ -95,7 +107,10 @@ const SideBar = ({ sessionUserId }) => {
                 className="sidebar-list"
                 onClick={() => callListFunction(item)}
               >
-                <Icon name="bars" className="sidebar-icons" />
+                {/* <Icon name="bars" className="sidebar-icons" /> */}
+                <div className="listSvg">
+                  <ListSvg />
+                </div>
                 <div className="default-list1">{item.listname}</div>
               </div>
             );
@@ -103,21 +118,33 @@ const SideBar = ({ sessionUserId }) => {
           : null}
 
         <div className="sidebar-add-list" onClick={() => openAddListModal()}>
-          <Icon name="add" className="sidebar-icons" />
+          {/* <Icon name="add" className="sidebar-icons" /> */}
+          <div className="addlistSvg">
+            <AddListSvg />
+          </div>
           <div className="default-list1">Add List</div>
         </div>
       </div>
       <div className="footer-actions">
         <div className="sidebar-f-list">
-          <Icon name="user" className="sidebar-icons" />
+          {/* <Icon name="user" className="sidebar-icons" /> */}
+          <div className="footerSvg">
+            <MyTeamSvg />
+          </div>
           <div className="default-list">My Team</div>
         </div>
         <div className="sidebar-f-list">
-          <Icon name="help circle" className="sidebar-icons" />
+          {/* <Icon name="help circle" className="sidebar-icons" /> */}
+          <div className="footerSvg">
+            <HelpSvg />
+          </div>
           <div className="default-list">Help</div>
         </div>
         <div className="sidebar-f-list">
-          <Icon name="clipboard outline" className="sidebar-icons" />
+          {/* <Icon name="clipboard outline" className="sidebar-icons" /> */}
+          <div className="footerSvg">
+            <IntegrationSvg />
+          </div>
           <div className="default-list">Integration</div>
         </div>
       </div>

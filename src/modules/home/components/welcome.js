@@ -129,45 +129,37 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
         </div>
         <div className="searchbar-container">
           <p className="searchbar-p">
-          Who can I look up for you today?
+            Who can I look up for you today?
           </p>
           <SearchComponent setSearchedText={setSearchedText} sessionUserId={sessionUserId} />
         </div>
-        <Grid className="summary-grid">
-          <p style={{ color: "#1c34b0", marginBottom: "20px" }}>Your Summary</p>
-          <Grid.Row>
-            <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent">
-                <div className="div1">{search}</div>
-                <div className="parent-div">Search conducted</div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent">
-                <div className="div1">{tags}</div>
-                <div className="parent-div">Tags created</div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent">
-                <div className="div1">{list}</div>
-                <div className="parent-div">Lists created</div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent">
-                <div className="div1">{team}</div>
-                <div className="parent-div">Team members</div>
-              </div>
-            </Grid.Column>
-            <Grid.Column width={3} className="summary-grid-column">
-              <div className="parent">
-                <div className="div1">{leads}</div>
-                <div className="parent-div">Leads left</div>
-              </div>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+
+        <div className="summary-grid-container">
+          <p className="summary-p">Your Summary</p>
+          <div className="summary-frame">
+            <div className="summary-div">
+              <div className="summary-div-num">{search}</div>
+              <div className="summary-div-text">Search conducted</div>
+            </div>
+            <div className="summary-div">
+              <div className="summary-div-num">{tags}</div>
+              <div className="summary-div-text">Tags created</div>
+            </div>
+            <div className="summary-div">
+              <div className="summary-div-num">{list}</div>
+              <div className="summary-div-text">Lists created</div>
+            </div>
+            <div className="summary-div">
+              <div className="summary-div-num">{team}</div>
+              <div className="summary-div-text">Team members</div>
+            </div>
+            <div className="summary-div">
+              <div className="summary-div-num">{leads}</div>
+              <div className="summary-div-text">Leads left</div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
   );
