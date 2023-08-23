@@ -131,87 +131,86 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div style={{ left: "10%", position: "relative" }}>
-          <CommonSearchComponent
-            start={start}
-            text={searchedText}
-            setSearchedText={setSearchedText}
-            setLoader={setListLoader}
-            sessionUserId={sessionUserId}
-          />
-        </div>
-        <p className="search-result-count">
-          {items.length > 0 ? items.length + " " + searchedText : ""}
-        </p>
-        {selectedRows.length > 0 ? (
-          <p className="list-selected">
-            <span> {selectedRows.length + " Selected"} </span>
-            <Button
-              icon
-              labelPosition="left"
-              color="blue"
-              size="mini"
-              onClick={() => addProfilesToListFunc()}
-              style={{
-                padding: "6px 0px",
-                marginLeft: "20px",
-                borderRadius: "6px",
-              }}
-            >
-              <Icon name="list ul" color="white" size="mini" />
-              Add to list
-            </Button>
-          </p>
-        ) : null}
 
-        <div className="d_flex">
-          <div
-            className="scrollable-container"
-            style={{ height: "70vh", overflowY: "scroll", width: "78vw" }}
-          >
-            {items && items.length > 0
-              ? items.map((item, index) => {
-                return (
-                  <SearchResults
-                    key={index}
-                    row={item}
-                    rowClicked={rowClicked}
-                    setRowClicked={setRowClicked}
-                    selectAll={selectAll}
-                    setSelectAll={setSelectAll}
-                    selectedRows={selectedRows}
-                    setSelectedRows={setSelectedRows}
-                    sessionUserId={sessionUserId}
-                    setAddListModal={setAddListModal}
-                    userCartLoader={userCartLoader}
-                    setUserCartLoader={setUserCartLoader}
-                  />
-                );
-              })
-              : null}
-            <div className="view-more-button-container">
-              {showViewMoreButton && items && items.length > 0 ? (
-                <button
-                  className="view-more-button"
-                  onClick={handleViewMoreClick}
-                >
-                  View More
-                </button>
-              ) : null}
-            </div>
-          </div>
-          {rowClicked ? (
-            <UserCart
-              setRowClicked={setRowClicked}
-              userCartLoader={userCartLoader}
-              setUserCartLoader={setUserCartLoader}
-              setAddListModal={setAddListModal}
-            />
+        <CommonSearchComponent
+          start={start}
+          text={searchedText}
+          setSearchedText={setSearchedText}
+          setLoader={setListLoader}
+          sessionUserId={sessionUserId}
+        />
+        <div className="search-container">
+          <p className="search-result-count">
+            {items.length > 0 ? items.length + " " + searchedText : ""}
+          </p>
+          {selectedRows.length > 0 ? (
+            <p className="list-selected">
+              <span> {selectedRows.length + " Selected"} </span>
+              <Button
+                icon
+                labelPosition="left"
+                color="blue"
+                size="mini"
+                onClick={() => addProfilesToListFunc()}
+                style={{
+                  padding: "6px 0px",
+                  marginLeft: "20px",
+                  borderRadius: "6px",
+                }}
+              >
+                <Icon name="list ul" color="white" size="mini" />
+                Add to list
+              </Button>
+            </p>
           ) : null}
+
+          <div className="d_flex">
+            <div
+              className="scrollable-container search-result-container"
+              style={{ height: "70vh", overflowY: "scroll", width: "78vw" }}
+            >
+              <>
+                {items && items.length > 0
+                  ? items.map((item, index) => {
+                    return (
+                      <SearchResults
+                        key={index}
+                        row={item}
+                        rowClicked={rowClicked}
+                        setRowClicked={setRowClicked}
+                        selectAll={selectAll}
+                        setSelectAll={setSelectAll}
+                        selectedRows={selectedRows}
+                        setSelectedRows={setSelectedRows}
+                        sessionUserId={sessionUserId}
+                        setAddListModal={setAddListModal}
+                        userCartLoader={userCartLoader}
+                        setUserCartLoader={setUserCartLoader}
+                      />
+                    );
+                  })
+                  : null}
+              </>
+              <div className="view-more-button-container">
+                {showViewMoreButton && items && items.length > 0 ? (
+                  <button
+                    className="view-more-button"
+                    onClick={handleViewMoreClick}
+                  >
+                    View More
+                  </button>
+                ) : null}
+              </div>
+            </div>
+            {rowClicked ? (
+              <UserCart
+                setRowClicked={setRowClicked}
+                userCartLoader={userCartLoader}
+                setUserCartLoader={setUserCartLoader}
+                setAddListModal={setAddListModal}
+              />
+            ) : null}
+          </div>
         </div>
         <div className="dimmer-loader-container">
           {listLoader.open && (

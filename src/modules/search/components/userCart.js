@@ -15,6 +15,7 @@ import { extractMonthNames } from "../../common/getMonthName";
 import { fetchProfileContactDetails } from "../../list/data/actions";
 import { getIsProfileContactDetails } from "../../list/data/selectors";
 import { fetchProfileDetails } from "../data/actions";
+import CancelSvg from "../../svg/cancelSvg";
 
 const UserCart = ({
   setRowClicked,
@@ -97,13 +98,9 @@ const UserCart = ({
                     height="55"
                     className="borderRadius"
                   />
-                  <Icon
-                    size="mini"
-                    color="grey"
-                    name="cancel"
-                    className="user-cart-close-icon"
-                    onClick={() => setRowClicked(false)}
-                  />
+                  <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
+                    <CancelSvg />
+                  </div>
                 </div>
               </div>
               <div className="paddingUsrDetails">
@@ -324,7 +321,7 @@ const UserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={skillsAccordion}>
-                    <div className="wordBreak">
+                    <div className="wordBreak skills">
                       {profileDetails.skills ? profileDetails.skills : "N/A"}
                     </div>
                   </Accordion.Content>

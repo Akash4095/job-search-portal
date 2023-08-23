@@ -78,18 +78,14 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div className="commonSearchCommponent">
+       
           <CommonSearchComponent
             setSearchedText={setSearchedText}
             text={searchedText}
             start={start}
             sessionUserId={sessionUserId}
           />
-        </div>
+     
         <div className="d_flex">
           <ListTable
             rowClicked={rowClicked}

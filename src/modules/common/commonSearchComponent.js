@@ -8,6 +8,7 @@ import {
   getIsSearchedText,
 } from "../home/data/selectors";
 import { fetchSearchByQuery, fetchViewMoreQuery } from "../search/data/actions";
+import SearchIconSvg from "../svg/searchIconSvg"
 
 const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessionUserId }) => {
   const [input, setInput] = useState("");
@@ -80,17 +81,18 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessio
 
   return (
     <div className="common-input-wrapper">
-      <Icon
-        name="search"
-        className="searchIcon"
-        onClick={() => saveSearchedText()}
-      />
-      <input
-        placeholder="Search..."
-        value={input || welcomeText}
-        onChange={(e) => handleChange(e.target.value)}
-        onKeyDown={handleKeyPress}
-      />
+      <div className='input-wrapper-child'>
+        <div onClick={() => saveSearchedText()} className="searchSvg">
+          <SearchIconSvg />
+        </div>
+        <input
+          placeholder="Search..."
+          value={input || welcomeText}
+          onChange={(e) => handleChange(e.target.value)}
+          onKeyDown={handleKeyPress}
+          className="common-input"
+        />
+      </div>
     </div>
   );
 };

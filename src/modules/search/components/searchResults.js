@@ -10,6 +10,10 @@ import {
   fetchProfileDetails,
   saveProfileDetailsPayload,
 } from "../data/actions";
+import CheckBoxSvg from "../../svg/checkBoxSvg";
+import LinkedinSvg from "../../svg/linkedinSvg";
+import DorribleSvg from "../../svg/dorribleSvg";
+import TwiterSvg from "../../svg/twiterSvg";
 
 const SearchResults = ({
   row,
@@ -59,11 +63,64 @@ const SearchResults = ({
   };
 
   return (
-    <div style={{ display: "flex" }} key={key}>
-      <div style={{ width: rowClicked ? "60vw" : "75vw" }}>
-        <div className="search-result-container">
-          <Grid className="search-result-grid" style={{ margin: "0px" }}>
-            <Grid.Row className="search-result-grid-row">
+    <div className="cart" style={{ width: rowClicked ? "60vw" : "78vw" }}>
+      <div>
+        <Checkbox
+          className="search-result-checkbox"
+          checked={selectedRows.includes(row.id)}
+          onChange={() => handleRowClick(row.id)}
+        />
+      </div>
+      <div className="cart-content">
+        <div className="cart-body">
+          <div className="cart-img">
+            <img
+              src={
+                row && row.profilepic && row.profilepic !== undefined
+                  ? row.profilepic
+                  : ""
+              }
+              height="58"
+              width="58"
+              className="border-radius"
+            />
+          </div>
+          <div className="cart-frame">
+            <div className="cart-name-header" style={{ width: rowClicked ? "50vw" : "68vw" }}>
+              <div className="cart-user-name" onClick={() => getUserProfileDetails(row)}>
+                {row && row.title ? (
+                  <span dangerouslySetInnerHTML={createMarkup(row.title)} />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="cart-user-icons">
+                <Link to={row.linkedinlink} target="_blank">
+                  <div title="Linkedin Profile">
+                    <Icon color="grey" name="linkedin" />
+                  </div>
+                </Link>
+                <Icon name="twitter" color="grey" />
+                <Icon name="dribbble" color="grey" />
+              </div>
+            </div>
+            <div className="cart-description" style={{ width: rowClicked ? "42vw" : "60vw" }}>
+              {row && row.description && row.description !== undefined ? (
+                <span
+                  dangerouslySetInnerHTML={createMarkup(row.description)}
+                />
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)}>
+              Add to list
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <Grid className="search-result-grid" style={{ margin: "0px" }}>
+            <Grid.Row className="search-result-grid-row" key={key}>
               <Grid.Column width={2}>
                 <Checkbox
                   className="search-result-checkbox"
@@ -118,9 +175,7 @@ const SearchResults = ({
                 Add List
               </p>
             </Grid.Row>
-          </Grid>
-        </div>
-      </div>
+          </Grid> */}
     </div>
   );
 };
