@@ -16,6 +16,7 @@ import { fetchProfileContactDetails } from "../../list/data/actions";
 import { getIsProfileContactDetails } from "../../list/data/selectors";
 import { fetchProfileDetails } from "../data/actions";
 import CancelSvg from "../../svg/cancelSvg";
+import ContactDownloadSvg from "../../svg/contactDownloadSvg";
 
 const UserCart = ({
   setRowClicked,
@@ -194,7 +195,10 @@ const UserCart = ({
                       {profileDetails.contactstatus &&
                         (profileDetails.contactstatus == "false" ||
                           profileDetails.contactstatus == false) ? (
-                        <Icon color="blue" name="download" />
+                        <div className="contact-download-svg">
+                          <ContactDownloadSvg />
+                        </div>
+
                       ) : (
                         ""
                       )}

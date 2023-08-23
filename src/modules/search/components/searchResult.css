@@ -100,6 +100,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  margin-right: 0.8vw;
 }
 
 .cart-description {
@@ -163,7 +164,7 @@
   position: relative !important;
   color: #999;
   font-weight: 500;
-  width: 78vw !important;
+  width: 77vw !important;
 }
 
 .usercart-container {
