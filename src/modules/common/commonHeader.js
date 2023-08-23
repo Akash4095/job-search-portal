@@ -119,30 +119,35 @@ const CommonHeaderComponent = () => {
                     List
                 </div>
             </div>
-            <div className="balance">
-                <div className="getlista">Available Credits</div>
-                <div className="div">
-                    <span>{usedCredit}</span>
-                    <span className="span"> / {totalCredit}</span>
+            <div className="balance-container">
+                <div className="balance">
+                    <div className="balance-background">
+                        <div className="getlista">Available Credits</div>
+                        <div className="div">
+                            <span>{usedCredit}</span>
+                            <span className="span"> / {totalCredit}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div className="top-actions">
-                <div style={{position:"relative"}}>
-                    <BellSvg />
-                    <span className="notification-count">5</span>
-                </div>
-                <img src={userImage} width="25px" height="25px" />
-                <div className="profile-wrapper">
-                    <div className="profile">
-                        <div className="user-parent">
-                            <div className="search">{userName}</div>
-                            <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", }} pointing="top">
-                                <Dropdown.Menu direction="left" style={{ height: "16vh", width: "12vw" }}>
-                                    <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+            <div className="top-actions-container">
+                <div className="top-actions">
+                    <div style={{ position: "relative" }}>
+                        <BellSvg />
+                        <span className="notification-count">5</span>
+                    </div>
+                    <img src={userImage} width="25px" height="25px" />
+                    <div className="profile-wrapper">
+                        <div className="profile">
+                            <div className="user-parent">
+                                <div className="search">{"akash Athnure"}</div>
+                                <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", }} pointing="top">
+                                    <Dropdown.Menu direction="left" style={{ height: "16vh", width: "12vw" }}>
+                                        <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
                         </div>
                     </div>
                 </div>

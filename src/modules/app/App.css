@@ -162,58 +162,54 @@ i.icon {
 
 .common-header {
   display: flex !important;
+  align-items: stretch;
   position: absolute;
   top: 3.7vh !important;
   height: 40px !important;
   box-sizing: border-box;
   width: 77vw !important;
   left: 2% !important;
-  gap: 36px !important;
+  gap: 1px !important;
   font-size: var(--font-size-lg);
   cursor: pointer !important;
 }
 
 .top-tab {
   display: flex;
-  flex: 1 !important;
+  flex-grow: 8 !important;
   align-items: flex-start;
-  /* margin-right: 40% !important; */
-  width: 60% !important;
   gap: 20px !important;
   color: var(--color-dodgerblue);
   margin-top: 10px;
 }
 
-/* .search-wrapper {
-  border-bottom: 2px solid var(--color-dodgerblue);
-  padding: var(--padding-5xs) var(--padding-11xs);
-  align-items: center;
-}
-
-.list-wrapper {
-  border-bottom: 2px solid var(--color-dodgerblue);
-  padding: var(--padding-5xs) var(--padding-11xs);
-  align-items: center;
-} */
 .div {
   position: relative;
   letter-spacing: -0.02em;
   font-weight: 500;
   color: var(--color-dodgerblue);
 }
+.balance-container {
+  display: flex;
+  justify-content: end;
+  flex-grow: 1 !important;
+  margin-top: 9px !important;
+  height: 80% !important;
+}
 .balance {
-  border-radius: 6px !important;
-  background-color: var(--color-white);
   display: flex;
   flex-direction: row;
   padding: 5px !important;
   align-items: center;
-  justify-content: flex-end;
-  gap: 8px !important;
   font-size: var(--font-size-sm);
-  width: 18% !important;
-  margin-top: 8px !important;
   height: 80% !important;
+}
+.balance-background {
+  gap: 8px !important;
+  display: flex;
+  background-color: var(--color-white);
+  padding: 8px !important;
+  border-radius: 6px !important;
 }
 .notification {
   position: relative;
@@ -221,12 +217,14 @@ i.icon {
   font-weight: 500;
   display: none;
 }
-
+.top-actions-container {
+  flex-grow: 1 !important;
+}
 .top-actions {
   display: flex;
   gap: 10px !important;
   font-size: var(--font-size-base);
-  width: 24% !important;
+  /* width: 24% !important; */
   margin-top: 10px;
   justify-content: flex-end;
 }
