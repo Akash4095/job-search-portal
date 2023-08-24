@@ -4,22 +4,20 @@ import CommonSearchComponent from "../../common/commonSearchComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../../common/sideBar";
-
+import { Checkbox, Grid, Icon, Image, Modal, Table } from "semantic-ui-react";
 import ListTable from "./listTable";
 import ListUserCart from "./listUserCart";
 import { getUserList } from "../../search/data/actions";
 import { getIsCodeSendResponse } from "../../home/data/selectors";
-import {
-  getIsListProfileDetailsPayload,
-  getIsSidebarListPayload,
-  getIsTagsRes,
-} from "../data/selectors";
+import AddTagNameForm from "./addTagName";
+import { getIsFetchedList, getIsListProfileDetailsPayload, getIsSidebarListPayload, getIsTagsRes, } from "../data/selectors";
 import { toast } from "react-toastify";
-import {
-  clearTagsRes,
-  fetchList,
-  fetchListProfileDetails,
-} from "../data/actions";
+import { clearTagsRes, fetchList, fetchListProfileDetails, } from "../data/actions";
+import TagSvg from "../../svg/tagSvg";
+import UnTagSvg from "../../svg/unTagSvg";
+import AddListSvg from "../../svg/addListSvg";
+import DownloadSvg from "../../svg/downloadSvg";
+import DeleteSvg from "../../svg/deleteSvg";
 
 const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
@@ -28,6 +26,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   const profileDetailsPayload = useSelector((state) =>
     getIsListProfileDetailsPayload(state)
   );
+  const listResponse = useSelector((state) => getIsFetchedList(state));
 
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
@@ -38,6 +37,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
     msg: "",
   });
   const [addTagModal, setAddTagModal] = useState({ open: false, obj: {} });
+  const [listArray, setListArray] = useState([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -73,33 +73,142 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
     }
   }, [tagsAddedRes]);
 
+
+  useEffect(() => {
+    if (listResponse && listResponse !== null && listResponse !== undefined) {
+      if (listResponse.status === "success") {
+        if (
+          listResponse.list &&
+          listResponse.list.length &&
+          listResponse.list.length > 0
+        ) {
+          setListArray(listResponse.list);
+        }
+      }
+    }
+  }, [listResponse]);
+
+  const handleSelectAll = () => {
+    if (selectAll) {
+      setSelectedRows([]);
+    } else {
+      setSelectedRows(listArray.map((row) => row));
+    }
+    setSelectAll((prevSelectAll) => !prevSelectAll);
+  };
+
+  const unselectAll = () => {
+    setSelectedRows([])
+    setSelectAll(false)
+  }
+
+  const tagListFunction = () => {
+    setAddTagModal({ open: true, obj: {} })
+  };
+
+  const unTagListFunction = () => { };
+
+  const addToListFunction = () => { };
+
+  const listExportFunction = () => { };
+
+  const deleteSelectedList = () => { };
+
   return (
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
-       
-          <CommonSearchComponent
-            setSearchedText={setSearchedText}
-            text={searchedText}
-            start={start}
-            sessionUserId={sessionUserId}
-          />
-     
-        <div className="d_flex">
-          <ListTable
-            rowClicked={rowClicked}
-            setRowClicked={setRowClicked}
-            selectAll={selectAll}
-            setSelectAll={setSelectAll}
-            selectedRows={selectedRows}
-            setSelectedRows={setSelectedRows}
-            sessionUserId={sessionUserId}
-            setLoader={setListCartLoader}
-            addTagModal={addTagModal}
-            setAddTagModal={setAddTagModal}
-          />
 
+        <CommonSearchComponent
+          setSearchedText={setSearchedText}
+          text={searchedText}
+          start={start}
+          sessionUserId={sessionUserId}
+        />
+        <div className="list-table-actions" style={{ width: rowClicked ? "62vw" : "77vw" }}>
+          <div className="list-actions-select">
+            {
+              selectedRows.length > 0 ?
+                <Icon name="minus square" color="blue" onClick={() => unselectAll()} />
+                :
+                <Checkbox
+                  checked={selectAll}
+                  onChange={handleSelectAll}
+                />
+            }
+
+            {selectedRows.length > 0 ? (
+              <span style={{ color: "#2185d0", fontSize: "12px" }}>
+                {selectedRows.length + " Selected"}
+              </span>
+            ) : (
+              <span style={{ fontSize: "12px" }}>Select All</span>
+            )}
+          </div>
+          <div className="list-actions-btns">
+            <div className="btn-frame">
+              <div className="btn-svg" onClick={() => tagListFunction()}>
+                <TagSvg />
+              </div>
+              <div className="btn-label">
+                Tag
+              </div>
+            </div>
+            <div className="btn-frame">
+              <div className="btn-svg">
+                <UnTagSvg />
+              </div>
+              <div className="btn-label">
+                Untag
+              </div>
+            </div>
+            <div className="btn-frame">
+              <div className="btn-svg">
+                <AddListSvg />
+              </div>
+              <div className="btn-label">
+                Add to list
+              </div>
+            </div>
+            <div className="btn-frame">
+              <div className="btn-svg">
+                <DownloadSvg />
+              </div>
+              <div className="btn-label">
+                Export
+              </div>
+            </div>
+            <div className="btn-frame">
+              <div className="btn-svg">
+                <DeleteSvg />
+              </div>
+              <div className="btn-label-delete">
+                Delete
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="d_flex">
+          <div
+            className="scrollable-container search-result-container"
+            style={{ height: "70vh", overflowY: "scroll", width: "79vw" }}
+          >
+            <ListTable
+              listArray={listArray}
+              setListArray={setListArray}
+              rowClicked={rowClicked}
+              setRowClicked={setRowClicked}
+              selectAll={selectAll}
+              setSelectAll={setSelectAll}
+              selectedRows={selectedRows}
+              setSelectedRows={setSelectedRows}
+              sessionUserId={sessionUserId}
+              setLoader={setListCartLoader}
+              addTagModal={addTagModal}
+              setAddTagModal={setAddTagModal}
+            />
+          </div>
           {rowClicked ? (
             <ListUserCart
               selectedRows={selectedRows}
@@ -114,6 +223,18 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           ) : null}
         </div>
       </div>
+      <>
+        <Modal
+          size="mini"
+          open={addTagModal.open}
+          onClose={() => setAddTagModal({ open: false, obj: {} })}
+        >
+          <Modal.Content>
+            <AddTagNameForm setAddTagModal={setAddTagModal} sessionUserId={sessionUserId} selectedRows={selectedRows} />
+          </Modal.Content>
+        </Modal>
+
+      </>
     </div>
   );
 };

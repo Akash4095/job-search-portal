@@ -21,6 +21,8 @@ import {
   fetchListProfileDetails,
   fetchProfileContactDetails,
 } from "../data/actions";
+import CancelSvg from "../../svg/cancelSvg";
+import ContactDownloadSvg from "../../svg/contactDownloadSvg";
 
 const ListUserCart = ({
   selectedRows,
@@ -32,8 +34,8 @@ const ListUserCart = ({
   setLoader,
 }) => {
   const [accordion, setAcordion] = useState(false);
-  const [contactAccordion, setContactAcordion] = useState(false);
-  const [tagsAccordion, setTagsAcordion] = useState(false);
+  const [contactAccordion, setContactAcordion] = useState(true);
+  const [tagsAccordion, setTagsAcordion] = useState(true);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
   const [profileDetails, setProfileDetails] = useState("");
   const [emails, setEmails] = useState([]);
@@ -111,13 +113,9 @@ const ListUserCart = ({
                     height="50"
                     className="borderRadius"
                   />
-                  <Icon
-                    size="mini"
-                    color="grey"
-                    name="cancel"
-                    className="list-user-cart-close-icon"
-                    onClick={() => setRowClicked(false)}
-                  />
+                  <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
+                    <CancelSvg />
+                  </div>
                 </div>
               </div>
               <div className="paddingUsrDetails">
@@ -180,30 +178,29 @@ const ListUserCart = ({
                   <Accordion.Title
                     active={contactAccordion}
                     index={0}
-                    onClick={() => setContactAcordion(!contactAccordion)}
+                  // onClick={() => setContactAcordion(!contactAccordion)}
                   >
                     <div className="accord-title">
                       <span>Contact Details</span>
                       <span>
-                        <Icon
-                          name={contactAccordion ? "angle down" : "angle right"}
-                        />
+                        <div
+                          style={{ paddingLeft: "86%", cursor: "pointer" }}
+                          onClick={() => callProfileContacts()}
+                        >
+                          {profileDetails.contactstatus &&
+                            (profileDetails.contactstatus == "false" ||
+                              profileDetails.contactstatus == false) ? (
+                            <div className="contact-download-svg">
+                              <ContactDownloadSvg />
+                            </div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </span>
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={contactAccordion}>
-                    <div
-                      style={{ paddingLeft: "86%", cursor: "pointer" }}
-                      onClick={() => callProfileContacts()}
-                    >
-                      {profileDetails.contactstatus &&
-                        (profileDetails.contactstatus == "false" ||
-                          profileDetails.contactstatus == false) ? (
-                        <Icon color="blue" name="download" />
-                      ) : (
-                        ""
-                      )}
-                    </div>
 
                     <div style={{ fontSize: "11px" }}>
                       {profileDetails.email && profileDetails.email.length > 0
@@ -265,7 +262,7 @@ const ListUserCart = ({
                   <Accordion.Title
                     active={tagsAccordion}
                     index={0}
-                    onClick={() => setTagsAcordion(!tagsAccordion)}
+                    // onClick={() => setTagsAcordion(!tagsAccordion)}
                   >
                     <div className="accord-title">
                       <span>Tags</span>
@@ -275,7 +272,7 @@ const ListUserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={tagsAccordion}>
-                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", paddingTop:"5px" }}>
                       {profileDetails.tags && profileDetails.tags.length > 0
                         ? profileDetails.tags.map((item, index) => {
                           return (

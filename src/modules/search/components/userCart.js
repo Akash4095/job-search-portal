@@ -26,7 +26,7 @@ const UserCart = ({
 }) => {
   const [profileData, setProfileData] = useState([]);
   const [skillsAccordion, setSkillsAcordion] = useState(false);
-  const [contactAccordion, setContactAcordion] = useState(false);
+  const [contactAccordion, setContactAcordion] = useState(true);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
   const [educationAccordion, setEducationAcordion] = useState(false);
 
@@ -176,33 +176,31 @@ const UserCart = ({
                   <Accordion.Title
                     active={contactAccordion}
                     index={0}
-                    onClick={() => setContactAcordion(!contactAccordion)}
+                    // onClick={() => setContactAcordion(!contactAccordion)}
                   >
                     <div className="accord-title">
                       <span>Contact Details</span>
                       <span>
-                        <Icon
-                          name={contactAccordion ? "angle down" : "angle right"}
-                        />
+                        <div
+                          style={{ paddingLeft: "86%", cursor: "pointer" }}
+                          onClick={() => callProfileContacts()}
+                        >
+                          {profileDetails.contactstatus &&
+                            (profileDetails.contactstatus == "false" ||
+                              profileDetails.contactstatus == false) ? (
+                            <div className="contact-download-svg">
+                              <ContactDownloadSvg />
+                            </div>
+
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </span>
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={contactAccordion}>
-                    <div
-                      style={{ paddingLeft: "86%", cursor: "pointer" }}
-                      onClick={() => callProfileContacts()}
-                    >
-                      {profileDetails.contactstatus &&
-                        (profileDetails.contactstatus == "false" ||
-                          profileDetails.contactstatus == false) ? (
-                        <div className="contact-download-svg">
-                          <ContactDownloadSvg />
-                        </div>
 
-                      ) : (
-                        ""
-                      )}
-                    </div>
 
                     <div style={{ fontSize: "11px" }}>
                       {profileDetails.email && profileDetails.email.length > 0

@@ -263,6 +263,11 @@ i.icon {
   margin-top: 3px !important;
 }
 
+.profile:hover {
+  margin-left: -4px !important;
+  margin-top: 3px !important;
+}
+
 .user-parent {
   display: flex;
 }
@@ -541,7 +546,6 @@ input:focus {
 
 .list-table-container {
   display: flex;
-  width: 77vw;
   height: 70vh;
   flex-direction: column;
   align-items: flex-start;
@@ -555,9 +559,9 @@ input:focus {
   align-items: center;
   gap: 24px;
   align-self: stretch;
-  width: 77vw;
   cursor: pointer !important;
   margin-bottom: 10px;
+  margin-left: 2%;
 }
 
 .list-actions-select {
@@ -681,6 +685,7 @@ input:focus {
   border-bottom: 1px solid #e6e6e6;
   background: #fff;
   width: 77vw;
+  align-items: stretch;
 }
 
 .list-column1 {
@@ -693,7 +698,6 @@ input:focus {
 
 .list-column2 {
   display: flex;
-  width: 20vw;
   align-items: center;
   gap: 12px;
 }
@@ -722,6 +726,8 @@ input:focus {
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.32px;
+  word-break: break-all;
+  padding-right: 8px;
 }
 
 .list-person-work {
@@ -733,12 +739,13 @@ input:focus {
   font-weight: 500;
   line-height: normal;
   letter-spacing: -0.28px;
+  word-break: break-all;
+  padding-right: 8px;
 }
 
 .list-column3 {
   display: flex;
-  width: 13vw;
-  align-items: center;
+  /* align-items: center; */
   gap: 8px;
 }
 
@@ -755,15 +762,19 @@ input:focus {
   gap: 4px;
   flex: 1 0 0;
   flex-wrap: wrap;
+  padding: 0px 4px;
+  align-self: baseline;
 }
 .company-name {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
   color: #1a1a1a;
+  word-break: break-all;
+  padding-right: 4px;
 }
 
 .tag-item-frame {
@@ -786,12 +797,12 @@ input:focus {
 
 .list-column5 {
   display: flex;
-  width: 18vw;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 4px;
   align-self: stretch;
+  padding-left: 8px;
 }
 
 .email-container,
@@ -814,11 +825,14 @@ input:focus {
   line-height: normal;
   letter-spacing: -0.28px;
   flex: 1 0 0;
+  word-break: break-all;
 }
-.contact-download-svg{
+.contact-download-svg {
   width: 14px;
   height: 14px;
   fill: #999;
+  position: relative;
+  right: 20px;
 }
 .list-column6 {
   display: flex;
@@ -829,13 +843,10 @@ input:focus {
 }
 
 .list-usercart-container {
-  width: 20vw !important;
-  margin: 5px !important;
-  margin-top: 2.7% !important;
-  margin-right: 0% !important;
+  width: 22vw !important;
   height: 70vh !important;
   background: #fff;
-  border: 1px solid #fff;
+  border: 1px solid #eee;
   overflow-y: scroll !important;
   position: relative;
 }
@@ -882,6 +893,10 @@ input:focus {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 1px;
+  margin-right: 8px;
 }
 
 .list-company-details {
@@ -1061,4 +1076,25 @@ input:focus {
 
 .selectInput > input {
   padding-left: 12px !important;
+}
+
+.logout-popup-item {
+  color: #333;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+}
+
+.logout-popup-item:hover {
+  color: #2b81e7 !important;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.28px;
+  background: aliceblue !important;
 }

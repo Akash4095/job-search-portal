@@ -141,10 +141,15 @@ const CommonHeaderComponent = () => {
                         <div className="profile">
                             <div className="user-parent">
                                 <div className="search">{userName}</div>
-                                <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", }} pointing="top">
-                                    <Dropdown.Menu direction="left" style={{ height: "16vh", width: "12vw" }}>
-                                        <Dropdown.Item text='Profile' onClick={() => navigateToWelcomePage()} ><Icon name="user" /> Profile</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => logoutSession()}> <Icon name="logout" /> Logout</Dropdown.Item>
+                                <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", borderRadius: "6px" }}>
+                                    <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "6px" }} >
+                                        <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item"> User Management</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item">Settings</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item">Contact/Help</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => logoutSession()} className="logout-popup-item">  Log Out</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>

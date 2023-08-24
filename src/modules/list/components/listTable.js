@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Checkbox, Grid, Icon, Image, Modal, Table } from "semantic-ui-react";
-import { getIsFetchedList } from "../data/selectors";
-import AddTagNameForm from "./addTagName";
 import { clearListProfileDetails, fetchListProfileDetails, saveListProfileDetailsPayload } from "../data/actions";
-import TagSvg from "../../svg/tagSvg";
-import UnTagSvg from "../../svg/unTagSvg";
-import AddListSvg from "../../svg/addListSvg";
-import DownloadSvg from "../../svg/downloadSvg";
-import DeleteSvg from "../../svg/deleteSvg";
 import TagsSvg from "../../svg/TagsSvg";
 import EmailSvg from "../../svg/emailSvg";
 import CallSvg from "../../svg/callSvg";
 import DotsSvg from "../../svg/dotsSvg";
 
 const ListTable = ({
+  listArray,
+  setListArray,
   rowClicked,
   setRowClicked,
   selectAll,
@@ -27,26 +22,12 @@ const ListTable = ({
   setAddTagModal
 }) => {
 
-  const [listArray, setListArray] = useState([]);
+
 
 
   const dispatch = useDispatch();
 
-  const listResponse = useSelector((state) => getIsFetchedList(state));
 
-  useEffect(() => {
-    if (listResponse && listResponse !== null && listResponse !== undefined) {
-      if (listResponse.status === "success") {
-        if (
-          listResponse.list &&
-          listResponse.list.length &&
-          listResponse.list.length > 0
-        ) {
-          setListArray(listResponse.list);
-        }
-      }
-    }
-  }, [listResponse]);
 
 
   const handleRowClick = (row) => {
@@ -60,19 +41,7 @@ const ListTable = ({
     });
   };
 
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedRows([]);
-    } else {
-      setSelectedRows(listArray.map((row) => row));
-    }
-    setSelectAll((prevSelectAll) => !prevSelectAll);
-  };
 
-  const unselectAll = () => {
-    setSelectedRows([])
-    setSelectAll(false)
-  }
 
   const fetchlistCartDetails = (row) => {
     let obj = {}
@@ -91,82 +60,12 @@ const ListTable = ({
     setAddTagModal({ open: true, obj: {} })
   };
 
-  const unTagListFunction = () => { };
-
-  const addToListFunction = () => { };
-
-  const listExportFunction = () => { };
-
-  const deleteSelectedList = () => { };
 
   return (
     <div>
-      <div style={{ width: rowClicked ? "65vw" : "81vw" }} className="list-table-container">
-        <div className="list-table-actions">
-          <div className="list-actions-select">
-            {
-              selectedRows.length > 0 ?
-                <Icon name="minus square" color="blue" onClick={() => unselectAll()} />
-                :
-                <Checkbox
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-            }
+      <div className="list-table-container" style={{ width: rowClicked ? "62vw" : "79vw" }} >
 
-            {selectedRows.length > 0 ? (
-              <span style={{ color: "#2185d0", fontSize: "12px" }}>
-                {selectedRows.length + " Selected"}
-              </span>
-            ) : (
-              <span style={{ fontSize: "12px" }}>Select All</span>
-            )}
-          </div>
-          <div className="list-actions-btns">
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <TagSvg />
-              </div>
-              <div className="btn-label">
-                Tag
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <UnTagSvg />
-              </div>
-              <div className="btn-label">
-                Untag
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <AddListSvg />
-              </div>
-              <div className="btn-label">
-                Add to list
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <DownloadSvg />
-              </div>
-              <div className="btn-label">
-                Export
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <DeleteSvg />
-              </div>
-              <div className="btn-label-delete">
-                Delete
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="list-table-header">
+        <div className="list-table-header" style={{ width: rowClicked ? "62vw" : "79vw" }} >
           <div className="checkbox-space">
 
           </div>
@@ -201,21 +100,22 @@ const ListTable = ({
           style={{
             height: "70vh",
             overflowY: "auto",
-            width: rowClicked ? "67vw" : "81vw",
+            width: rowClicked ? "62vw" : "79vw",
+            alignSelf: "stretch"
           }}
         >
           <div className="">
             {listArray.length > 0 &&
               listArray.map((item) => {
                 return (
-                  <div className="list-table-row">
+                  <div className="list-table-row" style={{ width: rowClicked ? "62vw" : "79vw" }} >
                     <div className="list-column1">
                       <Checkbox
                         checked={selectedRows.includes(item)}
                         onChange={() => handleRowClick(item)}
                       />
                     </div>
-                    <div className="list-column2">
+                    <div className="list-column2" style={{ width: rowClicked ? "16vw" : "21vw" }}>
                       <img
                         src={item.profilepic ? item.profilepic : ""}
                         alt=""
@@ -233,17 +133,17 @@ const ListTable = ({
                           </div>
                         </div>
                         <div className="list-person-work">
-                          {item.position ? item.position : ""}
+                          {item.position ? item.position : "Role N/A"}
                         </div>
                       </div>
 
                     </div>
-                    <div className="list-column3">
+                    <div className="list-column3" style={{ width: rowClicked ? "10vw" : "13vw" }}>
                       <div className="company-icon">
                         <Icon color="blue" name="building outline" />
                       </div>
                       <div className="company-name">
-                        {item.company ? item.company : ""}
+                        {item.company ? item.company : "N/A"}
                       </div>
                     </div>
                     <div className="list-column4">
@@ -251,14 +151,14 @@ const ListTable = ({
                         ? item.tags.map((tagname, index) => {
                           return (
                             <div className="tag-item-frame">
-                              <div className={`tag-color${index + 1}`}></div>
+                              <div className={`tag-color${Math.floor(Math.random() * 10) + 1}`}></div>
                               <div className="tag-name"> {tagname}</div>
                             </div>
                           );
                         })
                         : "N/A"}
                     </div>
-                    <div className="list-column5">
+                    <div className="list-column5" style={{ width: rowClicked ? "13.6vw" : "18vw" }}>
                       <div className="email-container">
                         <div className="emailSvg">
                           <EmailSvg />
@@ -286,123 +186,6 @@ const ListTable = ({
               })}
           </div>
         </div>
-        <>
-          <div
-          >
-            {/* <Table basic="very" className="list-table">
-        
-
-              <Table.Body>
-                {listArray.length > 0 &&
-                  listArray.map((item) => {
-                    return (
-                      <Table.Row key={item.id}>
-                        <Table.Cell style={{ width: "3%" }}>
-                          <Checkbox
-                            style={{ marginLeft: "8px" }}
-                            checked={selectedRows.includes(item)}
-                            onChange={() => handleRowClick(item)}
-                          />
-                        </Table.Cell>
-                        <Table.Cell
-                          style={{ width: "24%", cursor: "pointer" }}
-                          onClick={() => fetchlistCartDetails(item)}
-                          verticalAlign="top"
-                        >
-                          <div className="d_flex">
-                            <img
-                              src={item.profilepic ? item.profilepic : ""}
-                              alt=""
-                              height={rowClicked ? "40" : "55"}
-                              width={rowClicked ? "40" : "55"}
-                              style={{
-                                borderRadius: "50%",
-                                marginTop: "5px",
-                                marginRight: "10px",
-                              }}
-                            />
-                            <div>
-                              <div className="list-person-name">
-                                {item.name ? item.name : ""}
-                              </div>
-                              <div className="list-person-work">
-                                {item.position ? item.position : ""}
-                              </div>
-                            </div>
-                          </div>
-                        </Table.Cell>
-                        <Table.Cell style={{ width: "18%" }} verticalAlign="top">
-
-                          <div >
-                            <Icon color="blue" name="building outline" />
-                            <span style={{ wordBreak: "break-all", fontSize: "12px", fontFamily: "Inter" }}>
-                              {item.company ? item.company : ""}
-                            </span>
-                          </div>
-                        </Table.Cell>
-                        <Table.Cell style={{ width: "28%", fontSize: "12px" }} verticalAlign="top">
-                          <div style={{ display: "flex", flexWrap: "wrap" }}>
-                            {item.tags && item.tags.length > 0
-                              ? item.tags.map((tagname, index) => {
-                                return (
-                                  <div className="tag-item">
-                                    <div className={`tag-color${index + 1}`}></div> {tagname}
-                                  </div>
-                                );
-                              })
-                              : "N/A"}
-                          </div>
-                        </Table.Cell>
-                        <Table.Cell
-                          style={{
-                            width: "20%",
-                            color: "#666",
-                            wordBreak: "break-all",
-                          }}
-                          verticalAlign="top"
-                        >
-                          <div>
-                            <div className="icons">
-                              <Icon color="grey" name="mail outline" />
-                              <span style={{ fontSize: "11px" }}>
-                                {item.email ? item.email : "N/A"}
-                              </span>
-                            </div>
-                            <div className="icons">
-                              <Icon
-                                color="grey"
-                                name="phone"
-                                flipped="horizontally"
-                              />
-                              <span style={{ fontSize: "11px" }}>
-                                {item.mobile ? item.mobile : "N/A"}
-                              </span>
-                            </div>
-                          </div>
-                        </Table.Cell>
-                        <Table.Cell textAlign="center" style={{ width: "2%" }} verticalAlign="top">
-                          <Icon
-                            color="grey"
-                            name="ellipsis vertical"
-                            style={{ cursor: "pointer", paddingRight: "10px" }}
-                          />
-                        </Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-              </Table.Body>
-            </Table> */}
-            <Modal
-              size="mini"
-              open={addTagModal.open}
-              onClose={() => setAddTagModal({ open: false, obj: {} })}
-            >
-              <Modal.Content>
-                <AddTagNameForm setAddTagModal={setAddTagModal} sessionUserId={sessionUserId} selectedRows={selectedRows} />
-              </Modal.Content>
-            </Modal>
-          </div>
-        </>
       </div>
     </div>
   );
