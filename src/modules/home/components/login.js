@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Icon, Modal, Button } from "semantic-ui-react";
+import { Grid, Icon, Modal, Button, Dimmer, Loader } from "semantic-ui-react";
 import imgage from "../../../images/loginpageImg.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -19,6 +19,7 @@ const Login = ({ setSessionUserId }) => {
     const [redirectUri, setRedirectUri] = useState("");
     const [authCallOnce, setAuthCallOnce] = useState(false);
     const [scope, setScope] = useState("r_emailaddress,r_liteprofile");
+    const [loader, setLoader] = useState({ open: false, msg: "" });
 
     const getLinkedInKeys = useSelector((state) =>
         getIsLikedinKeysResponse(state)
@@ -53,6 +54,7 @@ const Login = ({ setSessionUserId }) => {
                 if (!authCallOnce) {
                     dispatch(sendLinkedInCode(obj));
                     setAuthCallOnce(true)
+                    // setLoader({ open: true, msg: "Loging in..." })
                 }
             }
         }
@@ -76,7 +78,14 @@ const Login = ({ setSessionUserId }) => {
                     }
 
                 }
-                navigate("/welcome");
+                setLoader({ open: false, msg: "" })
+                setTimeout(() => {
+                    navigate("/welcome");
+                }, 500)
+
+            }
+            if (getLoginAuthRes.status === "failed") {
+                setLoader({ open: false, msg: "" })
             }
         }
     }, [getLoginAuthRes]);
@@ -144,6 +153,13 @@ const Login = ({ setSessionUserId }) => {
                 </Grid>
             </div>
             <footer className="getlista-2023-">{`© getlist{a} 2023 - All rights reserved.`}</footer>
+            <div className="dimmer-loader-container">
+                {loader.open && (
+                    <Dimmer inverted active>
+                        <Loader active>{loader.msg}</Loader>
+                    </Dimmer>
+                )}
+            </div>
         </div>
     );
 };
