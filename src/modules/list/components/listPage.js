@@ -82,6 +82,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           listResponse.list.length &&
           listResponse.list.length > 0
         ) {
+          setRowClicked(false)
           setListArray(listResponse.list);
         }
       }
@@ -126,7 +127,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           start={start}
           sessionUserId={sessionUserId}
         />
-        <div className="list-table-actions" style={{ width: rowClicked ? "62vw" : "77vw" }}>
+        <div className="list-table-actions" style={{ width: rowClicked ? "62vw" : "77vw", marginLeft: rowClicked ? "1.5%" : "2%" }}>
           <div className="list-actions-select">
             {
               selectedRows.length > 0 ?

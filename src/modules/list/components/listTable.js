@@ -138,7 +138,7 @@ const ListTable = ({
                       </div>
 
                     </div>
-                    <div className="list-column3" style={{ width: rowClicked ? "10vw" : "13vw" }}>
+                    <div className="list-column3" style={{ width: rowClicked ? "10vw" : "13vw" }} onClick={() => fetchlistCartDetails(item)}>
                       <div className="company-icon">
                         <Icon color="blue" name="building outline" />
                       </div>
@@ -146,7 +146,7 @@ const ListTable = ({
                         {item.company ? item.company : "N/A"}
                       </div>
                     </div>
-                    <div className="list-column4">
+                    <div className="list-column4" onClick={() => fetchlistCartDetails(item)}>
                       {item.tags && item.tags.length > 0
                         ? item.tags.map((tagname, index) => {
                           return (
@@ -158,7 +158,7 @@ const ListTable = ({
                         })
                         : "N/A"}
                     </div>
-                    <div className="list-column5" style={{ width: rowClicked ? "13.6vw" : "18vw" }}>
+                    <div className="list-column5" style={{ width: rowClicked ? "13.6vw" : "18vw" }} onClick={() => fetchlistCartDetails(item)}>
                       <div className="email-container">
                         <div className="emailSvg">
                           <EmailSvg />
@@ -176,8 +176,8 @@ const ListTable = ({
                         </div>
                       </div>
                     </div>
-                    <div className="list-column6">
-                      <div className="emailSvg">
+                    <div className="list-column6" style={{right: rowClicked ? "-10px" : "8px"}}>
+                      <div className="dotsSvg">
                         <DotsSvg />
                       </div>
                     </div>

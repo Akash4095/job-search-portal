@@ -562,7 +562,6 @@ input:focus {
   align-self: stretch;
   cursor: pointer !important;
   margin-bottom: 10px;
-  margin-left: 2%;
 }
 
 .list-actions-select {
@@ -687,6 +686,7 @@ input:focus {
   background: #fff;
   width: 77vw;
   align-items: stretch;
+  cursor: pointer;
 }
 
 .list-column1 {
@@ -817,6 +817,10 @@ input:focus {
   width: 16px;
   height: 16px;
 }
+.dotsSvg {
+  width: 16px;
+  height: 16px;
+}
 .email {
   color: #333;
   font-family: Inter;
@@ -837,6 +841,7 @@ input:focus {
 }
 .list-column6 {
   display: flex;
+  position: relative;
   width: 20px;
   height: 38px;
   align-items: center;
