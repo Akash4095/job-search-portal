@@ -135,6 +135,7 @@
   align-items: flex-start;
   gap: 16px;
   flex: 1 0 0;
+  cursor: pointer;
 }
 
 .border-radius {

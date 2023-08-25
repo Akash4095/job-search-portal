@@ -72,7 +72,7 @@ const SearchResults = ({
         />
       </div>
       <div className="cart-content">
-        <div className="cart-body">
+        <div className="cart-body"  onClick={() => getUserProfileDetails(row)}>
           <div className="cart-img">
             <img
               src={
@@ -113,7 +113,7 @@ const SearchResults = ({
                 ""
               )}
             </div>
-            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)}>
+            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)} style={{width: rowClicked ? "12%" : "9%"}}>
               Add to list
             </div>
           </div>

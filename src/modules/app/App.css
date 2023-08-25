@@ -358,6 +358,7 @@ input:focus {
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.48px;
+  width: 100% !important;
 }
 
 /*------------------------end-----------------------*/
