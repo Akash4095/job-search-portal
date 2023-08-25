@@ -56,6 +56,7 @@ const SearchComponent = ({ setSearchedText, sessionUserId }) => {
           value={input}
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyPress}
+          className="common-input"
         />
       </div>
     </div>
