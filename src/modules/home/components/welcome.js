@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./welcome.css";
-import { Grid, Icon } from "semantic-ui-react";
+import { Grid, Icon, Modal } from "semantic-ui-react";
 import userImage from "../../../images/user.png";
 import SideBar from "../../common/sideBar";
 import SearchComponent from "../../common/searchComponent";
@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors";
 import { fetchDashboardDetails } from "../data/actions";
 import { getUserList } from "../../search/data/actions";
+import AddEmailForm from "./addEmailForm";
 
 const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
 
@@ -20,6 +21,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const [list, setList] = useState("");
   const [team, setTeam] = useState("");
   const [tags, setTags] = useState("");
+  const [addEmail, setAddEmailModal] = useState(false)
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
@@ -113,7 +115,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
               height="100"
             />
           </div>
-          <div className="user-name-parent">
+          <div className="user-name-parent" onClick={() => setAddEmailModal(true)}>
             <b className="user-name">{"Hello " + ((userName && userName !== undefined && userName !== null) ? userName : "")}</b>
             <div className="bio">
               <p>
@@ -161,6 +163,15 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
           </div>
         </div>
       </div>
+      <Modal
+        size="mini"
+        open={addEmail}
+        className="welcome-popup-container"
+      >
+        <Modal.Content>
+          <AddEmailForm setAddEmailModal={setAddEmailModal} sessionUserId={sessionUserId} />
+        </Modal.Content>
+      </Modal>
     </div>
   );
 };

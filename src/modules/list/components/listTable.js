@@ -63,9 +63,9 @@ const ListTable = ({
 
   return (
     <div>
-      <div className="list-table-container" style={{ width: rowClicked ? "62vw" : "79vw" }} >
+      <div className="list-table-container">
 
-        <div className="list-table-header" style={{ width: rowClicked ? "62vw" : "79vw" }} >
+        <div className="list-table-header">
           <div className="checkbox-space">
 
           </div>
@@ -100,7 +100,7 @@ const ListTable = ({
           style={{
             height: "70vh",
             overflowY: "auto",
-            width: rowClicked ? "62vw" : "79vw",
+            width: "79vw",
             alignSelf: "stretch"
           }}
         >
@@ -108,14 +108,14 @@ const ListTable = ({
             {listArray.length > 0 &&
               listArray.map((item) => {
                 return (
-                  <div className="list-table-row" style={{ width: rowClicked ? "62vw" : "79vw" }} >
+                  <div className="list-table-row"  >
                     <div className="list-column1">
                       <Checkbox
                         checked={selectedRows.includes(item)}
                         onChange={() => handleRowClick(item)}
                       />
                     </div>
-                    <div className="list-column2" style={{ width: rowClicked ? "16vw" : "21vw" }}>
+                    <div className="list-column2" >
                       <img
                         src={item.profilepic ? item.profilepic : ""}
                         alt=""
@@ -138,27 +138,26 @@ const ListTable = ({
                       </div>
 
                     </div>
-                    <div className="list-column3" style={{ width: rowClicked ? "10vw" : "13vw" }} onClick={() => fetchlistCartDetails(item)}>
-                      <div className="company-icon">
-                        <Icon color="blue" name="building outline" />
-                      </div>
+                    <div className="list-column3" onClick={() => fetchlistCartDetails(item)}>
                       <div className="company-name">
                         {item.company ? item.company : "N/A"}
                       </div>
                     </div>
                     <div className="list-column4" onClick={() => fetchlistCartDetails(item)}>
-                      {item.tags && item.tags.length > 0
-                        ? item.tags.map((tagname, index) => {
-                          return (
-                            <div className="tag-item-frame">
-                              <div className={`tag-color${Math.floor(Math.random() * 10) + 1}`}></div>
-                              <div className="tag-name"> {tagname}</div>
-                            </div>
-                          );
-                        })
-                        : "N/A"}
+                      <div className="tagsWrap">
+                        {item.tags && item.tags.length > 0
+                          ? item.tags.map((tagname, index) => {
+                            return (
+                              <div className="tag-item-frame">
+                                <div className={`tag-color${Math.floor(Math.random() * 10) + 1}`}></div>
+                                <div className="tag-name"> {tagname}</div>
+                              </div>
+                            );
+                          })
+                          : "N/A"}
+                      </div>
                     </div>
-                    <div className="list-column5" style={{ width: rowClicked ? "13.6vw" : "18vw" }} onClick={() => fetchlistCartDetails(item)}>
+                    <div className="list-column5" onClick={() => fetchlistCartDetails(item)}>
                       <div className="email-container">
                         <div className="emailSvg">
                           <EmailSvg />
@@ -176,7 +175,7 @@ const ListTable = ({
                         </div>
                       </div>
                     </div>
-                    <div className="list-column6" style={{right: rowClicked ? "-10px" : "8px"}}>
+                    <div className="list-column6">
                       <div className="dotsSvg">
                         <DotsSvg />
                       </div>

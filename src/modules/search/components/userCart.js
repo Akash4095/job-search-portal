@@ -95,78 +95,78 @@ const UserCart = ({
                 <div className="d_flex">
                   <img
                     src={profileDetails.profilepic ? profileDetails.profilepic : ""}
-                    width="55"
-                    height="55"
+                    width="68"
+                    height="68"
                     className="borderRadius"
                   />
+                  <div className="cartNameWork">
+                    <div className="user-cart-name">
+                      {profileDetails.full_name ? profileDetails.full_name : "N/A"}
+                    </div>
+                    <div className="user-cart-work">
+                      {profileDetails.designation ? profileDetails.designation : "N/A"}
+                    </div>
+                    <div style={{ marginTop: "8px" }} className="d_flex">
+                      <Link
+                        to={
+                          profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
+                        }
+                        target="_blank"
+                      >
+                        <div title="Linkedin Profile">
+                          <Icon color="grey" name="linkedin" />
+                        </div>
+                      </Link>
+                      <Icon name="twitter" color="grey" />
+                      <Icon name="dribbble" color="grey" />
+                    </div>
+                  </div>
+
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
                     <CancelSvg />
                   </div>
                 </div>
               </div>
-              <div className="paddingUsrDetails">
-                <div className="user-cart-name">
-                  {profileDetails.full_name ? profileDetails.full_name : "N/A"}
-                </div>
-                <div className="user-cart-work">
-                  {profileDetails.designation ? profileDetails.designation : "N/A"}
-                </div>
-              </div>
 
               <div className="company-details">
                 <div className="padding10">
-                  <div style={{ fontSize: "12px", paddingBottom: "5px" }}>
+                  <div className="list-user-cart-company">
                     Company Details
                   </div>
-                  <div style={{ fontSize: "12px", width: "100%" }} className="d_flex">
-                    <div style={{ width: "10%" }}>
-                      <Icon color="blue" name="building outline" />
-                    </div>
-                    <div style={{ width: "90%" }}>
+                  <div style={{ fontSize: "14px", width: "100%" }} className="d_flex">
+                    <div>
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
                           ? profileDetails.experience[0].company
                           : "N/A"
                         : "N/A"}
                     </div>
+                    <div style={{ marginLeft: "12px", fontSize: "12px" }}>
+                      {profileDetails.experience
+                        ? profileDetails.experience.length > 0
+                          ? ": From" +
+                          " " +
+                          ((profileDetails.experience[0].startdate && profileDetails.experience[0].startdate !== "") ?
+                            extractMonthNames(
+                              displayDate(profileDetails.experience[0].startdate)
+                            ) : "") +
+                          " " +
+                          (profileDetails.experience[0].startdate &&
+                            profileDetails.experience[0].startdate !== "" &&
+                            profileDetails.experience[0].startdate !== undefined
+                            ? displayDate(
+                              profileDetails.experience[0].startdate
+                            ).split("-")[2]
+                            : "")
+                          : ""
+                        : ""}
+                    </div>
                   </div>
-                  <div style={{ marginLeft: "10%", fontSize: "12px" }}>
-                    {profileDetails.experience
-                      ? profileDetails.experience.length > 0
-                        ? "From" +
-                        " " +
-                        ((profileDetails.experience[0].startdate && profileDetails.experience[0].startdate !== "") ?
-                          extractMonthNames(
-                            displayDate(profileDetails.experience[0].startdate)
-                          ) : "") +
-                        " " +
-                        (profileDetails.experience[0].startdate &&
-                          profileDetails.experience[0].startdate !== "" &&
-                          profileDetails.experience[0].startdate !== undefined
-                          ? displayDate(
-                            profileDetails.experience[0].startdate
-                          ).split("-")[2]
-                          : "")
-                        : ""
-                      : ""}
-                  </div>
+
                   <div className="user-cart-description">
                     {profileDetails.description ? profileDetails.description : "N/A"}
                   </div>
-                  <div style={{ marginBottom: "10px" }} className="d_flex">
-                    <Link
-                      to={
-                        profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
-                      }
-                      target="_blank"
-                    >
-                      <div title="Linkedin Profile">
-                        <Icon color="grey" name="linkedin" />
-                      </div>
-                    </Link>
-                    <Icon name="twitter" />
-                    <Icon name="dribbble" />
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ const UserCart = ({
                   <Accordion.Title
                     active={contactAccordion}
                     index={0}
-                    // onClick={() => setContactAcordion(!contactAccordion)}
+                  // onClick={() => setContactAcordion(!contactAccordion)}
                   >
                     <div className="accord-title">
                       <span>Contact Details</span>
@@ -202,7 +202,7 @@ const UserCart = ({
                   <Accordion.Content active={contactAccordion}>
 
 
-                    <div style={{ fontSize: "11px" }}>
+                    <div style={{ fontSize: "12px" }}>
                       {profileDetails.email && profileDetails.email.length > 0
                         ? profileDetails.email.map((item, index) => {
                           return (
@@ -210,7 +210,7 @@ const UserCart = ({
                               <Icon size="mini" color="grey" name="mail outline" />
                               <span
                                 style={{
-                                  fontSize: "11px",
+                                  fontSize: "12px",
                                   color: "#2185d0",
                                 }}
                               >
@@ -221,7 +221,7 @@ const UserCart = ({
                         })
                         : "N/A"}
                     </div>
-                    <div style={{ fontSize: "11px" }}>
+                    <div style={{ fontSize: "12px" }}>
                       {profileDetails.phone && profileDetails.phone.length > 0
                         ? profileDetails.phone.map((item, index) => {
                           return (
@@ -234,7 +234,7 @@ const UserCart = ({
                               />
                               <span
                                 style={{
-                                  fontSize: "10px",
+                                  fontSize: "12px",
                                   color: "#2185d0",
                                 }}
                               >
@@ -246,11 +246,11 @@ const UserCart = ({
                         : "N/A"}
                     </div>
 
-                    <div style={{ paddingTop: "10px" }}>
+                    {/* <div style={{ paddingTop: "10px" }}>
                       <Icon name="linkedin" />
                       <Icon name="twitter" />
                       <Icon name="dribbble" />
-                    </div>
+                    </div> */}
                   </Accordion.Content>
                 </Accordion>
               </div>
@@ -261,28 +261,28 @@ const UserCart = ({
                   <Accordion.Title
                     active={prevCompanyAccordion}
                     index={0}
-                    onClick={() => setPrevCompanyAcordion(!prevCompanyAccordion)}
+                  // onClick={() => setPrevCompanyAcordion(!prevCompanyAccordion)}
                   >
                     <div className="accord-title">
                       <span>Previous Company</span>
                       <span>
-                        <Icon
+                        {/* <Icon
                           name={prevCompanyAccordion ? "angle down" : "angle right"}
-                        />
+                        /> */}
                       </span>
                     </div>
                   </Accordion.Title>
-                  <Accordion.Content active={prevCompanyAccordion}>
+                  <Accordion.Content active={prevCompanyAccordion} className="prev-accord">
                     {profileDetails.experience && profileDetails.experience.length > 0
                       ? profileDetails.experience.map((item, index) => {
                         return (
-                          <div style={{ fontSize: "11px" }}>
-                            <li className="wordBreak">
+                          <div className="prev-com-container">
+                            <div className="wordBreak prev-com-name">
                               {item.company && item.company !== ""
                                 ? item.company
-                                : "N/A"}
-                            </li>
-                            <div style={{ padding: "0 8%" }}>
+                                : ""}
+                            </div>
+                            <div style={{ width: "20%" }}>
                               {index == 0 && item.enddate === "" ? (
                                 <>
                                   {displayDate(item.startdate).split("-")[2]}
@@ -323,8 +323,16 @@ const UserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={skillsAccordion}>
-                    <div className="wordBreak skills">
-                      {profileDetails.skills ? profileDetails.skills : "N/A"}
+                    <div className="skillsWrap">
+                      {(profileDetails.skills && profileDetails.skills !== "") ?
+                        profileDetails.skills.split(",").map((item) => {
+                          return (
+                            <div className="tag-item-frame">
+                              <div className="tag-name"> {item}</div>
+                            </div>
+                          )
+                        }) : ""}
+
                     </div>
                   </Accordion.Content>
                 </Accordion>
@@ -351,18 +359,21 @@ const UserCart = ({
                     {profileDetails.education && profileDetails.education.length > 0
                       ? profileDetails.education.map((item) => {
                         return (
-                          <div style={{ fontSize: "11px" }}>
-                            <li className="wordBreak">
-                              {item.degree_name && item.degree_name !== ""
+                         
+                         
+                          <div className="prev-com-container">
+                            <div className="wordBreak prev-com-name">
+                            {item.degree_name && item.degree_name !== ""
                                 ? item.degree_name
                                 : "N/A"}
-                            </li>
-                            <div style={{ padding: "0 8%" }}>
-                              {displayDate(item.startdate).split("-")[2]}
+                            </div>
+                            <div style={{ width: "20%" }}>
+                            {displayDate(item.startdate).split("-")[2]}
                               {item.startdate !== "" ? "-" : ""}
                               {item.startdate !== ""
                                 ? displayDate(item.enddate).split("-")[2]
                                 : ""}
+                             
                             </div>
                           </div>
                         );

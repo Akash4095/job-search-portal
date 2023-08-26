@@ -127,7 +127,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           start={start}
           sessionUserId={sessionUserId}
         />
-        <div className="list-table-actions" style={{ width: rowClicked ? "62vw" : "77vw", marginLeft: rowClicked ? "1.5%" : "2%" }}>
+        <div className="list-table-actions">
           <div className="list-actions-select">
             {
               selectedRows.length > 0 ?
@@ -140,14 +140,16 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
             }
 
             {selectedRows.length > 0 ? (
-              <span style={{ color: "#2185d0", fontSize: "12px" }}>
+              <span className="btn-label">
                 {selectedRows.length + " Selected"}
               </span>
             ) : (
-              <span style={{ fontSize: "12px" }}>Select All</span>
+              <span className="list-select-all">Select All</span>
             )}
           </div>
-          <div className="list-actions-btns">
+          {
+            selectedRows.length > 0 ? 
+            <div className="list-actions-btns">
             <div className="btn-frame">
               <div className="btn-svg" onClick={() => tagListFunction()}>
                 <TagSvg />
@@ -189,6 +191,9 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
               </div>
             </div>
           </div>
+          : null
+          }
+      
         </div>
         <div className="d_flex">
           <div

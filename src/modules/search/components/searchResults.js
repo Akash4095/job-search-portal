@@ -63,7 +63,7 @@ const SearchResults = ({
   };
 
   return (
-    <div className="cart" style={{ width: rowClicked ? "60vw" : "77vw" }}>
+    <div className="cart" style={{ width: rowClicked ? "40vw" : "77vw" }}>
       <div>
         <Checkbox
           className="search-result-checkbox"
@@ -72,7 +72,7 @@ const SearchResults = ({
         />
       </div>
       <div className="cart-content">
-        <div className="cart-body"  onClick={() => getUserProfileDetails(row)}>
+        <div className="cart-body" onClick={() => getUserProfileDetails(row)}>
           <div className="cart-img">
             <img
               src={
@@ -86,7 +86,7 @@ const SearchResults = ({
             />
           </div>
           <div className="cart-frame">
-            <div className="cart-name-header" style={{ width: rowClicked ? "50vw" : "68vw" }}>
+            <div className="cart-name-header" style={{ width: rowClicked ? "30vw" : "68vw" }}>
               <div className="cart-user-name" onClick={() => getUserProfileDetails(row)}>
                 {row && row.title ? (
                   <span dangerouslySetInnerHTML={createMarkup(row.title)} />
@@ -104,7 +104,7 @@ const SearchResults = ({
                 <Icon name="dribbble" color="grey" />
               </div>
             </div>
-            <div className="cart-description" style={{ width: rowClicked ? "42vw" : "60vw" }}>
+            <div className="cart-description" style={{ width: rowClicked ? "22vw" : "60vw" }}>
               {row && row.description && row.description !== undefined ? (
                 <span
                   dangerouslySetInnerHTML={createMarkup(row.description)}
@@ -113,13 +113,13 @@ const SearchResults = ({
                 ""
               )}
             </div>
-            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)} style={{width: rowClicked ? "12%" : "9%"}}>
+            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)} style={{ width: rowClicked ? "20%" : "9%" }}>
               Add to list
             </div>
           </div>
         </div>
       </div>
-   
+
     </div>
   );
 };

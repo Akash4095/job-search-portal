@@ -134,14 +134,14 @@ const SideBar = ({ sessionUserId }) => {
           <div className="default-list">My Team</div>
         </div>
         <div className="sidebar-f-list">
-          {/* <Icon name="help circle" className="sidebar-icons" /> */}
+
           <div className="footerSvg">
             <HelpSvg />
           </div>
           <div className="default-list">Help</div>
         </div>
         <div className="sidebar-f-list">
-          {/* <Icon name="clipboard outline" className="sidebar-icons" /> */}
+
           <div className="footerSvg">
             <IntegrationSvg />
           </div>

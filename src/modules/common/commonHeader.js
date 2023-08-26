@@ -106,14 +106,14 @@ const CommonHeaderComponent = () => {
         <header className="common-header">
             <div className="top-tab">
                 <div
-                    style={{ color: searchClicked ? "#2185d0" : "#666", borderBottom: searchClicked ? "2px solid" : "none" }}
+                    style={{ color: searchClicked ? "#2b81e7" : "#666", borderBottom: searchClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToSearch()}
                 >
                     Search
                 </div>
 
                 <div
-                    style={{ color: listClicked ? "#2185d0" : "#666", borderBottom: listClicked ? "2px solid" : "none" }}
+                    style={{ color: listClicked ? "#2b81e7" : "#666", borderBottom: listClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToList()}
                 >
                     List
@@ -132,17 +132,19 @@ const CommonHeaderComponent = () => {
             </div>
             <div className="top-actions-container">
                 <div className="top-actions">
-                    <div style={{ position: "relative" }}>
+                    <div style={{ position: "relative", right: "6%" }}>
                         <BellSvg />
                         <span className="notification-count">5</span>
                     </div>
-                    <img src={userImage} width="25px" height="25px" />
+                    <div className="header-image-container">
+                        <img src={userImage} width="25px" height="25px" />
+                    </div>
                     <div className="profile-wrapper">
                         <div className="profile">
                             <div className="user-parent">
-                                <div className="search">{userName}</div>
-                                <Dropdown text='' style={{ marginLeft: "-10px", marginTop: "-3px", borderRadius: "6px" }}>
-                                    <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "6px" }} >
+                                <div className="header-user-name">{userName}</div>
+                                <Dropdown text='' style={{ marginLeft: "-12px", marginTop: "-3px", borderRadius: "6px" }}>
+                                    <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "10px" }} >
                                         <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> User Management</Dropdown.Item>

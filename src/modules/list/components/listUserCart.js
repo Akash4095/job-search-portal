@@ -109,41 +109,41 @@ const ListUserCart = ({
                           : ""
                         : ""
                     }
-                    width="50"
-                    height="50"
+                    width="68"
+                    height="68"
                     className="borderRadius"
                   />
+                  <div className="cartNameWork">
+                    <div className="user-cart-name">
+                      {profileDetails !== ""
+                        ? profileDetails.full_name
+                          ? profileDetails.full_name
+                          : ""
+                        : ""}
+                    </div>
+                    <div className="user-cart-work">
+                      {profileDetails !== ""
+                        ? profileDetails.designation
+                          ? profileDetails.designation
+                          : ""
+                        : ""}
+                    </div>
+                  </div>
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
                     <CancelSvg />
                   </div>
                 </div>
               </div>
-              <div className="paddingUsrDetails">
-                <div className="user-cart-name">
-                  {profileDetails !== ""
-                    ? profileDetails.full_name
-                      ? profileDetails.full_name
-                      : ""
-                    : ""}
-                </div>
-                <div className="user-cart-work">
-                  {profileDetails !== ""
-                    ? profileDetails.designation
-                      ? profileDetails.designation
-                      : ""
-                    : ""}
-                </div>
-              </div>
+              {/* <div className="paddingUsrDetails">
+            
+              </div> */}
               <div className="list-company-details">
                 <div className="padding10">
-                  <div style={{ fontSize: "12px", paddingBottom: "5px" }}>
+                  <div className="list-user-cart-company">
                     Company Details
                   </div>
                   <div style={{ fontSize: "12px", width: "100%" }} className="d_flex">
-                    <div style={{ width: "10%" }}>
-                      <Icon color="blue" name="building outline" />
-                    </div>
-                    <div style={{ width: "90%" }}>
+                    <div>
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
                           ? profileDetails.experience[0].company
@@ -262,7 +262,7 @@ const ListUserCart = ({
                   <Accordion.Title
                     active={tagsAccordion}
                     index={0}
-                    // onClick={() => setTagsAcordion(!tagsAccordion)}
+                  // onClick={() => setTagsAcordion(!tagsAccordion)}
                   >
                     <div className="accord-title">
                       <span>Tags</span>
@@ -272,7 +272,7 @@ const ListUserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={tagsAccordion}>
-                    <div style={{ display: "flex", flexWrap: "wrap", paddingTop:"5px" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", paddingTop: "5px" }}>
                       {profileDetails.tags && profileDetails.tags.length > 0
                         ? profileDetails.tags.map((item, index) => {
                           return (
