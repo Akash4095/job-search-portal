@@ -24,31 +24,33 @@ body {
 .sidebar-header {
   border-bottom: 1px solid var(--color-lightgray-100);
   box-sizing: border-box;
-  height: 13vh !important;
+  height: 9vh !important;
   display: flex;
   flex-direction: row;
-  padding: 0 7% !important;
   align-items: center;
   justify-content: flex-start;
   margin-left: -10px !important;
   font-size: 34px;
   color: #464646;
+  background-color: #000;
 }
 .sidebar-header .top {
+  display: flex;
   cursor: pointer !important;
-  position: absolute;
-  top: 5vh !important;
+  top: 3vh !important;
+  width: 100%;
 }
 .sidebar-middle {
   border-bottom: 1px solid var(--color-lightgray-100);
   box-sizing: border-box;
-  height: 57vh !important;
+  height: 60vh !important;
   overflow-y: scroll !important;
 }
 
 .getlist {
   font-weight: 800;
   padding-left: 15% !important;
+  color: #fff;
 }
 .a {
   font-weight: 500;
@@ -57,8 +59,20 @@ body {
 .getlista {
   position: relative;
   letter-spacing: -0.02em;
+  color: #fff;
 }
-
+.subscription-date {
+  position: relative;
+  letter-spacing: -0.02em;
+  color: #666;
+}
+.sidebar-list-lock {
+  display: flex;
+  padding-left: 14% !important;
+  padding-top: 11% !important;
+  color: #666;
+  cursor: pointer !important;
+}
 .sidebar-list {
   display: flex;
   padding-left: 14% !important;
@@ -130,10 +144,11 @@ body {
   padding-bottom: 20px !important;
   border-bottom: 1px solid var(--color-lightgray-100);
   cursor: pointer;
+  height: 20vh !important;
 }
 
 .widget-last {
-  height: 8vh !important;
+  height: 10vh !important;
   border-radius: var(--br-7xs);
   width: 18vw !important;
   padding: 6% 12% !important;
@@ -182,18 +197,25 @@ i.icon {
   font-size: var(--font-size-lg);
 }
 
+.commonHeaderContainer {
+  width: 80vw;
+  background-color: #1a1a1a;
+}
 .common-header {
   display: flex !important;
   align-items: stretch;
   position: absolute;
-  top: 3.7vh !important;
-  height: 40px !important;
+  height: 9vh !important;
   box-sizing: border-box;
-  width: 77vw !important;
-  left: 2% !important;
+  width: 82vw !important;
+  padding-left: 1.4vw !important;
+  padding-right: 3vw !important;
+  padding-top: 1.5vh !important;
+  padding-bottom: 2vh !important;
   gap: 1px !important;
   font-size: var(--font-size-lg);
   cursor: pointer !important;
+  background-color: #000;
 }
 
 .top-tab {
@@ -230,8 +252,8 @@ i.icon {
 .balance-background {
   gap: 8px !important;
   display: flex;
-  background-color: var(--color-white);
-  padding: 6px 8px !important;
+  background-color: #393939;
+  padding: 5px 8px !important;
   border-radius: 6px !important;
 }
 .notification {
@@ -280,7 +302,7 @@ i.icon {
 }
 
 .notification-count {
-  background: #2b81e7;
+  background: #1be885;
   border-radius: 50%;
   color: #fff;
   height: 18px;
@@ -297,7 +319,7 @@ i.icon {
   margin-right: 5%;
 }
 .header-user-name {
-  color: #666;
+  color: #fff;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -317,10 +339,11 @@ i.icon {
 
 .input-wrapper {
   border: 1px solid #a9a9a9;
-  border-radius: 100px;
   padding: 24px 32px;
   box-shadow: 0px 0px 8px #ddd;
-  background-color: rgba(222, 222, 222, 0.49);
+  border-radius: 100px;
+  border: 1px solid #a9a9a9;
+  background: #000;
   align-items: center;
 }
 .input-wrapper-child {
@@ -329,7 +352,11 @@ i.icon {
   gap: 16px !important;
   flex: 1 0 0;
 }
-
+.searchSvgComp {
+  width: 24px !important;
+  height: 24px !important;
+  color: #1be885;
+}
 .searchSvg {
   width: 24px !important;
   height: 24px !important;
@@ -360,7 +387,8 @@ input:focus {
   border-radius: 100px;
   padding: 20px 32px;
   box-shadow: 0px 0px 8px #ddd;
-  background-color: rgba(222, 222, 222, 0.49);
+  border: 1px solid #000;
+  background: rgba(255, 255, 255, 0.49);
   align-items: center;
   margin-left: 7% !important;
   margin-top: 13vh !important;
@@ -371,6 +399,21 @@ input:focus {
   background-color: transparent;
   border: none;
   color: #666 !important;
+  font-family: Inter;
+  font-size: 20px !important;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.48px;
+  width: 100% !important;
+}
+.search-input::placeholder {
+  color: #1be885 !important;
+}
+.search-input {
+  background-color: transparent;
+  border: none;
+  color: #1be885 !important;
   font-family: Inter;
   font-size: 20px !important;
   font-style: normal;
@@ -557,6 +600,9 @@ input:focus {
   background-color: #fff;
   color: #fff;
   border-radius: 5px;
+}
+
+.searchList {
 }
 
 .search-result-container {
@@ -927,7 +973,7 @@ input:focus {
   font-size: 16px !important;
 }
 .list-usercart-container {
-  width: 70vw !important;
+  width: 72vw !important;
   height: 70vh !important;
   background: #fff;
   border: 1px solid #eee;

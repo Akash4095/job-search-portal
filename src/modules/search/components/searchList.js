@@ -167,7 +167,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
           <div className="d_flex">
             <div
               className="scrollable-container search-result-container"
-              style={{ height: "70vh", overflowY: "scroll", width: "77vw" }}
+              style={{ height: "70vh", overflowY: "scroll", }}
             >
               <>
                 {items && items.length > 0

@@ -106,14 +106,14 @@ const CommonHeaderComponent = () => {
         <header className="common-header">
             <div className="top-tab">
                 <div
-                    style={{ color: searchClicked ? "#2b81e7" : "#666", borderBottom: searchClicked ? "2px solid" : "none" }}
+                    style={{ color: searchClicked ? "#1BE885" : "#fff", borderBottom: searchClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToSearch()}
                 >
                     Search
                 </div>
 
                 <div
-                    style={{ color: listClicked ? "#2b81e7" : "#666", borderBottom: listClicked ? "2px solid" : "none" }}
+                    style={{ color: listClicked ? "#1BE885" : "#fff", borderBottom: listClicked ? "2px solid" : "none" }}
                     onClick={() => navigateToList()}
                 >
                     List
@@ -143,8 +143,8 @@ const CommonHeaderComponent = () => {
                         <div className="profile">
                             <div className="user-parent">
                                 <div className="header-user-name">{userName}</div>
-                                <Dropdown text='' style={{ marginLeft: "-12px", marginTop: "-3px", borderRadius: "6px" }}>
-                                    <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "10px" }} >
+                                <Dropdown text='' style={{ marginLeft: "-12px", marginTop: "-3px", borderRadius: "6px", color: "#fff" }}>
+                                    <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "26px" }} >
                                         <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> User Management</Dropdown.Item>

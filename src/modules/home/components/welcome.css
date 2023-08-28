@@ -80,14 +80,15 @@
 .searchbar-p {
   font-size: 23px !important;
   margin-bottom: 15px !important;
-  color: #666 !important;
-  text-align: center;
+  color: #000 !important;
+  text-align: left;
   font-family: Inter;
   font-size: 33px;
   font-style: normal;
-  font-weight: 300;
+  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.66px;
+  margin-left: 2%;
 }
 
 .summary-grid {

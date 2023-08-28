@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getIsCodeSendResponse, getIsSearchedText } from '../home/data/selectors';
 import { getSearchedComponentText } from '../home/data/actions';
 import { fetchSearchByQuery } from '../search/data/actions';
-import SearchIconSvg from '../svg/searchIconSvg';
+import SearchIconSvg from '../svg/SearchIcon';
 
 const SearchComponent = ({ setSearchedText, sessionUserId }) => {
 
@@ -48,7 +48,7 @@ const SearchComponent = ({ setSearchedText, sessionUserId }) => {
   return (
     <div className="input-wrapper">
       <div className='input-wrapper-child'>
-        <div onClick={() => saveSearchedText()} className="searchSvg">
+        <div onClick={() => saveSearchedText()} className="searchSvgComp">
           <SearchIconSvg />
         </div>
         <input
@@ -56,7 +56,7 @@ const SearchComponent = ({ setSearchedText, sessionUserId }) => {
           value={input}
           onChange={(e) => handleChange(e.target.value)}
           onKeyDown={handleKeyPress}
-          className="common-input"
+          className="search-input"
         />
       </div>
     </div>

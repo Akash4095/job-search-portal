@@ -84,12 +84,12 @@ const SideBar = ({ sessionUserId }) => {
     <section className="sidebar-container">
       <div className="sidebar-header">
         <div className="top" onClick={() => gotoWelcomePage()}>
-          <span className="getlist">getlist</span>
-          <span className="a">{`{a}`}</span>
+          <div className="getlist">getlist</div>
+          <div className="a">{`{a}`}</div>
         </div>
       </div>
       <div className="sidebar-middle scrollable-container-sidebar">
-        <div className="sidebar-list">
+        <div className="sidebar-list-lock">
           {/* <Icon name="bars" className="sidebar-icons" /> */}
           <div className="listSvg">
             <ListSvg />
@@ -149,7 +149,7 @@ const SideBar = ({ sessionUserId }) => {
         </div>
       </div>
       <div className="widget-last">
-        <div className="getlista">Subscription Expiry Date</div>
+        <div className="subscription-date">Subscription Expiry Date</div>
         <div>25 July 2023</div>
       </div>
       <Modal
