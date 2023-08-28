@@ -125,7 +125,7 @@
 }
 
 .summary-p {
-  color: #1c34b0;
+  color: #666;
   text-align: center;
   font-family: Inter;
   font-size: 15px;
@@ -144,7 +144,7 @@
 
 .summary-div {
   display: flex;
-  width: 14vw !important;
+  width: 12vw !important;
   height: 90px !important;
   flex-direction: column;
   justify-content: center;

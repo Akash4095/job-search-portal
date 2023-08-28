@@ -80,8 +80,8 @@ const SearchResults = ({
                   ? row.profilepic
                   : ""
               }
-              height="58"
-              width="58"
+              height="60"
+              width="60"
               className="border-radius"
             />
           </div>
@@ -96,7 +96,7 @@ const SearchResults = ({
               </div>
               <div className="cart-user-icons">
                 <Link to={row.linkedinlink} target="_blank">
-                  <div title="Linkedin Profile">
+                  <div title="Linkedin Profile" className="linkedinIcon-usercart">
                     <Icon color="grey" name="linkedin" />
                   </div>
                 </Link>

@@ -95,25 +95,25 @@ const UserCart = ({
                 <div className="d_flex">
                   <img
                     src={profileDetails.profilepic ? profileDetails.profilepic : ""}
-                    width="68"
-                    height="68"
+                    width="80"
+                    height="80"
                     className="borderRadius"
                   />
                   <div className="cartNameWork">
                     <div className="user-cart-name">
-                      {profileDetails.full_name ? profileDetails.full_name : "N/A"}
+                      {profileDetails.full_name ? profileDetails.full_name : ""}
                     </div>
                     <div className="user-cart-work">
-                      {profileDetails.designation ? profileDetails.designation : "N/A"}
+                      {profileDetails.designation ? profileDetails.designation : ""}
                     </div>
-                    <div style={{ marginTop: "8px" }} className="d_flex">
+                    <div style={{ marginTop: "12px" }} className="d_flex">
                       <Link
                         to={
                           profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
                         }
                         target="_blank"
                       >
-                        <div title="Linkedin Profile">
+                        <div title="Linkedin Profile" className="linkedinIcon">
                           <Icon color="grey" name="linkedin" />
                         </div>
                       </Link>
@@ -133,18 +133,18 @@ const UserCart = ({
                   <div className="list-user-cart-company">
                     Company Details
                   </div>
-                  <div style={{ fontSize: "14px", width: "100%" }} className="d_flex">
+                  <div style={{ fontSize: "14px", width: "100%" }} className="list-user-cart-company-name">
                     <div>
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
                           ? profileDetails.experience[0].company
-                          : "N/A"
-                        : "N/A"}
+                          : ""
+                        : ""}
                     </div>
-                    <div style={{ marginLeft: "12px", fontSize: "12px" }}>
+                    <div style={{ marginLeft: "12px", fontSize: "15px" }}>
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
-                          ? ": From" +
+                          ? " From" +
                           " " +
                           ((profileDetails.experience[0].startdate && profileDetails.experience[0].startdate !== "") ?
                             extractMonthNames(
@@ -164,7 +164,7 @@ const UserCart = ({
                   </div>
 
                   <div className="user-cart-description">
-                    {profileDetails.description ? profileDetails.description : "N/A"}
+                    {profileDetails.description ? profileDetails.description : ""}
                   </div>
 
                 </div>
@@ -180,28 +180,9 @@ const UserCart = ({
                   >
                     <div className="accord-title">
                       <span>Contact Details</span>
-                      <span>
-                        <div
-                          style={{ paddingLeft: "86%", cursor: "pointer" }}
-                          onClick={() => callProfileContacts()}
-                        >
-                          {profileDetails.contactstatus &&
-                            (profileDetails.contactstatus == "false" ||
-                              profileDetails.contactstatus == false) ? (
-                            <div className="contact-download-svg">
-                              <ContactDownloadSvg />
-                            </div>
-
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </span>
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={contactAccordion}>
-
-
                     <div style={{ fontSize: "12px" }}>
                       {profileDetails.email && profileDetails.email.length > 0
                         ? profileDetails.email.map((item, index) => {
@@ -219,7 +200,7 @@ const UserCart = ({
                             </div>
                           );
                         })
-                        : "N/A"}
+                        : ""}
                     </div>
                     <div style={{ fontSize: "12px" }}>
                       {profileDetails.phone && profileDetails.phone.length > 0
@@ -243,14 +224,21 @@ const UserCart = ({
                             </div>
                           );
                         })
-                        : "N/A"}
+                        : ""}
                     </div>
 
-                    {/* <div style={{ paddingTop: "10px" }}>
-                      <Icon name="linkedin" />
-                      <Icon name="twitter" />
-                      <Icon name="dribbble" />
-                    </div> */}
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => callProfileContacts()}
+                    >
+                      {profileDetails.contactstatus &&
+                        (profileDetails.contactstatus == "false" ||
+                          profileDetails.contactstatus == false) ? (
+                        <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>Get Contacts</Button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </Accordion.Content>
                 </Accordion>
               </div>
@@ -282,7 +270,7 @@ const UserCart = ({
                                 ? item.company
                                 : ""}
                             </div>
-                            <div style={{ width: "20%" }}>
+                            <div style={{ width: "20%" }} className="fontSize13">
                               {index == 0 && item.enddate === "" ? (
                                 <>
                                   {displayDate(item.startdate).split("-")[2]}
@@ -301,7 +289,7 @@ const UserCart = ({
                           </div>
                         );
                       })
-                      : "N/A"}
+                      : ""}
                   </Accordion.Content>
                 </Accordion>
               </div>
@@ -359,26 +347,30 @@ const UserCart = ({
                     {profileDetails.education && profileDetails.education.length > 0
                       ? profileDetails.education.map((item) => {
                         return (
-                         
-                         
+
                           <div className="prev-com-container">
                             <div className="wordBreak prev-com-name">
-                            {item.degree_name && item.degree_name !== ""
+                              {item.degree_name && item.degree_name !== ""
                                 ? item.degree_name
-                                : "N/A"}
-                            </div>
-                            <div style={{ width: "20%" }}>
-                            {displayDate(item.startdate).split("-")[2]}
-                              {item.startdate !== "" ? "-" : ""}
-                              {item.startdate !== ""
-                                ? displayDate(item.enddate).split("-")[2]
                                 : ""}
-                             
                             </div>
+                            {
+                              (item.degree_name && item.degree_name !== "") ?
+                                <div style={{ width: "20%" }} className="fontSize13">
+                                  {displayDate(item.startdate).split("-")[2]}
+                                  {item.startdate !== "" ? "-" : ""}
+                                  {item.startdate !== ""
+                                    ? displayDate(item.enddate).split("-")[2]
+                                    : ""}
+
+                                </div>
+                                : null
+                            }
+
                           </div>
                         );
                       })
-                      : "N/A"}
+                      : ""}
                   </Accordion.Content>
                 </Accordion>
               </div>

@@ -402,6 +402,7 @@ input:focus {
   font-size: 12px !important;
   padding: 1px 10px;
   color: #888 !important;
+  gap: 6px;
 }
 
 .icons > i {
@@ -488,6 +489,14 @@ input:focus {
   color: #2185d0 !important;
   margin-bottom: 1% !important;
   cursor: pointer !important;
+}
+
+.list-footer-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  cursor: pointer;
+  padding-bottom: 10px;
 }
 .marginRight7 {
   margin-right: 7% !important;
@@ -810,6 +819,7 @@ input:focus {
   flex: 1 0 0;
   flex-wrap: wrap;
   align-self: baseline;
+  padding-top: 10px;
 }
 .company-name {
   display: flex;
@@ -894,10 +904,28 @@ input:focus {
   gap: 10px;
 }
 
+.fontSize14 {
+  font-size: 14px !important;
+}
+.fontSize13 {
+  font-size: 13px !important;
+}
 .cartNameWork {
-  padding: 0px 10px !important;
+  padding: 4px 10px !important;
+}
+.cartNameWork > div > i {
+  font-size: 17px !important;
+}
+.linkedinIcon-usercart > i {
+  font-size: 16px !important;
+}
+.linkedinIcon > i {
+  font-size: 16px !important;
 }
 
+.cart-user-icons > i {
+  font-size: 16px !important;
+}
 .list-usercart-container {
   width: 70vw !important;
   height: 70vh !important;
@@ -910,7 +938,7 @@ input:focus {
 
 .list-user-cart-close-icon {
   position: absolute !important;
-  right: 20px !important;
+  right: 22px !important;
   cursor: pointer !important;
 }
 .list-user-cart-name {
@@ -940,16 +968,22 @@ input:focus {
 }
 
 .list-user-cart-company {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: #666 !important;
+}
+
+.list-user-cart-company-name {
+  display: flex;
   font-size: 16px !important;
   font-weight: 600 !important;
   color: #333 !important;
 }
-
 .list-user-cart-description {
   display: block;
   display: -webkit-box;
   margin: 10px 3px;
-  font-size: 12px !important;
+  font-size: 14px !important;
   word-wrap: break-word !important;
   word-break: break-all !important;
   -webkit-line-clamp: 4;
@@ -1038,7 +1072,7 @@ input:focus {
   font-size: 12px;
 }
 .prev-com-name {
-  width: 50% !important;
+  width: 75% !important;
   color: #1a1a1a;
   font-family: Inter;
   font-size: 14px;
@@ -1046,8 +1080,6 @@ input:focus {
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.28px;
-  text-decoration-line: underline;
-  margin-right: 12px;
 }
 
 .prev-accord {

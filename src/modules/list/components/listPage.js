@@ -150,8 +150,8 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           {
             selectedRows.length > 0 ? 
             <div className="list-actions-btns">
-            <div className="btn-frame">
-              <div className="btn-svg" onClick={() => tagListFunction()}>
+            <div className="btn-frame" onClick={() => tagListFunction()}>
+              <div className="btn-svg">
                 <TagSvg />
               </div>
               <div className="btn-label">

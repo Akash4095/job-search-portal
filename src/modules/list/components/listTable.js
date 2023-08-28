@@ -154,7 +154,7 @@ const ListTable = ({
                               </div>
                             );
                           })
-                          : "N/A"}
+                          : ""}
                       </div>
                     </div>
                     <div className="list-column5" onClick={() => fetchlistCartDetails(item)}>

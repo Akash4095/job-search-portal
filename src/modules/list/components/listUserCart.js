@@ -109,8 +109,8 @@ const ListUserCart = ({
                           : ""
                         : ""
                     }
-                    width="68"
-                    height="68"
+                    width="80"
+                    height="80"
                     className="borderRadius"
                   />
                   <div className="cartNameWork">
@@ -128,6 +128,20 @@ const ListUserCart = ({
                           : ""
                         : ""}
                     </div>
+                    <div style={{ marginTop: "12px" }} className="d_flex">
+                      <Link
+                        to={
+                          profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
+                        }
+                        target="_blank"
+                      >
+                        <div title="Linkedin Profile" className="linkedinIcon">
+                          <Icon color="grey" name="linkedin" />
+                        </div>
+                      </Link>
+                      <Icon name="twitter" color="grey" />
+                      <Icon name="dribbble" color="grey" />
+                    </div>
                   </div>
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
                     <CancelSvg />
@@ -142,7 +156,7 @@ const ListUserCart = ({
                   <div className="list-user-cart-company">
                     Company Details
                   </div>
-                  <div style={{ fontSize: "12px", width: "100%" }} className="d_flex">
+                  <div className="list-user-cart-company-name">
                     <div>
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
@@ -154,20 +168,7 @@ const ListUserCart = ({
                   <div className="list-user-cart-description">
                     {profileDetails.description ? profileDetails.description : ""}
                   </div>
-                  <div style={{ marginBottom: "10px" }} className="d_flex">
-                    <Link
-                      to={
-                        profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
-                      }
-                      target="_blank"
-                    >
-                      <div title="Linkedin Profile">
-                        <Icon color="grey" name="linkedin" />
-                      </div>
-                    </Link>
-                    <Icon name="twitter" />
-                    <Icon name="dribbble" />
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -182,22 +183,6 @@ const ListUserCart = ({
                   >
                     <div className="accord-title">
                       <span>Contact Details</span>
-                      <span>
-                        <div
-                          style={{ paddingLeft: "86%", cursor: "pointer" }}
-                          onClick={() => callProfileContacts()}
-                        >
-                          {profileDetails.contactstatus &&
-                            (profileDetails.contactstatus == "false" ||
-                              profileDetails.contactstatus == false) ? (
-                            <div className="contact-download-svg">
-                              <ContactDownloadSvg />
-                            </div>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      </span>
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={contactAccordion}>
@@ -219,7 +204,7 @@ const ListUserCart = ({
                             </div>
                           );
                         })
-                        : "N/A"}
+                        : ""}
                     </div>
                     <div style={{ fontSize: "11px" }}>
                       {profileDetails.phone && profileDetails.phone.length > 0
@@ -243,13 +228,19 @@ const ListUserCart = ({
                             </div>
                           );
                         })
-                        : "N/A"}
+                        : ""}
                     </div>
-
-                    <div style={{ paddingTop: "10px" }}>
-                      <Icon name="linkedin" />
-                      <Icon name="twitter" />
-                      <Icon name="dribbble" />
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => callProfileContacts()}
+                    >
+                      {profileDetails.contactstatus &&
+                        (profileDetails.contactstatus == "false" ||
+                          profileDetails.contactstatus == false) ? (
+                        <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>Get Contacts</Button>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </Accordion.Content>
                 </Accordion>
@@ -262,7 +253,7 @@ const ListUserCart = ({
                   <Accordion.Title
                     active={tagsAccordion}
                     index={0}
-                  // onClick={() => setTagsAcordion(!tagsAccordion)}
+                    onClick={() => setTagsAcordion(!tagsAccordion)}
                   >
                     <div className="accord-title">
                       <span>Tags</span>
@@ -281,7 +272,7 @@ const ListUserCart = ({
                             </div>
                           );
                         })
-                        : "N/A"}
+                        : ""}
                     </div>
                     <div className="paddingTop5">
                       <span
@@ -310,43 +301,49 @@ const ListUserCart = ({
                   >
                     <div className="accord-title">
                       <span>Previous Company</span>
-                      <span>
+                      {/* <span>
                         <Icon
                           name={prevCompanyAccordion ? "angle down" : "angle right"}
                         />
-                      </span>
+                      </span> */}
                     </div>
                   </Accordion.Title>
-                  <Accordion.Content active={prevCompanyAccordion}>
+                  <Accordion.Content active={prevCompanyAccordion} className="prev-accord">
                     {profileDetails.experience && profileDetails.experience.length > 0
                       ? profileDetails.experience.map((item, index) => {
                         return (
-                          <div style={{ fontSize: "11px" }}>
-                            <li className="wordBreak">{item.company}</li>
-                            <div style={{ padding: "0 8%" }}>
+                          <div className="prev-com-container">
+                            <div className="wordBreak prev-com-name">
+                              {item.company && item.company !== ""
+                                ? item.company
+                                : ""}
+                            </div>
+                            <div style={{ width: "20%" }} className="fontSize13">
                               {index == 0 && item.enddate === "" ? (
                                 <>
-                                  {displayDate(item.startdate).split("-")[2]}{" "}
+                                  {displayDate(item.startdate).split("-")[2]}
                                   {item.startdate !== "" ? "- Present" : ""}
                                 </>
                               ) : (
                                 <>
-                                  {displayDate(item.startdate).split("-")[2]}{" "}
+                                  {displayDate(item.startdate).split("-")[2]}
                                   {item.startdate !== "" ? "-" : ""}
-                                  {displayDate(item.enddate).split("-")[2]}
+                                  {item.startdate !== ""
+                                    ? displayDate(item.enddate).split("-")[2]
+                                    : ""}
                                 </>
                               )}
                             </div>
                           </div>
                         );
                       })
-                      : "N/A"}
+                      : ""}
                   </Accordion.Content>
                 </Accordion>
               </div>
             </div>
-            <div className="add-list-user-to-list">
-              <div className="padding10 alignCenter">
+            <div className="list-footer-btns">
+              <div className="alignCenter">
                 <Button
                   basic
                   color="blue"
@@ -357,7 +354,7 @@ const ListUserCart = ({
                   Add to list
                 </Button>
               </div>
-              <div className="padding10 alignCenter fontSize12">
+              <div className="alignCenter fontSize12">
                 <span className="error">
                   <Icon color="red" name="trash alternate" /> <span>Delete</span>
                 </span>
