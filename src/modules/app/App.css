@@ -1351,3 +1351,8 @@ input:focus {
   top: 12px;
   cursor: pointer;
 }
+
+.ui.dropdown>.dropdown.icon {
+  width: auto;
+  color: #fff !important;
+}

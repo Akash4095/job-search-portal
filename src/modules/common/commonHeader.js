@@ -137,13 +137,13 @@ const CommonHeaderComponent = () => {
                         <span className="notification-count">5</span>
                     </div>
                     <div className="header-image-container">
-                        <img src={userImage} width="25px" height="25px" />
+                        <img src={userImage} width="25px" height="25px" className="borderRadius" />
                     </div>
                     <div className="profile-wrapper">
                         <div className="profile">
                             <div className="user-parent">
                                 <div className="header-user-name">{userName}</div>
-                                <Dropdown text='' style={{ marginLeft: "-12px", marginTop: "-3px", borderRadius: "6px", color: "#fff" }}>
+                                <Dropdown text='' style={{ marginLeft: "-18px", marginTop: "-3px", borderRadius: "6px" }}>
                                     <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "26px" }} >
                                         <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
