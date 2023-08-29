@@ -53,6 +53,11 @@ const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessio
       setLoader({ open: true, msg: "Loading" });
 
     }
+    setTimeout(() => {
+      if (window.location.pathname && window.location.pathname !== undefined && window.location.pathname == "/list") {
+        navigate("/search")
+      }
+    }, 700)
   };
 
   useEffect(() => {

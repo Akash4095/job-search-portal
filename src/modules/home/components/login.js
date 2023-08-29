@@ -113,7 +113,7 @@ const Login = ({ setSessionUserId }) => {
         <div>
             <div className="get-started">
                 <div className="getlista-wrapper">
-                    <span className="getlist">getlist</span>
+                    <span className="getlist-login">getlist</span>
                     <span className="a">{`{a}`}</span>
                 </div>
                 <div className="get-started-divider" />
