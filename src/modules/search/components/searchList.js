@@ -26,6 +26,9 @@ import {
 import CommanResponseModal from "../../common/commonModal";
 import AddUserProfileToListForm from "./addUserProfile";
 import { toast } from "react-toastify";
+import AddListSvg from "../../svg/addListSvg";
+import BlueListSvg from "../../svg/blueListSvg";
+import WhiteListSvg from "../../svg/whiteListSvg";
 
 const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
@@ -146,21 +149,14 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
           {selectedRows.length > 0 ? (
             <p className="list-selected">
               <span> {selectedRows.length + " Selected"} </span>
-              <Button
-                icon
-                labelPosition="left"
-                color="blue"
-                size="mini"
-                onClick={() => addProfilesToListFunc()}
-                style={{
-                  padding: "6px 0px",
-                  marginLeft: "20px",
-                  borderRadius: "6px",
-                }}
-              >
-                <Icon name="list ul" color="white" size="mini" />
-                Add to list
-              </Button>
+              <div className="btn-frame addSearchList" onClick={() => addProfilesToListFunc()}>
+                <div className="listCartBtn">
+                  <WhiteListSvg />
+                </div>
+                <div>
+                  Add to list
+                </div>
+              </div>
             </p>
           ) : null}
 
@@ -191,7 +187,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
                   })
                   : null}
               </>
-              <div className="view-more-button-container">
+              <div className="view-more-button-container" style={{ paddingBottom: rowClicked ? "12%" : "6%" }}>
                 {showViewMoreButton && items && items.length > 0 ? (
                   <button
                     className="view-more-button"
@@ -223,7 +219,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
       <Modal
         size="tiny"
         open={addListModal.open}
-        // onClose={() => setAddListModal({ open: false, msg: "", obj: {} })}
+      // onClose={() => setAddListModal({ open: false, msg: "", obj: {} })}
       >
         <Modal.Content>
           <AddUserProfileToListForm

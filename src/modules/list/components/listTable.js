@@ -108,7 +108,7 @@ const ListTable = ({
             {listArray.length > 0 &&
               listArray.map((item) => {
                 return (
-                  <div className="list-table-row"  >
+                  <div className="list-table-row">
                     <div className="list-column1">
                       <Checkbox
                         checked={selectedRows.includes(item)}

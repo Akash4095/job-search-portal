@@ -14,6 +14,7 @@ import AddListSvg from "../svg/addListSvg";
 import MyTeamSvg from "../svg/myTeamSvg";
 import HelpSvg from "../svg/helpSvg";
 import IntegrationSvg from "../svg/integrationSvg";
+import GetlistSvg from "../svg/getlist{a}.svg";
 
 const SideBar = ({ sessionUserId }) => {
   const addListRes = useSelector((state) => getIsAddUserList(state));
@@ -84,8 +85,9 @@ const SideBar = ({ sessionUserId }) => {
     <section className="sidebar-container">
       <div className="sidebar-header">
         <div className="top" onClick={() => gotoWelcomePage()}>
-          <div className="getlist">getlist</div>
-          <div className="a">{`{a}`}</div>
+          {/* <div className="getlist">getlist</div>
+          <div className="a">{`{a}`}</div> */}
+         <img src={GetlistSvg} alt="" />
         </div>
       </div>
       <div className="sidebar-middle scrollable-container-sidebar">

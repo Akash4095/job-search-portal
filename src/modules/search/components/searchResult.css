@@ -118,7 +118,7 @@
 
 .cart-add-to-list {
   align-self: stretch;
-  color: #2b81e7;
+  color: #007bff;
   font-family: Inter;
   font-size: 14px;
   font-style: normal;
@@ -166,16 +166,18 @@
   color: #999;
   font-weight: 500;
   width: 77vw !important;
+  padding-left: 2px;
 }
 
 .usercart-container {
   width: 40vw !important;
-  margin-left: 2% !important;
+  margin-left: 2vw !important;
   height: 70vh !important;
   background: #fff;
   border: 1px solid #eee;
   overflow-y: scroll !important;
   position: relative;
+  border: 1px solid #000;
 }
 .add-user-to-list {
   padding-bottom: 15px !important;

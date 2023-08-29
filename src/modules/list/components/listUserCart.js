@@ -23,6 +23,8 @@ import {
 } from "../data/actions";
 import CancelSvg from "../../svg/cancelSvg";
 import ContactDownloadSvg from "../../svg/contactDownloadSvg";
+import AddListSvg from "../../svg/addListSvg";
+import BlueListSvg from "../../svg/blueListSvg";
 
 const ListUserCart = ({
   selectedRows,
@@ -237,7 +239,7 @@ const ListUserCart = ({
                       {profileDetails.contactstatus &&
                         (profileDetails.contactstatus == "false" ||
                           profileDetails.contactstatus == false) ? (
-                        <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>Get Contacts</Button>
+                        <Button size="small" style={{ padding: "8px 18px", marginTop: "12px", background: "#007bff", color: "#fff" }}>Get Contacts</Button>
                       ) : (
                         ""
                       )}
@@ -275,16 +277,14 @@ const ListUserCart = ({
                         : ""}
                     </div>
                     <div className="paddingTop5">
-                      <span
-                        style={{
-                          fontSize: "11px",
-                          color: "#2185d0",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => openTagModal(profileDetails)}
-                      >
-                        <Icon color="blue" name="add" /> <span>Add Tag</span>
-                      </span>
+                      <div className="btn-frame" onClick={() => openTagModal(profileDetails)}>
+                        <div className="btn-svg">
+                          <AddListSvg />
+                        </div>
+                        <div className="btn-label">
+                          Add Tag
+                        </div>
+                      </div>
                     </div>
                   </Accordion.Content>
                 </Accordion>
@@ -344,15 +344,14 @@ const ListUserCart = ({
             </div>
             <div className="list-footer-btns">
               <div className="alignCenter">
-                <Button
-                  basic
-                  color="blue"
-                  size="large"
-                  className="list-user-cart-btn"
-                >
-                  <Icon name="list ul" color="white" size="mini" />
-                  Add to list
-                </Button>
+                <div className="btn-frame list-user-cart-btn">
+                  <div className="listCartBtn">
+                    <BlueListSvg />
+                  </div>
+                  <div className="btn-label">
+                    Add to list
+                  </div>
+                </div>
               </div>
               <div className="alignCenter fontSize12">
                 <span className="error">

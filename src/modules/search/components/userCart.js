@@ -17,6 +17,7 @@ import { getIsProfileContactDetails } from "../../list/data/selectors";
 import { fetchProfileDetails } from "../data/actions";
 import CancelSvg from "../../svg/cancelSvg";
 import ContactDownloadSvg from "../../svg/contactDownloadSvg";
+import BlueListSvg from "../../svg/blueListSvg";
 
 const UserCart = ({
   setRowClicked,
@@ -192,7 +193,7 @@ const UserCart = ({
                               <span
                                 style={{
                                   fontSize: "12px",
-                                  color: "#2185d0",
+                                  color: "#007bff",
                                 }}
                               >
                                 {item}
@@ -216,7 +217,7 @@ const UserCart = ({
                               <span
                                 style={{
                                   fontSize: "12px",
-                                  color: "#2185d0",
+                                  color: "#007bff",
                                 }}
                               >
                                 {item}
@@ -304,7 +305,7 @@ const UserCart = ({
                     onClick={() => setSkillsAcordion(!skillsAccordion)}
                   >
                     <div className="accord-title">
-                      <span>Skilss</span>
+                      <span>Skills</span>
                       <span>
                         <Icon name={skillsAccordion ? "angle down" : "angle right"} />
                       </span>
@@ -377,16 +378,14 @@ const UserCart = ({
             </div>
             <div className="add-user-to-list">
               <div className="paddingBtn alignCenter">
-                <Button
-                  basic
-                  color="blue"
-                  size="large"
-                  className="user-cart-btn"
-                  onClick={() => addProfileToListFunc(profileDetails)}
-                >
-                  <Icon name="list ul" color="white" size="mini" />
-                  Add to list
-                </Button>
+                <div className="btn-frame list-user-cart-btn">
+                  <div className="listCartBtn">
+                    <BlueListSvg />
+                  </div>
+                  <div className="btn-label">
+                    Add to list
+                  </div>
+                </div>
               </div>
             </div>
           </>

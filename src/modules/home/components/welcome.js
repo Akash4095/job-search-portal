@@ -137,7 +137,6 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
         </div>
 
         <div className="summary-grid-container">
-          <p className="summary-p">Your Summary</p>
           <div className="summary-frame">
             <div className="summary-div">
               <div className="summary-div-num">{search}</div>
