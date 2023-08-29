@@ -117,7 +117,7 @@
 
 .summary-grid-container {
   margin-left: 5% !important;
-  width: 74vw !important;
+  width: 66vw !important;
   margin-top: 26vh !important;
   display: inline-flex;
   flex-direction: column;
@@ -140,7 +140,7 @@
   display: flex;
   justify-content: space-between;
   width: inherit;
-  gap: 16px;
+  gap: 40px;
 }
 
 .summary-div {
@@ -156,7 +156,7 @@
 }
 
 .summary-div-num {
-  color: #828282;
+  color: #000;
   font-family: Inter;
   font-size: 35.476px;
   font-style: normal;
@@ -165,13 +165,13 @@
 }
 
 .summary-div-text {
-  width: 127.004px;
+  width: 10vw;
   color: #535353;
   text-align: center;
   font-family: Inter;
-  font-size: 11.718px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 168%; /* 19.687px */
   letter-spacing: -0.234px;
 }

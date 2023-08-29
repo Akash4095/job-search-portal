@@ -15,12 +15,12 @@ import AddEmailForm from "./addEmailForm";
 
 const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
 
-  const [userName, setUserName] = useState("");
-  const [leads, setLeads] = useState("");
-  const [search, setSearch] = useState("");
-  const [list, setList] = useState("");
-  const [team, setTeam] = useState("");
-  const [tags, setTags] = useState("");
+  const [userName, setUserName] = useState(0);
+  const [leads, setLeads] = useState(0);
+  const [search, setSearch] = useState(0);
+  const [list, setList] = useState(0);
+  const [team, setTeam] = useState(0);
+  const [tags, setTags] = useState(0);
   const [addEmail, setAddEmailModal] = useState(false)
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
