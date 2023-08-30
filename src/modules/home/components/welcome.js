@@ -8,10 +8,11 @@ import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse, getIsDashboardDetails } from "../data/selectors";
-import { fetchDashboardDetails } from "../data/actions";
+import { getIsCodeSendResponse, getIsDashboardDetails, getIsUserProfileDetailsFetched, getIsUserProfileDetailsUpdated } from "../data/selectors";
+import { clearUpdateUserProfileDetails, fetchDashboardDetails, fetchUserProfileDetails } from "../data/actions";
 import { getUserList } from "../../search/data/actions";
-import AddEmailForm from "./addEmailForm";
+import AddUserProfileForm from "./addEmailForm";
+import { toast } from "react-toastify";
 
 const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
 
@@ -21,10 +22,12 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const [list, setList] = useState(0);
   const [team, setTeam] = useState(0);
   const [tags, setTags] = useState(0);
-  const [addEmail, setAddEmailModal] = useState(false)
+  const [userProfileModal, setUserProfileModal] = useState(false)
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
+  const userProfileRes = useSelector((state) => getIsUserProfileDetailsFetched(state));
+  const userProfileUpdatedRes = useSelector((state) => getIsUserProfileDetailsUpdated(state));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,21 +43,25 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   useEffect(() => {
     const usrName = localStorage.getItem("username");
     // console.log('usrName', usrName)
-    if (usrName && usrName !== null && usrName !== undefined) {
+    if (usrName) {
       setUserName(usrName);
     } else {
       setUserName("");
     }
     const usrId = localStorage.getItem("userid");
-    if (usrId && usrId !== null && usrId !== undefined) {
+    if (usrId) {
       dispatch(fetchDashboardDetails(usrId.toString()))
+    }
+
+    if (usrId) {
+      dispatch(fetchUserProfileDetails(usrId.toString()))
     }
 
   }, [])
 
   useEffect(() => {
     let obj = {};
-    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
     dispatch(getUserList(obj));
   }, [sessionUserId]);
 
@@ -99,6 +106,30 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
     }
   }, [getLoginAuthRes]);
 
+  useEffect(() => {
+    if (userProfileRes) {
+      if (userProfileRes.status && userProfileRes.status === "success") {
+        if (userProfileRes.secondaryemail === "" ||
+          userProfileRes.designation === "" ||
+          userProfileRes.company === "" ||
+          userProfileRes.fullname === "") {
+          setUserProfileModal(true)
+        }
+      }
+    }
+
+  }, [userProfileRes])
+
+  useEffect(() => {
+    if (userProfileUpdatedRes) {
+      if (userProfileUpdatedRes.status && userProfileUpdatedRes.status === "success") {
+        toast.success(userProfileUpdatedRes.msg ? userProfileUpdatedRes.msg : "");
+        dispatch(clearUpdateUserProfileDetails())
+      }
+    }
+
+  }, [userProfileUpdatedRes])
+
 
   return (
     <div className="d_flex">
@@ -115,7 +146,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
               height="100"
             />
           </div>
-          <div className="user-name-parent" onClick={() => setAddEmailModal(true)}>
+          <div className="user-name-parent" onClick={() => setUserProfileModal(true)}>
             <b className="user-name">{"Hello " + ((userName && userName !== undefined && userName !== null) ? userName : "")}</b>
             <div className="bio">
               <p>
@@ -164,11 +195,11 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
       </div>
       <Modal
         size="mini"
-        open={addEmail}
+        open={userProfileModal}
         className="welcome-popup-container"
       >
         <Modal.Content>
-          <AddEmailForm setAddEmailModal={setAddEmailModal} sessionUserId={sessionUserId} />
+          <AddUserProfileForm setUserProfileModal={setUserProfileModal} sessionUserId={sessionUserId} />
         </Modal.Content>
       </Modal>
     </div>

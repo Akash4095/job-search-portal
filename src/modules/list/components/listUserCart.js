@@ -18,6 +18,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import AddTagNameForm from "./addTagName";
 import {
+  deleteListProfile,
   fetchListProfileDetails,
   fetchProfileContactDetails,
 } from "../data/actions";
@@ -25,6 +26,7 @@ import CancelSvg from "../../svg/cancelSvg";
 import ContactDownloadSvg from "../../svg/contactDownloadSvg";
 import AddListSvg from "../../svg/addListSvg";
 import BlueListSvg from "../../svg/blueListSvg";
+import DeleteSvg from "../../svg/deleteSvg";
 
 const ListUserCart = ({
   selectedRows,
@@ -93,7 +95,15 @@ const ListUserCart = ({
   const callProfileContacts = () => {
     dispatch(fetchProfileContactDetails(profileDetailsPayload));
   };
+  
+  const deleteProfileFromList = () => {
+    let obj = {}
+    obj.listid = (profileDetailsPayload.listid ? profileDetailsPayload.listid : "").toString()
+    obj.profileid = (profileDetailsPayload.profileid ? profileDetailsPayload.profileid : "").toString()
+    obj.userid = (profileDetailsPayload.userid ? profileDetailsPayload.userid : "").toString()
+    dispatch(deleteListProfile(obj))
 
+  }
   return (
     <div className="list-usercart-container scrollable-container">
 
@@ -353,10 +363,13 @@ const ListUserCart = ({
                   </div>
                 </div>
               </div>
-              <div className="alignCenter fontSize12">
-                <span className="error">
-                  <Icon color="red" name="trash alternate" /> <span>Delete</span>
-                </span>
+              <div className="btn-frame alignCenter listcart-delete-btn" onClick={() => deleteProfileFromList()}>
+                <div className="btn-svg" >
+                  <DeleteSvg />
+                </div>
+                <div className="btn-label-delete">
+                  Delete
+                </div>
               </div>
             </div>
 

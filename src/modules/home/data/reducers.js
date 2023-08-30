@@ -5,6 +5,7 @@ import { merge } from "lodash";
 const defaultAuthParams = {
     isAuthFetched: false,
     isKeysFetched: false,
+    userProfileFetched: false,
 
 }
 
@@ -41,6 +42,30 @@ function fetchedDashBoardDetails(state = {}, action) {
     }
 }
 
+function fetchedUserProfileDetails(state = {}, action) {
+    if (action.type === 'FETCHED_USER_PROFILE_DETAILS') {
+        return action.payload
+    }
+    if (action.type === 'CLEAR_FETCHED_USER_PROFILE_DETAILS') {
+        return {}
+    }
+    else {
+        return state
+    }
+}
+
+function updatedUserProfileDetails(state = {}, action) {
+    if (action.type === 'UPDATE_USER_PROFILE_DETAILS_RES') {
+        return action.payload
+    }
+    if (action.type === 'CLEAR_UPDATE_USER_PROFILE_DETAILS_RES') {
+        return {}
+    }
+    else {
+        return state
+    }
+}
+
 function params(state = defaultAuthParams, action) {
     if (action.type === 'GET_LOGIN_AUTH_RESPONSE') {
         return {
@@ -52,6 +77,18 @@ function params(state = defaultAuthParams, action) {
         return {
             ...state,
             isKeysFetched: true,
+        }
+    }
+    if (action.type === 'FETCHED_USER_PROFILE_DETAILS') {
+        return {
+            ...state,
+            userProfileFetched: true,
+        }
+    }
+    if (action.type === 'CLEAR_FETCHED_USER_PROFILE_DETAILS') {
+        return {
+            ...state,
+            userProfileFetched: false,
         }
     }
     else {
@@ -66,6 +103,8 @@ const homepageReducer = combineReducers({
     getLoginAuthResponse,
     getSearchedText,
     fetchedDashBoardDetails,
+    fetchedUserProfileDetails,
+    updatedUserProfileDetails,
     params,
 
 })

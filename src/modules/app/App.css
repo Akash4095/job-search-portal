@@ -1072,12 +1072,24 @@ input:focus {
   color: #666 !important;
   border-bottom: 1px solid #ccc;
 }
-.list-user-cart-btn {
+.user-cart-addbtn {
   padding: 6px 40px !important;
-  margin-top: 6% !important;
+  margin-top: 4% !important;
+  margin-bottom: 4% !important;
   border-radius: 5px !important;
   font-size: 12px !important;
   border: 1px solid;
+}
+.list-user-cart-btn {
+  padding: 6px 40px !important;
+  margin-top: 5% !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  border: 1px solid;
+}
+
+.listcart-delete-btn {
+  margin-bottom: 5% !important;
 }
 .addSearchList {
   position: relative;

@@ -72,7 +72,11 @@ function saveSidebarListPayload(state = {}, action) {
 function deleteListProfileRes(state = {}, action) {
     if (action.type === 'DELETE_LIST_PROFILE_RES') {
         return action.payload
-    } else {
+    } 
+    if (action.type === 'CLEAR_DELETE_LIST_PROFILE_RES') {
+        return {}
+    }
+    else {
         return state
     }
 }

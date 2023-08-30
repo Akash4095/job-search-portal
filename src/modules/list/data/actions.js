@@ -113,3 +113,10 @@ export function deleteListProfileRes(props) {
         payload: props,
     };
 }
+
+export function clearDeleteListProfileRes(props) {
+    return {
+        type: type.CLEAR_DELETE_LIST_PROFILE_RES,
+        payload: props,
+    };
+}

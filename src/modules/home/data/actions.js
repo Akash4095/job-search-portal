@@ -56,3 +56,45 @@ export function fetchedDashboardDetails(props, res) {
         payload: props,
     }
 }
+
+export function fetchUserProfileDetails(props) {
+    return {
+        type: type.FETCH_USER_PROFILE_DETAILS,
+        payload: props,
+    };
+}
+
+export function fetchedUserProfileDetails(props) {
+    return {
+        type: type.FETCHED_USER_PROFILE_DETAILS,
+        payload: props,
+    }
+}
+
+export function clearFetchedUserProfileDetails(props) {
+    return {
+        type: type.CLEAR_FETCHED_USER_PROFILE_DETAILS,
+        payload: props,
+    }
+}
+
+export function updateUserProfileDetails(props) {
+    return {
+        type: type.UPDATE_USER_PROFILE_DETAILS,
+        payload: props,
+    };
+}
+
+export function updateUserProfileDetailsRes(props) {
+    return {
+        type: type.UPDATE_USER_PROFILE_DETAILS_RES,
+        payload: props,
+    }
+}
+
+export function clearUpdateUserProfileDetails(props) {
+    return {
+        type: type.CLEAR_UPDATE_USER_PROFILE_DETAILS_RES,
+        payload: props,
+    }
+}

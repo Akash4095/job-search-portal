@@ -1,12 +1,12 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { fetchedDashboardDetails, fetchedLinkedinKeys, getLoginAuthRes } from "./actions";
+import { fetchedDashboardDetails, fetchedLinkedinKeys, fetchedUserProfileDetails, getLoginAuthRes, updateUserProfileDetailsRes } from "./actions";
 import axios from "axios"
 import { getIsAuthFetched, getIsKeysFetched } from './selectors';
 
 
 
-// region for send code
+// region for get linked in keys
 
 function* fetchLinkedinKeys() {
     yield takeEvery('FETCH_LINKEDIN_KEYS', getLinkedinKeysFunc);
@@ -69,7 +69,7 @@ async function sendCodeAPI(data) {
 
 // End region
 
-// region for send code
+// region for fetchdashboard details
 
 function* fetchDashboardDetail() {
     yield takeEvery('FETCH_DASHBOARD_DETAILS', callDashboardDetails);
@@ -88,9 +88,65 @@ function* callDashboardDetails(action) {
 
 async function callDashboardDetailsAPI(data) {
     let sessionUserId = data
-    console.log('sessionUserId', sessionUserId)
     try {
         const response = await axios.get(BASE_URL + `/get/dashboarddetails/${sessionUserId}`, { headers: { Authorization: getToken() } });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for fetch user Profile details
+
+function* fetchUserProfileUserDetails() {
+    yield takeEvery('FETCH_USER_PROFILE_DETAILS', requestProfileDetails);
+}
+
+function* requestProfileDetails(action) {
+
+    const { response, error } = yield call(requestProfileDetailsAPI, action.payload)
+    if (response) {
+        yield put(fetchedUserProfileDetails(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+
+}
+
+async function requestProfileDetailsAPI(data) {
+    let sessionUserId = data
+    try {
+        const response = await axios.get(BASE_URL + `/user/get/profiledetails/${sessionUserId}`, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for update user Profile details
+
+function* updateUserProfileUserDetails() {
+    yield takeEvery('UPDATE_USER_PROFILE_DETAILS', requestUpdateProfileDetails);
+}
+
+function* requestUpdateProfileDetails(action) {
+    const { response, error } = yield call(requestUpdateProfileDetailsAPI, action.payload)
+    if (response) {
+        yield put(updateUserProfileDetailsRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function requestUpdateProfileDetailsAPI(data) {
+    try {
+        const response = await axios.get(BASE_URL + '/user/update/profiledetails', { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -111,5 +167,7 @@ export default function* homesagas() {
         fetchLinkedinKeys(),
         sendLinkedInCode(),
         fetchDashboardDetail(),
+        fetchUserProfileUserDetails(),
+        updateUserProfileUserDetails(),
     ])
 }

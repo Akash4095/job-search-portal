@@ -31,6 +31,7 @@ function App() {
         closeOnClick
         pauseOnHover
         hideProgressBar={false}
+        theme='light'
       />
     </div>
   );

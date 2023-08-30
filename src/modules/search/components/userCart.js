@@ -378,7 +378,7 @@ const UserCart = ({
             </div>
             <div className="add-user-to-list">
               <div className="paddingBtn alignCenter">
-                <div className="btn-frame list-user-cart-btn">
+                <div className="btn-frame user-cart-addbtn">
                   <div className="listCartBtn">
                     <BlueListSvg />
                   </div>

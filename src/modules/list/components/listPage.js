@@ -10,9 +10,9 @@ import ListUserCart from "./listUserCart";
 import { getUserList } from "../../search/data/actions";
 import { getIsCodeSendResponse } from "../../home/data/selectors";
 import AddTagNameForm from "./addTagName";
-import { getIsFetchedList, getIsListProfileDetailsPayload, getIsSidebarListPayload, getIsTagsRes, } from "../data/selectors";
+import { getIsFetchedList, getIsListDeletedRes, getIsListProfileDetailsPayload, getIsSidebarListPayload, getIsTagsRes, } from "../data/selectors";
 import { toast } from "react-toastify";
-import { clearTagsRes, fetchList, fetchListProfileDetails, } from "../data/actions";
+import { clearDeleteListProfileRes, clearTagsRes, deleteListProfile, fetchList, fetchListProfileDetails, } from "../data/actions";
 import TagSvg from "../../svg/tagSvg";
 import UnTagSvg from "../../svg/unTagSvg";
 import AddListSvg from "../../svg/addListSvg";
@@ -23,6 +23,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const tagsAddedRes = useSelector((state) => getIsTagsRes(state));
   const sidebarPayload = useSelector((state) => getIsSidebarListPayload(state));
+  const profileDeletedRes = useSelector((state) => getIsListDeletedRes(state));
   const profileDetailsPayload = useSelector((state) =>
     getIsListProfileDetailsPayload(state)
   );
@@ -89,6 +90,18 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
     }
   }, [listResponse]);
 
+  useEffect(() => {
+    if (profileDeletedRes) {
+      if (profileDeletedRes.status && profileDeletedRes.status === "success") {
+        toast.success(profileDeletedRes.msg ? profileDeletedRes.msg : "");
+        dispatch(fetchList(sidebarPayload));
+        dispatch(clearDeleteListProfileRes())
+        setSelectedRows([]);
+      }
+    }
+
+  }, [profileDeletedRes])
+
   const handleSelectAll = () => {
     if (selectAll) {
       setSelectedRows([]);
@@ -113,7 +126,17 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
 
   const listExportFunction = () => { };
 
-  const deleteSelectedList = () => { };
+  const deleteSelectedProfileFromList = () => {
+    if (selectedRows && selectedRows.length && selectedRows.length > 0) {
+      selectedRows.map((item) => {
+        let obj = {}
+        obj.listid = (item.listid).toString()
+        obj.profileid = (item.profileid).toString()
+        obj.userid = sessionUserId ? (sessionUserId).toString() : ""
+        dispatch(deleteListProfile(obj))
+      })
+    }
+  };
 
   return (
     <div className="d_flex">
@@ -148,52 +171,52 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
             )}
           </div>
           {
-            selectedRows.length > 0 ? 
-            <div className="list-actions-btns">
-            <div className="btn-frame" onClick={() => tagListFunction()}>
-              <div className="btn-svg">
-                <TagSvg />
+            selectedRows.length > 0 ?
+              <div className="list-actions-btns">
+                <div className="btn-frame" onClick={() => tagListFunction()}>
+                  <div className="btn-svg">
+                    <TagSvg />
+                  </div>
+                  <div className="btn-label">
+                    Tag
+                  </div>
+                </div>
+                <div className="btn-frame">
+                  <div className="btn-svg">
+                    <UnTagSvg />
+                  </div>
+                  <div className="btn-label">
+                    Untag
+                  </div>
+                </div>
+                <div className="btn-frame">
+                  <div className="btn-svg">
+                    <AddListSvg />
+                  </div>
+                  <div className="btn-label">
+                    Add to list
+                  </div>
+                </div>
+                <div className="btn-frame">
+                  <div className="btn-svg">
+                    <DownloadSvg />
+                  </div>
+                  <div className="btn-label">
+                    Export
+                  </div>
+                </div>
+                <div className="btn-frame" onClick={() => deleteSelectedProfileFromList()}>
+                  <div className="btn-svg">
+                    <DeleteSvg />
+                  </div>
+                  <div className="btn-label-delete">
+                    Delete
+                  </div>
+                </div>
               </div>
-              <div className="btn-label">
-                Tag
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <UnTagSvg />
-              </div>
-              <div className="btn-label">
-                Untag
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <AddListSvg />
-              </div>
-              <div className="btn-label">
-                Add to list
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <DownloadSvg />
-              </div>
-              <div className="btn-label">
-                Export
-              </div>
-            </div>
-            <div className="btn-frame">
-              <div className="btn-svg">
-                <DeleteSvg />
-              </div>
-              <div className="btn-label-delete">
-                Delete
-              </div>
-            </div>
-          </div>
-          : null
+              : null
           }
-      
+
         </div>
         <div className="d_flex">
           <div

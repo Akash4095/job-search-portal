@@ -11,36 +11,43 @@ import {
 } from "semantic-ui-react";
 import { FormikInputComponent } from "../../../utilities/formUtils";
 import CancelSvg from "../../svg/cancelSvg";
+import { updateUserProfileDetails } from "../data/actions";
+import ImageDragDrop from "./imageDrop";
 
-const AddEmailForm = (props) => {
+const AddUserProfileForm = (props) => {
+
     const dispatch = useDispatch();
+    const formDataObj = new FormData();
+    const [profilePicSelected, setProfilePicSelected] = useState(false);
+    const [profilePicObj, setProfilePicObj] = useState(formDataObj);
 
     const saveAddEmailForm = (values) => {
-        if (props.sessionUserId && props.sessionUserId !== undefined) {
-            let obj = {};
-            // obj.listname = values.listname
-            // obj.userid = props.sessionUserId.toString()
-            // dispatch(addUserList(obj))
-            props.setAddEmailModal(false);
+        if (props.sessionUserId) {
+            const formData = new FormData();
+            formData.append("company", values.company);
+            formData.append("secondaryemail", values.secondaryemail);
+            formData.append("userid", props.sessionUserId.toString());
+            formData.append("fullname", values.fullname);
+            formData.append("designation", values.designation);
+            formData.append("profilepic", profilePicObj);
+            dispatch(updateUserProfileDetails(formData))
+            props.setUserProfileModal(false);
         }
     };
 
-    const closeModal = () => {
-        props.setAddEmailModal(false);
-    };
 
     return (
         <Container>
             <div
                 className="welcome-popup-close-icon"
-                onClick={() => props.setAddEmailModal(false)}
+                onClick={() => props.setUserProfileModal(false)}
             >
                 <CancelSvg />
             </div>
             <div className="welcome-popup-header">Just for us!</div>
 
             <Formik
-                id="finbank"
+                id="userprofile"
                 size="large"
                 width={5}
                 initialValues={{ listname: "" }}
@@ -66,13 +73,13 @@ const AddEmailForm = (props) => {
                         className="emailform"
                     >
                         <Field
-                            name="name"
+                            name="fullname"
                             label="Name"
                             component={FormikInputComponent}
                             className="welcome-popup-input"
                         />
                         <Field
-                            name="email"
+                            name="secondaryemail"
                             label="Email"
                             component={FormikInputComponent}
                             className="welcome-popup-input"
@@ -89,6 +96,12 @@ const AddEmailForm = (props) => {
                             component={FormikInputComponent}
                             className="welcome-popup-input"
                         />
+                        <ImageDragDrop
+                            profilePicSelected={profilePicSelected}
+                            setProfilePicSelected={setProfilePicSelected}
+                            setProfilePicObj={setProfilePicObj}
+                            className="welcome-popup-file"
+                        />
                         <br />
                         <Button
                             type="submit"
@@ -99,7 +112,8 @@ const AddEmailForm = (props) => {
                                 gap: "10px",
                                 borderRadius: "6px",
                                 color: "#fff",
-                                fontWeight: "400"
+                                fontWeight: "400",
+                                // marginTop:"6px"
                             }}
                         >
                             Submit
@@ -111,4 +125,4 @@ const AddEmailForm = (props) => {
     );
 };
 
-export default AddEmailForm;
+export default AddUserProfileForm;
