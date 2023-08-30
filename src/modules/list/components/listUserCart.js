@@ -239,7 +239,7 @@ const ListUserCart = ({
                       {profileDetails.contactstatus &&
                         (profileDetails.contactstatus == "false" ||
                           profileDetails.contactstatus == false) ? (
-                        <Button size="small" style={{ padding: "8px 18px", marginTop: "12px", background: "#007bff", color: "#fff" }}>Get Contacts</Button>
+                        <Button size="small" style={{ padding: "8px 18px", marginTop: "12px", background: "#007bff", color: "#fff" }}>{"get{contact}"}</Button>
                       ) : (
                         ""
                       )}

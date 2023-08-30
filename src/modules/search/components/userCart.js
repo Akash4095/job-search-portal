@@ -235,7 +235,7 @@ const UserCart = ({
                       {profileDetails.contactstatus &&
                         (profileDetails.contactstatus == "false" ||
                           profileDetails.contactstatus == false) ? (
-                        <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>Get Contacts</Button>
+                        <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>{"get{contact}"}</Button>
                       ) : (
                         ""
                       )}

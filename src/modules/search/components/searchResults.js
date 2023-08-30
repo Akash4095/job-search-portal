@@ -87,7 +87,7 @@ const SearchResults = ({
           </div>
           <div className="cart-frame">
             <div className="cart-name-header" style={{ width: rowClicked ? "28vw" : "68vw" }}>
-              <div className="cart-user-name" onClick={() => getUserProfileDetails(row)}>
+              <div className="cart-user-name">
                 {row && row.title ? (
                   <span dangerouslySetInnerHTML={createMarkup(row.title)} />
                 ) : (

@@ -143,7 +143,7 @@ const ListTable = ({
                         {item.company ? item.company : "N/A"}
                       </div>
                     </div>
-                    <div className="list-column4" onClick={() => fetchlistCartDetails(item)}>
+                    <div className="list-column4">
                       <div className="tagsWrap">
                         {item.tags && item.tags.length > 0
                           ? item.tags.map((tagname, index) => {
@@ -157,7 +157,7 @@ const ListTable = ({
                           : ""}
                       </div>
                     </div>
-                    <div className="list-column5" onClick={() => fetchlistCartDetails(item)}>
+                    <div className="list-column5">
                       <div className="email-container">
                         <div className="emailSvg">
                           <EmailSvg />
