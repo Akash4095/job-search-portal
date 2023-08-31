@@ -5,6 +5,7 @@ import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { FormikInputComponent, } from '../../utilities/formUtils'
 import { getIsCodeSendResponse } from '../home/data/selectors';
 import { addUserList } from '../search/data/actions';
+import CancelSvg from '../svg/cancelSvg';
 
 
 const AddListForm = (props) => {
@@ -32,8 +33,14 @@ const AddListForm = (props) => {
 
     return (
         <Container>
-            <Header as='h3' style={{ marginBottom: "15px" }}>Add List Name  </Header>
-
+            <div
+                className="welcome-popup-close-icon"
+                onClick={() => closeModal()}
+            >
+                <CancelSvg />
+            </div>
+            <div className="welcome-popup-header">Add List Name </div>
+         
             <Formik id="finbank" size="large" width={5}
                 initialValues={{ listname: "" }}
                 validationSchema={null}
@@ -46,8 +53,22 @@ const AddListForm = (props) => {
 
                         <Field name='listname' isLabel='false' component={FormikInputComponent} className="listName" placeholder="Enter List Name" />
                         <br />
-                        <Button type="button" size="small" color='red' className="CustomeBTN" onClick={() => closeModal()}>Close</Button>
-                        <Button type="submit" size="small" color='blue' className="CustomeBTN">Add</Button>
+                       
+                        <Button
+                            type="submit"
+                            style={{
+                                background: "#2b81e7",
+                                padding: "10px 24px",
+                                width: "100%",
+                                gap: "10px",
+                                borderRadius: "6px",
+                                color: "#fff",
+                                fontWeight: "400",
+                                // marginTop:"6px"
+                            }}
+                        >
+                            Submit
+                        </Button>
                     </Form>
                 )}
             />

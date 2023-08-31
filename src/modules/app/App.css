@@ -113,7 +113,7 @@ body {
 }
 
 .default-list-lock {
-  padding-right: 30% !important;
+  width: 70% !important;
   padding-left: 10px !important;
   font-weight: 500;
   font-style: normal;
@@ -142,6 +142,16 @@ body {
   padding-left: 10px !important;
   font-weight: 500;
   font-style: normal;
+  width: 65% !important;
+}
+
+.listEditDelIcons {
+  display: flex;
+  gap: 2px;
+}
+
+.listEditDelIcons > i {
+  font-size: 12px !important;
 }
 
 .footer-actions {
@@ -1419,4 +1429,12 @@ input:focus {
   line-height: 1.21428571em;
   margin: 0px;
   padding: 2px !important;
+}
+
+.ui.form .field > .selection.dropdown > .dropdown.icon {
+  float: right;
+  color: #666 !important;
+  display: block;
+  margin-top: -6px;
+  font-size: 12px !important;
 }

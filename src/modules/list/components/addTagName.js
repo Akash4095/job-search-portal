@@ -5,6 +5,7 @@ import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { FormikInputComponent } from "../../../utilities/formUtils";
 import { addTags } from '../data/actions';
 import { getIsListProfileDetailsPayload } from '../data/selectors';
+import CancelSvg from '../../svg/cancelSvg';
 
 const AddTagNameForm = ({ setAddTagModal, sessionUserId, selectedRows }) => {
 
@@ -40,7 +41,14 @@ const AddTagNameForm = ({ setAddTagModal, sessionUserId, selectedRows }) => {
 
     return (
         <Container>
-            <Header as='h3' style={{ marginBottom: "15px" }}>Add Tag Name  </Header>
+            <div
+                className="welcome-popup-close-icon"
+                onClick={() => setAddTagModal({ open: false, obj: "" })}
+            >
+                <CancelSvg />
+            </div>
+            <div className="welcome-popup-header">Add Tag Name </div>
+        
 
             <Formik id="finbank" size="large" width={5}
                 initialValues={{ tagname: "" }}
@@ -54,8 +62,21 @@ const AddTagNameForm = ({ setAddTagModal, sessionUserId, selectedRows }) => {
 
                         <Field name='tagname' isLabel='false' component={FormikInputComponent} className="listName" placeholder="Enter Tag Name" />
                         <br />
-                        <Button type="button" size="small" color='red' className="CustomeBTN" onClick={() => setAddTagModal({ open: false, obj: {} })}>Close</Button>
-                        <Button type="submit" size="small" color='blue' className="CustomeBTN">Add</Button>
+                        <Button
+                            type="submit"
+                            style={{
+                                background: "#2b81e7",
+                                padding: "10px 24px",
+                                width: "100%",
+                                gap: "10px",
+                                borderRadius: "6px",
+                                color: "#fff",
+                                fontWeight: "400",
+                                // marginTop:"6px"
+                            }}
+                        >
+                            Submit
+                        </Button>
                     </Form>
                 )}
             />

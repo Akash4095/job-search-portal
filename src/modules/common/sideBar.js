@@ -114,6 +114,9 @@ const SideBar = ({ sessionUserId }) => {
                   <ListSvg />
                 </div>
                 <div className="default-list1">{item.listname}</div>
+                <div className="listEditDelIcons">
+                  {/* <Icon size="mini" name="edit" style={{color:"#007bff"}} /> <Icon style={{color:"#e72b2b"}} size="mini" name="cancel"/> */}
+                </div>
               </div>
             );
           })
@@ -157,7 +160,7 @@ const SideBar = ({ sessionUserId }) => {
       <Modal
         size="mini"
         open={addListModal.open}
-        onClose={() => setAddListModal({ open: false, msg: "" })}
+        // onClose={() => setAddListModal({ open: false, msg: "" })}
       >
         <Modal.Content>
           <AddListForm setAddListModal={setAddListModal} sessionUserId={sessionUserId} />

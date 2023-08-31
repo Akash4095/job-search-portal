@@ -6,6 +6,7 @@ import { addProfileToList } from '../data/actions';
 import UserListSelect from './userListSelect';
 import { getIsProfileDetailsPayload } from '../data/selectors';
 import AddListForm from '../../common/addListForm';
+import CancelSvg from '../../svg/cancelSvg';
 
 
 const AddUserProfileToListForm = (props) => {
@@ -44,12 +45,17 @@ const AddUserProfileToListForm = (props) => {
 
     return (
         <Container>
-            <Header as='h3' style={{ marginBottom: "15px" }}>Add Profile To List
-            <Button size='tiny' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{marginTop:"-5px"}}>Add List</Button>
-            </Header>
-           
-            <br />
-            <p>Note: U can Add New List from above Add List button</p>
+            <div
+                className="welcome-popup-close-icon"
+                onClick={() => props.setAddListModal({ open: false, msg: "", obj: {} })}
+            >
+                <CancelSvg />
+            </div>
+            <div className="welcome-popup-header">Add Profile To List
+
+            </div>
+
+            <p>Note: U can Add New List from below Add List button</p>
             <br />
             <Formik id="finbank" size="large" width={5}
                 initialValues={{ listid: "" }}
@@ -64,9 +70,8 @@ const AddUserProfileToListForm = (props) => {
                         <UserListSelect name='listid' label="Select List Name" placeholder="Select" isSelection={true} />
                         <br />
                         <br />
-                        <Button type="button" size="small" color='red' className="CustomeBTN" onClick={() => closeModal()}>Close</Button>
-                        <Button type="submit" size="small" color='blue' className="CustomeBTN">Add</Button>
-
+                        <Button type="submit" size="small" color='blue' className="CustomeBTN" style={{ padding: "10px 40px" }}>Add Profile To List</Button>
+                        <Button size='small' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{ padding: "10px 40px" }}>Add New List</Button>
                     </Form>
                 )}
             />
