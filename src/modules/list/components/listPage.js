@@ -45,16 +45,13 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
 
   const usrId = localStorage.getItem("userid");
   useEffect(() => {
-    if (usrId && usrId !== null && usrId !== undefined) {
+    if (usrId) {
       setSessionUserId(usrId)
+    } else {
+      navigate("/")
     }
   }, [usrId])
 
-  useEffect(() => {
-      if (!sessionUserId) {
-        navigate("/")
-      }
-  }, [sessionUserId])
 
   useEffect(() => {
     let obj = {};

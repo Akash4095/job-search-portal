@@ -36,14 +36,11 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   useEffect(() => {
     if (usrId) {
       setSessionUserId(usrId)
+    }else{
+      navigate("/")
     }
   }, [usrId])
 
-  useEffect(() => {
-    if (!sessionUserId) {
-      navigate("/")
-    }
-  }, [sessionUserId])
 
   useEffect(() => {
     const usrName = localStorage.getItem("username");

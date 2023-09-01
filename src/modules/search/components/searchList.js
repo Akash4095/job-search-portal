@@ -66,14 +66,11 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
   useEffect(() => {
     if (usrId) {
       setSessionUserId(usrId)
+    }else{
+      navigate("/")
     }
   }, [usrId])
 
-  useEffect(() => {
-    if (!sessionUserId) {
-      navigate("/")
-    }
-  }, [sessionUserId])
 
   useEffect(() => {
     let obj = {};
