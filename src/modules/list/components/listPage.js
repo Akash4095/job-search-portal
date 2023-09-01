@@ -44,7 +44,6 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   const dispatch = useDispatch();
 
   const usrId = localStorage.getItem("userid");
-  // console.log('usrId', usrId)
   useEffect(() => {
     if (usrId && usrId !== null && usrId !== undefined) {
       setSessionUserId(usrId)
@@ -52,8 +51,16 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   }, [usrId])
 
   useEffect(() => {
+    setTimeout(() => {
+      if (!sessionUserId) {
+        navigate("/")
+      }
+    }, 1000)
+  }, [sessionUserId])
+
+  useEffect(() => {
     let obj = {};
-    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
     dispatch(getUserList(obj));
 
   }, [sessionUserId]);

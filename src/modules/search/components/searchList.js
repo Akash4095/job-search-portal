@@ -58,16 +58,24 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
   });
   const [isModalOpen, setModalOpen] = useState({ open: false, msg: "" })
   const [showViewMoreButton, setShowViewMoreButton] = useState(true);
+  const [searchInfo, setSearchInfo] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const usrId = localStorage.getItem("userid");
-  // console.log('usrId', usrId)
   useEffect(() => {
-    if (usrId && usrId !== null && usrId !== undefined) {
+    if (usrId) {
       setSessionUserId(usrId)
     }
   }, [usrId])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!sessionUserId) {
+        navigate("/")
+      }
+    }, 1000)
+  }, [sessionUserId])
 
   useEffect(() => {
     let obj = {};
@@ -80,6 +88,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     if (searchResult && searchResult !== null && searchResult !== undefined) {
       if (searchResult.status && searchResult.status === "success") {
         setItems(searchResult.data);
+        setSearchInfo(searchResult.searchinfo ? searchResult.searchinfo : "")
       }
       if (searchResult.status && searchResult.status === "failed") {
         setModalOpen({ open: true, msg: searchResult.msg ? searchResult.msg : "" })
@@ -121,12 +130,13 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
 
 
 
-  const addProfilesToListFunc = (row) => {
-    setAddListModal({ open: true, msg: "", obj: row });
+  const addProfilesToListFunc = () => {
+    setAddListModal({ open: true, msg: "", obj: {} });
   };
 
   const handleViewMoreClick = () => {
     setStart(start + 10);
+    setRowClicked(false)
   };
 
   return (
@@ -144,7 +154,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
         />
         <div className="search-container">
           <p className="search-result-count">
-            {items.length > 0 ? items.length + " " + searchedText : ""}
+            {searchInfo ? searchInfo : ""}
           </p>
           {selectedRows.length > 0 ? (
             <p className="list-selected">
@@ -200,10 +210,12 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
             </div>
             {rowClicked ? (
               <UserCart
+                selectedRows={selectedRows}
                 setRowClicked={setRowClicked}
                 userCartLoader={userCartLoader}
                 setUserCartLoader={setUserCartLoader}
                 setAddListModal={setAddListModal}
+                addProfilesToListFunc={addProfilesToListFunc}
               />
             ) : null}
           </div>

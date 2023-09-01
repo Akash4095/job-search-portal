@@ -20,10 +20,12 @@ import ContactDownloadSvg from "../../svg/contactDownloadSvg";
 import BlueListSvg from "../../svg/blueListSvg";
 
 const UserCart = ({
+  selectedRows,
   setRowClicked,
   userCartLoader,
   setUserCartLoader,
   setAddListModal,
+  addProfilesToListFunc,
 }) => {
   const [profileData, setProfileData] = useState([]);
   const [skillsAccordion, setSkillsAcordion] = useState(false);
@@ -74,9 +76,6 @@ const UserCart = ({
     }
   }, [contactDetails]);
 
-  const addProfileToListFunc = (row) => {
-    setAddListModal({ open: true, msg: "", obj: row });
-  };
 
   const callProfileContacts = () => {
     let obj = {}
@@ -376,7 +375,7 @@ const UserCart = ({
                 </Accordion>
               </div>
             </div>
-            <div className="add-user-to-list">
+            <div className="add-user-to-list" style={{ marginBottom: selectedRows ? "8%" : "2%" }} onClick={()=> addProfilesToListFunc()}>
               <div className="paddingBtn alignCenter">
                 <div className="btn-frame user-cart-addbtn">
                   <div className="listCartBtn">

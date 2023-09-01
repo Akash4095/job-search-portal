@@ -146,7 +146,7 @@ function* requestUpdateProfileDetails(action) {
 
 async function requestUpdateProfileDetailsAPI(data) {
     try {
-        const response = await axios.get(BASE_URL + '/user/update/profiledetails', { headers: { Authorization: getToken() }, });
+        const response = await axios.post(BASE_URL + '/user/update/profiledetails', data, { headers: { Authorization: getToken() } });
         return ({ response });
     } catch (error) {
         return ({ error });

@@ -2,6 +2,12 @@ import { combineReducers } from "redux";
 import { merge } from "lodash";
 
 
+
+const defaultSearchParams = {
+    isUserListFetched: false,
+
+}
+
 function fetchedSearchedByQuery(state = { status: "", data: [] }, action) {
     if (action.type === 'FETCHED_SEARCH_BY_QUERY') {
         return action.payload
@@ -87,6 +93,21 @@ function deleteProfileFromListRes(state = {}, action) {
     }
 }
 
+function params(state = defaultSearchParams, action) {
+
+    if (action.type === 'GET_USER_LIST_RES') {
+        return {
+            ...state,
+            isUserListFetched: true,
+        }
+    }
+    else {
+        return state
+    }
+
+
+}
+
 const searchReducer = combineReducers({
     fetchedSearchedByQuery,
     addUserListRes,
@@ -95,6 +116,7 @@ const searchReducer = combineReducers({
     saveProfileDetailsPayload,
     addProfileToListRes,
     deleteProfileFromListRes,
+    params,
 
 })
 

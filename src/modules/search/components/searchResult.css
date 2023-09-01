@@ -179,9 +179,7 @@
   position: relative;
   border: 1px solid #000;
 }
-.add-user-to-list {
-  padding-bottom: 15px !important;
-}
+
 .user-cart-close-icon {
   position: absolute !important;
   right: 22px !important;

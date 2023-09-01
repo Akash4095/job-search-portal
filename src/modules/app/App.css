@@ -1089,6 +1089,7 @@ input:focus {
   border-radius: 5px !important;
   font-size: 12px !important;
   border: 1px solid;
+  background-color: #f5f9ff;
 }
 .list-user-cart-btn {
   padding: 6px 40px !important;
@@ -1096,6 +1097,7 @@ input:focus {
   border-radius: 5px !important;
   font-size: 12px !important;
   border: 1px solid;
+  background-color: #f5f9ff;
 }
 
 .listcart-delete-btn {

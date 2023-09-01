@@ -54,7 +54,7 @@ const Login = ({ setSessionUserId }) => {
                 if (!authCallOnce) {
                     dispatch(sendLinkedInCode(obj));
                     setAuthCallOnce(true)
-                    // setLoader({ open: true, msg: "Loging in..." })
+                    setLoader({ open: true, msg: "Loging in..." })
                 }
             }
         }

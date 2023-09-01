@@ -11,6 +11,7 @@ export const getIsProfileDetailsPayload = (state, prop) => state.searchReducer.s
 export const getIsAddProfileToListRes = (state, prop) => state.searchReducer.addProfileToListRes
 export const getIsDeleteProfileFromListRes = (state, prop) => state.searchReducer.deleteProfileFromListRes
 
+export const getIsUserListFetched = (state, prop) => state.searchReducer.params.isUserListFetched
 
 export const selectUserListOptions = createSelector(
     getIsUserList,

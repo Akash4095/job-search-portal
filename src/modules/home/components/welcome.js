@@ -33,12 +33,19 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const dispatch = useDispatch();
 
   const usrId = localStorage.getItem("userid");
-  // console.log('usrId', usrId)
   useEffect(() => {
-    if (usrId && usrId !== null && usrId !== undefined) {
+    if (usrId) {
       setSessionUserId(usrId)
     }
   }, [usrId])
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!sessionUserId) {
+        navigate("/")
+      }
+    }, 1000)
+  }, [sessionUserId])
 
   useEffect(() => {
     const usrName = localStorage.getItem("username");
