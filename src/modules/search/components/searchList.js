@@ -70,11 +70,9 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
   }, [usrId])
 
   useEffect(() => {
-    setTimeout(() => {
-      if (!sessionUserId) {
-        navigate("/")
-      }
-    }, 1000)
+    if (!sessionUserId) {
+      navigate("/")
+    }
   }, [sessionUserId])
 
   useEffect(() => {

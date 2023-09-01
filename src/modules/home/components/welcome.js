@@ -40,11 +40,9 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   }, [usrId])
 
   useEffect(() => {
-    setTimeout(() => {
-      if (!sessionUserId) {
-        navigate("/")
-      }
-    }, 1000)
+    if (!sessionUserId) {
+      navigate("/")
+    }
   }, [sessionUserId])
 
   useEffect(() => {

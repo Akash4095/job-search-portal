@@ -51,11 +51,9 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   }, [usrId])
 
   useEffect(() => {
-    setTimeout(() => {
       if (!sessionUserId) {
         navigate("/")
       }
-    }, 1000)
   }, [sessionUserId])
 
   useEffect(() => {
