@@ -9,6 +9,7 @@ import ListPage from '../list/components/listPage';
 import { fetchLinkedinKeys, fetchLoginAuth } from './apiCall';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import ProtectedRoute from '../common/protectedRoute';
 
 function App() {
 
@@ -21,9 +22,12 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<Login setSessionUserId={setSessionUserId} />} />
-        <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/' element={<ProtectedRoute />}>
+          <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+          <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+          <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+          <Route path='*' element={<Login setSessionUserId={setSessionUserId} />} />
+        </Route>
       </Routes>
       <ToastContainer
         position="top-right"

@@ -47,9 +47,11 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   useEffect(() => {
     if (usrId) {
       setSessionUserId(usrId)
-    } else {
-      navigate("/")
-    }
+    } 
+    
+    // else {
+    //   navigate("/")
+    // }
   }, [usrId])
 
 
