@@ -97,6 +97,10 @@ const CommonHeaderComponent = () => {
         navigate("/welcome");
     }
 
+    const navigateToUpdateProfilePage = () => {
+        navigate("/updateprofile");
+    }
+
     const logoutSession = () => {
         navigate("/");
         localStorage.clear()
@@ -124,8 +128,8 @@ const CommonHeaderComponent = () => {
                     <div className="balance-background">
                         <div className="getlista">Available Credits</div>
                         <div className="div">
-                            <span style={{color:"#1BE885"}}>{usedCredit}</span>
-                            <span style={{color:"#C7B4B4"}}> / {totalCredit}</span>
+                            <span style={{ color: "#1BE885" }}>{usedCredit}</span>
+                            <span style={{ color: "#C7B4B4" }}> / {totalCredit}</span>
                         </div>
                     </div>
                 </div>
@@ -143,14 +147,14 @@ const CommonHeaderComponent = () => {
                         <div className="profile">
                             <div className="user-parent">
                                 <div className="header-user-name">{userName}</div>
-                                <Dropdown text='' style={{ marginLeft: "-14px", marginTop: "-3px", borderRadius: "6px", zIndex:"105" }}>
+                                <Dropdown text='' style={{ marginLeft: "-14px", marginTop: "-3px", borderRadius: "6px", zIndex: "105" }}>
                                     <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "26px" }} >
                                         <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => navigateToUpdateProfilePage()} className="logout-popup-item" >Edit Profile</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> User Management</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item">Settings</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item">Contact/Help</Dropdown.Item>
-                                        <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
                                         <Dropdown.Item onClick={() => logoutSession()} className="logout-popup-item">  Log Out</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>

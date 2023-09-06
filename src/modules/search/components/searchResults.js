@@ -95,16 +95,16 @@ const SearchResults = ({
                 )}
               </div>
               <div className="cart-user-icons">
-                <Link to={row.linkedinlink} target="_blank">
+                {/* <Link to={row.linkedinlink} target="_blank">
                   <div title="Linkedin Profile" className="linkedinIcon-usercart">
                     <Icon color="grey" name="linkedin" />
                   </div>
                 </Link>
                 <Icon name="twitter" color="grey" />
-                <Icon name="dribbble" color="grey" />
+                <Icon name="dribbble" color="grey" /> */}
               </div>
             </div>
-            <div className="cart-description" style={{ width: rowClicked ? "20vw" : "60vw" }}>
+            <div className="cart-description" style={{ width: rowClicked ? "24vw" : "64vw" }}>
               {row && row.description && row.description !== undefined ? (
                 <span
                   dangerouslySetInnerHTML={createMarkup(row.description)}

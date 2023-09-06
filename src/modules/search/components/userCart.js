@@ -106,7 +106,7 @@ const UserCart = ({
                     <div className="user-cart-work">
                       {profileDetails.designation ? profileDetails.designation : ""}
                     </div>
-                    <div style={{ marginTop: "12px" }} className="d_flex">
+                    {/* <div style={{ marginTop: "12px" }} className="d_flex">
                       <Link
                         to={
                           profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
@@ -119,7 +119,7 @@ const UserCart = ({
                       </Link>
                       <Icon name="twitter" color="grey" />
                       <Icon name="dribbble" color="grey" />
-                    </div>
+                    </div> */}
                   </div>
 
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
