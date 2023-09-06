@@ -64,7 +64,7 @@ export const FormikInputComponent = ({
         maxLength={maxlength ? maxlength : ""}
 
       />
-      {isTxn ? <ErrorMessage name={field.name} render={msg => <Label size="mini" color='red' basic pointing prompt>{msg}</Label>} /> : null}
+      {isTxn ? <ErrorMessage name={field.name} render={msg => <Label size="mini" className='error' basic pointing prompt>{msg}</Label>} /> : null}
     </Form.Field>
   )
 };

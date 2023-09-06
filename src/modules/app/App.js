@@ -10,6 +10,8 @@ import { fetchLinkedinKeys, fetchLoginAuth } from './apiCall';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import ProtectedRoute from '../common/protectedRoute';
+import MyTeamList from '../myteam/components/myTeamList';
+import UpdateProfile from '../myteam/components/updateProfile';
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
           <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
           <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
           <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+          <Route path='/myteam' element={<MyTeamList sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+          <Route path='/updateprofile' element={<UpdateProfile sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
           <Route path='*' element={<Login setSessionUserId={setSessionUserId} />} />
         </Route>
       </Routes>

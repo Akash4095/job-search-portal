@@ -46,9 +46,9 @@ body {
   border-right: 1px solid #cdcdcd;
 }
 
-.getlist {
+.getlist-sidebar {
   font-weight: 800;
-  padding-left: 15% !important;
+  padding-left: 1% !important;
   color: #fff;
 }
 .getlist-login {
@@ -56,7 +56,7 @@ body {
   padding-left: 15% !important;
   color: var(--color-gray);
 }
-.a {
+.a-bracket {
   font-weight: 500;
   color: #1be885;
 }
@@ -594,6 +594,9 @@ input:focus {
   color: red !important;
 }
 
+.ui.form .field.error label {
+  color: #9f3a38 !important;
+}
 .success {
   color: green !important;
 }
@@ -612,14 +615,14 @@ input:focus {
 
 /* Styles to hide the scrollbar */
 .scrollable-container::-webkit-scrollbar {
-  width: 0px; /* Adjust the width of the scrollbar if needed */
-  color: #fff;
+  width: 0px !important; /* Adjust the width of the scrollbar if needed */
+  color: #fff !important;
 }
 
 .scrollable-container::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  color: #fff;
-  border-radius: 5px;
+  background-color: #fff !important;
+  color: #fff !important;
+  border-radius: 5px !important;
 }
 
 .searchList {
@@ -1439,4 +1442,8 @@ input:focus {
   display: block;
   margin-top: -6px;
   font-size: 12px !important;
+}
+
+a {
+  color: #666 !important;
 }

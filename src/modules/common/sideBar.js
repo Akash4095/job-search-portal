@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Icon, Modal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getIsAddUserList, getIsUserList } from "../search/data/selectors";
 import AddListForm from "./addListForm";
 import CommanResponseModal from "./commonModal";
@@ -85,19 +85,17 @@ const SideBar = ({ sessionUserId }) => {
     <section className="sidebar-container">
       <div className="sidebar-header">
         <div className="top" onClick={() => gotoWelcomePage()}>
-          {/* <div className="getlist">getlist</div>
-          <div className="a">{`{a}`}</div> */}
-         <img src={GetlistSvg} alt="" />
+          <div className="getlist-sidebar">getlist</div>
+          <div className="a-bracket">{`{a}`}</div>
+          {/* <img src={GetlistSvg} alt="" /> */}
         </div>
       </div>
       <div className="sidebar-middle scrollable-container-sidebar">
         <div className="sidebar-list-lock">
-          {/* <Icon name="bars" className="sidebar-icons" /> */}
           <div className="listSvg">
             <ListSvg />
           </div>
           <div className="default-list-lock">Default List</div>
-          {/* <Icon name="lock" /> */}
           <div className="lockSvg">
             <LockSvg />
           </div>
@@ -123,7 +121,6 @@ const SideBar = ({ sessionUserId }) => {
           : null}
 
         <div className="sidebar-add-list" onClick={() => openAddListModal()}>
-          {/* <Icon name="add" className="sidebar-icons" /> */}
           <div className="addlistSvg">
             <AddListSvg />
           </div>
@@ -132,12 +129,18 @@ const SideBar = ({ sessionUserId }) => {
       </div>
       <div className="footer-actions">
         <div className="sidebar-f-list">
-          {/* <Icon name="user" className="sidebar-icons" /> */}
           <div className="footerSvg">
-            <MyTeamSvg />
+            <NavLink to="/myteam" activeClassName="active">
+              <MyTeamSvg />
+            </NavLink>
           </div>
-          <div className="default-list">My Team</div>
+          <div className="default-list">
+            <NavLink to="/myteam" activeClassName="active">
+              My Team
+            </NavLink>
+          </div>
         </div>
+
         <div className="sidebar-f-list">
 
           <div className="footerSvg">
@@ -160,7 +163,7 @@ const SideBar = ({ sessionUserId }) => {
       <Modal
         size="mini"
         open={addListModal.open}
-        // onClose={() => setAddListModal({ open: false, msg: "" })}
+      // onClose={() => setAddListModal({ open: false, msg: "" })}
       >
         <Modal.Content>
           <AddListForm setAddListModal={setAddListModal} sessionUserId={sessionUserId} />

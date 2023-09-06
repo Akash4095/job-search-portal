@@ -114,7 +114,7 @@ const Login = ({ setSessionUserId }) => {
             <div className="get-started">
                 <div className="getlista-wrapper">
                     <span className="getlist-login">getlist</span>
-                    <span className="a">{`{a}`}</span>
+                    <span className="a-bracket">{`{a}`}</span>
                 </div>
                 <div className="get-started-divider" />
                 <b className="is-gateway-to">is gateway to #openweb</b>
