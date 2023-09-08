@@ -3,24 +3,38 @@ import { NavLink } from "react-router-dom";
 import { Dropdown, Icon } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse, getIsDashboardDetails } from "../home/data/selectors";
+import { getIsCodeSendResponse, getIsDashboardDetails, getIsReactLoginResponse, getIsUserProfileDetailsFetched } from "../home/data/selectors";
 import userImage from "../../images/user.png";
 import BellSvg from "../svg/bellSvg";
+import { BASE_URL } from '../../store/path'
+import { fetchUserProfileDetails } from "../home/data/actions";
 
 
 const CommonHeaderComponent = () => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
     const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
+    const reactLoginRes = useSelector((state) => getIsReactLoginResponse(state));
+    const userProfileRes = useSelector((state) => getIsUserProfileDetailsFetched(state));
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);
     const [usedCredit, setUsedCredit] = useState("");
     const [totalCredit, setTotalCredit] = useState("");
     const [userName, setUserName] = useState("");
+    const [selectedImage, setSelectedImage] = useState("");
+    const [sessionUserId, setSessionUserId] = useState("");
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const usrId = localStorage.getItem("userid");
+    useEffect(() => {
+        if (usrId) {
+            setSessionUserId(usrId)
+        }
+
+    }, [usrId])
 
     const navigateToSearch = () => {
         setSearchClicked(true);
@@ -58,38 +72,42 @@ const CommonHeaderComponent = () => {
 
     }, [dashboardRes])
 
+
+
     useEffect(() => {
-        if (
-            getLoginAuthRes &&
-            getLoginAuthRes !== null &&
-            getLoginAuthRes !== undefined
-        ) {
-            if (getLoginAuthRes.status === "success") {
-                if (
-                    getLoginAuthRes.data &&
-                    getLoginAuthRes.data !== undefined &&
-                    getLoginAuthRes.data !== null &&
-                    getLoginAuthRes.data !== {}
-                ) {
-                    if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
-                        setUserName(getLoginAuthRes.data.fname);
-
-                    }
-
+        if (reactLoginRes) {
+            if (reactLoginRes.status === "success") {
+                if (reactLoginRes.fname) {
+                    setUserName(reactLoginRes.fname);
+                    setSessionUserId(reactLoginRes.id)
+                    setSelectedImage(`${BASE_URL}/static/profile/${reactLoginRes.profilepic}`)
                 }
+            }
 
+        }
+    }, [reactLoginRes]);
+
+    useEffect(() => {
+        if (userProfileRes) {
+            if (userProfileRes.status === "success") {
+                setSelectedImage(`${BASE_URL}/static/profile/${userProfileRes.profilepic}`)
             }
         }
-    }, [getLoginAuthRes]);
+
+    }, [userProfileRes])
+
+    useEffect(() => {
+        if (sessionUserId) {
+            dispatch(fetchUserProfileDetails(sessionUserId.toString()))
+        }
+    }, [sessionUserId]);
 
 
     useEffect(() => {
         const usrName = localStorage.getItem("username");
-        console.log('usrName-header', usrName)
-        if (usrName && usrName !== null && usrName !== undefined) {
+        const usrid = localStorage.getItem("userid");
+        if (usrName) {
             setUserName(usrName);
-        } else {
-            setUserName("");
         }
     }, [])
 
@@ -141,7 +159,7 @@ const CommonHeaderComponent = () => {
                         <span className="notification-count">5</span>
                     </div>
                     <div className="header-image-container">
-                        <img src={userImage} width="25px" height="25px" className="borderRadius" />
+                        <img src={selectedImage ? selectedImage : userImage} width="25px" height="25px" className="borderRadius" />
                     </div>
                     <div className="profile-wrapper">
                         <div className="profile">

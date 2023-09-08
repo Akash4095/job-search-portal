@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./myteam.css"
 import SideBar from '../../common/sideBar'
 import CommonHeaderComponent from '../../common/commonHeader'
 import DotsSvg from '../../svg/dotsSvg'
 import { Modal } from 'semantic-ui-react'
 import SendInviteForm from './sendInvite'
+import { useDispatch } from 'react-redux'
+import { getUserList } from '../../search/data/actions'
 
 
 const MyTeamList = ({ sessionUserId }) => {
 
     const [inviteModal, setInviteModal] = useState(false)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let obj = {};
+        obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
+        dispatch(getUserList(obj));
+
+    }, [sessionUserId]);
 
     return (
         <div className='d_flex'>
@@ -17,14 +27,14 @@ const MyTeamList = ({ sessionUserId }) => {
             <div className="right-panel">
                 <CommonHeaderComponent />
                 <div className='myteam-container'>
-                    <div className='myteam-header'>
+                    {/* <div className='myteam-header'>
                         <div className='myteam-title'>My Team</div>
                         <div className='searchbar'>
                             <div className='searchbar-div1'>
-                                {/* <input type='text' className='searchInput'></input> */}
+                                <input type='text' className='searchInput'></input>
                             </div>
                             <div className='searchbar-div2'>
-                                {/* Search */}
+                                Search
                             </div>
                         </div>
                         <div className='addmember-btn' onClick={() => setInviteModal(true)}>
@@ -48,7 +58,9 @@ const MyTeamList = ({ sessionUserId }) => {
                             </div>
 
                         </div>
-                    </div>
+                    </div> */}
+
+                    <div style={{ marginLeft: "40%", marginTop: "20%" }}>Version 2.0 coming soon </div>
 
                 </div>
             </div>

@@ -32,6 +32,7 @@ const UserCart = ({
   const [contactAccordion, setContactAcordion] = useState(true);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
   const [educationAccordion, setEducationAcordion] = useState(false);
+  const [insightsAccordion, setInsightsAcordion] = useState(false)
 
   const profileDetails = useSelector((state) => getIsProfileDetails(state));
   const profileDetailsPayload = useSelector((state) =>
@@ -84,6 +85,10 @@ const UserCart = ({
     obj.listid = "1"
     dispatch(fetchProfileContactDetails(obj));
   };
+
+  function createMarkup(msg) {
+    return { __html: msg };
+  }
 
   return (
     <div className="usercart-container scrollable-container">
@@ -375,7 +380,32 @@ const UserCart = ({
                 </Accordion>
               </div>
             </div>
-            <div className="add-user-to-list" style={{ marginBottom: selectedRows ? "8%" : "2%" }} onClick={()=> addProfilesToListFunc()}>
+            <div className="accord-container">
+              <div className="padding5">
+                <Accordion>
+                  <Accordion.Title
+                    active={insightsAccordion}
+                    index={0}
+                    onClick={() => setInsightsAcordion(!insightsAccordion)}
+                  >
+                    <div className="accord-title">
+                      <span>Insights</span>
+                      <span>
+                        <Icon name={insightsAccordion ? "angle down" : "angle right"} />
+                      </span>
+                    </div>
+                  </Accordion.Title>
+                  <Accordion.Content active={insightsAccordion}>
+                    <div className="">
+                      {(profileDetails.insights) ?
+                        <span dangerouslySetInnerHTML={createMarkup(profileDetails.insights)} /> : ""}
+
+                    </div>
+                  </Accordion.Content>
+                </Accordion>
+              </div>
+            </div>
+            <div className="add-user-to-list" style={{ marginBottom: selectedRows ? "8%" : "2%" }} onClick={() => addProfilesToListFunc()}>
               <div className="paddingBtn alignCenter">
                 <div className="btn-frame user-cart-addbtn">
                   <div className="listCartBtn">

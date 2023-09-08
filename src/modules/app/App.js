@@ -23,15 +23,13 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Login setSessionUserId={setSessionUserId} />} />
-        <Route path='/' element={<ProtectedRoute />}>
-          <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-          <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-          <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-          <Route path='/myteam' element={<MyTeamList sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-          <Route path='/updateprofile' element={<UpdateProfile sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
-          <Route path='*' element={<Login setSessionUserId={setSessionUserId} />} />
-        </Route>
+        <Route path='/login' element={<Login setSessionUserId={setSessionUserId} />} />
+        <Route path='/welcome' element={<Welcome setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/search' element={<SearchList setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/list' element={<ListPage setSearchedText={setSearchedText} searchedText={searchedText} sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/myteam' element={<MyTeamList sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        <Route path='/updateprofile' element={<UpdateProfile sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />} />
+        {/* <Route path='*' element={<Login setSessionUserId={setSessionUserId} />} /> */}
       </Routes>
       <ToastContainer
         position="top-right"

@@ -10,8 +10,8 @@ import {
 import { fetchSearchByQuery, fetchViewMoreQuery } from "../search/data/actions";
 import SearchIconSvg from "../svg/searchIconSvg"
 
-const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessionUserId }) => {
-  const [input, setInput] = useState("");
+const CommonSearchComponent = ({ setSearchedText, start, text, setLoader, sessionUserId, input, setInput }) => {
+
   const [welcomeText, setWelcomeText] = useState("");
 
 

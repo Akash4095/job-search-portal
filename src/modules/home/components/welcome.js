@@ -8,11 +8,12 @@ import { NavLink } from "react-router-dom";
 import CommonHeaderComponent from "../../common/commonHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse, getIsDashboardDetails, getIsUserProfileDetailsFetched, getIsUserProfileDetailsUpdated } from "../data/selectors";
+import { getIsCodeSendResponse, getIsDashboardDetails, getIsReactLoginResponse, getIsUserProfileDetailsFetched, getIsUserProfileDetailsUpdated } from "../data/selectors";
 import { clearUpdateUserProfileDetails, fetchDashboardDetails, fetchUserProfileDetails } from "../data/actions";
 import { getUserList } from "../../search/data/actions";
 import AddUserProfileForm from "./addEmailForm";
 import { toast } from "react-toastify";
+import { BASE_URL } from '../../../store/path'
 
 const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
 
@@ -23,8 +24,11 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   const [team, setTeam] = useState(0);
   const [tags, setTags] = useState(0);
   const [userProfileModal, setUserProfileModal] = useState(false)
+  const [selectedImage, setSelectedImage] = useState("");
+
 
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
+  const reactLoginRes = useSelector((state) => getIsReactLoginResponse(state));
   const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
   const userProfileRes = useSelector((state) => getIsUserProfileDetailsFetched(state));
   const userProfileUpdatedRes = useSelector((state) => getIsUserProfileDetailsUpdated(state));
@@ -37,9 +41,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
     if (usrId) {
       setSessionUserId(usrId)
     }
-    // else{
-    //   navigate("/")
-    // }
+
   }, [usrId])
 
 
@@ -63,6 +65,9 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
   }, [])
 
   useEffect(() => {
+    if (sessionUserId) {
+      dispatch(fetchUserProfileDetails(sessionUserId.toString()))
+    }
     let obj = {};
     obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
     dispatch(getUserList(obj));
@@ -81,33 +86,25 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
 
   }, [dashboardRes])
 
+
   useEffect(() => {
-    if (
-      getLoginAuthRes &&
-      getLoginAuthRes !== null &&
-      getLoginAuthRes !== undefined
-    ) {
-      if (getLoginAuthRes.status === "success") {
-        if (
-          getLoginAuthRes.data &&
-          getLoginAuthRes.data !== undefined &&
-          getLoginAuthRes.data !== null &&
-          getLoginAuthRes.data !== {}
-        ) {
-          if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined && getLoginAuthRes.data.fname !== null) {
-            setUserName(getLoginAuthRes.data.fname);
-            setSessionUserId(getLoginAuthRes.data.id)
-
-          }
-          if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined && getLoginAuthRes.data.id !== null) {
-            dispatch(fetchDashboardDetails(getLoginAuthRes.data.id))
-          }
-
+    if (reactLoginRes) {
+      if (reactLoginRes.status === "success") {
+        if (reactLoginRes.fname) {
+          setUserName(reactLoginRes.fname);
         }
-
+        if (reactLoginRes.profilepic) {
+          setSelectedImage(`${BASE_URL}/static/profile/${reactLoginRes.profilepic}`)
+        }
+        if (reactLoginRes.id) {
+          setSessionUserId(reactLoginRes.id)
+          dispatch(fetchDashboardDetails(reactLoginRes.id))
+        }
       }
+
     }
-  }, [getLoginAuthRes]);
+  }, [reactLoginRes]);
+
 
   useEffect(() => {
     if (userProfileRes) {
@@ -118,6 +115,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
           userProfileRes.fullname === "") {
           setUserProfileModal(true)
         }
+        setSelectedImage(`${BASE_URL}/static/profile/${userProfileRes.profilepic}`)
       }
     }
 
@@ -142,7 +140,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
         <div className="user-container">
           <div className="image-container">
             <img
-              src={userImage}
+              src={selectedImage ? selectedImage : userImage}
               alt=""
               className="user-container-img"
               width="100"

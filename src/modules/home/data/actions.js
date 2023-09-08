@@ -43,6 +43,13 @@ export function getSearchedComponentText(props) {
     };
 }
 
+export function clearSearchedComponentText(props) {
+    return {
+        type: type.CLEAR_SEARCHED_COMPONENT_TEXT,
+        payload: props,
+    };
+}
+
 export function fetchDashboardDetails(props) {
     return {
         type: type.FETCH_DASHBOARD_DETAILS,
@@ -97,4 +104,25 @@ export function clearUpdateUserProfileDetails(props) {
         type: type.CLEAR_UPDATE_USER_PROFILE_DETAILS_RES,
         payload: props,
     }
+}
+
+export function userReactLogin(props) {
+    return {
+        type: type.USER_REACT_LOGIN,
+        payload: props,
+    };
+}
+
+export function userReactLoginRes(props) {
+    return {
+        type: type.USER_REACT_LOGIN_RESPONSE,
+        payload: props,
+    };
+}
+
+export function clearUserReactLoginRes(props) {
+    return {
+        type: type.CLEAR_USER_REACT_LOGIN_RESPONSE,
+        payload: props,
+    };
 }

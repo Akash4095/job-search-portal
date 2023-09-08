@@ -29,6 +29,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   );
   const listResponse = useSelector((state) => getIsFetchedList(state));
 
+  const [input, setInput] = useState("");
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [start, setStart] = useState(1);
@@ -49,9 +50,6 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
       setSessionUserId(usrId)
     } 
     
-    // else {
-    //   navigate("/")
-    // }
   }, [usrId])
 
 
@@ -153,6 +151,8 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
           text={searchedText}
           start={start}
           sessionUserId={sessionUserId}
+          input={input}
+          setInput={setInput}
         />
         <div className="list-table-actions">
           <div className="list-actions-select">

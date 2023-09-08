@@ -10,3 +10,5 @@ export const getIsUserProfileDetailsUpdated = (state, prop) => state.homepage.up
 export const getIsAuthFetched = (state, props) => state.homepage.params.isAuthFetched;
 export const getIsKeysFetched = (state, props) => state.homepage.params.isKeysFetched;
 export const getIsUserProfileFetchedFetched = (state, props) => state.homepage.params.userProfileFetched;
+
+export const getIsReactLoginResponse = (state, prop) => state.homepage.getUserReactLoginRes

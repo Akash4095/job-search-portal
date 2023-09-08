@@ -41,6 +41,7 @@ const ListUserCart = ({
   const [contactAccordion, setContactAcordion] = useState(true);
   const [tagsAccordion, setTagsAcordion] = useState(true);
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
+  const [insightsAccordion, setInsightsAcordion] = useState(false)
   const [profileDetails, setProfileDetails] = useState("");
   const [emails, setEmails] = useState([]);
   const [phones, setPhones] = useState([]);
@@ -95,7 +96,7 @@ const ListUserCart = ({
   const callProfileContacts = () => {
     dispatch(fetchProfileContactDetails(profileDetailsPayload));
   };
-  
+
   const deleteProfileFromList = () => {
     let obj = {}
     obj.listid = (profileDetailsPayload.listid ? profileDetailsPayload.listid : "").toString()
@@ -104,6 +105,11 @@ const ListUserCart = ({
     dispatch(deleteListProfile(obj))
 
   }
+
+  function createMarkup(msg) {
+    return { __html: msg };
+  }
+
   return (
     <div className="list-usercart-container scrollable-container">
 
@@ -140,7 +146,7 @@ const ListUserCart = ({
                           : ""
                         : ""}
                     </div>
-                
+
                   </div>
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>
                     <CancelSvg />
@@ -335,6 +341,31 @@ const ListUserCart = ({
                         );
                       })
                       : ""}
+                  </Accordion.Content>
+                </Accordion>
+              </div>
+            </div>
+            <div className="accord-container">
+              <div className="padding5">
+                <Accordion>
+                  <Accordion.Title
+                    active={insightsAccordion}
+                    index={0}
+                    onClick={() => setInsightsAcordion(!insightsAccordion)}
+                  >
+                    <div className="accord-title">
+                      <span>Insights</span>
+                      <span>
+                        <Icon name={insightsAccordion ? "angle down" : "angle right"} />
+                      </span>
+                    </div>
+                  </Accordion.Title>
+                  <Accordion.Content active={insightsAccordion}>
+                    <div className="">
+                      {(profileDetails.insights) ?
+                        <span dangerouslySetInnerHTML={createMarkup(profileDetails.insights)} /> : ""}
+
+                    </div>
                   </Accordion.Content>
                 </Accordion>
               </div>

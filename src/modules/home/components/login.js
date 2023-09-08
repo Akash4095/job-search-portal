@@ -4,12 +4,13 @@ import imgage from "../../../images/loginpageImg.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchLinkedinKeys, sendLinkedInCode } from "../data/actions";
+import { fetchLinkedinKeys, sendLinkedInCode, userReactLogin } from "../data/actions";
 import {
     getIsAuthFetched,
     getIsCodeSendResponse,
     getIsKeysFetched,
     getIsLikedinKeysResponse,
+    getIsReactLoginResponse,
 } from "../data/selectors";
 import "./login.css";
 
@@ -27,56 +28,59 @@ const Login = ({ setSessionUserId }) => {
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
     const getAuthResFetched = useSelector((state) => getIsAuthFetched(state));
     const getKeysFetched = useSelector((state) => getIsKeysFetched(state));
+    const reactLoginRes = useSelector((state) => getIsReactLoginResponse(state));
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (!getKeysFetched) {
-            dispatch(fetchLinkedinKeys());
-        }
-    }, [])
+
 
     const getUrl = window.location.href;
+
 
 
     useEffect(() => {
 
         let code = getUrl
-            ? getUrl.split("code=")[1]
-                ? getUrl.split("code=")[1]
+            ? getUrl.split("var=")[1]
+                ? getUrl.split("var=")[1]
                 : ""
             : "";
-        if (getUrl && getUrl.includes("code=")) {
-            if (code && code !== "" && code !== undefined && code !== null) {
-                let obj = {};
-                obj.code = code;
-                if (!authCallOnce) {
-                    dispatch(sendLinkedInCode(obj));
-                    setAuthCallOnce(true)
-                    setLoader({ open: true, msg: "Loging in..." })
-                }
+        if (code) {
+            const decodedString = atob(code)
+            if (decodedString) {
+                dispatch(userReactLogin(decodedString))
+                setLoader({ open: true, msg: "Loging in..." })
             }
+            // if (getUrl && getUrl.includes("var=")) {
+            //     if (code) {
+            //         let obj = {};
+            //         obj.code = code;
+            //         if (!authCallOnce) {
+            //             dispatch(sendLinkedInCode(obj));
+            //             setAuthCallOnce(true)
+            //             setLoader({ open: true, msg: "Loging in..." })
+            //         }
+            //     }
+            // }
+
         }
 
-    }, [authCallOnce]);
+
+    }, [getUrl]);
+
 
     useEffect(() => {
         if (
-            getLoginAuthRes &&
-            getLoginAuthRes !== null &&
-            getLoginAuthRes !== undefined
+            reactLoginRes
         ) {
-            if (getLoginAuthRes.status === "success") {
-                if (getLoginAuthRes.data && getLoginAuthRes.data !== null && getLoginAuthRes.data !== undefined) {
-                    if (getLoginAuthRes.data.id && getLoginAuthRes.data.id !== undefined) {
-                        setSessionUserId(getLoginAuthRes.data.id)
-                        localStorage.setItem("userid", getLoginAuthRes.data.id)
-                    }
-                    if (getLoginAuthRes.data.fname && getLoginAuthRes.data.fname !== undefined) {
-                        localStorage.setItem("username", getLoginAuthRes.data.fname)
-                    }
-
+            if (reactLoginRes.status === "success") {
+                if (reactLoginRes.id) {
+                    setSessionUserId(reactLoginRes.id)
+                    localStorage.setItem("userid", reactLoginRes.id)
+                }
+                if (reactLoginRes.fname) {
+                    localStorage.setItem("username", reactLoginRes.fname)
                 }
                 setLoader({ open: false, msg: "" })
                 setTimeout(() => {
@@ -84,24 +88,24 @@ const Login = ({ setSessionUserId }) => {
                 }, 500)
 
             }
-            if (getLoginAuthRes.status === "failed") {
+            if (reactLoginRes.status === "failed") {
                 setLoader({ open: false, msg: "" })
             }
         }
-    }, [getLoginAuthRes]);
+    }, [reactLoginRes]);
 
-    useEffect(() => {
-        if (getLinkedInKeys && getLinkedInKeys !== undefined && getLinkedInKeys !== null) {
-            if (getLinkedInKeys.status === "success") {
-                if (getLinkedInKeys.data && getLinkedInKeys.data !== undefined) {
-                    setClientId(getLinkedInKeys.data.client_id)
-                    setClientSecret(getLinkedInKeys.data.client_secret)
-                    setRedirectUri(getLinkedInKeys.data.redirecturi)
-                }
-            }
-        }
+    // useEffect(() => {
+    //     if (getLinkedInKeys && getLinkedInKeys !== undefined && getLinkedInKeys !== null) {
+    //         if (getLinkedInKeys.status === "success") {
+    //             if (getLinkedInKeys.data && getLinkedInKeys.data !== undefined) {
+    //                 setClientId(getLinkedInKeys.data.client_id)
+    //                 setClientSecret(getLinkedInKeys.data.client_secret)
+    //                 setRedirectUri(getLinkedInKeys.data.redirecturi)
+    //             }
+    //         }
+    //     }
 
-    }, [getLinkedInKeys])
+    // }, [getLinkedInKeys])
 
     const signUpWithLinkedFunction = () => {
         window.location.href = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${encodeURIComponent(
@@ -111,7 +115,7 @@ const Login = ({ setSessionUserId }) => {
 
     return (
         <div>
-            <div className="get-started">
+            {/* <div className="get-started">
                 <div className="getlista-wrapper">
                     <span className="getlist-login">getlist</span>
                     <span className="a-bracket">{`{a}`}</span>
@@ -152,7 +156,7 @@ const Login = ({ setSessionUserId }) => {
                     <Grid.Row></Grid.Row>
                 </Grid>
             </div>
-            <footer className="getlista-2023-">{`© getlist{a} 2023 - All rights reserved.`}</footer>
+            <footer className="getlista-2023-">{`© getlist{a} 2023 - All rights reserved.`}</footer> */}
             <div className="dimmer-loader-container">
                 {loader.open && (
                     <Dimmer inverted active>

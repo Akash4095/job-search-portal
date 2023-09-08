@@ -1,10 +1,40 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { fetchedDashboardDetails, fetchedLinkedinKeys, fetchedUserProfileDetails, getLoginAuthRes, updateUserProfileDetailsRes } from "./actions";
+import { fetchedDashboardDetails, fetchedLinkedinKeys, fetchedUserProfileDetails, getLoginAuthRes, updateUserProfileDetailsRes, userReactLoginRes } from "./actions";
 import axios from "axios"
 import { getIsAuthFetched, getIsKeysFetched } from './selectors';
 
 
+
+// region for react login
+
+function* userReactLogin() {
+    yield takeEvery('USER_REACT_LOGIN', requestReactLogin);
+}
+
+function* requestReactLogin(action) {
+
+    const { response, error } = yield call(requestReactLoginAPI, action.payload)
+    if (response) {
+        yield put(userReactLoginRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+
+}
+
+async function requestReactLoginAPI(data) {
+    let sessionUserId = data
+    try {
+        const response = await axios.get(BASE_URL + `/user/reactlogin/${sessionUserId}`, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
 
 // region for get linked in keys
 
@@ -165,6 +195,7 @@ const sagaErrorMessage = (error, action) => {
 export default function* homesagas() {
     yield all([
         fetchLinkedinKeys(),
+        userReactLogin(),
         sendLinkedInCode(),
         fetchDashboardDetail(),
         fetchUserProfileUserDetails(),

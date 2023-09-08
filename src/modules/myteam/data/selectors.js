@@ -1,5 +1,9 @@
-import { sendInvite } from "./model"
+import { sendInvite, updateInitialValues } from "./model"
 
+
+export const getIsUpdateInitialValues = (state, props) => {
+    return updateInitialValues()
+}
 
 export const getIsSendInvite = (state, props) => {
     return sendInvite()

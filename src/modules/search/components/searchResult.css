@@ -162,11 +162,13 @@
 }
 
 .search-result-count {
-  position: relative !important;
+  display: flex;
+  justify-content: space-between;
   color: #999;
   font-weight: 500;
   width: 77vw !important;
   padding-left: 2px;
+  margin-bottom: 8px;
 }
 
 .usercart-container {

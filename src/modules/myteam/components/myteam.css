@@ -276,19 +276,27 @@
 
 .profile-picture-img {
   border-radius: 10px;
-  margin-top: -32px;
+  margin-top: -36px;
 }
 
 .profile-pic-edit {
   display: flex;
-  padding: 4px;
   align-items: flex-start;
   gap: 10px;
   position: relative;
-  left: 78%;
-  top: -4px;
+  left: 79%;
+  top: -8px;
   border-radius: 60px;
   background: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.img-drag-drop {
+  position: relative;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .update-form {

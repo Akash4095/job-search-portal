@@ -29,8 +29,10 @@ import { toast } from "react-toastify";
 import AddListSvg from "../../svg/addListSvg";
 import BlueListSvg from "../../svg/blueListSvg";
 import WhiteListSvg from "../../svg/whiteListSvg";
+import { clearSearchedComponentText } from "../../home/data/actions";
 
 const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId }) => {
+
   const searchResult = useSelector((state) => getIsFetchedSearchByQuery(state));
   const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
   const inputText = useSelector((state) => getIsSearchedText(state));
@@ -40,6 +42,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     getIsAddProfileToListRes(state)
   );
 
+  const [input, setInput] = useState("");
   const [rowClicked, setRowClicked] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -67,15 +70,13 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     if (usrId) {
       setSessionUserId(usrId)
     }
-    // else{
-    //   navigate("/")
-    // }
+
   }, [usrId])
 
 
   useEffect(() => {
     let obj = {};
-    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
     dispatch(getUserList(obj));
 
   }, [sessionUserId]);
@@ -135,6 +136,16 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     setRowClicked(false)
   };
 
+  const clearSearchResult = () => {
+    setSelectedRows([]);
+    setItems([])
+    setSearchedText("")
+    setSearchInfo("")
+    setInput("")
+    dispatch(clearSearchByQuery())
+    dispatch(clearSearchedComponentText())
+  }
+
   return (
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
@@ -147,11 +158,14 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
           setSearchedText={setSearchedText}
           setLoader={setListLoader}
           sessionUserId={sessionUserId}
+          input={input}
+          setInput={setInput}
         />
         <div className="search-container">
-          <p className="search-result-count">
-            {searchInfo ? searchInfo : ""}
-          </p>
+          <div className="search-result-count">
+            <div>{searchInfo ? searchInfo : ""}</div>
+            <div style={{ cursor: "pointer" }} onClick={() => clearSearchResult()}>{searchInfo ? "Clear Search" : ""}</div>
+          </div>
           {selectedRows.length > 0 ? (
             <p className="list-selected">
               <span> {selectedRows.length + " Selected"} </span>

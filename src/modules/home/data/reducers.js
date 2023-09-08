@@ -26,9 +26,23 @@ function getLoginAuthResponse(state = {}, action) {
     }
 }
 
+function getUserReactLoginRes(state = {}, action) {
+    if (action.type === 'USER_REACT_LOGIN_RESPONSE') {
+        return action.payload
+    }
+    if (action.type === 'CLEAR_USER_REACT_LOGIN_RESPONSE') {
+        return {}
+    } else {
+        return state
+    }
+}
+
 function getSearchedText(state = "", action) {
     if (action.type === 'GET_SEARCHED_COMPONENT_TEXT') {
         return action.payload
+    }
+    if (action.type === 'CLEAR_SEARCHED_COMPONENT_TEXT') {
+        return ""
     } else {
         return state
     }
@@ -105,6 +119,7 @@ const homepageReducer = combineReducers({
     fetchedDashBoardDetails,
     fetchedUserProfileDetails,
     updatedUserProfileDetails,
+    getUserReactLoginRes,
     params,
 
 })

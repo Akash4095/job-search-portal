@@ -1,6 +1,13 @@
 import * as Yup from 'yup'
 
 
+export const updateInitialValues = () => ({
+    fullname: "",
+    secondaryemail: "",
+    company: "",
+    designation: "",
+    profilepic: "",
+})
 
 export const sendInvite = () => ({
     email: ""
