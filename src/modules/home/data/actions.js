@@ -126,3 +126,45 @@ export function clearUserReactLoginRes(props) {
         payload: props,
     };
 }
+
+export function fetchNotificationCount(props) {
+    return {
+        type: type.FETCH_NOTIFICATION_COUNT,
+        payload: props,
+    };
+}
+
+export function fetchedNotificationCount(props) {
+    return {
+        type: type.FETCHED_NOTIFICATION_COUNT,
+        payload: props,
+    };
+}
+
+export function fetchAllNotification(props) {
+    return {
+        type: type.FETCH_ALL_NOTIFICATION,
+        payload: props,
+    };
+}
+
+export function fetchedAllNotification(props) {
+    return {
+        type: type.FETCHED_ALL_NOTIFICATION,
+        payload: props,
+    };
+}
+
+export function updateAllNotification(props) {
+    return {
+        type: type.UPDATE_ALL_NOTIFICATION,
+        payload: props,
+    };
+}
+
+export function updateAllNotificationRes(props) {
+    return {
+        type: type.UPDATE_ALL_NOTIFICATION_RES,
+        payload: props,
+    };
+}

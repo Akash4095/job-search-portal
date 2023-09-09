@@ -12,3 +12,7 @@ export const getIsKeysFetched = (state, props) => state.homepage.params.isKeysFe
 export const getIsUserProfileFetchedFetched = (state, props) => state.homepage.params.userProfileFetched;
 
 export const getIsReactLoginResponse = (state, prop) => state.homepage.getUserReactLoginRes
+
+export const getIsNotificationCount = (state, prop) => state.homepage.fetchedNotificationCount 
+export const getIsAllNotification = (state, prop) => state.homepage.fetchedAllNotification 
+export const getIsUpdateAllNotification = (state, prop) => state.homepage.updateAllNotification

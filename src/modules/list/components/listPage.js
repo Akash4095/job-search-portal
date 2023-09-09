@@ -201,14 +201,14 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
                     Add to list
                   </div>
                 </div>
-                <div className="btn-frame">
+                {/* <div className="btn-frame">
                   <div className="btn-svg">
                     <DownloadSvg />
                   </div>
                   <div className="btn-label">
                     Export
                   </div>
-                </div>
+                </div> */}
                 <div className="btn-frame" onClick={() => deleteSelectedProfileFromList()}>
                   <div className="btn-svg">
                     <DeleteSvg />

@@ -80,6 +80,33 @@ function updatedUserProfileDetails(state = {}, action) {
     }
 }
 
+function fetchedNotificationCount(state = {}, action) {
+    if (action.type === 'FETCHED_NOTIFICATION_COUNT') {
+        return action.payload
+    }
+    else {
+        return state
+    }
+}
+
+function fetchedAllNotification(state = {}, action) {
+    if (action.type === 'FETCHED_ALL_NOTIFICATION') {
+        return action.payload
+    }
+    else {
+        return state
+    }
+}
+
+function updateAllNotification(state = {}, action) {
+    if (action.type === 'UPDATE_ALL_NOTIFICATION_RES') {
+        return action.payload
+    }
+    else {
+        return state
+    }
+}
+
 function params(state = defaultAuthParams, action) {
     if (action.type === 'GET_LOGIN_AUTH_RESPONSE') {
         return {
@@ -120,6 +147,9 @@ const homepageReducer = combineReducers({
     fetchedUserProfileDetails,
     updatedUserProfileDetails,
     getUserReactLoginRes,
+    fetchedNotificationCount,
+    fetchedAllNotification,
+    updateAllNotification,
     params,
 
 })

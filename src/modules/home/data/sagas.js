@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { fetchedDashboardDetails, fetchedLinkedinKeys, fetchedUserProfileDetails, getLoginAuthRes, updateUserProfileDetailsRes, userReactLoginRes } from "./actions";
+import { fetchedAllNotification, fetchedDashboardDetails, fetchedLinkedinKeys, fetchedNotificationCount, fetchedUserProfileDetails, getLoginAuthRes, updateAllNotificationRes, updateUserProfileDetailsRes, userReactLoginRes } from "./actions";
 import axios from "axios"
 import { getIsAuthFetched, getIsKeysFetched } from './selectors';
 
@@ -185,6 +185,93 @@ async function requestUpdateProfileDetailsAPI(data) {
 
 // End region
 
+// region for notification count
+
+function* fetchNotificationCount() {
+    yield takeEvery('FETCH_NOTIFICATION_COUNT', reqNotificationCount);
+}
+
+function* reqNotificationCount(action) {
+
+    const { response, error } = yield call(reqNotificationCountAPI, action.payload)
+    if (response) {
+        yield put(fetchedNotificationCount(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+
+}
+
+async function reqNotificationCountAPI(data) {
+    let sessionUserId = data
+    try {
+        const response = await axios.get(BASE_URL + `/count/notifications/${sessionUserId}`, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for notification count
+
+function* fetchAllNotification() {
+    yield takeEvery('FETCH_ALL_NOTIFICATION', reqAllNotification);
+}
+
+function* reqAllNotification(action) {
+
+    const { response, error } = yield call(reqAllNotificationAPI, action.payload)
+    if (response) {
+        yield put(fetchedAllNotification(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+
+}
+
+async function reqAllNotificationAPI(data) {
+    let sessionUserId = data
+    try {
+        const response = await axios.get(BASE_URL + `/user/notifications/${sessionUserId}`, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for update all notification
+
+function* updateAllNotification() {
+    yield takeEvery('UPDATE_ALL_NOTIFICATION', requestupdateNotification);
+}
+
+function* requestupdateNotification(action) {
+    const { response, error } = yield call(requestupdateNotificationAPI, action.payload)
+    if (response) {
+        yield put(updateAllNotificationRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function requestupdateNotificationAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/user/update/notifications', data, { headers: { Authorization: getToken() } });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
 
 const sagaErrorMessage = (error, action) => {
     console.group("Saga Error:" + action.type);
@@ -200,5 +287,8 @@ export default function* homesagas() {
         fetchDashboardDetail(),
         fetchUserProfileUserDetails(),
         updateUserProfileUserDetails(),
+        fetchNotificationCount(),
+        fetchAllNotification(),
+        updateAllNotification(),
     ])
 }

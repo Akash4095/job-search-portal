@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Dropdown, Icon } from "semantic-ui-react";
+import { Link, NavLink } from "react-router-dom";
+import { Dropdown, Icon, Modal, Segment, TransitionablePortal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsCodeSendResponse, getIsDashboardDetails, getIsReactLoginResponse, getIsUserProfileDetailsFetched } from "../home/data/selectors";
+import { getIsAllNotification, getIsCodeSendResponse, getIsDashboardDetails, getIsNotificationCount, getIsReactLoginResponse, getIsUpdateAllNotification, getIsUserProfileDetailsFetched } from "../home/data/selectors";
 import userImage from "../../images/user.png";
 import BellSvg from "../svg/bellSvg";
 import { BASE_URL } from '../../store/path'
-import { fetchUserProfileDetails } from "../home/data/actions";
+import CancelSvg from '../svg/cancelSvg';
+import { fetchAllNotification, fetchNotificationCount, fetchUserProfileDetails, updateAllNotification } from "../home/data/actions";
 
 
 const CommonHeaderComponent = () => {
@@ -16,6 +17,9 @@ const CommonHeaderComponent = () => {
     const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
     const reactLoginRes = useSelector((state) => getIsReactLoginResponse(state));
     const userProfileRes = useSelector((state) => getIsUserProfileDetailsFetched(state));
+    const countRes = useSelector((state) => getIsNotificationCount(state));
+    const allNotificationRes = useSelector((state) => getIsAllNotification(state));
+    const updateAllNotificationRes = useSelector((state) => getIsUpdateAllNotification(state));
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);
@@ -24,6 +28,10 @@ const CommonHeaderComponent = () => {
     const [userName, setUserName] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
     const [sessionUserId, setSessionUserId] = useState("");
+    const [notifyCount, setNotifyCount] = useState("");
+    const [callCount, setCallCount] = useState(true);
+    const [notifyData, setNotifyData] = useState([]);
+    const [notifyPortal, setNotifyPortal] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -102,6 +110,67 @@ const CommonHeaderComponent = () => {
         }
     }, [sessionUserId]);
 
+    useEffect(() => {
+        if (callCount) {
+            let id = (sessionUserId) ? sessionUserId.toString() : "";
+            dispatch(fetchNotificationCount(id));
+            setCallCount(false)
+        }
+    }, [callCount]);
+
+    setTimeout(() => {
+        setCallCount(true)
+    }, 180000)
+
+
+    useEffect(() => {
+        if (countRes && countRes.status === "success") {
+            setNotifyCount(countRes.count)
+        }
+
+    }, [countRes])
+
+    useEffect(() => {
+        if (allNotificationRes && allNotificationRes.status === "success") {
+            if (allNotificationRes.data) {
+                setNotifyData(allNotificationRes.data)
+            }
+        }
+
+    }, [allNotificationRes])
+
+    useEffect(() => {
+        if (updateAllNotificationRes && updateAllNotificationRes.status === "success") {
+            let id = (sessionUserId) ? sessionUserId.toString() : "";
+            dispatch(fetchNotificationCount(id));
+        }
+
+    }, [updateAllNotificationRes])
+
+
+    useEffect(() => {
+        if (notifyData && notifyData.length > 0) {
+            let userid = notifyData[0].userid
+            let ids = notifyData.map(item => item.id).join(', ')
+            let obj = {}
+            obj.ids = ids.toString()
+            obj.userid = userid.toString()
+            dispatch(updateAllNotification(obj))
+
+
+        }
+    }, [notifyData])
+
+    const closeModal = () => {
+        setNotifyPortal(false)
+        setNotifyData([])
+    }
+
+    const showAllNotifications = () => {
+        let id = (sessionUserId) ? sessionUserId.toString() : "";
+        dispatch(fetchAllNotification(id))
+        setNotifyPortal(true)
+    }
 
     useEffect(() => {
         const usrName = localStorage.getItem("username");
@@ -119,8 +188,15 @@ const CommonHeaderComponent = () => {
         navigate("/updateprofile");
     }
 
+    const navigateToPricingPage = () => {
+        let id = (sessionUserId) ? sessionUserId.toString() : "";
+        let encodedId = btoa(id)
+        let url = `${BASE_URL}/pricing?var=${encodedId}`
+        window.location.href = url;
+    }
     const logoutSession = () => {
-        navigate("/");
+        let url = `${BASE_URL}/mainlogout`
+        window.location.href = url;
         localStorage.clear()
     }
 
@@ -154,9 +230,9 @@ const CommonHeaderComponent = () => {
             </div>
             <div className="top-actions-container">
                 <div className="top-actions">
-                    <div style={{ position: "relative", right: "6%" }}>
+                    <div style={{ position: "relative", right: "6%" }} onClick={() => showAllNotifications()}>
                         <BellSvg />
-                        <span className="notification-count">5</span>
+                        <span className="notification-count">{notifyCount}</span>
                     </div>
                     <div className="header-image-container">
                         <img src={selectedImage ? selectedImage : userImage} width="25px" height="25px" className="borderRadius" />
@@ -169,10 +245,13 @@ const CommonHeaderComponent = () => {
                                     <Dropdown.Menu direction="left" style={{ width: "12vw", marginTop: "26px" }} >
                                         <Dropdown.Item onClick={() => navigateToWelcomePage()} className="logout-popup-item" >Profile</Dropdown.Item>
                                         <Dropdown.Item onClick={() => navigateToUpdateProfilePage()} className="logout-popup-item" >Edit Profile</Dropdown.Item>
-                                        <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
+                                        {/* <Dropdown.Item className="logout-popup-item"> Reporting</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item"> User Management</Dropdown.Item>
                                         <Dropdown.Item className="logout-popup-item">Settings</Dropdown.Item>
-                                        <Dropdown.Item className="logout-popup-item">Contact/Help</Dropdown.Item>
+                                        <Dropdown.Item className="logout-popup-item">Contact/Help</Dropdown.Item> */}
+
+                                        <Dropdown.Item className="logout-popup-item" onClick={() => navigateToPricingPage()}>Pricing</Dropdown.Item>
+
                                         <Dropdown.Item onClick={() => logoutSession()} className="logout-popup-item">  Log Out</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -181,6 +260,29 @@ const CommonHeaderComponent = () => {
                     </div>
                 </div>
             </div>
+            <Modal
+                size="small"
+                open={notifyPortal}
+                centered={false}
+                dimmer="inverted"
+                style={{ marginTop: "12vh", marginLeft: "40vw", height: "25vh", overflowY: "scroll" }}
+            >
+                <div
+                    className="welcome-popup-close-icon"
+                    onClick={() => closeModal()}
+                >
+                    <CancelSvg />
+                </div>
+                <Modal.Content>
+                    {
+                        (notifyData && notifyData.length > 0) ? notifyData.map((item) => {
+                            return (
+                                <div>{item.notifytext}</div>
+                            )
+                        }) : <div>{"No Notifications Found"}</div>
+                    }
+                </Modal.Content>
+            </Modal>
         </header>
     );
 };
