@@ -4,6 +4,8 @@ import { createSelector } from "@reduxjs/toolkit"
 export const getIsFetchedSearchByQuery = (state, prop) => state.searchReducer.fetchedSearchedByQuery
 
 export const getIsAddUserList = (state, prop) => state.searchReducer.addUserListRes
+export const getIsUpdateUserList = (state, prop) => state.searchReducer.updateUserListRes
+export const getIsDeleteUserList = (state, prop) => state.searchReducer.deleteUserListRes
 export const getIsUserList = (state, prop) => state.searchReducer.getUserListRes
 export const getIsProfileDetails = (state, prop) => state.searchReducer.fetchedProfileDetailsRes 
 export const getIsProfileDetailsPayload = (state, prop) => state.searchReducer.saveProfileDetailsPayload 

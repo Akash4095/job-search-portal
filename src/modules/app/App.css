@@ -142,7 +142,7 @@ body {
   padding-left: 10px !important;
   font-weight: 500;
   font-style: normal;
-  width: 65% !important;
+  width: 72% !important;
 }
 
 .listEditDelIcons {
@@ -1446,4 +1446,19 @@ input:focus {
 
 a {
   color: #666 !important;
+}
+
+.optionHolderDiv {
+  width: 60px !important;
+  float: right !important;
+}
+
+.ui.table.tableOfOption tr td {
+  border-top: none;
+  height: 12px !important;
+  font-size: 12px;
+}
+
+.ui.table.tableOfOption tr td i {
+  margin-top: 1px;
 }

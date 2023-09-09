@@ -49,6 +49,49 @@ export function addUserListRes(props) {
         payload: props,
     };
 }
+
+export function updateUserList(props) {
+    return {
+        type: type.UPDATE_USER_LIST,
+        payload: props,
+    };
+}
+
+export function updateUserListRes(props) {
+    return {
+        type: type.UPDATE_USER_LIST_RES,
+        payload: props,
+    };
+}
+
+export function clearUpdateUserListRes(props) {
+    return {
+        type: type.CLEAR_UPDATE_USER_LIST_RES,
+        payload: props,
+    };
+}
+
+export function deleteUserList(props) {
+    return {
+        type: type.DELETE_USER_LIST,
+        payload: props,
+    };
+}
+
+export function deleteUserListRes(props) {
+    return {
+        type: type.DELETE_USER_LIST_RES,
+        payload: props,
+    };
+}
+
+export function clearDeleteUserListRes(props) {
+    return {
+        type: type.CLEAR_DELETE_USER_LIST_RES,
+        payload: props,
+    };
+}
+
 export function clearUserListRes(props) {
     return {
         type: type.CLEAR_USER_LIST_RES,

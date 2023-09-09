@@ -1,6 +1,6 @@
 import { call, takeEvery, put, all, select } from 'redux-saga/effects'
 import { BASE_URL, getToken } from '../../../store/path'
-import { addProfileToListRes, addUserListRes, deleteProfileFromListRes, fetchedProfileDetails, fetchedSearchByQuery, getUserListRes, viewMoreSearchRes } from "./actions";
+import { addProfileToListRes, addUserListRes, deleteProfileFromListRes, deleteUserListRes, fetchedProfileDetails, fetchedSearchByQuery, getUserListRes, updateUserListRes, viewMoreSearchRes } from "./actions";
 import axios from "axios"
 
 
@@ -81,6 +81,62 @@ function* addUserListFunc(action) {
 async function addUserListAPI(data) {
     try {
         const response = await axios.post(BASE_URL + '/add/list', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for update userlist
+
+function* updateUserList() {
+    yield takeEvery('UPDATE_USER_LIST', updateUserListFunc);
+}
+
+function* updateUserListFunc(action) {
+
+    const { response, error } = yield call(updateUserListAPI, action.payload)
+    if (response) {
+        yield put(updateUserListRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function updateUserListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/update/list', data, { headers: { Authorization: getToken() }, });
+        return ({ response });
+    } catch (error) {
+        return ({ error });
+    }
+}
+
+// End region
+
+// region for delete user
+
+function* deleteUserList() {
+    yield takeEvery('DELETE_USER_LIST', deleteUserListFunc);
+}
+
+function* deleteUserListFunc(action) {
+
+    const { response, error } = yield call(deleteUserListAPI, action.payload)
+    if (response) {
+        yield put(deleteUserListRes(response.data))
+    }
+    else {
+        sagaErrorMessage(error, action)
+    }
+}
+
+async function deleteUserListAPI(data) {
+    try {
+        const response = await axios.post(BASE_URL + '/delete/list', data, { headers: { Authorization: getToken() }, });
         return ({ response });
     } catch (error) {
         return ({ error });
@@ -216,6 +272,8 @@ export default function* searchsagas() {
         fetchViewMoreQuery(),
         addUserList(),
         getUserList(),
+        updateUserList(),
+        deleteUserList(),
         fetchProfileDetails(),
         addUserToList(),
         deleteUserFromList(),

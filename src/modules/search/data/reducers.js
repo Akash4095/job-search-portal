@@ -47,6 +47,28 @@ function addUserListRes(state = {}, action) {
     }
 }
 
+function updateUserListRes(state = {}, action) {
+    if (action.type === 'UPDATE_USER_LIST_RES') {
+        return action.payload
+    }
+    if (action.type === 'CLEAR_UPDATE_USER_LIST_RES') {
+        return {}
+    } else {
+        return state
+    }
+}
+
+function deleteUserListRes(state = {}, action) {
+    if (action.type === 'DELETE_USER_LIST_RES') {
+        return action.payload
+    }
+    if (action.type === 'CLEAR_DELETE_USER_LIST_RES') {
+        return {}
+    } else {
+        return state
+    }
+}
+
 function getUserListRes(state = {}, action) {
     if (action.type === 'GET_USER_LIST_RES') {
         return action.payload
@@ -111,6 +133,8 @@ function params(state = defaultSearchParams, action) {
 const searchReducer = combineReducers({
     fetchedSearchedByQuery,
     addUserListRes,
+    updateUserListRes,
+    deleteUserListRes,
     getUserListRes,
     fetchedProfileDetailsRes,
     saveProfileDetailsPayload,

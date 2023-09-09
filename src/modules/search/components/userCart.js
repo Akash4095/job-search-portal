@@ -33,6 +33,7 @@ const UserCart = ({
   const [prevCompanyAccordion, setPrevCompanyAcordion] = useState(false);
   const [educationAccordion, setEducationAcordion] = useState(false);
   const [insightsAccordion, setInsightsAcordion] = useState(false)
+  const [contactLoader, setContactLoader] = useState(false);
 
   const profileDetails = useSelector((state) => getIsProfileDetails(state));
   const profileDetailsPayload = useSelector((state) =>
@@ -74,6 +75,7 @@ const UserCart = ({
       if (contactDetails.status === "success") {
         dispatch(fetchProfileDetails(profileDetailsPayload));
       }
+      setContactLoader(false)
     }
   }, [contactDetails]);
 
@@ -84,6 +86,7 @@ const UserCart = ({
     obj.profileid = profileDetailsPayload.profileid
     obj.listid = "1"
     dispatch(fetchProfileContactDetails(obj));
+    setContactLoader(true)
   };
 
   function createMarkup(msg) {
@@ -242,6 +245,15 @@ const UserCart = ({
                         <Button size="small" color="blue" style={{ padding: "8px 18px", marginTop: "12px", }}>{"get{contact}"}</Button>
                       ) : (
                         ""
+                      )}
+                    </div>
+                    <div style={{position:"relative"}}>
+                      {contactLoader && (
+                        <Dimmer inverted active style={{ position:"reletive"}}>
+                          <Loader size="tiny" active>
+                            <div style={{fontSize:"12px"}}>{"Fetching Contacts"}</div>
+                          </Loader>
+                        </Dimmer>
                       )}
                     </div>
                   </Accordion.Content>

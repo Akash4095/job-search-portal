@@ -45,6 +45,7 @@ const ListUserCart = ({
   const [profileDetails, setProfileDetails] = useState("");
   const [emails, setEmails] = useState([]);
   const [phones, setPhones] = useState([]);
+  const [contactLoader, setContactLoader] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -86,6 +87,7 @@ const ListUserCart = ({
         setEmails(contactDetails.email);
         setPhones(contactDetails.phones);
       }
+      setContactLoader(false);
     }
   }, [contactDetails]);
 
@@ -95,6 +97,7 @@ const ListUserCart = ({
 
   const callProfileContacts = () => {
     dispatch(fetchProfileContactDetails(profileDetailsPayload));
+    setContactLoader(true);
   };
 
   const deleteProfileFromList = () => {
@@ -245,6 +248,15 @@ const ListUserCart = ({
                         <Button size="small" style={{ padding: "8px 18px", marginTop: "12px", background: "#007bff", color: "#fff" }}>{"get{contact}"}</Button>
                       ) : (
                         ""
+                      )}
+                    </div>
+                    <div style={{ position: "relative" }}>
+                      {contactLoader && (
+                        <Dimmer inverted active style={{ position: "reletive" }}>
+                          <Loader size="tiny" active>
+                            <div style={{ fontSize: "12px" }}>{"Fetching Contacts"}</div>
+                          </Loader>
+                        </Dimmer>
                       )}
                     </div>
                   </Accordion.Content>

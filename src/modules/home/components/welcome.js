@@ -134,7 +134,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
 
   return (
     <div className="d_flex">
-      <SideBar />
+      <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent />
         <div className="user-container">

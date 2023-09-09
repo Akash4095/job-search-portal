@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon, Modal } from "semantic-ui-react";
+import { Button, Icon, Modal, Popup } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { getIsAddUserList, getIsUserList } from "../search/data/selectors";
+import { getIsAddUserList, getIsDeleteUserList, getIsUpdateUserList, getIsUserList } from "../search/data/selectors";
 import AddListForm from "./addListForm";
 import CommanResponseModal from "./commonModal";
-import { clearUserListRes, getUserList } from "../search/data/actions";
+import { clearDeleteUserListRes, clearUpdateUserListRes, clearUserListRes, getUserList } from "../search/data/actions";
 import { clearFetchedList, fetchList, saveSideListPayload } from "../list/data/actions";
 import { getIsFetchedListResSave } from "../list/data/selectors";
 import LockSvg from "../svg/lockSvg"
@@ -15,13 +15,22 @@ import MyTeamSvg from "../svg/myTeamSvg";
 import HelpSvg from "../svg/helpSvg";
 import IntegrationSvg from "../svg/integrationSvg";
 import GetlistSvg from "../svg/getlist{a}.svg";
+import ListEditSvg from "../svg/listEditSvg"
+import EditDeleteMenus from "./editDeleteMenus";
+import EditListForm from "./editListForm";
+import { toast } from "react-toastify";
 
 const SideBar = ({ sessionUserId }) => {
+
   const addListRes = useSelector((state) => getIsAddUserList(state));
+  const updateListRes = useSelector((state) => getIsUpdateUserList(state));
+  const deleteListRes = useSelector((state) => getIsDeleteUserList(state));
   const userListRes = useSelector((state) => getIsUserList(state));
   const [addListModal, setAddListModal] = useState({ open: false, msg: "" });
+  const [editListModal, setEditListModal] = useState({ open: false, obj: {} });
   const listResponse = useSelector((state) => getIsFetchedListResSave(state));
   const [sidebarUserList, setSidebarUserList] = useState([]);
+  const [isHovered, setIsHovered] = useState(false);
 
 
   const navigate = useNavigate();
@@ -37,12 +46,12 @@ const SideBar = ({ sessionUserId }) => {
 
 
   useEffect(() => {
-    if (addListRes && addListRes !== null && addListRes !== undefined) {
+    if (addListRes) {
       if (addListRes.status === "success") {
         dispatch(clearUserListRes());
-
+        toast.success("List added Succesfully");
         let obj = {};
-        obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+        obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
         dispatch(getUserList(obj));
       }
 
@@ -50,7 +59,44 @@ const SideBar = ({ sessionUserId }) => {
   }, [addListRes]);
 
   useEffect(() => {
-    if (userListRes && userListRes !== null && userListRes !== undefined) {
+    if (updateListRes) {
+      if (updateListRes.status === "success") {
+        toast.success("List Updated Succesfully");
+        dispatch(clearUpdateUserListRes());
+
+        let obj = {};
+        obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
+        dispatch(getUserList(obj));
+      }
+      if (updateListRes.status === "failed") {
+        toast.error("Something went wrong");
+        dispatch(clearUpdateUserListRes());
+      }
+
+    }
+  }, [updateListRes]);
+
+  useEffect(() => {
+    if (deleteListRes) {
+      if (deleteListRes.status === "success") {
+        toast.success(deleteListRes.data ? deleteListRes.data : "");
+        dispatch(clearDeleteUserListRes());
+
+        let obj = {};
+        obj.userid = (sessionUserId) ? sessionUserId.toString() : "";
+        dispatch(getUserList(obj));
+      }
+
+      if (deleteListRes.status === "failed") {
+        toast.error(deleteListRes.data ? deleteListRes.data : "");
+        dispatch(clearDeleteUserListRes());
+      }
+
+    }
+  }, [deleteListRes]);
+
+  useEffect(() => {
+    if (userListRes) {
       if (userListRes.status === "success") {
         setSidebarUserList(userListRes.list);
       }
@@ -58,7 +104,7 @@ const SideBar = ({ sessionUserId }) => {
   }, [userListRes]);
 
   useEffect(() => {
-    if (listResponse && listResponse !== null && listResponse !== undefined) {
+    if (listResponse) {
       if (listResponse.status === "success") {
         if (
           listResponse.list &&
@@ -67,6 +113,13 @@ const SideBar = ({ sessionUserId }) => {
         ) {
           navigate("/list");
           dispatch(clearFetchedList());
+        }
+        if (
+          listResponse.list &&
+          listResponse.list.length &&
+          listResponse.list.length === 0
+        ) {
+          toast.success("Default List Has No Data");
         }
       }
     }
@@ -91,7 +144,7 @@ const SideBar = ({ sessionUserId }) => {
         </div>
       </div>
       <div className="sidebar-middle scrollable-container-sidebar">
-        <div className="sidebar-list-lock">
+        {/* <div className="sidebar-list-lock">
           <div className="listSvg">
             <ListSvg />
           </div>
@@ -99,22 +152,43 @@ const SideBar = ({ sessionUserId }) => {
           <div className="lockSvg">
             <LockSvg />
           </div>
-        </div>
+        </div> */}
         {sidebarUserList && sidebarUserList.length > 0
           ? sidebarUserList.map((item) => {
             return (
-              <div
-                className="sidebar-list"
-                onClick={() => callListFunction(item)}
+              <div className="sidebar-list"
               >
-                {/* <Icon name="bars" className="sidebar-icons" /> */}
                 <div className="listSvg">
                   <ListSvg />
                 </div>
-                <div className="default-list1">{item.listname}</div>
-                <div className="listEditDelIcons">
-                  {/* <Icon size="mini" name="edit" style={{color:"#007bff"}} /> <Icon style={{color:"#e72b2b"}} size="mini" name="cancel"/> */}
-                </div>
+                <div className="default-list1" onClick={() => callListFunction(item)}>{item.listname}</div>
+                {
+                  item.listname === "Default List" ?
+                    <div className="lockSvg">
+                      <LockSvg />
+                    </div> :
+                    <div>
+                      <Popup
+                        content={
+                          <EditDeleteMenus
+                            item={item}
+                            setEditListModal={setEditListModal}
+                          />}
+                        on="click"
+                        pinned
+                        wide
+                        position="bottom center"
+                        style={{ marginLeft: "6px", marginTop: "2px" }}
+                        trigger={
+                          <div id="popupBtn">
+                            <ListEditSvg />
+                          </div>
+                        }
+                      />
+
+                    </div>
+
+                }
               </div>
             );
           })
@@ -167,6 +241,14 @@ const SideBar = ({ sessionUserId }) => {
       >
         <Modal.Content>
           <AddListForm setAddListModal={setAddListModal} sessionUserId={sessionUserId} />
+        </Modal.Content>
+      </Modal>
+      <Modal
+        size="mini"
+        open={editListModal.open}
+      >
+        <Modal.Content>
+          <EditListForm setEditListModal={setEditListModal} editListModal={editListModal} sessionUserId={sessionUserId} />
         </Modal.Content>
       </Modal>
 

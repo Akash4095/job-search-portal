@@ -99,14 +99,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     setModalOpen({ open: false, msg: "" })
   }
 
-  useEffect(() => {
-    if (addListRes && addListRes !== null && addListRes !== undefined) {
-      if (addListRes.status && addListRes.status === "success") {
-        toast.success("List Added Successfully");
-        dispatch(clearUserListRes());
-      }
-    }
-  }, [addListRes]);
+
 
   useEffect(() => {
     if (

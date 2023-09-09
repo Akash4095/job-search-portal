@@ -17,7 +17,7 @@ import { BASE_URL } from '../../../store/path'
 
 
 
-const UpdateProfile = ({ sessionUserId }) => {
+const UpdateProfile = ({ sessionUserId, setSessionUserId }) => {
 
     const updateIitailValues = useSelector((state) => getIsUpdateInitialValues(state));
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state));
@@ -35,6 +35,14 @@ const UpdateProfile = ({ sessionUserId }) => {
 
 
     const dispatch = useDispatch();
+
+    const usrId = localStorage.getItem("userid");
+    useEffect(() => {
+      if (usrId) {
+        setSessionUserId(usrId)
+      }
+  
+    }, [usrId])
 
     useEffect(() => {
         if (sessionUserId) {
