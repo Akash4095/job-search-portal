@@ -1194,6 +1194,15 @@ input:focus {
   letter-spacing: -0.28px;
 }
 
+.insights-name {
+  color: #1a1a1a;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.28px;
+}
 .prev-accord {
   display: flex !important;
   flex-direction: column !important;
@@ -1461,4 +1470,13 @@ a {
 
 .ui.table.tableOfOption tr td i {
   margin-top: 1px;
+}
+
+
+@media (max-width: 480px) {
+  .sidebar-container {
+    width: 100% !important;
+    height: 100vh !important;
+  }
+
 }

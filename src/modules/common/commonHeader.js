@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Dropdown, Icon, Modal, Segment, TransitionablePortal } from "semantic-ui-react";
+import { Dropdown, Icon, Modal, Popup, Segment, TransitionablePortal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getIsAllNotification, getIsCodeSendResponse, getIsDashboardDetails, getIsNotificationCount, getIsReactLoginResponse, getIsUpdateAllNotification, getIsUserProfileDetailsFetched } from "../home/data/selectors";
@@ -9,9 +9,10 @@ import BellSvg from "../svg/bellSvg";
 import { BASE_URL } from '../../store/path'
 import CancelSvg from '../svg/cancelSvg';
 import { fetchAllNotification, fetchNotificationCount, fetchUserProfileDetails, updateAllNotification } from "../home/data/actions";
+import ShowNotification from "./showNotification";
 
 
-const CommonHeaderComponent = () => {
+const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
 
     const getLoginAuthRes = useSelector((state) => getIsCodeSendResponse(state))
     const dashboardRes = useSelector((state) => getIsDashboardDetails(state));
@@ -27,7 +28,6 @@ const CommonHeaderComponent = () => {
     const [totalCredit, setTotalCredit] = useState("");
     const [userName, setUserName] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
-    const [sessionUserId, setSessionUserId] = useState("");
     const [notifyCount, setNotifyCount] = useState(0);
     const [callCount, setCallCount] = useState(true);
     const [notifyData, setNotifyData] = useState([]);
@@ -162,16 +162,22 @@ const CommonHeaderComponent = () => {
     }, [notifyData])
 
     const closeModal = () => {
-        setNotifyPortal(false)
+        if (notifyData && notifyData.length > 0) {
+            let userid = notifyData[0].userid
+            let ids = notifyData.map(item => item.id).join(', ')
+            let obj = {}
+            obj.ids = ids.toString()
+            obj.userid = userid.toString()
+            dispatch(updateAllNotification(obj))
+
+
+        }
         setNotifyData([])
     }
 
     const showAllNotifications = () => {
-        if(notifyCount > 0){
-            let id = (sessionUserId) ? sessionUserId.toString() : "";
-            dispatch(fetchAllNotification(id))
-            setNotifyPortal(true)
-        }
+        let id = (sessionUserId) ? sessionUserId.toString() : "";
+        dispatch(fetchAllNotification(id))
     }
 
     useEffect(() => {
@@ -232,10 +238,28 @@ const CommonHeaderComponent = () => {
             </div>
             <div className="top-actions-container">
                 <div className="top-actions">
-                    <div style={{ position: "relative", right: "6%" }} onClick={() => showAllNotifications()}>
-                        <BellSvg />
-                        <span className="notification-count">{notifyCount}</span>
-                    </div>
+                    <>
+                        <Popup
+                            content={
+                                <ShowNotification
+                                    notifyData={notifyData}
+                                />}
+                            on="click"
+                            pinned
+                            wide
+                            position="bottom right"
+                            style={{ marginLeft: "2px", marginTop: "2px", }}
+                            trigger={
+                                <div style={{ position: "relative", right: "6%" }} onClick={() => showAllNotifications()}>
+                                    <BellSvg />
+                                    <span className="notification-count">{notifyCount}</span>
+                                </div>
+                            }
+                            onClose={() => closeModal()}
+                        />
+
+                    </>
+
                     <div className="header-image-container">
                         <img src={selectedImage ? selectedImage : userImage} width="25px" height="25px" className="borderRadius" />
                     </div>
@@ -262,29 +286,6 @@ const CommonHeaderComponent = () => {
                     </div>
                 </div>
             </div>
-            <Modal
-                size="small"
-                open={notifyPortal}
-                centered={false}
-                dimmer="inverted"
-                style={{ marginTop: "12vh", marginLeft: "40vw", height: "25vh", overflowY: "scroll" }}
-            >
-                <div
-                    className="welcome-popup-close-icon"
-                    onClick={() => closeModal()}
-                >
-                    <CancelSvg />
-                </div>
-                <Modal.Content>
-                    {
-                        (notifyData && notifyData.length > 0) ? notifyData.map((item) => {
-                            return (
-                                <div>{item.notifytext}</div>
-                            )
-                        }) : <div>{"No Notifications Found"}</div>
-                    }
-                </Modal.Content>
-            </Modal>
         </header>
     );
 };

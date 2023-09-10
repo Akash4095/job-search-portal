@@ -44,7 +44,7 @@ const ListTable = ({
 
 
   const fetchlistCartDetails = (row) => {
-    if (selectedRows && selectedRows.length === 0) {
+    
       let obj = {}
       obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
       obj.profileid = row.profileid
@@ -55,7 +55,7 @@ const ListTable = ({
       setRowClicked(true);
       dispatch(clearListProfileDetails())
 
-    }
+    
   };
 
   const tagListFunction = () => {

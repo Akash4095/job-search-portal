@@ -144,7 +144,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
-        <CommonHeaderComponent />
+        <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
 
         <CommonSearchComponent
           start={start}

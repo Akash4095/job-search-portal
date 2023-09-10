@@ -38,10 +38,10 @@ const UpdateProfile = ({ sessionUserId, setSessionUserId }) => {
 
     const usrId = localStorage.getItem("userid");
     useEffect(() => {
-      if (usrId) {
-        setSessionUserId(usrId)
-      }
-  
+        if (usrId) {
+            setSessionUserId(usrId)
+        }
+
     }, [usrId])
 
     useEffect(() => {
@@ -108,7 +108,7 @@ const UpdateProfile = ({ sessionUserId, setSessionUserId }) => {
         <div className='d_flex'>
             <SideBar sessionUserId={sessionUserId} />
             <div className="right-panel">
-                <CommonHeaderComponent />
+                <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
                 <div className='updateprofile-container'>
                     <div className='updateprofile-header'>
                         <div className='updateprofile-title'>Profile</div>

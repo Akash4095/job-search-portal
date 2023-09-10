@@ -247,11 +247,11 @@ const UserCart = ({
                         ""
                       )}
                     </div>
-                    <div style={{position:"relative"}}>
+                    <div style={{ position: "relative" }}>
                       {contactLoader && (
-                        <Dimmer inverted active style={{ position:"reletive"}}>
+                        <Dimmer inverted active style={{ position: "reletive" }}>
                           <Loader size="tiny" active>
-                            <div style={{fontSize:"12px"}}>{"Fetching Contacts"}</div>
+                            <div style={{ fontSize: "12px" }}>{"Fetching Contacts"}</div>
                           </Loader>
                         </Dimmer>
                       )}
@@ -408,7 +408,7 @@ const UserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={insightsAccordion}>
-                    <div className="">
+                    <div className="insights-name">
                       {(profileDetails.insights) ?
                         <span dangerouslySetInnerHTML={createMarkup(profileDetails.insights)} /> : ""}
 

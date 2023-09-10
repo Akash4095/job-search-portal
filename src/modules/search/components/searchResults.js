@@ -48,7 +48,7 @@ const SearchResults = ({
   }
 
   const getUserProfileDetails = (row) => {
-    if(selectedRows && selectedRows.length === 0){
+   
       let obj = {};
       obj.profileid = row.id.toString();
       obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
@@ -57,7 +57,7 @@ const SearchResults = ({
       setUserCartLoader({ open: true, msg: "Loading Profile" });
       setRowClicked(true);
       dispatch(clearProfileDetails())
-    }
+    
   };
 
   const addProfileToListFunc = (row) => {

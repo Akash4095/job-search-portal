@@ -48,8 +48,8 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
   useEffect(() => {
     if (usrId) {
       setSessionUserId(usrId)
-    } 
-    
+    }
+
   }, [usrId])
 
 
@@ -144,7 +144,7 @@ const ListPage = ({ setSearchedText, searchedText, sessionUserId, setSessionUser
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
-        <CommonHeaderComponent />
+        <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
 
         <CommonSearchComponent
           setSearchedText={setSearchedText}

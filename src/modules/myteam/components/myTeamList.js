@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { getUserList } from '../../search/data/actions'
 
 
-const MyTeamList = ({ sessionUserId }) => {
+const MyTeamList = ({ sessionUserId, setSessionUserId }) => {
 
     const [inviteModal, setInviteModal] = useState(false)
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const MyTeamList = ({ sessionUserId }) => {
         <div className='d_flex'>
             <SideBar sessionUserId={sessionUserId} />
             <div className="right-panel">
-                <CommonHeaderComponent />
+                <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
                 <div className='myteam-container'>
                     {/* <div className='myteam-header'>
                         <div className='myteam-title'>My Team</div>

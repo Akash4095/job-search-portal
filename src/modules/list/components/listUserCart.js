@@ -373,7 +373,7 @@ const ListUserCart = ({
                     </div>
                   </Accordion.Title>
                   <Accordion.Content active={insightsAccordion}>
-                    <div className="">
+                    <div className="insights-name">
                       {(profileDetails.insights) ?
                         <span dangerouslySetInnerHTML={createMarkup(profileDetails.insights)} /> : ""}
 
@@ -384,7 +384,7 @@ const ListUserCart = ({
             </div>
             <div className="list-footer-btns">
               <div className="alignCenter">
-                <div className="btn-frame list-user-cart-bt" style={{paddingTop:"4vh"}}>
+                <div className="btn-frame list-user-cart-bt" style={{ paddingTop: "4vh" }}>
                   {/* <div className="listCartBtn">
                     <BlueListSvg />
                   </div>

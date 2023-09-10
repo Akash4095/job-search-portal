@@ -136,7 +136,7 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
     <div className="d_flex">
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
-        <CommonHeaderComponent />
+        <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
         <div className="user-container">
           <div className="image-container">
             <img
