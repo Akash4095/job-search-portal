@@ -384,13 +384,13 @@ const ListUserCart = ({
             </div>
             <div className="list-footer-btns">
               <div className="alignCenter">
-                <div className="btn-frame list-user-cart-btn">
-                  <div className="listCartBtn">
+                <div className="btn-frame list-user-cart-bt" style={{paddingTop:"4vh"}}>
+                  {/* <div className="listCartBtn">
                     <BlueListSvg />
                   </div>
                   <div className="btn-label">
                     Add to list
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="btn-frame alignCenter listcart-delete-btn" onClick={() => deleteProfileFromList()}>

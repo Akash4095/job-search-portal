@@ -28,7 +28,7 @@ const CommonHeaderComponent = () => {
     const [userName, setUserName] = useState("");
     const [selectedImage, setSelectedImage] = useState("");
     const [sessionUserId, setSessionUserId] = useState("");
-    const [notifyCount, setNotifyCount] = useState("");
+    const [notifyCount, setNotifyCount] = useState(0);
     const [callCount, setCallCount] = useState(true);
     const [notifyData, setNotifyData] = useState([]);
     const [notifyPortal, setNotifyPortal] = useState(false);
@@ -167,9 +167,11 @@ const CommonHeaderComponent = () => {
     }
 
     const showAllNotifications = () => {
-        let id = (sessionUserId) ? sessionUserId.toString() : "";
-        dispatch(fetchAllNotification(id))
-        setNotifyPortal(true)
+        if(notifyCount > 0){
+            let id = (sessionUserId) ? sessionUserId.toString() : "";
+            dispatch(fetchAllNotification(id))
+            setNotifyPortal(true)
+        }
     }
 
     useEffect(() => {

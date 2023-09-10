@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Modal, Form, Container, Header, Icon } from 'semantic-ui-react'
 import { addProfileToList } from '../data/actions';
 import UserListSelect from './userListSelect';
-import { getIsProfileDetailsPayload } from '../data/selectors';
+import { getAddList, getIsProfileDetailsPayload } from '../data/selectors';
 import AddListForm from '../../common/addListForm';
 import CancelSvg from '../../svg/cancelSvg';
+import { addListSchema } from '../data/model';
 
 
 const AddUserProfileToListForm = (props) => {
 
     const profileDetailsPayload = useSelector((state) => getIsProfileDetailsPayload(state));
+    const initialVal = useSelector((state) => getAddList(state));
     const [listModal, setListModal] = useState({ open: false, msg: "" });
 
     const dispatch = useDispatch();
@@ -35,6 +37,9 @@ const AddUserProfileToListForm = (props) => {
 
         }
         props.setAddListModal({ open: false, msg: "", obj: {} })
+        if (props.setRowClicked) {
+            props.setRowClicked(false)
+        }
     }
 
 
@@ -58,8 +63,8 @@ const AddUserProfileToListForm = (props) => {
             <p>Note: U can Add New List from below Add List button</p>
             <br />
             <Formik id="finbank" size="large" width={5}
-                initialValues={{ listid: "" }}
-                validationSchema={null}
+                initialValues={initialVal}
+                validationSchema={addListSchema}
                 onSubmit={(values, { resetForm }) => {
                     saveForm(values, resetForm)
                 }}
@@ -71,7 +76,7 @@ const AddUserProfileToListForm = (props) => {
                         <br />
                         <br />
                         <Button type="submit" size="small" color='blue' className="CustomeBTN" style={{ padding: "10px 40px" }}>Add Profile To List</Button>
-                        <Button size='small' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{ padding: "10px 40px" }}>Add New List</Button>
+                        <Button type='button' size='small' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{ padding: "10px 40px" }}>Add New List</Button>
                     </Form>
                 )}
             />

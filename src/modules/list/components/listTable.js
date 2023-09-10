@@ -44,16 +44,18 @@ const ListTable = ({
 
 
   const fetchlistCartDetails = (row) => {
-    let obj = {}
-    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
-    obj.profileid = row.profileid
-    obj.listid = row.listid
-    dispatch(fetchListProfileDetails(obj))
-    dispatch(saveListProfileDetailsPayload(obj))
-    setLoader({ open: true, msg: "Loading" })
-    setRowClicked(true);
-    dispatch(clearListProfileDetails())
+    if (selectedRows && selectedRows.length === 0) {
+      let obj = {}
+      obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+      obj.profileid = row.profileid
+      obj.listid = row.listid
+      dispatch(fetchListProfileDetails(obj))
+      dispatch(saveListProfileDetailsPayload(obj))
+      setLoader({ open: true, msg: "Loading" })
+      setRowClicked(true);
+      dispatch(clearListProfileDetails())
 
+    }
   };
 
   const tagListFunction = () => {

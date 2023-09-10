@@ -122,6 +122,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
 
   const addProfilesToListFunc = () => {
     setAddListModal({ open: true, msg: "", obj: {} });
+    setRowClicked(false)
   };
 
   const handleViewMoreClick = () => {
@@ -242,6 +243,7 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
             setAddListModal={setAddListModal}
             selectedRows={selectedRows}
             sessionUserId={sessionUserId}
+            setRowClicked={setRowClicked}
           />
         </Modal.Content>
       </Modal>

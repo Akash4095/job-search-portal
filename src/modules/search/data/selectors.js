@@ -1,4 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit"
+import { listValues } from "./model"
+
+export const getAddList = (state, props) => {
+    return listValues()
+}
 
 
 export const getIsFetchedSearchByQuery = (state, prop) => state.searchReducer.fetchedSearchedByQuery
