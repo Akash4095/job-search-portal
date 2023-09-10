@@ -4,8 +4,7 @@ import userACL from "./access";
 export const BASE_URL = 'https://getlista.io'
 
 export const getHeader = () => {
-
-    return { headers: { 'accountName': domain, 'Content-Type': 'application/json' } }
+    return { headers: { 'Content-Type': 'application/json' } }
 }
 
 export const getToken = () => {
