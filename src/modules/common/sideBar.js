@@ -243,7 +243,7 @@ const SideBar = ({ sessionUserId }) => {
           <div>25 July 2023</div>
         </div>
       </div>
-      <div className={showSidebar ? "sidebar-container-mobile" : "sidebar-container"}>
+      <div className={showSidebar ? "sidebar-container-mobile" : "sidebar-container-hide"}>
         <div className="sidebar-header">
           <div className="top-mobile" onClick={() => setShowSidebarFunc(!showSidebar)}>
             <div className="getlist-sidebar">getlist</div>

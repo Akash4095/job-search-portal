@@ -23,7 +23,9 @@ body {
 .sidebar-container-mobile {
   display: none;
 }
-
+.sidebar-container-hide {
+  display: none;
+}
 .sidebar-header {
   box-sizing: border-box;
   height: 74px !important;
@@ -1503,6 +1505,15 @@ a {
     padding-left: 13vw;
     justify-content: center;
     align-items: center;
+  }
+  .widget-last {
+    height: 11vh !important;
+    width: 70vw !important;
+    padding: 6% 12% !important;
+    justify-content: center;
+    gap: 10px;
+    color: var(--color-gray-100);
+    border-right: 1px solid #cdcdcd;
   }
   .header-image-container {
     display: none;
