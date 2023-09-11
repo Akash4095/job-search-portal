@@ -168,3 +168,10 @@ export function updateAllNotificationRes(props) {
         payload: props,
     };
 }
+
+export function setShowSidebar(props) {
+    return {
+        type: type.SET_SHOW_SIDEBAR,
+        payload: props,
+    };
+}

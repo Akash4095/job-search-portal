@@ -3,13 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { Dropdown, Icon, Modal, Popup, Segment, TransitionablePortal } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getIsAllNotification, getIsCodeSendResponse, getIsDashboardDetails, getIsNotificationCount, getIsReactLoginResponse, getIsUpdateAllNotification, getIsUserProfileDetailsFetched } from "../home/data/selectors";
+import { getIsAllNotification, getIsCodeSendResponse, getIsDashboardDetails, getIsNotificationCount, getIsReactLoginResponse, getIsShowSidebar, getIsUpdateAllNotification, getIsUserProfileDetailsFetched } from "../home/data/selectors";
 import userImage from "../../images/user.png";
 import BellSvg from "../svg/bellSvg";
 import { BASE_URL } from '../../store/path'
 import CancelSvg from '../svg/cancelSvg';
-import { fetchAllNotification, fetchNotificationCount, fetchUserProfileDetails, updateAllNotification } from "../home/data/actions";
+import { fetchAllNotification, fetchNotificationCount, fetchUserProfileDetails, setShowSidebar, updateAllNotification } from "../home/data/actions";
 import ShowNotification from "./showNotification";
+import BarsSvg from "../svg/barsSvg";
 
 
 const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
@@ -21,6 +22,7 @@ const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
     const countRes = useSelector((state) => getIsNotificationCount(state));
     const allNotificationRes = useSelector((state) => getIsAllNotification(state));
     const updateAllNotificationRes = useSelector((state) => getIsUpdateAllNotification(state));
+    const showSidebar = useSelector((state) => getIsShowSidebar(state));
 
     const [searchClicked, setSearchClicked] = useState(true);
     const [listClicked, setListClicked] = useState(false);
@@ -43,6 +45,10 @@ const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
         }
 
     }, [usrId])
+
+    const setShowSidebarFunc = () => {
+        dispatch(setShowSidebar(!showSidebar))
+    }
 
     const navigateToSearch = () => {
         setSearchClicked(true);
@@ -208,8 +214,22 @@ const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
         localStorage.clear()
     }
 
+    const gotoWelcomePage = () => {
+        navigate("/welcome");
+    };
+
     return (
         <header className="common-header">
+            <div className="getlist-mobile-view">
+                <div className="barsSvg" onClick={() => setShowSidebarFunc()}>
+                    <BarsSvg />
+                </div>
+                <div className="top" onClick={() => gotoWelcomePage()}>
+                    <div className="getlist-sidebar">getlist</div>
+                    <div className="a-bracket">{`{a}`}</div>
+                    {/* <img src={GetlistSvg} alt="" /> */}
+                </div>
+            </div>
             <div className="top-tab">
                 <div
                     style={{ color: searchClicked ? "#1BE885" : "#fff", borderBottom: searchClicked ? "2px solid" : "none" }}

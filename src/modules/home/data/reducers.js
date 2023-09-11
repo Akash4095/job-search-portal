@@ -106,6 +106,14 @@ function updateAllNotification(state = {}, action) {
         return state
     }
 }
+function setShowSidebar(state = false, action) {
+    if (action.type === 'SET_SHOW_SIDEBAR') {
+        return action.payload
+    }
+    else {
+        return state
+    }
+}
 
 function params(state = defaultAuthParams, action) {
     if (action.type === 'GET_LOGIN_AUTH_RESPONSE') {
@@ -150,6 +158,7 @@ const homepageReducer = combineReducers({
     fetchedNotificationCount,
     fetchedAllNotification,
     updateAllNotification,
+    setShowSidebar,
     params,
 
 })

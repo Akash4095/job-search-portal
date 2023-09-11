@@ -19,12 +19,15 @@ import ListEditSvg from "../svg/listEditSvg"
 import EditDeleteMenus from "./editDeleteMenus";
 import EditListForm from "./editListForm";
 import { toast } from "react-toastify";
+import { getIsShowSidebar } from "../home/data/selectors";
+import { setShowSidebar } from "../home/data/actions";
 
 const SideBar = ({ sessionUserId }) => {
 
   const addListRes = useSelector((state) => getIsAddUserList(state));
   const updateListRes = useSelector((state) => getIsUpdateUserList(state));
   const deleteListRes = useSelector((state) => getIsDeleteUserList(state));
+  const showSidebar = useSelector((state) => getIsShowSidebar(state));
   const userListRes = useSelector((state) => getIsUserList(state));
   const [addListModal, setAddListModal] = useState({ open: false, msg: "" });
   const [editListModal, setEditListModal] = useState({ open: false, obj: {} });
@@ -43,6 +46,9 @@ const SideBar = ({ sessionUserId }) => {
     setAddListModal({ open: true, msg: "" });
   };
 
+  const setShowSidebarFunc = () => {
+    dispatch(setShowSidebar(!showSidebar))
+  }
 
 
   useEffect(() => {
@@ -134,105 +140,200 @@ const SideBar = ({ sessionUserId }) => {
     dispatch(saveSideListPayload(obj))
   };
 
+  const callListFunctionMobileView = (row) => {
+    let obj = {};
+    obj.userid = row.userid.toString();
+    obj.listid = row.id.toString();
+    dispatch(fetchList(obj));
+    dispatch(saveSideListPayload(obj))
+    dispatch(setShowSidebar(false))
+  };
+
   return (
-    <section className="sidebar-container">
-      <div className="sidebar-header">
-        <div className="top" onClick={() => gotoWelcomePage()}>
-          <div className="getlist-sidebar">getlist</div>
-          <div className="a-bracket">{`{a}`}</div>
-          {/* <img src={GetlistSvg} alt="" /> */}
+    <section >
+      <div className="sidebar-container">
+        <div className="sidebar-header">
+          <div className="top" onClick={() => gotoWelcomePage()}>
+            <div className="getlist-sidebar">getlist</div>
+            <div className="a-bracket">{`{a}`}</div>
+
+          </div>
         </div>
-      </div>
-      <div className="sidebar-middle scrollable-container-sidebar">
-        {/* <div className="sidebar-list-lock">
-          <div className="listSvg">
-            <ListSvg />
-          </div>
-          <div className="default-list-lock">Default List</div>
-          <div className="lockSvg">
-            <LockSvg />
-          </div>
-        </div> */}
-        {sidebarUserList && sidebarUserList.length > 0
-          ? sidebarUserList.map((item) => {
-            return (
-              <div className="sidebar-list"
-              >
-                <div className="listSvg">
-                  <ListSvg />
+        <div className="sidebar-middle scrollable-container-sidebar">
+
+          {sidebarUserList && sidebarUserList.length > 0
+            ? sidebarUserList.map((item) => {
+              return (
+                <div className="sidebar-list"
+                >
+                  <div className="listSvg">
+                    <ListSvg />
+                  </div>
+                  <div className="default-list1" onClick={() => callListFunction(item)}>{item.listname}</div>
+                  {
+                    item.listname === "Default List" ?
+                      <div className="lockSvg">
+                        <LockSvg />
+                      </div> :
+                      <div>
+                        <Popup
+                          content={
+                            <EditDeleteMenus
+                              item={item}
+                              setEditListModal={setEditListModal}
+                            />}
+                          on="click"
+                          pinned
+                          wide
+                          position="bottom center"
+                          style={{ marginLeft: "6px", marginTop: "2px" }}
+                          trigger={
+                            <div id="popupBtn">
+                              <ListEditSvg />
+                            </div>
+                          }
+                        />
+
+                      </div>
+
+                  }
                 </div>
-                <div className="default-list1" onClick={() => callListFunction(item)}>{item.listname}</div>
-                {
-                  item.listname === "Default List" ?
-                    <div className="lockSvg">
-                      <LockSvg />
-                    </div> :
-                    <div>
-                      <Popup
-                        content={
-                          <EditDeleteMenus
-                            item={item}
-                            setEditListModal={setEditListModal}
-                          />}
-                        on="click"
-                        pinned
-                        wide
-                        position="bottom center"
-                        style={{ marginLeft: "6px", marginTop: "2px" }}
-                        trigger={
-                          <div id="popupBtn">
-                            <ListEditSvg />
-                          </div>
-                        }
-                      />
+              );
+            })
+            : null}
 
-                    </div>
-
-                }
-              </div>
-            );
-          })
-          : null}
-
-        <div className="sidebar-add-list" onClick={() => openAddListModal()}>
-          <div className="addlistSvg">
-            <AddListSvg />
+          <div className="sidebar-add-list" onClick={() => openAddListModal()}>
+            <div className="addlistSvg">
+              <AddListSvg />
+            </div>
+            <div className="default-list1">Add List</div>
           </div>
-          <div className="default-list1">Add List</div>
+        </div>
+        <div className="footer-actions">
+          <div className="sidebar-f-list">
+            <div className="footerSvg">
+              <NavLink to="/myteam" activeClassName="active">
+                <MyTeamSvg />
+              </NavLink>
+            </div>
+            <div className="default-list">
+              <NavLink to="/myteam" activeClassName="active">
+                My Team
+              </NavLink>
+            </div>
+          </div>
+
+          <div className="sidebar-f-list">
+
+            <div className="footerSvg">
+              <HelpSvg />
+            </div>
+            <div className="default-list">Help</div>
+          </div>
+          <div className="sidebar-f-list">
+
+            <div className="footerSvg">
+              <IntegrationSvg />
+            </div>
+            <div className="default-list">Integration</div>
+          </div>
+        </div>
+        <div className="widget-last">
+          <div className="subscription-date">Subscription Expiry Date</div>
+          <div>25 July 2023</div>
         </div>
       </div>
-      <div className="footer-actions">
-        <div className="sidebar-f-list">
-          <div className="footerSvg">
-            <NavLink to="/myteam" activeClassName="active">
-              <MyTeamSvg />
-            </NavLink>
-          </div>
-          <div className="default-list">
-            <NavLink to="/myteam" activeClassName="active">
-              My Team
-            </NavLink>
+      <div className={showSidebar ? "sidebar-container-mobile" : "sidebar-container"}>
+        <div className="sidebar-header">
+          <div className="top-mobile" onClick={() => setShowSidebarFunc(!showSidebar)}>
+            <div className="getlist-sidebar">getlist</div>
+            <div className="a-bracket">{`{a}`}</div>
+
           </div>
         </div>
+        <div className="sidebar-middle scrollable-container-sidebar">
 
-        <div className="sidebar-f-list">
+          {sidebarUserList && sidebarUserList.length > 0
+            ? sidebarUserList.map((item) => {
+              return (
+                <div className="sidebar-list"
+                >
+                  <div className="listSvg">
+                    <ListSvg />
+                  </div>
+                  <div className="default-list1" onClick={() => callListFunctionMobileView(item)}>{item.listname}</div>
+                  {
+                    item.listname === "Default List" ?
+                      <div className="lockSvg">
+                        <LockSvg />
+                      </div> :
+                      <div>
+                        <Popup
+                          content={
+                            <EditDeleteMenus
+                              item={item}
+                              setEditListModal={setEditListModal}
+                            />}
+                          on="click"
+                          pinned
+                          wide
+                          position="bottom center"
+                          style={{ marginLeft: "6px", marginTop: "2px" }}
+                          trigger={
+                            <div id="popupBtn">
+                              <ListEditSvg />
+                            </div>
+                          }
+                        />
 
-          <div className="footerSvg">
-            <HelpSvg />
+                      </div>
+
+                  }
+                </div>
+              );
+            })
+            : null}
+
+          <div className="sidebar-add-list" onClick={() => openAddListModal()}>
+            <div className="addlistSvg">
+              <AddListSvg />
+            </div>
+            <div className="default-list1">Add List</div>
           </div>
-          <div className="default-list">Help</div>
         </div>
-        <div className="sidebar-f-list">
-
-          <div className="footerSvg">
-            <IntegrationSvg />
+        <div className="footer-actions">
+          <div className="sidebar-f-list">
+            <div className="footerSvg">
+              <NavLink to="/myteam" activeClassName="active">
+                <MyTeamSvg />
+              </NavLink>
+            </div>
+            <div className="default-list">
+              <NavLink to="/myteam" activeClassName="active">
+                My Team
+              </NavLink>
+            </div>
           </div>
-          <div className="default-list">Integration</div>
+
+          <div className="sidebar-f-list">
+
+            <div className="footerSvg">
+              <HelpSvg />
+            </div>
+            <div className="default-list">Help</div>
+          </div>
+          <div className="sidebar-f-list">
+
+            <div className="footerSvg">
+              <IntegrationSvg />
+            </div>
+            <div className="default-list">Integration</div>
+          </div>
         </div>
-      </div>
-      <div className="widget-last">
-        <div className="subscription-date">Subscription Expiry Date</div>
-        <div>25 July 2023</div>
+        <div className="widget-last">
+          <div className="subscription-date">Subscription Expiry Date</div>
+          <div>25 July 2023</div>
+        </div>
       </div>
       <Modal
         size="mini"

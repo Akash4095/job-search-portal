@@ -15,4 +15,7 @@ export const getIsReactLoginResponse = (state, prop) => state.homepage.getUserRe
 
 export const getIsNotificationCount = (state, prop) => state.homepage.fetchedNotificationCount 
 export const getIsAllNotification = (state, prop) => state.homepage.fetchedAllNotification 
-export const getIsUpdateAllNotification = (state, prop) => state.homepage.updateAllNotification
+export const getIsUpdateAllNotification = (state, prop) => state.homepage.updateAllNotification 
+
+
+export const getIsShowSidebar = (state, prop) => state.homepage.setShowSidebar

@@ -147,6 +147,15 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
               height="100"
             />
           </div>
+          <div className="image-container-mobile">
+            <img
+              src={selectedImage ? selectedImage : userImage}
+              alt=""
+              className="user-container-img"
+              width="70"
+              height="70"
+            />
+          </div>
           <div className="user-name-parent" onClick={() => setUserProfileModal(true)}>
             <b className="user-name">{"Hello " + ((userName && userName !== undefined && userName !== null) ? userName : "")}</b>
             <div className="bio">
@@ -158,6 +167,14 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
               <p style={{ marginTop: "-15px" }}>
                 Start exploring now and unlock your company's potential!
               </p>
+            </div>
+            <div className="bio-mobile">
+              <p>
+                We're here to help you find the perfect candidates for your
+                needs. Easily search, filter, and connect with talented
+                individuals.  Start exploring now and unlock your company's potential!
+              </p>
+           
             </div>
           </div>
         </div>
@@ -186,9 +203,14 @@ const Welcome = ({ setSearchedText, searchedText, sessionUserId, setSessionUserI
               <div className="summary-div-num">{team}</div>
               <div className="summary-div-text">Team members</div>
             </div>
-            <div className="summary-div">
+            <div className="summary-div-leads">
               <div className="summary-div-num">{leads}</div>
               <div className="summary-div-text">Leads left</div>
+            </div>
+            <div className="summary-div-leads-mobile">
+              <div className="summary-div-num">{leads}</div>
+              <div className="summary-div-text-mobile">Leads </div>
+              <div className="summary-div-text-mobile">Left</div>
             </div>
 
           </div>
