@@ -60,7 +60,7 @@ const AddUserProfileToListForm = (props) => {
 
             </div>
 
-            <p>Note: U can Add New List from below Add List button</p>
+            <p className='note-text'>Note: U can Add New List from below Add List button</p>
             <br />
             <Formik id="finbank" size="large" width={5}
                 initialValues={initialVal}
@@ -75,8 +75,8 @@ const AddUserProfileToListForm = (props) => {
                         <UserListSelect name='listid' label="Select List Name" placeholder="Select" isSelection={true} />
                         <br />
                         <br />
-                        <Button type="submit" size="small" color='blue' className="CustomeBTN" style={{ padding: "10px 40px" }}>Add Profile To List</Button>
-                        <Button type='button' size='small' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{ padding: "10px 40px" }}>Add New List</Button>
+                        <Button type="submit" size="small" color='blue' className="CustomeBTN" style={{ padding: "10px 30px" }}>Add Profile To List</Button>
+                        <Button type='button' size='small' color='green' onClick={() => setListModal({ open: true, msg: "" })} floated='right' style={{ padding: "10px 30px" }}>Add New List</Button>
                     </Form>
                 )}
             />

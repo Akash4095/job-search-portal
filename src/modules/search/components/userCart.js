@@ -69,8 +69,7 @@ const UserCart = ({
     if (
       contactDetails &&
       contactDetails !== undefined &&
-      contactDetails !== null &&
-      contactDetails !== {}
+      contactDetails !== null
     ) {
       if (contactDetails.status === "success") {
         dispatch(fetchProfileDetails(profileDetailsPayload));
@@ -101,12 +100,22 @@ const UserCart = ({
             <div className="">
               <div className="paddingImg">
                 <div className="d_flex">
+                <div className="usercart-image">
                   <img
                     src={profileDetails.profilepic ? profileDetails.profilepic : ""}
                     width="80"
                     height="80"
                     className="borderRadius"
                   />
+                  </div>
+                  <div className="mobile-cart-img">
+                    <img
+                      src={profileDetails.profilepic ? profileDetails.profilepic : ""}
+                      width="60"
+                      height="60"
+                      className="borderRadius"
+                    />
+                  </div>
                   <div className="cartNameWork">
                     <div className="user-cart-name">
                       {profileDetails.full_name ? profileDetails.full_name : ""}
@@ -114,20 +123,6 @@ const UserCart = ({
                     <div className="user-cart-work">
                       {profileDetails.designation ? profileDetails.designation : ""}
                     </div>
-                    {/* <div style={{ marginTop: "12px" }} className="d_flex">
-                      <Link
-                        to={
-                          profileDetails.linkedin_url ? profileDetails.linkedin_url : ""
-                        }
-                        target="_blank"
-                      >
-                        <div title="Linkedin Profile" className="linkedinIcon">
-                          <Icon color="grey" name="linkedin" />
-                        </div>
-                      </Link>
-                      <Icon name="twitter" color="grey" />
-                      <Icon name="dribbble" color="grey" />
-                    </div> */}
                   </div>
 
                   <div className="user-cart-close-icon" onClick={() => setRowClicked(false)}>

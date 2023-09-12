@@ -145,7 +145,9 @@ const Search = ({ setSearchedText, searchedText, sessionUserId, setSessionUserId
       <SideBar sessionUserId={sessionUserId} />
       <div className="right-panel">
         <CommonHeaderComponent sessionUserId={sessionUserId} setSessionUserId={setSessionUserId} />
-
+        <div className="searchlist-p">
+          Who can I look up for you today?
+        </div>
         <CommonSearchComponent
           start={start}
           text={searchedText}

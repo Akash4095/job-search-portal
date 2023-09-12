@@ -48,81 +48,135 @@ const SearchResults = ({
   }
 
   const getUserProfileDetails = (row) => {
-   
-      let obj = {};
-      obj.profileid = row.id.toString();
-      obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
-      dispatch(fetchProfileDetails(obj));
-      dispatch(saveProfileDetailsPayload(obj));
-      setUserCartLoader({ open: true, msg: "Loading Profile" });
-      setRowClicked(true);
-      dispatch(clearProfileDetails())
-    
+
+    let obj = {};
+    obj.profileid = row.id.toString();
+    obj.userid = (sessionUserId && sessionUserId !== undefined && sessionUserId !== null) ? sessionUserId.toString() : "";
+    dispatch(fetchProfileDetails(obj));
+    dispatch(saveProfileDetailsPayload(obj));
+    setUserCartLoader({ open: true, msg: "Loading Profile" });
+    setRowClicked(true);
+    dispatch(clearProfileDetails())
+
   };
 
   const addProfileToListFunc = (row) => {
     setAddListModal({ open: true, msg: "", obj: row });
+    setRowClicked(false)
   };
 
   return (
-    <div className="cart" style={{ width: rowClicked ? "38vw" : "77vw" }}>
-      <div>
-        <Checkbox
-          className="search-result-checkbox"
-          checked={selectedRows.includes(row.id)}
-          onChange={() => handleRowClick(row.id)}
-        />
-      </div>
-      <div className="cart-content">
-        <div className="cart-body" onClick={() => getUserProfileDetails(row)}>
-          <div className="cart-img">
-            <img
-              src={
-                row && row.profilepic && row.profilepic !== undefined
-                  ? row.profilepic
-                  : ""
-              }
-              height="60"
-              width="60"
-              className="border-radius"
-            />
-          </div>
-          <div className="cart-frame">
-            <div className="cart-name-header" style={{ width: rowClicked ? "28vw" : "68vw" }}>
-              <div className="cart-user-name">
-                {row && row.title ? (
-                  <span dangerouslySetInnerHTML={createMarkup(row.title)} />
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="cart-user-icons">
-                {/* <Link to={row.linkedinlink} target="_blank">
+    <>
+      <div className="cart" style={{ width: rowClicked ? "38vw" : "77vw" }}>
+        <div>
+          <Checkbox
+            className="search-result-checkbox"
+            checked={selectedRows.includes(row.id)}
+            onChange={() => handleRowClick(row.id)}
+          />
+        </div>
+        <div className="cart-content">
+          <div className="cart-body">
+            <div className="cart-img">
+              <img
+                src={
+                  row && row.profilepic && row.profilepic !== undefined
+                    ? row.profilepic
+                    : ""
+                }
+                height="60"
+                width="60"
+                className="border-radius"
+              />
+            </div>
+            <div className="cart-frame">
+              <div className="cart-name-header" style={{ width: rowClicked ? "28vw" : "68vw" }}>
+                <div className="cart-user-name" onClick={() => getUserProfileDetails(row)}>
+                  {row && row.title ? (
+                    <span dangerouslySetInnerHTML={createMarkup(row.title)} />
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="cart-user-icons">
+                  {/* <Link to={row.linkedinlink} target="_blank">
                   <div title="Linkedin Profile" className="linkedinIcon-usercart">
                     <Icon color="grey" name="linkedin" />
                   </div>
                 </Link>
                 <Icon name="twitter" color="grey" />
                 <Icon name="dribbble" color="grey" /> */}
+                </div>
               </div>
-            </div>
-            <div className="cart-description" style={{ width: rowClicked ? "24vw" : "64vw" }}>
-              {row && row.description && row.description !== undefined ? (
-                <span
-                  dangerouslySetInnerHTML={createMarkup(row.description)}
-                />
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)} style={{ width: rowClicked ? "20%" : "9%" }}>
-              Add to list
+              <div className="cart-description" style={{ width: rowClicked ? "24vw" : "64vw" }} onClick={() => getUserProfileDetails(row)}>
+                {row && row.description && row.description !== undefined ? (
+                  <span
+                    dangerouslySetInnerHTML={createMarkup(row.description)}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)} style={{ width: rowClicked ? "20%" : "9%" }}>
+                Add to list
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+      <div className="cart-mobile">
+        <div>
+          <Checkbox
+            className="search-result-checkbox"
+            checked={selectedRows.includes(row.id)}
+            onChange={() => handleRowClick(row.id)}
+          />
+        </div>
+        <div className="cart-content">
+          <div className="cart-body">
+            <div className="cart-img-mobile">
+              <img
+                src={
+                  row && row.profilepic && row.profilepic !== undefined
+                    ? row.profilepic
+                    : ""
+                }
+                height="45"
+                width="45"
+                className="border-radius"
+              />
+            </div>
+            <div className="cart-frame">
+              <div className="cart-name-header">
+                <div className="cart-user-name" onClick={() => getUserProfileDetails(row)}>
+                  {row && row.title ? (
+                    <span dangerouslySetInnerHTML={createMarkup(row.title)} />
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="cart-user-icons">
+                </div>
+              </div>
+              <div className="cart-description" onClick={() => getUserProfileDetails(row)}>
+                {row && row.description && row.description !== undefined ? (
+                  <span
+                    dangerouslySetInnerHTML={createMarkup(row.description)}
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="cart-add-to-list" onClick={() => addProfileToListFunc(row)}>
+                Add to list
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </>
   );
 };
 
