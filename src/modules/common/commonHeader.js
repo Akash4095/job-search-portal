@@ -54,12 +54,14 @@ const CommonHeaderComponent = ({ sessionUserId, setSessionUserId }) => {
         setSearchClicked(true);
         setListClicked(false);
         navigate("/search");
+        dispatch(setShowSidebar(false))
     };
 
     const navigateToList = () => {
         setSearchClicked(false);
         setListClicked(true);
         navigate("/list");
+        dispatch(setShowSidebar(false))
     };
 
     useEffect(() => {

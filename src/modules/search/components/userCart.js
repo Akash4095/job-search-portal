@@ -89,7 +89,8 @@ const UserCart = ({
   };
 
   function createMarkup(msg) {
-    return { __html: msg };
+    const htmlContent = msg.replace(/\n/g, '<br />');
+    return { __html: htmlContent };
   }
 
   return (
@@ -100,13 +101,13 @@ const UserCart = ({
             <div className="">
               <div className="paddingImg">
                 <div className="d_flex">
-                <div className="usercart-image">
-                  <img
-                    src={profileDetails.profilepic ? profileDetails.profilepic : ""}
-                    width="80"
-                    height="80"
-                    className="borderRadius"
-                  />
+                  <div className="usercart-image">
+                    <img
+                      src={profileDetails.profilepic ? profileDetails.profilepic : ""}
+                      width="80"
+                      height="80"
+                      className="borderRadius"
+                    />
                   </div>
                   <div className="mobile-cart-img">
                     <img
@@ -144,7 +145,7 @@ const UserCart = ({
                           : ""
                         : ""}
                     </div>
-                    <div style={{ marginLeft: "12px", fontSize: "15px" }}>
+                    <div style={{ marginLeft: "12px", }} className="fromFontSize">
                       {profileDetails.experience
                         ? profileDetails.experience.length > 0
                           ? " From" +

@@ -65,8 +65,7 @@ const ListUserCart = ({
     if (
       profileDetailsRes &&
       profileDetailsRes !== undefined &&
-      profileDetailsRes !== null &&
-      profileDetailsRes !== {}
+      profileDetailsRes !== null
     ) {
       if (profileDetailsRes.status === "success") {
         setProfileDetails(profileDetailsRes);
@@ -79,8 +78,7 @@ const ListUserCart = ({
     if (
       contactDetails &&
       contactDetails !== undefined &&
-      contactDetails !== null &&
-      contactDetails !== {}
+      contactDetails !== null
     ) {
       if (contactDetails.status === "success") {
         dispatch(fetchListProfileDetails(profileDetailsPayload));
@@ -110,7 +108,8 @@ const ListUserCart = ({
   }
 
   function createMarkup(msg) {
-    return { __html: msg };
+    const htmlContent = msg.replace(/\n/g, '<br />');
+    return { __html: htmlContent };
   }
 
   return (
